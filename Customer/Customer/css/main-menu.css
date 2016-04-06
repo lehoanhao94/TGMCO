@@ -1,0 +1,138 @@
+body{
+  min-height: 2000px;
+}
+
+#Main-Menu{
+  height: 60px;
+  background-color: #FED208;
+}
+
+#Logo{
+  margin-top: 10px;
+  width: 150px;
+  padding: 0 auto;
+  margin-right: 0;
+  float: left;
+}
+
+#Search{
+  float: left;
+  max-width: 500px;
+  padding-top: 11px;
+  margin-left: 160px;
+}
+
+#Search input{
+  height: 41px;
+}
+
+#btnSearch{
+  padding: 9px;
+  height: 39px;
+  border: 3px solid white;
+  font-size: 14px;
+}
+
+#btnSearch:hover{
+    background-color: #F37232;
+  border: 3px solid white;
+}
+#Shopping-Cart{
+  width: 90px;
+  float: left;
+    margin-top: 12px;
+    margin-left: 30px;
+}
+
+#Shopping-Cart .btn{
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  width: 70px;
+  background-color: #61777D;
+  border: 3px solid #61777D;
+  height: 39px;
+  text-align: center;
+  right: 0px;
+}
+#Shopping-Cart .btn:hover{
+  background-color: #F37232;
+  border: 3px solid white;
+}
+#Shopping-Cart .items{
+  font-size: 14px;
+  background-color: #3D3D3D;
+    padding:0px 6px;
+    -webkit-border-radius: 9px;
+  -moz-border-radius: 9px;
+  border-radius: 9px;
+  text-align: center;
+  color: white;
+  }
+#Shopping-Cart .btn .glyphicon{
+  font-size: 20px;
+  color: white;
+}
+
+#custom-search-input {
+        margin:0;
+        margin-top: 10px;
+        padding: 0;
+    }
+ 
+    #custom-search-input .search-query {
+        padding-right: 3px;
+        padding-right: 4px \9;
+        padding-left: 3px;
+        padding-left: 4px \9;
+        /* IE7-8 doesn't have border-radius, so don't indent the padding */
+ 
+        margin-bottom: 0;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+    }
+ 
+    #custom-search-input button {
+        border: 0;
+        background: none;
+        /** belows styles are working good */
+        padding: 2px 5px;
+        margin-top: 2px;
+        position: relative;
+        left: -28px;
+        /* IE7-8 doesn't have border-radius, so don't indent the padding */
+        margin-bottom: 0;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+        color:#D9230F;
+    }
+ 
+    .search-query:focus + button {
+        z-index: 3;   
+    }
+
+#Register{
+  width: 187px;
+  float: left;
+  margin-left: 22px;
+  height: 60px !important; 
+}
+#Register .dropdown, #Register .nav{
+  height: 60px;
+}
+ .navbar-inverse .navbar-nav > li > a{
+  padding-top: 20px;
+  color: black;
+  font-size: 14px;
+ }
+ .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:focus, .navbar-inverse .navbar-nav > .open > a:hover,.navbar-inverse .navbar-nav > .open > a:hover{
+  height: 60px;
+  background-color: #F37232;
+
+}
+/* General sizing */
+ul.dropdown-lr {
+  width: 300px;
+}
