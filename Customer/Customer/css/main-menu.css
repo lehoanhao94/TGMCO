@@ -1,5 +1,6 @@
 body{
   min-height: 2000px;
+  background-color: #E3E6F0;
 }
 
 #Main-Menu{
@@ -7,6 +8,12 @@ body{
   background-color: #FED208;
 }
 
+#btnHome{
+  float: left;
+  height: 39px;
+  margin-top: 12px;
+  margin-left: 50px;
+}
 #Logo{
   margin-top: 10px;
   width: 150px;
@@ -19,7 +26,7 @@ body{
   float: left;
   max-width: 500px;
   padding-top: 11px;
-  margin-left: 160px;
+  margin-left: 10px;
 }
 
 #Search input{
@@ -37,26 +44,29 @@ body{
     background-color: #F37232;
   border: 3px solid white;
 }
-#Shopping-Cart{
+#btnHome{
+  margin-left: 50px !important;
+}
+#btnHome, #Shopping-Cart{
   width: 90px;
   float: left;
     margin-top: 12px;
     margin-left: 30px;
 }
 
-#Shopping-Cart .btn{
+#btnHome .btn, #Shopping-Cart .btn{
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   border-radius: 0;
   width: 70px;
-  background-color: #61777D;
-  border: 3px solid #61777D;
+  background-color: #F37232;
+  border: 3px solid white;
   height: 39px;
   text-align: center;
   right: 0px;
 }
-#Shopping-Cart .btn:hover{
-  background-color: #F37232;
+#btnHome .btn:hover, #Shopping-Cart .btn:hover{
+  background-color: #084C51;
   border: 3px solid white;
 }
 #Shopping-Cart .items{
@@ -69,7 +79,7 @@ body{
   text-align: center;
   color: white;
   }
-#Shopping-Cart .btn .glyphicon{
+#btnHome .btn .glyphicon, #Shopping-Cart .btn .glyphicon{
   font-size: 20px;
   color: white;
 }
@@ -114,9 +124,9 @@ body{
     }
 
 #Register{
-  width: 187px;
+  width: 220px;
   float: left;
-  margin-left: 22px;
+  margin-left: 0px;
   height: 60px !important; 
 }
 #Register .dropdown, #Register .nav{
