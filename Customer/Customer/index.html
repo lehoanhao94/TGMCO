@@ -10,7 +10,10 @@
       <link rel="stylesheet" type="text/css" href="css/main-menu.css">
       <link rel="stylesheet" type="text/css" href="css/sub-menu.css">
       <link rel="stylesheet" type="text/css" href="css/left-menu.css">
+      <link rel="stylesheet" type="text/css" href="css/main-content.css">
+      <link rel="stylesheet" type="text/css" href="css/left-content.css">
       <link rel="stylesheet" type="text/css" href="css/right-content.css">
+      <link rel="stylesheet" type="text/css" href="css/center-content.css">
       <link rel="stylesheet" type="text/css" href="css/animate.css">
       <!-- FONT + ICON -->
       <link rel="font" type="font" href="font/glyphicons-halflings-regular.woff">
@@ -25,7 +28,7 @@
     </head>
     <body>
 
-      <!-- MENU CHÍNH-->
+      <!-- TOP MENU -->
       <nav id="Main-Menu" class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
           <!-- LOGO-->
@@ -33,7 +36,7 @@
             <a href="#"><img src="img/logo.png" alt="LOGO"></a>
           </div>
           <div id="btnHome">
-            <button class="btn" data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-home"></span></button>
+            <a href="index.html"><button class="btn" data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-home"></span></button></a>
           </div>
           <!-- SEARCH BOX-->
           <div class="search input-group" role="search" id="Search">
@@ -131,129 +134,187 @@
           </div>
         </div>
       </nav>
-      <!-- END MENU CHÍNH-->
+      <!-- END TOP MENU-->
 
-      <!-- MENU PHỤ-->
-      <div id="Sub-Menu" class="container">
-        <div id="myCarousel" class="carousel slide" data-ride="carousel">
-          <!-- Wrapper for slides -->
-          <div class="carousel-inner">
-            <div class="item active">
-              <a href="#"><img src="img/stanley.jpg"></a>
-              <div class="carousel-caption">
-
-              </div>
-            </div>
-            <!-- End Item -->
-            <div class="item">
-              <a href="#"><img src="img/dewalt.jpg"></a>
-              <div class="carousel-caption">
-
-              </div>
-            </div>
-            <!-- End Item -->
-            <div class="item">
-              <a href="#"><img src="img/blackandecker.jpg"></a>
-              <div class="carousel-caption">
-              </div>
-            </div>
-            <!-- End Item -->
-            <div class="item">
-              <a href="#"><img src="img/bosch.png"></a>
-              <div class="carousel-caption">             
-              </div>
-            </div>
-            <!-- End Item -->
-            <div class="item">
-              <a href="#"><img src="img/makita.jpg"></a>
-              <div class="carousel-caption">
-              </div>
-            </div>
-            <!-- End Item -->
-          </div>
-          <!-- End Carousel Inner -->
-          <ul class="nav nav-pills nav-justified">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"><a href="#"><strong>STANLEY</strong></a></li>
-            <li data-target="#myCarousel" data-slide-to="1"><a href="#"><strong>DEWALT</strong></a></li>
-            <li data-target="#myCarousel" data-slide-to="2"><a href="#"><strong>BLACK & DECKER</strong></a></li>
-            <li data-target="#myCarousel" data-slide-to="3"><a href="#"><strong>BOSCH</strong></a></li>
-            <li data-target="#myCarousel" data-slide-to="4"><a href="#"><strong>MAKITA</strong></a></li>
-          </ul>
-        </div>
-        <!-- End Carousel -->
-      </div>
-      <!-- END MENU PHỤ-->
-      <div class="container">
-        <ol id="Navigate" class="breadcrumb">
-          <li><a href="index.html">Trang chủ</a>
-          </li>
-          <li class="active"></li>
-        </ol>
-      </div>
-
+      <!-- MAIN CONTENT-->
       <div id="Main-Content" class="container">
-              <!-- LEFT-MENU-->
-      <div id="Left-Menu">
-        <div class="nav-side-menu">
-          <div class="brand"><strong>MENU </strong></div>
-          <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+        <!-- LEFT CONTENT-->
+        <div id="Left-Content">
 
-          <div class="menu-list">
+          <!-- MENU ĐIỀU HƯỚNG-->
+          <div id="Left-Menu">
+            <div class="nav-side-menu">
+              <div class="brand"><strong>MENU </strong></div>
+              <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
 
-            <ul id="menu-content" class="menu-content collapse out">
+              <div class="menu-list">
 
-              <li  data-toggle="collapse" data-target="#products" class="collapsed">
-                <a><i class="fa fa-gift fa-lg"></i> NHÀ SẢN XUẤT <span class="arrow"></span></a>
-              </li>
-              <ul class="sub-menu collapse" id="products">
-                <li><a href="#">Stanley</a></li>
-                <li><a href="#">Dewalt</a></li>
-                <li><a href="#">Black and decker</a></li>
-                <li><a href="#">Bosch</a></li>
-                <li><a href="#">Makita</a></li>
+                <ul id="menu-content" class="menu-content collapse out">
+
+                  <li  data-toggle="collapse" data-target="#gioithieu" class="collapsed">
+                    <a><i class="fa fa-gift fa-lg"></i> GIỚI THIỆU <span class="arrow"></span></a>
+                  </li>
+                  <ul class="sub-menu collapse" id="gioithieu">
+                    <li><a href="#">Giới thiệu công ty</a></li>
+                    <li><a href="#">Lịch sử hình thành</a></li>
+                    <li><a href="#">Lĩnh vực hoạt động</a></li>
+                    <li><a href="#">Sơ đồ tổ chức</a></li>
+                  </ul>
+
+
+                  <li data-toggle="collapse" data-target="#tintuc" class="collapsed">
+                    <a><i class="fa fa-globe fa-lg"></i> TIN TỨC <span class="arrow"></span></a>
+                  </li>  
+                  <ul class="sub-menu collapse" id="tintuc">
+                    <li>Tin tức sự kiện</li>
+                    <li>Tin khuyến mãi</li>
+                  </ul>
+
+
+                  <li data-toggle="collapse" data-target="#huongdan" class="collapsed">
+                    <a><i class="fa fa-globe fa-lg"></i> HƯỚNG DẪN <span class="arrow"></span></a>
+                  </li>  
+                  <ul class="sub-menu collapse" id="huongdan">
+                    <li>Hướng dẫn đăng nhập</li>
+                    <li>Hướng dẫn mua hàng</li>
+                    <li>Hướng dẫn lấy lại mật khẩu</li>
+                  </ul>
+
+                  <li data-toggle="collapse" data-target="#chinhsach" class="collapsed">
+                    <a><i class="fa fa-globe fa-lg"></i> CHÍNH SÁCH <span class="arrow"></span></a>
+                  </li>  
+                  <ul class="sub-menu collapse" id="chinhsach">
+                    <li>Chính sách bảo mật</li>
+                    <li>Chính sách vận chuyển</li>
+                    <li>Quy trình giao hàng</li>
+                    <li>Chính sách đổi trả hàng </li>
+                  </ul>
+                </ul>
+              </div>
+            </div>
+            <!--END LEFT-MENU-->
+          </div>
+          <!-- DANH MỤC SP-->
+          <div id="Left-Menu">
+            <div class="nav-side-menu">
+              <div class="brand"><strong> DANH MỤC SẢN PHẨM </strong></div>
+              <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+
+              <div class="menu-list">
+
+                <ul id="menu-content" class="menu-content collapse out">
+
+                  <li  data-toggle="collapse" data-target="#products" class="collapsed">
+                    <a><i class="fa fa-gift fa-lg"></i> NHÀ SẢN XUẤT <span class="arrow"></span></a>
+                  </li>
+                  <ul class="sub-menu collapse" id="products">
+                    <li><a href="#">Stanley</a></li>
+                    <li><a href="#">Dewalt</a></li>
+                    <li><a href="#">Black and decker</a></li>
+                    <li><a href="#">Bosch</a></li>
+                    <li><a href="#">Makita</a></li>
+                  </ul>
+
+
+                  <li data-toggle="collapse" data-target="#service" class="collapsed">
+                    <a><i class="fa fa-globe fa-lg"></i> DỤNG CỤ ĐIỆN <span class="arrow"></span></a>
+                  </li>  
+                  <ul class="sub-menu collapse" id="service">
+                    <li>Máy khoan</li>
+                    <li>Máy mài</li>
+                    <li>Máy cưa</li>
+                    <li>Máy cắt </li>
+                    <li>Máy bào</li>
+                  </ul>
+
+
+                  <li data-toggle="collapse" data-target="#abc" class="collapsed">
+                    <a><i class="fa fa-globe fa-lg"></i> PHỤ KIỆN <span class="arrow"></span></a>
+                  </li>  
+                  <ul class="sub-menu collapse" id="abc">
+                    <li>Lưỡi cưa</li>
+                    <li>Mũi khoan</li>
+                  </ul>
+
+                  <li data-toggle="collapse" data-target="#abcd" class="collapsed">
+                    <a><i class="fa fa-globe fa-lg"></i> DỤNG CỤ CẦM TAY <span class="arrow"></span></a>
+                  </li>  
+                  <ul class="sub-menu collapse" id="abcd">
+                    <li>Búa rìu</li>
+                    <li>Cào</li>
+                    <li>Đá cắt</li>
+                    <li>Đá mài </li>
+                    <li>Giấy nháp</li>
+                  </ul>
+                </ul>
+              </div>
+            </div>
+            <!--END LEFT-MENU-->
+          </div>          
+
+        </div>
+        <!-- LEFT CONTENT-->
+
+        <!-- RIGHT CONTENT-->
+        <div id="Right-Content">
+          <!-- TOP SLIDES-->
+          <div id="Sub-Menu">
+            <!--Carousel -->
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+              <!-- Wrapper for slides -->
+              <div class="carousel-inner">
+                <div class="item active">
+                  <a href="#"><img src="img/stanley.jpg"></a>
+                  <div class="carousel-caption">
+
+                  </div>
+                </div>
+                <!-- End Item -->
+                <div class="item">
+                  <a href="#"><img src="img/dewalt.jpg"></a>
+                  <div class="carousel-caption">
+
+                  </div>
+                </div>
+                <!-- End Item -->
+                <div class="item">
+                  <a href="#"><img src="img/blackandecker.jpg"></a>
+                  <div class="carousel-caption">
+                  </div>
+                </div>
+                <!-- End Item -->
+                <div class="item">
+                  <a href="#"><img src="img/bosch.png"></a>
+                  <div class="carousel-caption">             
+                  </div>
+                </div>
+                <!-- End Item -->
+                <div class="item">
+                  <a href="#"><img src="img/makita.jpg"></a>
+                  <div class="carousel-caption">
+                  </div>
+                </div>
+                <!-- End Item -->
+              </div>
+              <!-- End Carousel Inner -->
+              <ul class="nav nav-pills nav-justified">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"><a href="#"><strong>STANLEY</strong></a></li>
+                <li data-target="#myCarousel" data-slide-to="1"><a href="#"><strong>DEWALT</strong></a></li>
+                <li data-target="#myCarousel" data-slide-to="2"><a href="#"><strong>BLACK & DECKER</strong></a></li>
+                <li data-target="#myCarousel" data-slide-to="3"><a href="#"><strong>BOSCH</strong></a></li>
+                <li data-target="#myCarousel" data-slide-to="4"><a href="#"><strong>MAKITA</strong></a></li>
               </ul>
-
-
-              <li data-toggle="collapse" data-target="#service" class="collapsed">
-                <a><i class="fa fa-globe fa-lg"></i> DỤNG CỤ ĐIỆN <span class="arrow"></span></a>
-              </li>  
-              <ul class="sub-menu collapse" id="service">
-                <li>Máy khoan</li>
-                <li>Máy mài</li>
-                <li>Máy cưa</li>
-                <li>Máy cắt </li>
-                <li>Máy bào</li>
-              </ul>
-
-
-              <li data-toggle="collapse" data-target="#abc" class="collapsed">
-                <a><i class="fa fa-globe fa-lg"></i> PHỤ KIỆN <span class="arrow"></span></a>
-              </li>  
-              <ul class="sub-menu collapse" id="abc">
-                <li>Lưỡi cưa</li>
-                <li>Mũi khoan</li>
-              </ul>
-
-              <li data-toggle="collapse" data-target="#abc" class="collapsed">
-                <a><i class="fa fa-globe fa-lg"></i> DỤNG CỤ CẦM TAY <span class="arrow"></span></a>
-              </li>  
-              <ul class="sub-menu collapse" id="abc">
-                <li>Búa rìu</li>
-                <li>Cào</li>
-                <li>Đá cắt</li>
-                <li>Đá mài </li>
-                <li>Giấy nháp</li>
-              </ul>
-            </ul>
+            </div>
+            <!-- End Carousel -->
+          </div>
+          <!-- END TOP SLIDES-->
+          <div id="Center-Content">
+            
           </div>
         </div>
-        <!--END LEFT-MENU-->
+        <!-- END RIGHT CONTENT-->
       </div>
-
-      <div id="Right-Content">
-        ádasdasd
-      </div>
-      </div>
+      <!-- END MAIN CONTENT-->
 
   </body>
 </html>

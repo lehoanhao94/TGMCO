@@ -1,10 +1,7 @@
 #Left-Menu{
   width: 238px;
-  float: left;
-}
-#Right{
-  float: left;
-  width: 901px;
+  margin-bottom: 15px;
+
 }
 .nav-side-menu {
   overflow: auto;
@@ -14,15 +11,15 @@
   background-color: #2e353d;
   width: 238px;
   height: auto;
-  color: #e1ffff;
+  color: white;
 }
 .nav-side-menu .brand {
   background-color: #FED208;
   line-height: 50px;
   display: block;
   text-align: center;
-  font-size: 14px;
   font-size: 15px;
+  color: black;
 }
 .nav-side-menu .toggle-btn {
   display: none;
