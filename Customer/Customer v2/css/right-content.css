@@ -1,0 +1,68 @@
+#Right-Content{
+	float: right;
+	width: 238px;
+}
+
+#Right-Slides{
+
+}
+
+#Title-Right-Slides{
+    background-color: #FED208;
+  line-height: 50px;
+  display: block;
+  text-align: center;
+  font-size: 15px;
+  color: black;
+  padding: 0;
+}
+
+#Body-Right-Slides{
+    background-color: #FED208;
+    padding: 5px;
+}
+
+.Slides{
+    padding-left: 5px;
+}
+.Control-Slides{
+    padding-left: 0;
+}
+
+.news-item
+{
+    padding:0;
+    margin:0px;
+    border: 4px solid #2E353D; 
+}
+.separator{
+    text-align: center;
+    margin-bottom: 7px;
+}
+.Name-Product, .Price-Product{
+    padding-left: 23px;
+}
+#Info-Item{
+    line-height: 0.7;
+}
+.price-text-color{
+    color: red;
+    font-weight: bold;
+    font-size: 16px;
+}
+.panel-footer{
+    background-color: #FED208;
+}
+.panel-footer ul a{
+    background-color: #F37232;
+}
+.btnShopNow{
+    width: 80%;
+    background-color: #F37232;
+    color: white;
+}
+
+.panel-footer ul a:hover,.btnShopNow:hover{
+        background-color: #084C51;
+    color: white;
+}
