@@ -1,5 +1,4 @@
 body{
-  min-height: 2000px;
   background-color: #E3E6F0;
 }
 
@@ -129,9 +128,16 @@ body{
   margin-left: 0px;
   height: 60px !important; 
 }
-#Register .dropdown, #Register .nav{
-  height: 60px;
+
+#Register a{
+  line-height: 3.5;
+  color: #F37232;
 }
+
+#Register a:hover{
+  color: #084C51;
+  }
+
  .navbar-inverse .navbar-nav > li > a{
   padding-top: 20px;
   color: black;

@@ -10,6 +10,7 @@
       <!-- CSS -->
       <link href="css/bootstrap.min.css" rel="stylesheet">
       <link rel="stylesheet" type="text/css" href="css/main-menu.css">
+      <link rel="stylesheet" type="text/css" href="css/login-register.css">
 
       <link rel="stylesheet" type="text/css" href="css/main-content.css">
 
@@ -17,25 +18,31 @@
       <link rel="stylesheet" type="text/css" href="css/left-menu.css">
       
       <link rel="stylesheet" type="text/css" href="css/center-content.css">
+      <link rel="stylesheet" type="text/css" href="css/main-content-news.css">
 
       <link rel="stylesheet" type="text/css" href="css/right-content.css">
       
+      <link rel="stylesheet" type="text/css" href="css/footer.css">
+
+      <link rel="stylesheet" type="text/css" href="css/startup.css">
+
       <link rel="stylesheet" type="text/css" href="css/animate.css">
       <!-- FONT + ICON -->
       <link rel="font" type="font" href="font/glyphicons-halflings-regular.woff">
       <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
       <!-- SCRIPT -->
-          <script src="http://code.jquery.com/jquery-1.10.2.min.js" type="text/javascript"></script>
+      <script src="http://code.jquery.com/jquery-1.10.2.min.js" type="text/javascript"></script>
       <script src="js/jquery.bootstrap.newsbox.min.js" type="text/javascript"></script>
       <script src="js/bootstrap.min.js"></script>
       <script src="js/myjs.js"></script>
       <script src="js/home-menu.js"></script>
       <script src="js/right-content.js"></script>
+      <script src="js/news.js"></script>
       <!-- END INCLUDE -->
       <title>TRANG CHỦ</title>
     </head>
-    <body>
+    <body>   
 
       <!-- TOP MENU -->
       <nav id="Main-Menu" class="navbar navbar-inverse navbar-fixed-top">
@@ -62,84 +69,8 @@
             <button class="btn" data-toggle="tooltip" data-placement="bottom" title="Giỏ hàng trống."><span class="glyphicon glyphicon-shopping-cart"></span> <span class="items">0</span></button>
           </div> 
           <!-- REGISTER & LOGIN-->
-          <div id="Register" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav navbar-right">
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">ĐĂNG KÝ<span class="caret"></span></a>
-                <ul class="dropdown-menu dropdown-lr animated fadeInLeft" role="menu">
-                  <div class="col-lg-12">
-                    <!-- REGISTER-->
-                    <div class="text-center"><h3><b>Đăng ký tài khoản</b></h3></div>
-                    <form id="ajax-register-form" action="#" method="post" role="form" autocomplete="off">
-                      <div class="form-group">
-                        <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Tên đăng nhập" value="">
-                      </div>
-                      <div class="form-group">
-                        <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Địa chỉ Email" value="">
-                      </div>
-                      <div class="form-group">
-                        <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Mật khẩu">
-                      </div>
-                      <div class="form-group">
-                        <input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Nhập lại mật khẩu">
-                      </div>
-                      <div class="form-group">
-                        <div class="row">
-                          <div class="col-xs-6 col-xs-offset-3">
-                            <input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-info" value="Đăng ký ngay">
-                          </div>
-                        </div>
-                      </div>
-                      <input type="hidden" class="hide" name="token" id="token" value="7c6f19960d63f53fcd05c3e0cbc434c0">
-                    </form>
-                  </div>
-                </ul>
-              </li>
-              
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">ĐĂNG NHẬP<span class="caret"></span></a>
-                <ul class="dropdown-menu dropdown-lr animated slideInRight" role="menu">
-                  <div class="col-lg-12">
-                    <div class="text-center"><h3><b>Đăng nhập</b></h3></div>
-                    <!-- LOGIN-->
-                    <form id="ajax-login-form" action="#" method="post" role="form" autocomplete="off">
-                      <div class="form-group">
-                        <label for="username">Tên đăng nhập</label>
-                        <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Tên đăng nhập" value="" autocomplete="off">
-                      </div>
-
-                      <div class="form-group">
-                        <label for="password">Mật khẩu</label>
-                        <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Mật khẩu của bạn" autocomplete="off">
-                      </div>
-
-                      <div class="form-group">
-                        <div class="row">
-                          <div class="col-xs-7">
-                            <input type="checkbox" tabindex="3" name="remember" id="remember">
-                            <label for="remember"> Ghi nhớ tài khoản</label>
-                          </div>
-                          <div class="col-xs-5 pull-right">
-                            <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-success" value="Đăng nhập">
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="form-group">
-                        <div class="row">
-                          <div class="col-lg-12">
-                            <div class="text-center">
-                              <a href="#" tabindex="5" class="forgot-password">Quên mật khẩu?</a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <input type="hidden" class="hide" name="token" id="token" value="a465a2791ae0bae853cf4bf485dbe1b6">
-                    </form>
-                  </div>
-                </ul>
-              </li>
-            </ul>
+          <div id="Register">
+            <a href="#Login-Register" class="btn" data-toggle="modal"><strong>ĐĂNG KÝ / ĐĂNG NHẬP</strong></a>
           </div>
         </div>
       </nav>
@@ -147,6 +78,111 @@
 
       <!-- MAIN CONTENT-->
       <div id="Main-Content">
+
+        <!--LOGIN AND REGISTER MODAL -->
+        <div id="Login-Register" class="modal fade">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              </div>               
+
+              <div class="modal-body">                                       
+                <div class="col-md-6 col-sm-6 no-padng">
+                <h4 class="modal-title">ĐĂNG NHẬP</h4>
+                  <div class="model-l">                    
+                    <form method="post" id="logFrm" class="log-frm" name="logFrm"> 
+                      <ul>                                                     
+                        <li>Tên đăng nhập</li>
+                        <li> <input type="text" placeholder="Nhập tên đăng nhập của bạn" id="userName" name="userName" class="form-control"></li>
+                        <li>Mật khẩu</li>
+                        <li><input type="password" placeholder="Nhập mật khẩu của bạn" id="password" name="password" class="form-control" </li>                                                
+                        <li><br/><button type="button" id="btnLog" class="btn btn-default">Đăng nhập</button></li>
+                        <div style="display:none;" id="loginFail" class="sign">
+                          <li> <font color="red">  Tên đăng nhập hoặc mật khẩu không đúng.</font></li>
+                        </div>
+                      </ul>
+                    </form>                      
+                    <div class="clearfix"></div>
+                    <form method="post" id="logFrm1" class="log-frm" name="logFrm1"> 
+                      <ul>                                    
+                        <li>
+                          <a class="for-got" onclick="ayantoggle();" href="javascript:;">Quên mật khẩu?</a>
+                          <div class="forgot">
+                            <ul>                                          
+                              <li><p>Nhập địa chỉ Email đăng ký tài khoản để nhận lại mật khẩu.</p></li>
+                              <li>Email đăng ký</li>
+                              <li><input type="text" placeholder="Nhập địa chỉ Email đăng ký" id="forgetemailId" class="form-control" name="forgetemailId"></li>
+                              <li><button id="btnSentMail" type="button" class="btn btn-default">Gửi Email</button></li>
+                            </ul> 
+                          </div>
+                        </li>
+                      </ul>
+                    </form>
+                  </div>
+                </div>    
+                <div class="col-md-6 col-sm-6 no-padng">
+                <h4 class="modal-title">ĐĂNG KÝ TÀI KHOẢN MỚI</h4>
+                  <div class="model-r">
+                    <div class="o-r">
+                      <span>OR</span>
+                    </div>
+                    <form method="post" id="userRegisterFrm" class="log-frm" name="userRegisterFrm">  
+                      <ul>
+                       <li>Tên đăng nhập</li>
+                       <li><input type="text" placeholder="Tên đăng nhập" name="fName" class="form-control"></li>
+                       <li>Email</li>
+                       <li><input type="text" placeholder="Email" name="emailId" class="form-control"></li>
+                       <li>Mật khẩu</li>
+                       <li><input type="password" placeholder="Mật khẩu" name="password" class="form-control"></li>
+                       <li>Nhập lại mật khẩu</li>
+                       <li><input type="password" placeholder="Xác nhận lại mật khẩu" name="repassword" class="form-control"></li>
+                       <br> <li><button id="btnRes" type="button" name="userRegBtn" class="btn btn-default">Đăng ký ngay</button></li>
+                       <div style="display:none;" class="sign greenglow">
+                         <li>   <i class="icon-check"></i><br>
+                           <font color="red"> 
+                             User registration successful.<br>
+                             Your login Url already send to your email.
+                           </font></li>
+                         </div>
+                         <div style="display:none;" id="regnSuc11" class="sign redglow">
+                           <li>   <i class="icon-mail"></i><br>
+                             <font color="red">    Email Exist.</font></li>
+                           </div> 
+                         </ul>
+                       </form>
+                     </div>
+                   </div>
+
+                   <div class="clearfix"></div>
+                 </div>
+                 <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        <!--END LOGIN AND REGISTER MODAL -->
+
+        <!-- TRANG THÔNG BÁO -->
+        <div id="Startup-Modal" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+          
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-body">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <p>CHƯƠNG TRÌNH KHUYẾN MÃI <a href="#">...Xem thêm...</a> </p> 
+                <img src="img/sales-startup.png" width="800" height="400">
+              </div>
+            </div>
+            
+          </div>
+        </div>
+
+        <script type="text/javascript">$("#Startup-Modal").modal();</script>
+        <!-- END TRANG THÔNG BÁO -->
+
         <!-- LEFT CONTENT-->
         <div id="Left-Content">
 
@@ -221,7 +257,7 @@
                     <li><a href="#">Dewalt</a></li>
                     <li><a href="#">Black and decker</a></li>
                     <li><a href="#">Bosch</a></li>
-                    <li><a href="#">Makita</a></li>
+                    <li><a href="makita.html">Makita</a></li>
                   </ul>
 
 
@@ -268,16 +304,72 @@
           
           <div id="Top-Center-Content">
           <h4>NHÀ CUNG CẤP</h4>
-            <a href="#"><img src="img/stanley-logo.gif" width="162"></a>
+            <a href="#"><img src="img/stanley-logo.gif" width="160"></a>
 
-            <a href="#"><img src="img/dewalt-logo.png" width="162"></a>
-            <a href="#"><img src="img/black-logo.jpg" width="162"></a>
-            <a href="#"><img src="img/makita-logo.jpg" width="162"></a>
-            <a href="#"><img src="img/bosch-logo.jpg" width="162"></a>
+            <a href="#"><img src="img/dewalt-logo.png" width="160"></a>
+            <a href="#"><img src="img/black-logo.jpg" width="160"></a>
+            <a href="makita.html"><img src="img/makita-logo.jpg" width="160"></a>
+            <a href="#"><img src="img/bosch-logo.jpg" width="160"></a>
           </div>
 
           <div id="Main-Center-Content">
             
+            <div id="Main-Center-Content-News" class="news-holder cf">
+            <h5>TIN TỨC KHUYẾN MÃI</h5>
+              <ul class="news-headlines">
+                <li class="selected">Khuyến mãi + Thưởng <br> (19/01/2015)</li>
+                <li>Giảm giá hot nhất năm <br> (16/02/2015)</li>
+                <li>Mua 1 tặng 1 <br> (11/01/2015)</li>
+                <li>Mua hàng trả góp 0 % <br> (01/02/2015)</li>
+                <li>Khai trương cửa hàng tặng 10 phần quà <br> (08/06/2016)</li>
+                <!-- li.highlight gets inserted here -->
+              </ul>
+
+              <div class="news-preview">
+
+                <div class="news-content top-content">
+                  <img src="img/sales.jpg">
+                  <p><a href="#">Khuyến mãi + Thưởng</a></p>
+
+                  <p>- Thời gian: 16/02/2015</p>
+                  <p>- Nội dung: Giảm giá tất cả mặt hàng...aaaaa <a href="#">xem chi tiết...</a></p>
+                </div><!-- .news-content -->
+
+                <div class="news-content">
+                  <img src="img/sales2.jpg">
+                  <p><a href="#">Giảm giá hot nhất năm</a></p>
+
+                  <p>- Thời gian: 11/01/2015</p>
+                  <p>- Nội dung: Giảm giá tất cả mặt hàng... <a href="#">xem chi tiết...</a></p>
+                </div><!-- .news-content -->
+
+                <div class="news-content">
+                  <img src="img/sales.jpg">
+                  <p><a href="#">Mua 1 tặng 1</a></p>
+
+                  <p>- Thời gian: 01/02/2015</p>
+                  <p>- Nội dung: Giảm giá tất cả mặt hàng... <a href="#">xem chi tiết...</a></p>
+                </div><!-- .news-content -->
+
+                <div class="news-content">
+                  <img src="img/sales2.jpg">
+                  <p><a href="#">Mua hàng trả góp 0 % </a></p>
+
+                  <p>- Thời gian: 08/06/2016</p>
+                  <p>- Nội dung: Giảm giá tất cả mặt hàng... <a href="#">xem chi tiết...</a></p>
+                </div><!-- .news-content -->
+
+                <div class="news-content">
+                  <img src="img/sales.jpg">
+                  <p><a href="#">Khai trương cửa hàng tặng 10 phần quà </a></p>
+
+                  <p>- Thời gian: 05/11 đến hết 31/12/2014</p>
+                  <p>- Nội dung: Giảm giá tất cả mặt hàng... <a href="#">xem chi tiết...</a></p>
+                </div><!-- .news-content -->
+              
+              </div><!-- .news-preview -->
+
+            </div><!-- .news-holder -->
           </div>
 
           <div id="Slides-Center-Content">
@@ -654,12 +746,112 @@
           <!-- END SP MOI-->         
         </div>
         <!-- END CENTER CONTENT-->
-
       </div>
 
-     <script type="text/javascript">
-    $(function () {
-        $(".Slides").bootstrapNews({
+
+      <footer>
+
+       <div class="footer" id="footer">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-4  col-md-2 col-sm-4 col-xs-6">
+              <h3> CÔNG TY TNHH TM TUẤN GIA MINH </h3>
+              <ul>
+                <li>
+                  <div class="col-sm-1">
+                      <span class="glyphicon glyphicon-home"></span>
+                  </div> 
+                  Tầng trệt 18A Vạn Tượng, P.13, Q.5, TP.HCM
+                </li>
+
+                <li>
+                  <div class="col-sm-1">
+                      <span class="glyphicon glyphicon-th"></span>
+                  </div> 
+                  Showroom: 171 Gia Phú, P.1, Q.6, TP.HCM
+                </li>
+
+                <li>
+                  <div class="col-sm-1">
+                      <span class="glyphicon glyphicon-phone-alt"></span>
+                  </div> 
+                  (08) 38 591 896
+                </li>
+
+                <li>
+                  <div class="col-sm-1">
+                      <span class="glyphicon glyphicon-phone"></span>
+                  </div> 
+                  091 9977 926 - 090 2333 949
+                </li>
+
+                <li>
+                  <div class="col-sm-1">
+                      <span class="glyphicon glyphicon-envelope"></span>
+                  </div> 
+                  info@tgmco.com.vn 
+                </li>
+
+                
+              </ul>
+            </div>
+
+            <div class="col-lg-3  col-md-2 col-sm-4 col-xs-6">
+              <h3> CHÍNH SÁCH BÁN HÀNG </h3>
+              <ul>
+                <li> <a href="#"> Chính sách bảo mật thông tin  </a> </li>
+                <li> <a href="#"> Chính sách vận chuyển  </a> </li>
+                <li> <a href="#"> Quy trình giao hàng  </a> </li>
+                <li> <a href="#"> Chính sách đổi trả hàng  </a> </li>
+              </ul>
+            </div>
+            <div class="col-lg-3  col-md-2 col-sm-4 col-xs-6">
+              <h3> HỖ TRỢ KHÁCH HÀNG </h3>
+              <ul>
+                <li> <a href="#"> Hướng dẫn mua hàng  </a> </li>
+                <li> <a href="#"> Hướng dẫn thanh toán  </a> </li>
+                <li> <a href="#"> Các hình thức mua hàng  </a> </li>
+                <li> <a href="#"> Sơ đồ đường đi  </a> </li>
+              </ul>
+            </div>
+            <div class="col-lg-2  col-md-3 col-sm-6 col-xs-12 ">
+              <h3> LIÊN HỆ </h3>
+              <ul>
+              </ul>
+              <ul class="social">
+                <li> <a href="#"> <i class=" fa fa-facebook">   </i> </a> </li>
+                <li> <a href="#"> <i class="fa fa-skype">   </i> </a> </li>
+                <li> <a href="#"> <i class="fa fa-youtube">   </i> </a> </li>
+              </ul>
+            </div>
+          </div>
+          <!--/.row--> 
+        </div>
+        <!--/.container--> 
+      </div>
+      <!--/.footer-->
+
+      <div class="footer-bottom">
+        <div class="container">
+          <p class="pull-left"> Copyright © 2016.TGM All right reserved. </p>
+          <div class="pull-right">
+            <ul class="nav nav-pills payments">
+              <li><i class="fa fa-cc-visa"></i></li>
+              <li><i class="fa fa-cc-mastercard"></i></li>
+              <li><i class="fa fa-cc-amex"></i></li>
+              <li><i class="fa fa-cc-paypal"></i></li>
+            </ul> 
+          </div>
+        </div>
+      </div>
+      <!--/.footer-bottom--> 
+    </footer>
+
+
+
+      <script type="text/javascript">
+        $(function () {
+          $(".Slides").bootstrapNews({
             newsPerPage: 1,
             autoplay: true,
             pauseOnHover:true,
@@ -667,10 +859,23 @@
             newsTickerInterval: 3000,
             onToDo: function () {
                 //console.log(this);
-            }
+              }
+            });
+
         });
-    
-    });
-</script>
+      </script>
+      <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-76172798-1', 'auto');
+        ga('send', 'pageview');
+
+      </script>
+
+      <script lang="javascript">(function() {var pname = ( (document.title !='')? document.title : document.querySelector('meta[property="og:title"]').getAttribute('content') );var ga = document.createElement('script'); ga.type = 'text/javascript';ga.src = '//live.vnpgroup.net/js/web_client_box.php?hash=68d46082ba3e9658febe7e66bbafeefa&data=eyJoYXNoIjoiMTI0ZTVhOWQ4MTk0MDNjNTdjZjFkYThmMTdhM2FjYWIiLCJzc29faWQiOjM3MzQwNzZ9&pname='+pname;var s = document.getElementsByTagName('script');s[0].parentNode.insertBefore(ga, s[0]);})();</script><noscript><a href="http://www.vatgia.com" title="vatgia.com" target="_blank">Tài trợ bởi vatgia.com</a></noscript><noscript><a href="http://vchat.vn" title="vchat.vn" target="_blank">Phát triển bởi vchat.vn</a></noscript>  
+
   </body>
 </html>

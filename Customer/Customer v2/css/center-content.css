@@ -18,16 +18,16 @@
 }
 
 #Main-Center-Content{
-		text-align: center;
 	margin-top: 5px;
-	min-height: 300px;
+	height: auto;
 }
 #Slides-Center-Content{
-    margin-left: 7px;
-    margin-right: 7px;
+    margin-left: 4px;
+    margin-right: 4px;
+    margin-top: 4px;
 }
 #myCarousel{
-    width: 828px;
+    width: 834px;
 }
 
 #myCarousel .nav a small
