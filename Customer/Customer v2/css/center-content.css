@@ -14,11 +14,33 @@
 
 #Top-Center-Content{
 	text-align: center;
-	margin-top: 5px;
+		margin-right: 5px;
+	margin-left: 5px;	
+}
+
+#Top-Center-Content h4{
+	vertical-align: middle;
+	line-height: 50px;
+	margin-top: 0;
+}
+.Title-Menu{
+	background-color: #FED208;	
+	height: 50px;
+	text-align: center;
+	font-size: 15px;
+}
+
+.Content-Menu{
+	height: auto;
+	text-align: center;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border: 3px solid #FED208;
+
 }
 
 #Main-Center-Content{
-		text-align: center;
+	text-align: center;
 	margin-top: 5px;
 	min-height: 300px;
 }
