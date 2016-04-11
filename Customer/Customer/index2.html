@@ -1,0 +1,271 @@
+    <<!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="utf-8"> 
+
+      <!-- INCLUDE -->
+
+      <!-- CSS -->
+      <link href="css/bootstrap.min.css" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="css/main-menu.css">
+      <link rel="stylesheet" type="text/css" href="css/sub-menu.css">
+      <link rel="stylesheet" type="text/css" href="css/left-menu.css">
+      <link rel="stylesheet" type="text/css" href="css/main-content.css">
+      <link rel="stylesheet" type="text/css" href="css/left-content.css">
+      <link rel="stylesheet" type="text/css" href="css/right-content.css">
+      <link rel="stylesheet" type="text/css" href="css/center-content.css">
+      <link rel="stylesheet" type="text/css" href="css/animate.css">
+      <!-- FONT + ICON -->
+      <link rel="font" type="font" href="font/glyphicons-halflings-regular.woff">
+      <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+      <!-- SCRIPT -->
+      <script type="text/javascript" src="js/jquery-1.12.2.min.js"></script>
+      <script src="js/bootstrap.min.js"></script>
+      <script src="js/myjs.js"></script>
+      <script src="js/home-menu.js"></script>
+      <!-- END INCLUDE -->
+      <title>TRANG CHỦ</title>
+    </head>
+    <body>
+
+      <!-- TOP MENU -->
+      <nav id="Main-Menu" class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+          <!-- LOGO-->
+          <div id="Logo">
+            <a href="#"><img src="img/logo.png" alt="LOGO"></a>
+          </div>
+          <div id="btnHome">
+            <a href="index.html"><button class="btn" data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-home"></span></button></a>
+          </div>
+          <!-- SEARCH BOX-->
+          <div class="search input-group" role="search" id="Search">
+            <input type="search" class="form-control" placeholder="Nhập tên sản phẩm hoặc mã sản phẩm..."/>
+            <span class="input-group-btn">
+              <button id="btnSearch" class="btn btn-default" type="button">  
+                <span class="glyphicon glyphicon-search"></span>
+                <span class="sr-only">Search</span>
+              </button>
+            </span>
+          </div>
+          <!-- SHOPPING CART-->
+          <div id="Shopping-Cart">
+            <button class="btn" data-toggle="tooltip" data-placement="bottom" title="Giỏ hàng trống."><span class="glyphicon glyphicon-shopping-cart"></span> <span class="items">0</span></button>
+          </div> 
+          <!-- REGISTER & LOGIN-->
+          <div id="Register" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">ĐĂNG KÝ<span class="caret"></span></a>
+                <ul class="dropdown-menu dropdown-lr animated fadeInLeft" role="menu">
+                  <div class="col-lg-12">
+                    <!-- REGISTER-->
+                    <div class="text-center"><h3><b>Đăng ký tài khoản</b></h3></div>
+                    <form id="ajax-register-form" action="#" method="post" role="form" autocomplete="off">
+                      <div class="form-group">
+                        <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Tên đăng nhập" value="">
+                      </div>
+                      <div class="form-group">
+                        <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Địa chỉ Email" value="">
+                      </div>
+                      <div class="form-group">
+                        <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Mật khẩu">
+                      </div>
+                      <div class="form-group">
+                        <input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Nhập lại mật khẩu">
+                      </div>
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-xs-6 col-xs-offset-3">
+                            <input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-info" value="Đăng ký ngay">
+                          </div>
+                        </div>
+                      </div>
+                      <input type="hidden" class="hide" name="token" id="token" value="7c6f19960d63f53fcd05c3e0cbc434c0">
+                    </form>
+                  </div>
+                </ul>
+              </li>
+              
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">ĐĂNG NHẬP<span class="caret"></span></a>
+                <ul class="dropdown-menu dropdown-lr animated slideInRight" role="menu">
+                  <div class="col-lg-12">
+                    <div class="text-center"><h3><b>Đăng nhập</b></h3></div>
+                    <!-- LOGIN-->
+                    <form id="ajax-login-form" action="#" method="post" role="form" autocomplete="off">
+                      <div class="form-group">
+                        <label for="username">Tên đăng nhập</label>
+                        <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Tên đăng nhập" value="" autocomplete="off">
+                      </div>
+
+                      <div class="form-group">
+                        <label for="password">Mật khẩu</label>
+                        <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Mật khẩu của bạn" autocomplete="off">
+                      </div>
+
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-xs-7">
+                            <input type="checkbox" tabindex="3" name="remember" id="remember">
+                            <label for="remember"> Ghi nhớ tài khoản</label>
+                          </div>
+                          <div class="col-xs-5 pull-right">
+                            <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-success" value="Đăng nhập">
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-lg-12">
+                            <div class="text-center">
+                              <a href="#" tabindex="5" class="forgot-password">Quên mật khẩu?</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <input type="hidden" class="hide" name="token" id="token" value="a465a2791ae0bae853cf4bf485dbe1b6">
+                    </form>
+                  </div>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- END TOP MENU-->
+
+      <!-- MAIN CONTENT-->
+      <div id="Main-Content">
+        <!-- LEFT CONTENT-->
+        <div id="Left-Content">
+
+          <!-- MENU ĐIỀU HƯỚNG-->
+          <div id="Left-Menu">
+            <div class="nav-side-menu">
+              <div class="brand"><strong>MENU </strong></div>
+              <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+
+              <div class="menu-list">
+
+                <ul id="menu-content" class="menu-content collapse out">
+
+                  <li  data-toggle="collapse" data-target="#gioithieu" class="collapsed">
+                    <a><i class="fa fa-gift fa-lg"></i> GIỚI THIỆU <span class="arrow"></span></a>
+                  </li>
+                  <ul class="sub-menu collapse" id="gioithieu">
+                    <li><a href="#">Giới thiệu công ty</a></li>
+                    <li><a href="#">Lịch sử hình thành</a></li>
+                    <li><a href="#">Lĩnh vực hoạt động</a></li>
+                    <li><a href="#">Sơ đồ tổ chức</a></li>
+                  </ul>
+
+
+                  <li data-toggle="collapse" data-target="#tintuc" class="collapsed">
+                    <a><i class="fa fa-globe fa-lg"></i> TIN TỨC <span class="arrow"></span></a>
+                  </li>  
+                  <ul class="sub-menu collapse" id="tintuc">
+                    <li>Tin tức sự kiện</li>
+                    <li>Tin khuyến mãi</li>
+                  </ul>
+
+
+                  <li data-toggle="collapse" data-target="#huongdan" class="collapsed">
+                    <a><i class="fa fa-globe fa-lg"></i> HƯỚNG DẪN <span class="arrow"></span></a>
+                  </li>  
+                  <ul class="sub-menu collapse" id="huongdan">
+                    <li>Hướng dẫn đăng nhập</li>
+                    <li>Hướng dẫn mua hàng</li>
+                    <li>Hướng dẫn lấy lại mật khẩu</li>
+                  </ul>
+
+                  <li data-toggle="collapse" data-target="#chinhsach" class="collapsed">
+                    <a><i class="fa fa-globe fa-lg"></i> CHÍNH SÁCH <span class="arrow"></span></a>
+                  </li>  
+                  <ul class="sub-menu collapse" id="chinhsach">
+                    <li>Chính sách bảo mật</li>
+                    <li>Chính sách vận chuyển</li>
+                    <li>Quy trình giao hàng</li>
+                    <li>Chính sách đổi trả hàng </li>
+                  </ul>
+                </ul>
+              </div>
+            </div>
+            <!--END LEFT-MENU-->
+          </div>
+          <!-- DANH MỤC SP-->
+          <div id="Left-Menu">
+            <div class="nav-side-menu">
+              <div class="brand"><strong> DANH MỤC SẢN PHẨM </strong></div>
+              <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+
+              <div class="menu-list">
+
+                <ul id="menu-content" class="menu-content collapse out">
+
+                  <li  data-toggle="collapse" data-target="#products" class="collapsed">
+                    <a><i class="fa fa-gift fa-lg"></i> NHÀ SẢN XUẤT <span class="arrow"></span></a>
+                  </li>
+                  <ul class="sub-menu collapse" id="products">
+                    <li><a href="#">Stanley</a></li>
+                    <li><a href="#">Dewalt</a></li>
+                    <li><a href="#">Black and decker</a></li>
+                    <li><a href="#">Bosch</a></li>
+                    <li><a href="#">Makita</a></li>
+                  </ul>
+
+
+                  <li data-toggle="collapse" data-target="#service" class="collapsed">
+                    <a><i class="fa fa-globe fa-lg"></i> DỤNG CỤ ĐIỆN <span class="arrow"></span></a>
+                  </li>  
+                  <ul class="sub-menu collapse" id="service">
+                    <li>Máy khoan</li>
+                    <li>Máy mài</li>
+                    <li>Máy cưa</li>
+                    <li>Máy cắt </li>
+                    <li>Máy bào</li>
+                  </ul>
+
+
+                  <li data-toggle="collapse" data-target="#abc" class="collapsed">
+                    <a><i class="fa fa-globe fa-lg"></i> PHỤ KIỆN <span class="arrow"></span></a>
+                  </li>  
+                  <ul class="sub-menu collapse" id="abc">
+                    <li>Lưỡi cưa</li>
+                    <li>Mũi khoan</li>
+                  </ul>
+
+                  <li data-toggle="collapse" data-target="#abcd" class="collapsed">
+                    <a><i class="fa fa-globe fa-lg"></i> DỤNG CỤ CẦM TAY <span class="arrow"></span></a>
+                  </li>  
+                  <ul class="sub-menu collapse" id="abcd">
+                    <li>Búa rìu</li>
+                    <li>Cào</li>
+                    <li>Đá cắt</li>
+                    <li>Đá mài </li>
+                    <li>Giấy nháp</li>
+                  </ul>
+                </ul>
+              </div>
+            </div>
+            <!--END LEFT-MENU-->
+          </div>          
+        </div>
+        <!-- LEFT CONTENT-->
+
+        <!-- CENTER CONTENT-->
+        <div id="Center-Content">
+          
+        </div>
+        <!-- END CENTER CONTENT-->
+
+        <!-- RIGHT CONTENT-->
+        <div id="Right-Content">
+          
+        </div>
+        <!-- END RIGHT CONTENT-->
+
+      </div>
+  </body>
+</html>
