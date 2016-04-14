@@ -1,0 +1,47 @@
+﻿@{
+    Layout = null;
+}
+
+<<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <!-- INCLUDE -->
+    <!-- CSS -->
+    <link href="/Content/Admin_Layout/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/Admin_Layout/css/login-admin.css" rel="stylesheet" type="text/css" />
+
+    <!-- SCRIPT -->
+    <script src="/Content/Admin_Layout/js/jquery-1.12.2.min.js" type="text/css">
+    </script>
+    <script src="/Content/Admin_Layout/js/bootstrap.min.js" type="text/css">
+    </script>
+    <!-- END INCLUDE -->
+    <title>ĐĂNG NHẬP ADMIN</title>
+</head>
+<body>
+    <div class="container">
+        <div class="wrapper">
+            @using (Html.BeginForm("Login", "Admin", FormMethod.Post, new { @class = "form-signin" }))
+            {
+                <h3 class="form-signin-heading"><img src="~/Content/Admin_Layout/img/logo.png" width="300px"></h3>
+                <hr class="colorgraph"><br>
+
+
+                if (!string.IsNullOrEmpty(@ViewBag.VB_ErrorLogin))
+                {
+                        <div class="alert alert-danger fade in">
+                            <strong>@ViewBag.VB_ErrorLogin</strong>
+                        </div>
+                }
+
+            <input type="text" class="form-control" name="UserName" placeholder="Username" required autofocus="" />
+            <input type="password" class="form-control" name="Password" placeholder="Password" required />
+
+            <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit">Đăng nhập</button>
+            }
+        </div>
+    </div>
+</body>
+</html>

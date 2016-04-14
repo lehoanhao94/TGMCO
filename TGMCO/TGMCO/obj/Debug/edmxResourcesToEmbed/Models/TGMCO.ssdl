@@ -1,0 +1,297 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TGMCOModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ABOUTS">
+    <Key>
+      <PropertyRef Name="ABOUTS_ID" />
+    </Key>
+    <Property Name="ABOUTS_ID" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="COMPANY_NAME" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="IMAGE" Type="nvarchar" MaxLength="50" />
+    <Property Name="PHONE" Type="nchar" MaxLength="15" />
+    <Property Name="ADDRESS" Type="nvarchar(max)" />
+    <Property Name="DESCRIPTION_1" Type="nvarchar(max)" />
+    <Property Name="DESCRIPTION_2" Type="nvarchar(max)" />
+    <Property Name="DESCRIPTION_3" Type="nvarchar(max)" />
+    <Property Name="DESCRIPTION_4" Type="nvarchar(max)" />
+    <Property Name="DESCRIPTION_5" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="AGENCIES">
+    <Key>
+      <PropertyRef Name="AGENCY_ID" />
+    </Key>
+    <Property Name="AGENCY_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="REGION" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="ADDRESS" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PHONE" Type="nchar" MaxLength="50" />
+    <Property Name="FAX" Type="nchar" MaxLength="50" />
+    <Property Name="URL" Type="nvarchar" MaxLength="50" />
+    <Property Name="IMAGE" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="CATEGORIES">
+    <Key>
+      <PropertyRef Name="CATEGORY_ID" />
+    </Key>
+    <Property Name="CATEGORY_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CATEGORY_NAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DESCRIPTION" Type="nvarchar" MaxLength="150" />
+    <Property Name="IMAGE" Type="nvarchar" MaxLength="50" />
+    <Property Name="IS_ACTIVE" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CATEGORIES_BY_SUPPLIER">
+    <Key>
+      <PropertyRef Name="CATEGORIES_BY_SUPPLIER_ID" />
+    </Key>
+    <Property Name="CATEGORIES_BY_SUPPLIER_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SUPPLIER_ID" Type="int" Nullable="false" />
+    <Property Name="CATEGORY_ID" Type="int" Nullable="false" />
+    <Property Name="SUPPLIER_NAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CATEGORY_NAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CATEGORIES_EXTRA">
+    <Key>
+      <PropertyRef Name="CATEGORY_EXTRA_ID" />
+    </Key>
+    <Property Name="CATEGORY_EXTRA_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CATEGORY_EXTRA_NAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DESCRIPTION" Type="nvarchar" MaxLength="150" />
+    <Property Name="CATEGORY_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EMPLOYEES">
+    <Key>
+      <PropertyRef Name="EMPLOYEE_ID" />
+    </Key>
+    <Property Name="EMPLOYEE_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EMPLOYEE_CODE" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="FULL_NAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ADDRESS" Type="nvarchar" MaxLength="150" />
+    <Property Name="EMAIL" Type="nchar" MaxLength="10" />
+    <Property Name="MOBILE" Type="nchar" MaxLength="12" />
+    <Property Name="AVATAR" Type="nvarchar" MaxLength="50" />
+    <Property Name="USER_ID" Type="int" Nullable="false" />
+    <Property Name="IS_ACTIVE" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NEWS">
+    <Key>
+      <PropertyRef Name="NEWS_ID" />
+    </Key>
+    <Property Name="NEWS_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TITLE" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="CONTENT_1" Type="nvarchar(max)" />
+    <Property Name="CONTENT_2" Type="nvarchar(max)" />
+    <Property Name="CONTENT_3" Type="nvarchar(max)" />
+    <Property Name="IMAGE_1" Type="nvarchar" MaxLength="50" />
+    <Property Name="IMAGE_2" Type="nvarchar" MaxLength="50" />
+    <Property Name="IMAGE_3" Type="nvarchar" MaxLength="50" />
+    <Property Name="CREATED_DATE" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NEWS_PROMOTION">
+    <Key>
+      <PropertyRef Name="NEWS_PROMOTION_ID" />
+    </Key>
+    <Property Name="NEWS_PROMOTION_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TITLE" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="BEGIN_DATE" Type="datetime" />
+    <Property Name="END_DATE" Type="datetime" />
+    <Property Name="CONTENT" Type="nvarchar(max)" />
+    <Property Name="IMAGE" Type="nvarchar" MaxLength="50" />
+    <Property Name="CREATED_DATE" Type="datetime" Nullable="false" />
+    <Property Name="CREATED_USER" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ORDER_DETAILS">
+    <Key>
+      <PropertyRef Name="ORDER_DETAIL_ID" />
+    </Key>
+    <Property Name="ORDER_ID" Type="int" Nullable="false" />
+    <Property Name="PRODUCT_ID" Type="int" Nullable="false" />
+    <Property Name="UNIT_PRICE" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="QUANTITY" Type="int" Nullable="false" />
+    <Property Name="DISCOUNT" Type="float" />
+    <Property Name="EXTENDED_PRICE" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="ORDER_DETAIL_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UNIT" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ORDER_STATUS">
+    <Key>
+      <PropertyRef Name="ORDER_STATUS_ID" />
+    </Key>
+    <Property Name="ORDER_STATUS_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ORDER_STATUS_NAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DESCRIPTION" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="ORDERS">
+    <Key>
+      <PropertyRef Name="ORDER_ID" />
+    </Key>
+    <Property Name="ORDER_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="USER_ID" Type="int" Nullable="false" />
+    <Property Name="EMPLOYEE_ID" Type="int" Nullable="false" />
+    <Property Name="ORDER_DATE" Type="datetime" Nullable="false" />
+    <Property Name="SHIP_CODE" Type="nvarchar" MaxLength="50" />
+    <Property Name="SHIPPED_DATE" Type="datetime" />
+    <Property Name="SHIP_VIA_ID" Type="int" Nullable="false" />
+    <Property Name="FREIGHT" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="SHIP_NAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="SHIP_ADDRESS" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="SHIP_PHONE" Type="nchar" MaxLength="12" />
+    <Property Name="SUBTOTAL" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="ORDER_STATUS_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PRODUCT_FILES">
+    <Key>
+      <PropertyRef Name="PRODUCT_FILE_ID" />
+    </Key>
+    <Property Name="PRODUCT_FILE_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PRUDUCT_ID" Type="int" Nullable="false" />
+    <Property Name="FILE_1" Type="nvarchar" MaxLength="50" />
+    <Property Name="FILE_2" Type="nvarchar" MaxLength="50" />
+    <Property Name="FILE_3" Type="nvarchar" MaxLength="50" />
+    <Property Name="FILE_4" Type="nvarchar" MaxLength="50" />
+    <Property Name="FILE_5" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="PRODUCTS">
+    <Key>
+      <PropertyRef Name="PRODUCT_ID" />
+    </Key>
+    <Property Name="PRODUCT_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PRODUCT_CODE" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PRODUCT_NAME" Type="nvarchar" MaxLength="50" />
+    <Property Name="CATEGORY_EXTRA_ID" Type="int" />
+    <Property Name="CATEGORY_ID" Type="int" Nullable="false" />
+    <Property Name="SUPPLIER_ID" Type="int" Nullable="false" />
+    <Property Name="UNIT_PRICE" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="IDX" Type="int" Nullable="false" />
+    <Property Name="IS_NEW" Type="bit" Nullable="false" />
+    <Property Name="IS_STILL" Type="bit" Nullable="false" />
+    <Property Name="IS_ACTIVE" Type="bit" Nullable="false" />
+    <Property Name="QUANTITY_SOLD" Type="int" Nullable="false" />
+    <Property Name="CAPACITY" Type="nvarchar" MaxLength="50" />
+    <Property Name="WEIGHT" Type="nchar" MaxLength="10" />
+    <Property Name="DESCRIPTION_1" Type="nvarchar" MaxLength="50" />
+    <Property Name="DESCRIPTION_2" Type="nvarchar" MaxLength="50" />
+    <Property Name="DESCRIPTION_3" Type="nvarchar" MaxLength="50" />
+    <Property Name="DESCRIPTION_4" Type="nvarchar" MaxLength="50" />
+    <Property Name="DESCRIPTION_5" Type="nvarchar" MaxLength="50" />
+    <Property Name="DESCRIPTION_6" Type="nvarchar" MaxLength="50" />
+    <Property Name="DESCRIPTION_7" Type="nvarchar" MaxLength="50" />
+    <Property Name="DESCRIPTION_8" Type="nvarchar" MaxLength="50" />
+    <Property Name="DESCRIPTION_9" Type="nvarchar" MaxLength="50" />
+    <Property Name="FEATURED" Type="nvarchar" MaxLength="150" />
+    <Property Name="ACCESSORIES" Type="nvarchar" MaxLength="50" />
+    <Property Name="MADE_IN" Type="nvarchar" MaxLength="50" />
+    <Property Name="UNIT" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SHIPPERS">
+    <Key>
+      <PropertyRef Name="SHIPPER_ID" />
+    </Key>
+    <Property Name="SHIPPER_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SHIPPER_NAME" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="PHONE" Type="nchar" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="SUPPLIERS">
+    <Key>
+      <PropertyRef Name="SUPPLIER_ID" />
+    </Key>
+    <Property Name="SUPPLIER_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SUPPLIER_NAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DESCRIPTION" Type="nvarchar" MaxLength="150" />
+    <Property Name="SUPPLIER_CODE" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="IMAGE" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="TECHNOLOGIES">
+    <Key>
+      <PropertyRef Name="TECHNOLOGY_ID" />
+    </Key>
+    <Property Name="TECHNOLOGY_ID" Type="int" Nullable="false" />
+    <Property Name="TECHNOLOGY_NAME" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="IMAGE" Type="nvarchar" MaxLength="50" />
+    <Property Name="DESCRIPTION" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="USER_PROFILES">
+    <Key>
+      <PropertyRef Name="USER_PROFILE_ID" />
+    </Key>
+    <Property Name="USER_PROFILE_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="USER_ID" Type="int" Nullable="false" />
+    <Property Name="FULL_NAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="EMAIL" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ADDRESS" Type="nvarchar" MaxLength="50" />
+    <Property Name="MOBILE" Type="nchar" MaxLength="12" />
+    <Property Name="AVATAR" Type="nvarchar" MaxLength="50" />
+    <Property Name="POINTS" Type="int" />
+  </EntityType>
+  <EntityType Name="USERS">
+    <Key>
+      <PropertyRef Name="USER_ID" />
+    </Key>
+    <Property Name="USER_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="USER_NAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PASSWORD" Type="char" MaxLength="256" Nullable="false" />
+    <Property Name="IS_ACTIVE" Type="bit" />
+    <Property Name="IS_ADMIN" Type="bit" />
+    <Property Name="IS_EMPLOYEE" Type="bit" />
+    <Property Name="CREATED_DATE" Type="datetime" Nullable="false" />
+  </EntityType>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="TGMCOModelStoreContainer">
+    <EntitySet Name="ABOUTS" EntityType="Self.ABOUTS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AGENCIES" EntityType="Self.AGENCIES" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CATEGORIES" EntityType="Self.CATEGORIES" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CATEGORIES_BY_SUPPLIER" EntityType="Self.CATEGORIES_BY_SUPPLIER" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CATEGORIES_EXTRA" EntityType="Self.CATEGORIES_EXTRA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EMPLOYEES" EntityType="Self.EMPLOYEES" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NEWS" EntityType="Self.NEWS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NEWS_PROMOTION" EntityType="Self.NEWS_PROMOTION" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ORDER_DETAILS" EntityType="Self.ORDER_DETAILS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ORDER_STATUS" EntityType="Self.ORDER_STATUS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ORDERS" EntityType="Self.ORDERS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PRODUCT_FILES" EntityType="Self.PRODUCT_FILES" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PRODUCTS" EntityType="Self.PRODUCTS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SHIPPERS" EntityType="Self.SHIPPERS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SUPPLIERS" EntityType="Self.SUPPLIERS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TECHNOLOGIES" EntityType="Self.TECHNOLOGIES" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="USER_PROFILES" EntityType="Self.USER_PROFILES" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

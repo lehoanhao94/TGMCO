@@ -1,0 +1,307 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TGMCOModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="ABOUT">
+    <Key>
+      <PropertyRef Name="ABOUTS_ID" />
+    </Key>
+    <Property Name="ABOUTS_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="COMPANY_NAME" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IMAGE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PHONE" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+    <Property Name="ADDRESS" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DESCRIPTION_1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DESCRIPTION_2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DESCRIPTION_3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DESCRIPTION_4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DESCRIPTION_5" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="AGENCy">
+    <Key>
+      <PropertyRef Name="AGENCY_ID" />
+    </Key>
+    <Property Name="AGENCY_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="REGION" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="ADDRESS" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PHONE" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="FAX" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="URL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IMAGE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="CATEGORy">
+    <Key>
+      <PropertyRef Name="CATEGORY_ID" />
+    </Key>
+    <Property Name="CATEGORY_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CATEGORY_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DESCRIPTION" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="IMAGE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IS_ACTIVE" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CATEGORIES_BY_SUPPLIER">
+    <Key>
+      <PropertyRef Name="CATEGORIES_BY_SUPPLIER_ID" />
+    </Key>
+    <Property Name="CATEGORIES_BY_SUPPLIER_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SUPPLIER_ID" Type="Int32" Nullable="false" />
+    <Property Name="CATEGORY_ID" Type="Int32" Nullable="false" />
+    <Property Name="SUPPLIER_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CATEGORY_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CATEGORIES_EXTRA">
+    <Key>
+      <PropertyRef Name="CATEGORY_EXTRA_ID" />
+    </Key>
+    <Property Name="CATEGORY_EXTRA_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CATEGORY_EXTRA_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DESCRIPTION" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="CATEGORY_ID" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EMPLOYEE">
+    <Key>
+      <PropertyRef Name="EMPLOYEE_ID" />
+    </Key>
+    <Property Name="EMPLOYEE_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EMPLOYEE_CODE" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="FULL_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ADDRESS" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="EMAIL" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="MOBILE" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
+    <Property Name="AVATAR" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="USER_ID" Type="Int32" Nullable="false" />
+    <Property Name="IS_ACTIVE" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NEWS">
+    <Key>
+      <PropertyRef Name="NEWS_ID" />
+    </Key>
+    <Property Name="NEWS_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TITLE" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CONTENT_1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CONTENT_2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CONTENT_3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IMAGE_1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IMAGE_2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IMAGE_3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CREATED_DATE" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="NEWS_PROMOTION">
+    <Key>
+      <PropertyRef Name="NEWS_PROMOTION_ID" />
+    </Key>
+    <Property Name="NEWS_PROMOTION_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TITLE" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="BEGIN_DATE" Type="DateTime" Precision="3" />
+    <Property Name="END_DATE" Type="DateTime" Precision="3" />
+    <Property Name="CONTENT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IMAGE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CREATED_DATE" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CREATED_USER" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ORDER_DETAILS">
+    <Key>
+      <PropertyRef Name="ORDER_DETAIL_ID" />
+    </Key>
+    <Property Name="ORDER_ID" Type="Int32" Nullable="false" />
+    <Property Name="PRODUCT_ID" Type="Int32" Nullable="false" />
+    <Property Name="UNIT_PRICE" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="QUANTITY" Type="Int32" Nullable="false" />
+    <Property Name="DISCOUNT" Type="Double" />
+    <Property Name="EXTENDED_PRICE" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="ORDER_DETAIL_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UNIT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ORDER_STATUS">
+    <Key>
+      <PropertyRef Name="ORDER_STATUS_ID" />
+    </Key>
+    <Property Name="ORDER_STATUS_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ORDER_STATUS_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DESCRIPTION" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ORDER">
+    <Key>
+      <PropertyRef Name="ORDER_ID" />
+    </Key>
+    <Property Name="ORDER_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="USER_ID" Type="Int32" Nullable="false" />
+    <Property Name="EMPLOYEE_ID" Type="Int32" Nullable="false" />
+    <Property Name="ORDER_DATE" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="SHIP_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SHIPPED_DATE" Type="DateTime" Precision="3" />
+    <Property Name="SHIP_VIA_ID" Type="Int32" Nullable="false" />
+    <Property Name="FREIGHT" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="SHIP_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SHIP_ADDRESS" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SHIP_PHONE" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
+    <Property Name="SUBTOTAL" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="ORDER_STATUS_ID" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PRODUCT">
+    <Key>
+      <PropertyRef Name="PRODUCT_ID" />
+    </Key>
+    <Property Name="PRODUCT_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PRODUCT_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PRODUCT_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CATEGORY_EXTRA_ID" Type="Int32" />
+    <Property Name="CATEGORY_ID" Type="Int32" Nullable="false" />
+    <Property Name="SUPPLIER_ID" Type="Int32" Nullable="false" />
+    <Property Name="UNIT_PRICE" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="IDX" Type="Int32" Nullable="false" />
+    <Property Name="IS_NEW" Type="Boolean" Nullable="false" />
+    <Property Name="IS_STILL" Type="Boolean" Nullable="false" />
+    <Property Name="IS_ACTIVE" Type="Boolean" Nullable="false" />
+    <Property Name="QUANTITY_SOLD" Type="Int32" Nullable="false" />
+    <Property Name="CAPACITY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="WEIGHT" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="DESCRIPTION_1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DESCRIPTION_2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DESCRIPTION_3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DESCRIPTION_4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DESCRIPTION_5" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DESCRIPTION_6" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DESCRIPTION_7" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DESCRIPTION_8" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DESCRIPTION_9" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FEATURED" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="ACCESSORIES" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MADE_IN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UNIT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SHIPPER">
+    <Key>
+      <PropertyRef Name="SHIPPER_ID" />
+    </Key>
+    <Property Name="SHIPPER_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SHIPPER_NAME" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PHONE" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="SUPPLIER">
+    <Key>
+      <PropertyRef Name="SUPPLIER_ID" />
+    </Key>
+    <Property Name="SUPPLIER_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SUPPLIER_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DESCRIPTION" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="SUPPLIER_CODE" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="IMAGE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="TECHNOLOGy">
+    <Key>
+      <PropertyRef Name="TECHNOLOGY_ID" />
+    </Key>
+    <Property Name="TECHNOLOGY_ID" Type="Int32" Nullable="false" />
+    <Property Name="TECHNOLOGY_NAME" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IMAGE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DESCRIPTION" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="USER_PROFILES">
+    <Key>
+      <PropertyRef Name="USER_PROFILE_ID" />
+    </Key>
+    <Property Name="USER_PROFILE_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="USER_ID" Type="Int32" Nullable="false" />
+    <Property Name="FULL_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ADDRESS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MOBILE" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
+    <Property Name="AVATAR" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="POINTS" Type="Int32" />
+  </EntityType>
+  <EntityType Name="USER">
+    <Key>
+      <PropertyRef Name="USER_ID" />
+    </Key>
+    <Property Name="USER_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="USER_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PASSWORD" Type="String" MaxLength="256" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="IS_ACTIVE" Type="Boolean" />
+    <Property Name="IS_ADMIN" Type="Boolean" />
+    <Property Name="IS_EMPLOYEE" Type="Boolean" />
+    <Property Name="CREATED_DATE" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityContainer Name="TGMCOEntitiesDB" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ABOUTS" EntityType="Self.ABOUT" />
+    <EntitySet Name="AGENCIES" EntityType="Self.AGENCy" />
+    <EntitySet Name="CATEGORIES" EntityType="Self.CATEGORy" />
+    <EntitySet Name="CATEGORIES_BY_SUPPLIER" EntityType="Self.CATEGORIES_BY_SUPPLIER" />
+    <EntitySet Name="CATEGORIES_EXTRA" EntityType="Self.CATEGORIES_EXTRA" />
+    <EntitySet Name="EMPLOYEES" EntityType="Self.EMPLOYEE" />
+    <EntitySet Name="NEWS" EntityType="Self.NEWS" />
+    <EntitySet Name="NEWS_PROMOTION" EntityType="Self.NEWS_PROMOTION" />
+    <EntitySet Name="ORDER_DETAILS" EntityType="Self.ORDER_DETAILS" />
+    <EntitySet Name="ORDER_STATUS" EntityType="Self.ORDER_STATUS" />
+    <EntitySet Name="ORDERS" EntityType="Self.ORDER" />
+    <EntitySet Name="PRODUCTS" EntityType="Self.PRODUCT" />
+    <EntitySet Name="SHIPPERS" EntityType="Self.SHIPPER" />
+    <EntitySet Name="SUPPLIERS" EntityType="Self.SUPPLIER" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="TECHNOLOGIES" EntityType="Self.TECHNOLOGy" />
+    <EntitySet Name="USER_PROFILES" EntityType="Self.USER_PROFILES" />
+    <EntitySet Name="USERS" EntityType="Self.USER" />
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(TGMCOModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(TGMCOModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <EntitySet Name="PRODUCT_FILES" EntityType="TGMCOModel.PRODUCT_FILES" />
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="PRODUCT_FILES">
+    <Key>
+      <PropertyRef Name="PRODUCT_FILE_ID" />
+    </Key>
+    <Property Name="PRODUCT_FILE_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PRUDUCT_ID" Type="Int32" Nullable="false" />
+    <Property Name="FILE_1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FILE_2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FILE_3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FILE_4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FILE_5" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+</Schema>

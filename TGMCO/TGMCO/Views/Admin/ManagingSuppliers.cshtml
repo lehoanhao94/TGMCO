@@ -1,0 +1,86 @@
+﻿@model List<TGMCO.Models.SUPPLIER>
+
+@{
+    ViewBag.Title = "ManagingSuppliers";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@section Page_Header {
+    <h1>
+        QUẢN LÝ NHÀ CUNG CẤP
+        <small>Thêm, xóa, cập nhập</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="Admin/Index"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">@ViewBag.Title</li>
+    </ol>
+}
+@{
+    if (@TempData["VB_ErrorCreate"] != null)
+    {
+        <div class="alert alert-danger alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4><i class="icon fa fa-ban"></i> LỖI !</h4>
+            @TempData["VB_ErrorCreate"]
+        </div>
+    }
+    if (@TempData["VB_SuccessCreate"] != null)
+    {
+        <div class="alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4>	<i class="icon fa fa-check"></i> THÀNH CÔNG!</h4>
+            @TempData["VB_SuccessCreate"] 
+        </div>
+    }
+}
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Mã nhà cung cấp</th>
+                <th>Tên nhà cung cấp</th>
+                <th>Mô tả</th>
+                <th>Hình ảnh đại diện</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @using (Html.BeginForm("Create", "ManagingSuppliers", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                <tr>
+                    <td><input name="SupplierCode" class="form-control" placeholder="Mã nhà cung cấp" type="text"></td>
+                    <td><input name="SupplierName" class="form-control" placeholder="Tên nhà cung cấp" id="ex1" type="text"></td>
+                    <td><input name="Description" class="form-control" placeholder="Mô tả" id="ex1" type="text"></td>
+                    <td>
+                        <input type="file" id="btnAvatar_In" name="fileUpload" value="Chọn hình..." style="height: 33px;width: 300px; ">
+                    <td>
+                        <button type="submit" class="btn btn-success btn-md"><span class="glyphicon glyphicon-pencil"></span> Thêm </button>
+                    </td>
+                </tr>
+            }
+            @foreach (var supplier in Model)
+            {
+                <tr id="row_@supplier.SUPPLIER_ID">
+                    <td>@supplier.SUPPLIER_CODE</td>
+                    <td>@supplier.SUPPLIER_NAME</td>
+                    <td>@supplier.DESCRIPTION</td>
+                    @{
+                if (@supplier.IMAGE != null)
+                {
+                    <td><img src="@Url.Content(@supplier.IMAGE)" alt="@supplier.SUPPLIER_NAME" width="200" /></td>
+                }
+                else
+                {
+                    <td>Không có hình ảnh...</td>
+                }
+                    }
+                    <td class="btn-group">
+                        <button id="btnUpdate" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-refresh"></span></button>
+                        <a data-ajax="true" href="/ManagingSuppliers/Delete/@supplier.SUPPLIER_ID" type="button" data-ajax-confirm="Bạn có muốn xóa nhà cung cấp này không?" data-ajax-complete="$('#row_@supplier.SUPPLIER_ID').remove()" data-ajax-method="Delete" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
