@@ -50,7 +50,6 @@ $.AdminLTE.options = {
   //Enable sidebar expand on hover effect for sidebar mini
   //This option is forced to true if both the fixed layout and sidebar mini
   //are used together
-  sidebarExpandOnHover: false,
   //BoxRefresh Plugin
   enableBoxRefresh: true,
   //Bootstrap.js tooltip
@@ -332,31 +331,7 @@ function _init() {
         }
       });
 
-      //Enable expand on hover for sidebar mini
-      if ($.AdminLTE.options.sidebarExpandOnHover
-              || ($('body').hasClass('fixed')
-                      && $('body').hasClass('sidebar-mini'))) {
-        this.expandOnHover();
-      }
 
-    },
-    expandOnHover: function () {
-      var _this = this;
-      var screenWidth = $.AdminLTE.options.screenSizes.sm - 1;
-      //Expand sidebar on hover
-      $('.main-sidebar').hover(function () {
-        if ($('body').hasClass('sidebar-mini')
-                && $("body").hasClass('sidebar-collapse')
-                && $(window).width() > screenWidth) {
-          _this.expand();
-        }
-      }, function () {
-        if ($('body').hasClass('sidebar-mini')
-                && $('body').hasClass('sidebar-expanded-on-hover')
-                && $(window).width() > screenWidth) {
-          _this.collapse();
-        }
-      });
     },
     expand: function () {
       $("body").removeClass('sidebar-collapse').addClass('sidebar-expanded-on-hover');

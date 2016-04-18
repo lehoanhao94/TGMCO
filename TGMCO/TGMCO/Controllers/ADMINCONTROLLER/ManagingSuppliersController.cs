@@ -14,7 +14,7 @@ namespace TGMCO.Controllers.ADMINCONTROLLER
     {
         private TGMCOEntitiesDB db = new TGMCOEntitiesDB();
         private SUPPLIER m_objSUPPLIER = new SUPPLIER();
-        private StringRandom m_STRING_RANDOM = new StringRandom();
+        private StringRandom m_STRING_RANDOM_IMAGE = new StringRandom(20);
         //
         // POST: /ManagingSuppliers/Create
 
@@ -38,7 +38,7 @@ namespace TGMCO.Controllers.ADMINCONTROLLER
                             //Upload File
                             if (fileUpload != null)
                             {
-                                string _fileNameRandom = m_STRING_RANDOM.RandomString();
+                                string _fileNameRandom = m_STRING_RANDOM_IMAGE.RandomString();
                                 m_objSUPPLIER.IMAGE = "~/Images/ADMIN/SUPPLIERS/" + _fileNameRandom + fileUpload.FileName;
                                 string _path = Path.Combine(Server.MapPath("~/Images/ADMIN/SUPPLIERS/" + _fileNameRandom + fileUpload.FileName));
                                 fileUpload.SaveAs(_path);

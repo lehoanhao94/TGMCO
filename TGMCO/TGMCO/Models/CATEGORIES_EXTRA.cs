@@ -18,5 +18,6 @@ namespace TGMCO.Models
         public string CATEGORY_EXTRA_NAME { get; set; }
         public string DESCRIPTION { get; set; }
         public int CATEGORY_ID { get; set; }
+        public bool IS_ACTIVE { get; set; }
     }
 }

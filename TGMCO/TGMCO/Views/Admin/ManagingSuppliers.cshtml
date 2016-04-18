@@ -10,7 +10,7 @@
         <small>Thêm, xóa, cập nhập</small>
     </h1>
     <ol class="breadcrumb">
-        <li><a href="Admin/Index"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="@Url.Action("Index", "Admin")"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active">@ViewBag.Title</li>
     </ol>
 }
@@ -28,19 +28,19 @@
         <div class="alert alert-success alert-dismissable">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
             <h4>	<i class="icon fa fa-check"></i> THÀNH CÔNG!</h4>
-            @TempData["VB_SuccessCreate"] 
+            @TempData["VB_SuccessCreate"]
         </div>
     }
 }
 
-<div class="table-responsive">
-    <table class="table table-hover">
+<div id="green-contents" class="listId table-responsive">
+    <table id="mt" class="table table-hover">
         <thead>
             <tr>
-                <th>Mã nhà cung cấp</th>
+                <th style="width:100px;">Mã NCC</th>
                 <th>Tên nhà cung cấp</th>
                 <th>Mô tả</th>
-                <th>Hình ảnh đại diện</th>
+                <th style="width:300px;">Hình ảnh đại diện</th>
                 <th></th>
             </tr>
         </thead>
@@ -49,22 +49,26 @@
             {
                 @Html.AntiForgeryToken()
                 <tr>
-                    <td><input name="SupplierCode" class="form-control" placeholder="Mã nhà cung cấp" type="text"></td>
-                    <td><input name="SupplierName" class="form-control" placeholder="Tên nhà cung cấp" id="ex1" type="text"></td>
-                    <td><input name="Description" class="form-control" placeholder="Mô tả" id="ex1" type="text"></td>
+                    <td class="code"><input id="code-field" name="SupplierCode" class="form-control" placeholder="Mã NCC" type="text"></td>
+                    <td class="name"><input name="SupplierName" class="form-control" placeholder="Tên nhà cung cấp" id="name-field" type="text"></td>
+                    <td class="description"><input name="Description" class="form-control" placeholder="Mô tả" id="description-field" type="text"></td>
                     <td>
                         <input type="file" id="btnAvatar_In" name="fileUpload" value="Chọn hình..." style="height: 33px;width: 300px; ">
+                    </td>
                     <td>
                         <button type="submit" class="btn btn-success btn-md"><span class="glyphicon glyphicon-pencil"></span> Thêm </button>
                     </td>
                 </tr>
             }
+        </tbody>
+
+        <tbody class="list">
             @foreach (var supplier in Model)
             {
                 <tr id="row_@supplier.SUPPLIER_ID">
-                    <td>@supplier.SUPPLIER_CODE</td>
-                    <td>@supplier.SUPPLIER_NAME</td>
-                    <td>@supplier.DESCRIPTION</td>
+                    <td class="code">@supplier.SUPPLIER_CODE</td>
+                    <td class="name">@supplier.SUPPLIER_NAME</td>
+                    <td class="description">@supplier.DESCRIPTION</td>
                     @{
                 if (@supplier.IMAGE != null)
                 {
@@ -76,7 +80,7 @@
                 }
                     }
                     <td class="btn-group">
-                        <button id="btnUpdate" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-refresh"></span></button>
+                        <button id="btnUpdate" onclick="clearFields()" type="button" class="edit-item-btn btn btn-primary"><span class="glyphicon glyphicon-refresh"></span></button>
                         <a data-ajax="true" href="/ManagingSuppliers/Delete/@supplier.SUPPLIER_ID" type="button" data-ajax-confirm="Bạn có muốn xóa nhà cung cấp này không?" data-ajax-complete="$('#row_@supplier.SUPPLIER_ID').remove()" data-ajax-method="Delete" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
                     </td>
                 </tr>
@@ -84,3 +88,8 @@
         </tbody>
     </table>
 </div>
+
+@section footerjs{
+
+}
+

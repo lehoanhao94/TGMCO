@@ -1,0 +1,102 @@
+﻿@using TGMCO.Models.Entity;
+@model List<TGMCO.Models.CATEGORIES_EXTRA>
+@{
+    ViewBag.Title = "ManagingCategoriesExtra";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+    CategoryModel m_CATEGORY_MODEL = new CategoryModel();
+}
+
+@section Page_Header {
+    <h1>
+        QUẢN LÝ DANH MỤC NHỎ
+        <small>Thêm, xóa, cập nhập</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Admin")"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">@ViewBag.Title</li>
+    </ol>
+}
+
+@{
+    if (@TempData["VB_ErrorCreate"] != null)
+    {
+        <div class="alert alert-danger alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4><i class="icon fa fa-ban"></i> LỖI !</h4>
+            @TempData["VB_ErrorCreate"]
+        </div>
+    }
+    if (@TempData["VB_SuccessCreate"] != null)
+    {
+        <div class="alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4>	<i class="icon fa fa-check"></i> THÀNH CÔNG!</h4>
+            @TempData["VB_SuccessCreate"]
+        </div>
+    }
+}
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th style="width:100px;">#ID</th>
+                <th>Tên danh mục nhỏ</th>
+                <th>Mô tả</th>
+                <th>Tên danh mục lớn</th>
+                <th>Trạng thái</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @using (Html.BeginForm("Create", "ManagingCategoriesExtra", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <tr>
+                    <td></td>
+                    <td><input name="CategoryExtraName" class="form-control" placeholder="Tên danh mục nhỏ" id="ex1" type="text"></td>
+                    <td><input name="Description" class="form-control" placeholder="Mô tả" id="ex1" type="text"></td>
+                    <td>@Html.DropDownList("ListCategory", (IEnumerable<SelectListItem>)ViewBag.ListCategory, new { @class = "form-control", @style = "width: 350px;" })</td>
+                    <td>
+                        <div class="checkbox checkbox-primary">
+                            <input name="IsActive" id="checkbox2" type="checkbox" checked>
+                            <label for="checkbox2">
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        <button type="submit" class="btn btn-success btn-md"><span class="glyphicon glyphicon-pencil"></span> Thêm </button>
+                    </td>
+                </tr>
+            }
+            @foreach (var category_extra in Model)
+            {
+                <tr id="row_@category_extra.CATEGORY_EXTRA_ID">
+                    <td>@category_extra.CATEGORY_EXTRA_ID</td>
+                    <td>@category_extra.CATEGORY_EXTRA_NAME</td>
+                    <td>@category_extra.DESCRIPTION</td>
+                    <td>@m_CATEGORY_MODEL.GetCategoryName(category_extra.CATEGORY_ID)</td>
+                    @{
+                if (@category_extra.IS_ACTIVE == true)
+                {
+                    <td>
+                        <a data-ajax="true" href="/ManagingCategoriesExtra/ChangeStatus/@category_extra.CATEGORY_EXTRA_ID" type="button" data-ajax-complete="location.reload()" data-ajax-method="POST"><span style="color: #337ab7; " class="glyphicon glyphicon-ok"></span></a>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <a data-ajax="true" href="/ManagingCategoriesExtra/ChangeStatus/@category_extra.CATEGORY_EXTRA_ID" type="button" data-ajax-complete="location.reload()" data-ajax-method="POST"><span style="color:red;" class="glyphicon glyphicon-remove"></span></a>
+                    </td>
+                }
+                    }
+                    <td class="btn-group">
+                        <button id="btnUpdate" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-refresh"></span></button>
+                        <a data-ajax="true" href="/ManagingCategoriesExtra/Delete/@category_extra.CATEGORY_EXTRA_ID" type="button" data-ajax-confirm="Bạn có muốn xóa danh mục con này không?" data-ajax-complete="$('#row_@category_extra.CATEGORY_EXTRA_ID').remove()" data-ajax-method="Delete" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

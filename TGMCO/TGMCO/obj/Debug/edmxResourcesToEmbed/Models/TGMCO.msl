@@ -55,6 +55,7 @@
     <EntitySetMapping Name="CATEGORIES_EXTRA">
       <EntityTypeMapping TypeName="TGMCOModel.CATEGORIES_EXTRA">
         <MappingFragment StoreEntitySet="CATEGORIES_EXTRA">
+          <ScalarProperty Name="IS_ACTIVE" ColumnName="IS_ACTIVE" />
           <ScalarProperty Name="CATEGORY_EXTRA_ID" ColumnName="CATEGORY_EXTRA_ID" />
           <ScalarProperty Name="CATEGORY_EXTRA_NAME" ColumnName="CATEGORY_EXTRA_NAME" />
           <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
@@ -283,6 +284,21 @@
           <ScalarProperty Name="FILE_1" ColumnName="FILE_1" />
           <ScalarProperty Name="PRUDUCT_ID" ColumnName="PRUDUCT_ID" />
           <ScalarProperty Name="PRODUCT_FILE_ID" ColumnName="PRODUCT_FILE_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PRODUCT_IMAGES">
+      <EntityTypeMapping TypeName="TGMCOModel.PRODUCT_IMAGES">
+        <MappingFragment StoreEntitySet="PRODUCT_IMAGES">
+          <ScalarProperty Name="IMAGE_7" ColumnName="IMAGE_7" />
+          <ScalarProperty Name="IMAGE_6" ColumnName="IMAGE_6" />
+          <ScalarProperty Name="IMAGE_5" ColumnName="IMAGE_5" />
+          <ScalarProperty Name="IMAGE_4" ColumnName="IMAGE_4" />
+          <ScalarProperty Name="IMAGE_3" ColumnName="IMAGE_3" />
+          <ScalarProperty Name="IMAGE_2" ColumnName="IMAGE_2" />
+          <ScalarProperty Name="IMAGE_1" ColumnName="IMAGE_1" />
+          <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
+          <ScalarProperty Name="PRODUCT_IMAGES_ID" ColumnName="PRODUCT_IMAGES_ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -3,6 +3,7 @@ var form = $('.form');
 var btn = $('#submit');
 var topbar = $('.topbar');
 var input = $('#password');
+var input2 = $('#username');
 var article =$('.article');
 var tries = 0;
 var h = input.height();
@@ -48,9 +49,11 @@ btn.on('click',function(){
           setTimeout(function(){
           btn.text('Recover password?');
           },300);
-          input.prop('disabled',true);
+          input.prop('disabled', true);
+          input2.prop('disabled', true);
           topbar.removeClass('error');
           input.addClass('disabled');
+          input2.addClass('disabled');
           btn.addClass('recover');
           break;
          defaut:

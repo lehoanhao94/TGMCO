@@ -1,0 +1,56 @@
+﻿@using TGMCO.Models;
+@model List<TGMCO.Models.SUPPLIER>
+@{
+    ViewBag.Title = "ManagingCategoriesBySupplier";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    NumberObject m_NUMBER_OBJECT = new NumberObject();
+    
+}
+
+@section Page_Header {
+    <h1>
+        QUẢN LÝ DANH MỤC THEO NHÀ CUNG CẤP
+        <small>Thêm, xóa, cập nhập</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Admin")"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">@ViewBag.Title</li>
+    </ol>
+}
+
+
+<div class="row">
+    @foreach (var supplier in Model)
+    {
+        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+
+            <!-- PRICE ITEM -->
+            <div class="panel price panel-grey">
+                <div class="panel-heading arrow_box text-center">
+                    @{if (@supplier.IMAGE != null)
+                      {
+                        <img src="@Url.Content(@supplier.IMAGE)" alt="@supplier.SUPPLIER_NAME" width="215" height="105" />
+                      }
+                      else
+                      {
+                          <i>Không có hình ảnh...</i>
+                      }
+                    }
+                </div>
+                <ul class="list-group list-group-flush text-center">
+                    <li class="list-group-item"> <strong>@supplier.SUPPLIER_NAME</strong> </li>
+                    <li class="list-group-item"> Danh mục hiện có: @m_NUMBER_OBJECT.GetNumOfCategoriesBySupplier(@supplier.SUPPLIER_ID)</li>
+                    <li class="list-group-item"> Sản phẩm hiện có: </li>
+                </ul>
+                <div class="panel-footer">
+                    <a class="btn btn-lg btn-block btn-primary" href="@Url.Action("Supplier", "ManagingCategoriesBySupplier", new {id =  @supplier.SUPPLIER_ID})">QUẢN LÝ</a>
+                </div>
+            </div>
+            <!-- /PRICE ITEM -->
+        </div>
+    }
+
+</div>
+
+
+

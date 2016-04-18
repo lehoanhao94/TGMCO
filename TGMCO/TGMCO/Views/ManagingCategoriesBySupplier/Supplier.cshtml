@@ -1,0 +1,93 @@
+﻿@using TGMCO.Models;
+@using TGMCO.Models.Entity;
+
+@model List<TGMCO.Models.CATEGORIES_BY_SUPPLIER>
+
+@{
+    ViewBag.Title = "Supplier";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    SUPPLIER m_SUPPLIER = (SUPPLIER)ViewBag.Supplier;
+    CategoryModel m_CATEGORY = new CategoryModel();
+    List<CATEGORy> m_LIST_CATEGORY = (List<CATEGORy>)ViewBag.ListCategory;
+}
+
+
+@section Page_Header {
+    <h1>
+        QUẢN LÝ DANH MỤC NHÀ CUNG CẤP <strong>@m_SUPPLIER.SUPPLIER_NAME</strong>
+        <small>Thêm, xóa, cập nhập</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Admin")"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="@Url.Action("ManagingCategoriesBySupplier", "Admin")"> ManagingCategoriesBySupplier</a></li>
+        <li class="active">@m_SUPPLIER.SUPPLIER_NAME</li>
+    </ol>
+}
+
+<div id="categories">
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th style="width:100px;">#ID</th>
+                    <th>Tên danh mục</th>
+                    <th>Trạng thái</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td colspan="3"><input class="search form-control" placeholder="Tìm kiếm theo tên danh mục, ID danh mục..." style="width: 300px;" /></td>
+                </tr>
+            </tbody>
+            <tbody class="list">
+                @{
+                    if (Model != null && Model.Count > 0)
+                    {
+                        foreach (var category_by_supplier in Model)
+                        {
+                            <tr id="row_@category_by_supplier.CATEGORIES_BY_SUPPLIER_ID" class="success">
+                                <td class="id">@category_by_supplier.CATEGORY_ID</td>
+                                <td class="name">@category_by_supplier.CATEGORY_NAME</td>
+                                <td>
+                                    <a data-ajax="true" href="@Url.Action("RemoveCategory", "ManagingCategoriesBySupplier", new { id = @category_by_supplier.CATEGORIES_BY_SUPPLIER_ID })" type="button" data-ajax-complete="location.reload()" data-ajax-method="POST"><span style="color: #337ab7; " class="glyphicon glyphicon-ok"></span></a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="3" style="text-align: center;"> <strong> NHÀ CUNG CẤP CHƯA CÓ DANH MỤC NÀO... </strong></td>
+                        </tr>
+                    }
+                }
+
+
+                @foreach (var category in m_LIST_CATEGORY)
+                {
+                    if (!m_CATEGORY.IsExistCategoryInSupplier(m_SUPPLIER.SUPPLIER_ID, category.CATEGORY_ID))
+                    {
+                        <tr id="row_@category.CATEGORY_ID" class="danger">
+                            <td class ="id">@category.CATEGORY_ID</td>
+                            <td class="name">@category.CATEGORY_NAME</td>
+                            <td>
+                                <a data-ajax="true" href="@Url.Action("AddCategory", "ManagingCategoriesBySupplier", new {id_sup = m_SUPPLIER.SUPPLIER_ID, id_cate = category.CATEGORY_ID })" type="button" data-ajax-complete="location.reload()" data-ajax-method="POST"><span style="color:red;" class="glyphicon glyphicon-remove"></span></a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@section footerjs{
+    <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.2.0/list.min.js"></script>
+    <script>
+        var options = {
+            valueNames: ['name', 'id']
+        };
+
+        var userList = new List('categories', options);
+    </script>
+}

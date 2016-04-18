@@ -11,11 +11,11 @@ namespace TGMCO.Models
         private static Random m_Random = null;
         private static int m_Size = int.MinValue;
 
-        public StringRandom()
+        public StringRandom(int size)
         {
             try
             {
-                m_Size = 30;
+                m_Size = size;
                 m_Random = new Random((int)DateTime.Now.Ticks);
             }
             catch (Exception ex)

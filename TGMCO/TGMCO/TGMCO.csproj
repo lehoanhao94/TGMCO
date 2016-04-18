@@ -40,6 +40,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
@@ -183,19 +189,20 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ADMINCONTROLLER\AdminController.cs" />
+    <Compile Include="Controllers\ADMINCONTROLLER\ManagingCategoriesBySupplierController.cs" />
+    <Compile Include="Controllers\ADMINCONTROLLER\ManagingCategoriesController.cs" />
+    <Compile Include="Controllers\ADMINCONTROLLER\ManagingCategoriesExtraController.cs" />
+    <Compile Include="Controllers\ADMINCONTROLLER\ManagingProductsController.cs" />
     <Compile Include="Controllers\ADMINCONTROLLER\ManagingSuppliersController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ABOUT.cs">
       <DependentUpon>TGMCO.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\AGENCy.cs">
       <DependentUpon>TGMCO.tt</DependentUpon>
     </Compile>
@@ -211,12 +218,18 @@
     <Compile Include="Models\EMPLOYEE.cs">
       <DependentUpon>TGMCO.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Entity\SupplierModel.cs" />
+    <Compile Include="Models\Entity\CategoryModel.cs" />
     <Compile Include="Models\NEWS.cs">
       <DependentUpon>TGMCO.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\NEWS_PROMOTION.cs">
       <DependentUpon>TGMCO.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PRODUCT_IMAGES.cs">
+      <DependentUpon>TGMCO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Util\NumberObject.cs" />
     <Compile Include="Models\ORDER.cs">
       <DependentUpon>TGMCO.tt</DependentUpon>
     </Compile>
@@ -241,8 +254,8 @@
     <Compile Include="Models\sp_helpdiagrams_Result.cs">
       <DependentUpon>TGMCO.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\StringCipher.cs" />
-    <Compile Include="Models\StringRandom.cs" />
+    <Compile Include="Models\Util\StringCipher.cs" />
+    <Compile Include="Models\Util\StringRandom.cs" />
     <Compile Include="Models\SUPPLIER.cs">
       <DependentUpon>TGMCO.tt</DependentUpon>
     </Compile>
@@ -285,6 +298,8 @@
     <Content Include="Content\Admin_Layout\css\bootstrap-theme.css" />
     <Content Include="Content\Admin_Layout\css\bootstrap-theme.min.css" />
     <Content Include="Content\Admin_Layout\css\bootstrap.min.css" />
+    <Content Include="Content\Admin_Layout\css\dataTables.bootstrap.css" />
+    <Content Include="Content\Admin_Layout\css\style.css" />
     <Content Include="Content\Admin_Layout\css\login-admin.css" />
     <Content Include="Content\Admin_Layout\dist\css\AdminLTE.css" />
     <Content Include="Content\Admin_Layout\dist\css\AdminLTE.min.css" />
@@ -321,8 +336,10 @@
     <Content Include="Content\Admin_Layout\dist\js\pages\dashboard2.js" />
     <Content Include="Content\Admin_Layout\img\logo.png" />
     <Content Include="Content\Admin_Layout\js\bootstrap.min.js" />
+    <Content Include="Content\Admin_Layout\js\controller\ManagingCategoriesController.js" />
     <Content Include="Content\Admin_Layout\js\jquery-1.12.2.min.js" />
     <Content Include="Content\Admin_Layout\js\login.js" />
+    <Content Include="Content\Admin_Layout\js\smartpaginator.js" />
     <Content Include="Content\Admin_Layout\plugins\bootstrap-slider\bootstrap-slider.js" />
     <Content Include="Content\Admin_Layout\plugins\bootstrap-slider\slider.css" />
     <Content Include="Content\Admin_Layout\plugins\bootstrap-wysihtml5\bootstrap3-wysihtml5.all.min.js" />
@@ -993,6 +1010,7 @@
     <Content Include="Content\Admin_Layout\plugins\timepicker\bootstrap-timepicker.js" />
     <Content Include="Content\Admin_Layout\plugins\timepicker\bootstrap-timepicker.min.css" />
     <Content Include="Content\Admin_Layout\plugins\timepicker\bootstrap-timepicker.min.js" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -1122,19 +1140,24 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\Login.cshtml" />
     <Content Include="Views\Admin\ManagingSuppliers.cshtml" />
-    <Content Include="Views\ManagingSuppliers\Create.cshtml" />
+    <Content Include="Views\Admin\ManagingCategories.cshtml" />
+    <Content Include="Views\Admin\ManagingCategoriesExtra.cshtml" />
+    <Content Include="Views\Admin\ManagingCategoriesBySupplier.cshtml" />
+    <Content Include="Views\ManagingCategoriesBySupplier\Supplier.cshtml" />
+    <Content Include="Views\Admin\ManagingProducts.cshtml" />
+    <Content Include="Views\ManagingProducts\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Admin_Layout\dist\img\" />
+    <Folder Include="Images\ADMIN\CATEGORIES\" />
     <Folder Include="Images\ADMIN\SUPPLIERS\" />
+    <Folder Include="Views\ManagingSuppliers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

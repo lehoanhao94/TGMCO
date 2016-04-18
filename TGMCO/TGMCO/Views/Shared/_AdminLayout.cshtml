@@ -2,6 +2,7 @@
     
 @{
     USER m_ADMIN = (USER)Session["SS_USER"];
+    NumberObject m_NUMBER_OBJECT = new NumberObject();
 }
 
 <!DOCTYPE html>
@@ -23,6 +24,8 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link href="~/Content/Admin_Layout/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Admin_Layout/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Admin_Layout/css/dataTables.bootstrap.css" type="text/css" rel="stylesheet" />
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -41,7 +44,7 @@
     <script src="/Scripts/bootstrap.min.js" type="text/javascript"></script>
     <!-- Sparkline -->
     <!-- AdminLTE App -->
-    <script src="/Scripts/app.min.js" type="text/javascript"></script>
+    <script src="/Content/Admin_Layout/dist/js/app.js"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="/Scripts/dashboard.js" type="text/javascript"></script>
     <!-- AdminLTE for demo purposes -->
@@ -49,9 +52,9 @@
     @RenderSection("masterjs", required: false)
 
 </head>
-<body class="skin-blue sidebar-mini fixed">
+<body class="skin-blue sidebar-mini fixed sidebar-collapse">
     <div class="wrapper">
-        
+
         <header class="main-header">
             <!-- Logo -->
             <a href="index2.html" class="logo">
@@ -294,7 +297,7 @@
                                         <a href="#" class="btn btn-default btn-flat">Profile</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="Admin/Logout" class="btn btn-default btn-flat">Sign out</a>
+                                        <a href="@Url.Action("Logout", "Admin")" class="btn btn-default btn-flat">Sign out</a>
                                     </div>
                                 </li>
                             </ul>
@@ -335,52 +338,59 @@
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu">
                     <li class="header"> BẢNG ĐIỀU KHIỂN </li>
-                    <li class="active">
+                    <li>
                         <a href="#">
                             <i class="fa fa-dashboard"></i> <span> DASHBOARD </span>
                         </a>
                     </li>
                     <li>
                         <a href="@Url.Action("ManagingSuppliers", "Admin")">
-                            <i class="fa fa-th"></i> <span> QUẢN LÝ NHÀ CUNG CẤP</span> <small class="label pull-right bg-green">6</small>
+                            <i class="fa fa-cubes"></i> <span> QUẢN LÝ NHÀ CUNG CẤP <small class="label label-primary">@m_NUMBER_OBJECT.GetNumOfSuppliers()</small></span> 
                         </a>
                     </li>
                     <li class="treeview">
                         <a href="#">
-                            <i class="fa fa-dashboard"></i> <span>QUẢN LÝ DANH MỤC</span> <i class="fa fa-angle-left pull-right"></i>
+                            <i class="fa fa-sort-alpha-asc">
+                            </i> <span>QUẢN LÝ DANH MỤC</span> <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> DANH MỤC LỚN</a></li>
-                            <li><a href="index2.html"><i class="fa fa-circle-o"></i> DANH MỤC NHỎ</a></li>
+                            <li>
+                                <a href="@Url.Action("ManagingCategories", "Admin")">
+                                    <i class="fa fa-tags">
+                                    </i> DANH MỤC LỚN <small class="label label-primary pull-right">@m_NUMBER_OBJECT.GetNumOfCategories()</small>
+                                </a>
+                            </li>
+                            <li><a href="@Url.Action("ManagingCategoriesExtra", "Admin")"><i class="fa fa-tag"></i> DANH MỤC NHỎ <small class="label label-primary pull-right">@m_NUMBER_OBJECT.GetNumOfCategoriesExtra()</small></a></li>
+                            <li><a href="@Url.Action("ManagingCategoriesBySupplier", "Admin")"><i class="fa fa-cubes"></i> DANH MỤC THEO NCC </a></li>                     
                         </ul>
                     </li>
                     <li>
-                        <a href="pages/widgets.html">
-                            <i class="fa fa-th"></i> <span> QUẢN LÝ SẢN PHẨM </span> <span class="label label-primary pull-right">21</span>
+                        <a href="@Url.Action("ManagingProducts", "Admin")">
+                            <i class="fa fa-gamepad"></i> <span> QUẢN LÝ SẢN PHẨM </span> <span class="label label-primary pull-right">21</span>
                         </a>
                     </li>
                     <li>
                         <a href="pages/widgets.html">
-                            <i class="fa fa-th"></i> <span> QUẢN LÝ TÀI KHOẢN</span> <span class="label label-primary pull-right">21</span>
+                            <i class="fa fa-users"></i> <span> QUẢN LÝ TÀI KHOẢN</span> <span class="label label-primary pull-right">21</span>
                         </a>
                     </li>
                     <li>
                         <a href="pages/widgets.html">
-                            <i class="fa fa-th"></i> <span> QUẢN LÝ ĐƠN ĐẶT HÀNG</span> <span class="label label-primary pull-right">21</span>
+                            <i class="fa fa-cart-plus"></i> <span> QUẢN LÝ ĐƠN ĐẶT HÀNG</span> <span class="label label-primary pull-right">21</span>
                         </a>
                     </li>
                     <li class="treeview">
                         <a href="#">
-                            <i class="fa fa-dashboard"></i> <span>QUẢN LÝ TIN TỨC</span> <i class="fa fa-angle-left pull-right"></i>
+                            <i class="fa fa-newspaper-o"></i> <span>QUẢN LÝ TIN TỨC</span> <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> TIN TỨC</a></li>
-                            <li><a href="index2.html"><i class="fa fa-circle-o"></i> TIN KHUYẾN MÃI</a></li>
+                            <li class="active"><a href="index.html"><i class="fa fa-file-text-o"></i> TIN TỨC</a></li>
+                            <li><a href="index2.html"><i class="fa fa-gift"></i> TIN KHUYẾN MÃI</a></li>
                         </ul>
                     </li>
                     <li>
                         <a href="pages/widgets.html">
-                            <i class="fa fa-th"></i> <span> QUẢN LÝ CHI NHÁNH </span> <span class="label label-primary pull-right">3</span>
+                            <i class="fa fa-sitemap"></i> <span> QUẢN LÝ CHI NHÁNH </span> <span class="label label-primary pull-right">3</span>
                         </a>
                     </li>
                 </ul>
@@ -392,7 +402,7 @@
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">
-                @RenderSection("Page_Header",false)
+                @RenderSection("Page_Header", false)
             </section>
 
             <!-- Main content -->
@@ -402,9 +412,9 @@
         </div><!-- /.content-wrapper -->
         <footer class="main-footer">
             <div class="pull-right hidden-xs">
-                <b>Version</b> 2.0
+                <b>Version</b> 1.0
             </div>
-            <strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.
+            <strong>Copyright &copy; @DateTime.Now.Year <a href="#">TGMCO</a>.</strong> All rights reserved.
         </footer>
 
         <!-- Control Sidebar -->
@@ -576,5 +586,7 @@
              immediately after the control sidebar -->
         <div class='control-sidebar-bg'></div>
     </div><!-- ./wrapper -->
+
+    @RenderSection("footerjs", required: false)
 </body>
 </html>
