@@ -16,242 +16,281 @@
 }
 
 <div class="box box-success">
-    <div class="box-header">
-        <h3 class="box-title">Sản phẩm mới</h3>
-    </div>
-    <div class="box-body">
-    @using (Html.BeginForm("Create", "ManagingProducts", FormMethod.Post, new { enctype = "multipart/form-data" })){
-        <div class="row">
-            <div class="col-xs-2 form-group">
-                <label>Mã SP <i style="color:red;">*</i></label>
-                <input name="PRODUCT_CODE" type="text" class="form-control" placeholder="Mã SP" required>
+    @using (Html.BeginForm("Create", "ManagingProducts", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="box-header">
+            <div class="col-xs-1">
+                <input name="IDX" type="text" class="form-control" placeholder="IDX" required value="0">
             </div>
-            <div class="col-xs-3 form-group">
-                <label>Tên sản phẩm <i style="color:red;">*</i></label>
-                <input name="PRODUCT_NAME" type="text" class="form-control" placeholder="Tên sản phẩm" required>
+            <div class="col-xs-1">
+                <div class="checkbox checkbox-primary" style="width: 100px;">
+                    <input name="IsActive" id="checkbox1" type="checkbox" checked>
+                    <label for="checkbox1">
+                        Còn hàng
+                    </label>
+                </div>
             </div>
-            <div class="col-xs-2 form-group">
-                <label>Nhà cung cấp <i style="color:red;">*</i></label>
-                @Html.DropDownList("ListSupplier", (IEnumerable<SelectListItem>)ViewBag.ListSupplier,"Chọn nhà cung cấp", new { @class = "form-control" })
+            <div class="col-xs-1">
+                <div class="checkbox checkbox-primary" style="width: 100px;">
+                    <input name="IsActive" id="checkbox2" type="checkbox" checked>
+                    <label for="checkbox2">
+                        SP mới
+                    </label>
+                </div>
             </div>
-            <div class="col-xs-3 form-group">
-                <label>Danh mục <i style="color:red;">*</i></label>
-                @Html.DropDownList("ListCategory", (IEnumerable<SelectListItem>)ViewBag.ListCategory,"Chọn danh mục" ,new { @class = "form-control" })
-            </div>
-            <div class="col-xs-2 form-group">
-                <label>Danh mục con</label>
-                @Html.DropDownList("ListCategoryExtra", (IEnumerable<SelectListItem>)ViewBag.ListCategory, "Chọn danh mục con", new { @class = "form-control" })
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-2 form-group">
-                <label>Đơn giá <i style="color:red;">*</i></label>
-                <input name="UNIT_PRICE" class="form-control" type="number" required min="1000" placeholder="Đơn giá ">
-            </div>
-            <div class="col-xs-1 form-group">
-                <label>ĐVT <i style="color:red;">*</i></label>
-                <input name="UNIT" type="text" class="form-control" placeholder="Loại, chiếc, bộ, cặp...." required>
-            </div>
-            <div class="col-xs-1 form-group">
-                <label>Công suất</label>
-                <input name="CAPACITY" type="text" class="form-control" placeholder="Công suất">
-            </div>
-            <div class="col-xs-1 form-group">
-                <label>Tr/Lượng</label>
-                <input name="WEIGHT" type="text" class="form-control" placeholder="Trọng lượng">
-            </div>
-            <div class="col-xs-2 form-group">
-                <label>Xuất xứ</label>
-                <input name="MADE_IN" type="text" class="form-control" placeholder="Xuất xứ">
-            </div>
-            <div class="col-xs-3 form-group">
-                <label>Phụ kiện đi kèm</label>
-                <input name="ACCESSORIES" type="text" class="form-control" placeholder="Phụ kiện">
-            </div>
-            <div class="col-xs-2 form-group">
-                <label>Tính năng nổi bật</label>
-                <input name="FEATURED" type="text" class="form-control" placeholder="Tính năng nổi bật">
+            <div class="col-xs-1">
+                <div class="checkbox checkbox-primary" style="width: 100px;">
+                    <input name="IsActive" id="checkbox3" type="checkbox" checked>
+                    <label for="checkbox3">
+                        Hoạt động
+                    </label>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-xs-4 form-group">
-                <label>Mô tả 1</label>
-                <input name="DESCRIPTION_1" class="form-control" type="text" placeholder="Mô tả 1">
+
+        <div class="box-body">
+            @{
+        if (@TempData["ErrorCreate"] != null)
+        {
+            <div class="alert alert-danger alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4><i class="icon fa fa-ban"></i> LỖI !</h4>
+                @TempData["ErrorCreate"]
             </div>
-            <div class="col-xs-4 form-group">
-                <label>Mô tả 2</label>
-                <input name="DESCRIPTION_2" type="text" class="form-control" placeholder="Mô tả 2">
-            </div>
-            <div class="col-xs-4 form-group">
-                <label>Mô tả 3</label>
-                <input name="DESCRIPTION_3" type="text" class="form-control" placeholder="Mô tả 3">
-            </div>         
-        </div>
-        <div class="row">
-            <div class="col-xs-4 form-group">
-                <label>Mô tả 4</label>
-                <input name="DESCRIPTION_4" class="form-control" type="text" placeholder="Mô tả 1">
-            </div>
-            <div class="col-xs-4 form-group">
-                <label>Mô tả 5</label>
-                <input name="DESCRIPTION_5" type="text" class="form-control" placeholder="Mô tả 2">
-            </div>
-            <div class="col-xs-4 form-group">
-                <label>Mô tả 6</label>
-                <input name="DESCRIPTION_6" type="text" class="form-control" placeholder="Mô tả 3">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-4 form-group">
-                <label>Mô tả 7</label>
-                <input name="DESCRIPTION_7" class="form-control" type="text" placeholder="Mô tả 1">
-            </div>
-            <div class="col-xs-4 form-group">
-                <label>Mô tả 8</label>
-                <input name="DESCRIPTION_8" type="text" class="form-control" placeholder="Mô tả 2">
-            </div>
-            <div class="col-xs-4 form-group">
-                <label>Mô tả 9</label>
-                <input name="DESCRIPTION_9" type="text" class="form-control" placeholder="Mô tả 3">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-4 form-group">            
-                <i class="file-image">
-                    <input id="_" name="Image" type="file" onchange="readImage(this)" title="" />
-                    <i class="reset" onclick="resetImage(this.previousElementSibling)"></i>
-                    <label for="_" class="image"></label>
-                </i>
-                <i class="file-image">
-                    <input id="_1" name="Image_1" type="file" onchange="readImage(this)" title="" />
-                    <i class="reset" onclick="resetImage(this.previousElementSibling)"></i>
-                    <label for="_1" class="image"></label>
-                </i>
-                <i class="file-image">
-                    <input id="_2" name="Image_2" type="file" onchange="readImage(this)" title="" />
-                    <i class="reset" onclick="resetImage(this.previousElementSibling)"></i>
-                    <label for="_2" class="image"></label>
-                </i>
-            </div>
-            <div class="col-xs-4 form-group">
-                <i class="file-image">
-                    <input id="_3" name="Image_3" type="file" onchange="readImage(this)" title="" />
-                    <i class="reset" onclick="resetImage(this.previousElementSibling)"></i>
-                    <label for="_3" class="image"></label>
-                </i>
-                <i class="file-image">
-                    <input id="_4" name="Image_4" type="file" onchange="readImage(this)" title="" />
-                    <i class="reset" onclick="resetImage(this.previousElementSibling)"></i>
-                    <label for="_4" class="image"></label>
-                </i>
-                <i class="file-image">
-                    <input id="_5" name="Image_5" type="file" onchange="readImage(this)" title="" />
-                    <i class="reset" onclick="resetImage(this.previousElementSibling)"></i>
-                    <label for="_5" class="image"></label>
-                </i>
-            </div>
-            <div class="col-xs-4 form-group">
-                <input type="file" class="form-group" id="btnAvatar_In" name="fileUpload_1" value="Chọn hình..." style="height: 33px;width: 300px; ">
-                <input type="file" class="form-group" id="btnAvatar_In" name="fileUpload_2" value="Chọn hình..." style="height: 33px;width: 300px; ">
-                <input type="file" class="form-group" id="btnAvatar_In" name="fileUpload_3" value="Chọn hình..." style="height: 33px;width: 300px; ">				
-                <button type="submit" class="btn btn-success btn-block">THÊM MỚI</button>
-            </div>
-            
-        </div>
-    }
-    </div><!-- /.box-body -->
-</div><!-- /.box -->
-@section masterjs{
-    <style>
-        .file-image {
-            display: inline-block;
-            position: relative;
         }
-
-            .file-image input {
-                position: absolute;
-                overflow: hidden;
-                opacity: 0;
-                width: 0;
             }
 
-            .file-image .reset {
-                cursor: pointer;
-                display: block;
-                position: absolute;
-                right: 0;
-                width: 40px;
-                height: 40px;
-                text-align: center;
-                background: rgba(0,0,0,.8);
+            <div class="row">
+                <div class="col-xs-2 form-group">
+                    <label>Mã SP <i style="color:red;">*</i></label>
+                    <input name="PRODUCT_CODE" type="text" class="form-control" placeholder="Mã SP" required>
+                </div>
+                <div class="col-xs-3 form-group">
+                    <label>Tên sản phẩm <i style="color:red;">*</i></label>
+                    <input name="PRODUCT_NAME" type="text" class="form-control" placeholder="Tên sản phẩm" required>
+                </div>
+                <div class="col-xs-2 form-group">
+                    <label>Nhà cung cấp <i style="color:red;">*</i></label>
+                    @Html.DropDownList("ListSupplier", (IEnumerable<SelectListItem>)ViewBag.ListSupplier, "Chọn nhà cung cấp", new { @class = "form-control" })
+                </div>
+                <div class="col-xs-3 form-group">
+                    <label>Danh mục <i style="color:red;">*</i></label>
+                    @Html.DropDownList("ListCategory", (IEnumerable<SelectListItem>)ViewBag.ListCategory, "Chọn danh mục", new { @class = "form-control" })
+                </div>
+                <div class="col-xs-2 form-group">
+                    <label>Danh mục con</label>
+                    @Html.DropDownList("ListCategoryExtra", (IEnumerable<SelectListItem>)ViewBag.ListCategoryExtra, "Chọn danh mục con", new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 form-group">
+                    <label>Đơn giá <i style="color:red;">*</i></label>
+                    <input name="UNIT_PRICE" class="form-control" type="number" required min="1000" placeholder="Đơn giá ">
+                </div>
+                <div class="col-xs-1 form-group">
+                    <label>ĐVT <i style="color:red;">*</i></label>
+                    <input name="UNIT" type="text" class="form-control" placeholder="Loại, chiếc, bộ, cặp...." required>
+                </div>
+                <div class="col-xs-1 form-group">
+                    <label>Công suất</label>
+                    <input name="CAPACITY" type="text" class="form-control" placeholder="Công suất">
+                </div>
+                <div class="col-xs-1 form-group">
+                    <label>Tr/Lượng</label>
+                    <input name="WEIGHT" type="text" class="form-control" placeholder="Trọng lượng">
+                </div>
+                <div class="col-xs-2 form-group">
+                    <label>Xuất xứ</label>
+                    <input name="MADE_IN" type="text" class="form-control" placeholder="Xuất xứ">
+                </div>
+                <div class="col-xs-3 form-group">
+                    <label>Phụ kiện đi kèm</label>
+                    <input name="ACCESSORIES" type="text" class="form-control" placeholder="Phụ kiện">
+                </div>
+                <div class="col-xs-2 form-group">
+                    <label>Tính năng nổi bật</label>
+                    <input name="FEATURED" type="text" class="form-control" placeholder="Tính năng nổi bật">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4 form-group">
+                    <label>Mô tả 1</label>
+                    <input name="DESCRIPTION_1" class="form-control" type="text" placeholder="Mô tả 1">
+                </div>
+                <div class="col-xs-4 form-group">
+                    <label>Mô tả 2</label>
+                    <input name="DESCRIPTION_2" type="text" class="form-control" placeholder="Mô tả 2">
+                </div>
+                <div class="col-xs-4 form-group">
+                    <label>Mô tả 3</label>
+                    <input name="DESCRIPTION_3" type="text" class="form-control" placeholder="Mô tả 3">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4 form-group">
+                    <label>Mô tả 4</label>
+                    <input name="DESCRIPTION_4" class="form-control" type="text" placeholder="Mô tả 1">
+                </div>
+                <div class="col-xs-4 form-group">
+                    <label>Mô tả 5</label>
+                    <input name="DESCRIPTION_5" type="text" class="form-control" placeholder="Mô tả 2">
+                </div>
+                <div class="col-xs-4 form-group">
+                    <label>Mô tả 6</label>
+                    <input name="DESCRIPTION_6" type="text" class="form-control" placeholder="Mô tả 3">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4 form-group">
+                    <label>Mô tả 7</label>
+                    <input name="DESCRIPTION_7" class="form-control" type="text" placeholder="Mô tả 1">
+                </div>
+                <div class="col-xs-4 form-group">
+                    <label>Mô tả 8</label>
+                    <input name="DESCRIPTION_8" type="text" class="form-control" placeholder="Mô tả 2">
+                </div>
+                <div class="col-xs-4 form-group">
+                    <label>Mô tả 9</label>
+                    <input name="DESCRIPTION_9" type="text" class="form-control" placeholder="Mô tả 3">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4 form-group">
+                    <i class="file-image">
+                        <input id="_" name="Image" type="file" onchange="readImage(this)" title="" />
+                        <i class="reset" onclick="resetImage(this.previousElementSibling)"></i>
+                        <label for="_" class="image"></label>
+                    </i>
+                    <i class="file-image">
+                        <input id="_1" name="Image_1" type="file" onchange="readImage(this)" title="" />
+                        <i class="reset" onclick="resetImage(this.previousElementSibling)"></i>
+                        <label for="_1" class="image"></label>
+                    </i>
+                    <i class="file-image">
+                        <input id="_2" name="Image_2" type="file" onchange="readImage(this)" title="" />
+                        <i class="reset" onclick="resetImage(this.previousElementSibling)"></i>
+                        <label for="_2" class="image"></label>
+                    </i>
+                </div>
+                <div class="col-xs-4 form-group">
+                    <i class="file-image">
+                        <input id="_3" name="Image_3" type="file" onchange="readImage(this)" title="" />
+                        <i class="reset" onclick="resetImage(this.previousElementSibling)"></i>
+                        <label for="_3" class="image"></label>
+                    </i>
+                    <i class="file-image">
+                        <input id="_4" name="Image_4" type="file" onchange="readImage(this)" title="" />
+                        <i class="reset" onclick="resetImage(this.previousElementSibling)"></i>
+                        <label for="_4" class="image"></label>
+                    </i>
+                    <i class="file-image">
+                        <input id="_5" name="Image_5" type="file" onchange="readImage(this)" title="" />
+                        <i class="reset" onclick="resetImage(this.previousElementSibling)"></i>
+                        <label for="_5" class="image"></label>
+                    </i>
+                </div>
+                <div class="col-xs-4 form-group">
+                    <input type="file" class="form-group" id="btnAvatar_In" name="fileUpload_1" value="Chọn hình..." style="height: 33px;width: 300px; ">
+                    <input type="file" class="form-group" id="btnAvatar_In" name="fileUpload_2" value="Chọn hình..." style="height: 33px;width: 300px; ">
+                    <input type="file" class="form-group" id="btnAvatar_In" name="fileUpload_3" value="Chọn hình..." style="height: 33px;width: 300px; ">
+                    <button type="submit" class="btn btn-success btn-block">THÊM MỚI</button>
+                </div>
+
+            </div>
+        </div><!-- /.box-body -->
+    }
+    </div><!-- /.box -->
+    @section masterjs{
+        <style>
+            .file-image {
+                display: inline-block;
+                position: relative;
             }
 
-                .file-image .reset:before {
-                    content: '\d7';
-                    font: normal normal 40px/39px sans-serif, Arial;
-                    color: #fa8e8e;
+                .file-image input {
+                    position: absolute;
+                    overflow: hidden;
+                    opacity: 0;
+                    width: 0;
                 }
 
-            .file-image .image {
-                cursor: pointer;
-                display: block;
-                box-sizing: border-box;
-                width: 130px;
-                height: 130px;
-                border: 1px solid #dbdbdb;
-                background-color: #f0f0f0;
-                background-repeat: no-repeat;
-                background-position: center center;
-                background-size: 100% 100%;
-            }
-
-                .file-image .image:before, .file-image .image:after {
-                    content: "";
+                .file-image .reset {
+                    cursor: pointer;
                     display: block;
                     position: absolute;
-                    left: 0;
                     right: 0;
-                    top: 50%;
-                    font: normal normal 14px sans-serif, Arial;
-                    line-height: 0;
-                    color: #ababab;
+                    width: 40px;
+                    height: 40px;
                     text-align: center;
+                    background: rgba(0,0,0,.8);
                 }
 
-                .file-image .image:before {
-                    content: "+";
-                    font-size: 100px;
-                    margin-top: -20px;
-                    color: #3C8DBC;
+                    .file-image .reset:before {
+                        content: '\d7';
+                        font: normal normal 40px/39px sans-serif, Arial;
+                        color: #fa8e8e;
+                    }
+
+                .file-image .image {
+                    cursor: pointer;
+                    display: block;
+                    box-sizing: border-box;
+                    width: 130px;
+                    height: 130px;
+                    border: 1px solid #dbdbdb;
+                    background-color: #f0f0f0;
+                    background-repeat: no-repeat;
+                    background-position: center center;
+                    background-size: 100% 100%;
                 }
 
-                .file-image .image:after {
-                    content: "Thêm ảnh";
-                    margin-top: 30px;
-                    color: #3C8DBC;
-                }
+                    .file-image .image:before, .file-image .image:after {
+                        content: "";
+                        display: block;
+                        position: absolute;
+                        left: 0;
+                        right: 0;
+                        top: 50%;
+                        font: normal normal 14px sans-serif, Arial;
+                        line-height: 0;
+                        color: #ababab;
+                        text-align: center;
+                    }
 
-            .file-image .reset {
-                display: none;
-            }
+                    .file-image .image:before {
+                        content: "+";
+                        font-size: 100px;
+                        margin-top: -20px;
+                        color: #3C8DBC;
+                    }
 
-            .file-image input:not([title=""]) ~ .reset {
-                display: block;
-            }
+                    .file-image .image:after {
+                        content: "Thêm ảnh";
+                        margin-top: 30px;
+                        color: #3C8DBC;
+                    }
 
-            .file-image input:not([title=""]) ~ .image {
-                border: 0 none;
-            }
-
-                .file-image input:not([title=""]) ~ .image:before,
-                .file-image input:not([title=""]) ~ .image:after {
+                .file-image .reset {
                     display: none;
                 }
 
-    </style>
-}
-@section footerjs{
-    <script>
+                .file-image input:not([title=""]) ~ .reset {
+                    display: block;
+                }
+
+                .file-image input:not([title=""]) ~ .image {
+                    border: 0 none;
+                }
+
+                    .file-image input:not([title=""]) ~ .image:before,
+                    .file-image input:not([title=""]) ~ .image:after {
+                        display: none;
+                    }
+
+        </style>
+    }
+    @section footerjs{
+        <script>
         function resetImage(input) {
             input.value = '';
             input.onchange();
@@ -268,6 +307,6 @@
             }
             else receiver.style.backgroundImage = 'none';
         }
-    </script>
+        </script>
 
-}
+    }

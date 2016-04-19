@@ -1,8 +1,12 @@
 ﻿@model List<TGMCO.Models.PRODUCT>
+  @using TGMCO.Models.Entity;         
 
 @{
     ViewBag.Title = "ManagingProducts";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    SupplierModel m_SUPPLIER_MODEL = new SupplierModel();
+    CategoryModel m_CATEGORY_MODEL = new CategoryModel();
+    CategoryExtraModel m_CATEGORY_EXTRA_MODEL = new CategoryExtraModel();
 }
 
 
@@ -16,48 +20,131 @@
         <li class="active">@ViewBag.Title</li>
     </ol>
 }
-
-<div class="table-responsive">
+<div class="jquery-script-clear"></div>
+<div class="table-responsive" id="categories">
     <a href="@Url.Action("Create", "ManagingProducts")" class="btn btn-success btn-md"><span class="glyphicon glyphicon-pencil"></span> Thêm mới </a>
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th style="width:100px;">Mã SP</th>
-                <th>Tên sản phẩm</th>
-                <th>Nhà cung cấp</th>
-                <th>Danh mục</th>
-                <th>Danh mục con</th>
-                <th>Đơn giá</th>
-                <th style="width:300px;">Hình ảnh đại diện</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var product in Model)
-            {
-                <tr id="row_@product.PRODUCT_ID">
-                    <td>@product.PRODUCT_CODE</td>
-                    <td>@product.PRODUCT_NAME</td>
-                    <td>@product.SUPPLIER_ID</td>
-                    <td>@product.CATEGORY_ID</td>
-                    <td>@product.CATEGORY_EXTRA_ID</td>
-                    <td>@product.UNIT_PRICE</td>
-                    @*@{
-                if (@product.IMAGE != null)
-                {
-                    <td><img src="@Url.Content(@product.IMAGE)" alt="@product.SUPPLIER_NAME" width="200" /></td>
-                }
-                else
-                {
-                    <td>Không có hình ảnh...</td>
-                }
-                    }*@
-                    <td class="btn-group">
-                        <button onclick="showCustomer(@product.SUPPLIER_ID)" id="btnUpdate" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-refresh"></span></button>
-                        <a data-ajax="true" href="/ManagingSuppliers/Delete/@product.SUPPLIER_ID" type="button" data-ajax-confirm="Bạn có muốn xóa nhà cung cấp này không?" data-ajax-complete="$('#row_@product.SUPPLIER_ID').remove()" data-ajax-method="Delete" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
-                    </td>
+
+    <div style="float: right;">
+        <input class="search form-control" placeholder="Tìm kiếm theo mã, tên sản phẩm..." style="width: 300px;" />
+    </div>
+    
+    @{
+        if (@TempData["SuccessCreate"] != null)
+        {
+            <div class="alert alert-success alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4>	<i class="icon fa fa-check"></i> THÀNH CÔNG!</h4>
+                @TempData["SuccessCreate"]
+            </div>
+        }
+    }
+
+    <div id="first-container">
+        <table id="table" class="table table-hover">
+            <thead>
+                <tr>
+                    <th style="width:100px;">Mã SP</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Nhà cung cấp</th>
+                    <th>Danh mục</th>
+                    <th>Danh mục con</th>
+                    <th>Đơn giá</th>
+                    <th style="width:300px;">Hình ảnh đại diện</th>
+                    <th></th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody class="list">
+                @foreach (var product in Model)
+                {
+                    <tr id="row_@product.PRODUCT_ID">
+                        <td class="id">@product.PRODUCT_CODE</td>
+                        <td class="name">@product.PRODUCT_NAME</td>
+                        <td class="supplier">@m_SUPPLIER_MODEL.GetSupplierName(@product.SUPPLIER_ID)</td>
+                        <td class="category">@m_CATEGORY_MODEL.GetCategoryName(@product.CATEGORY_ID)</td>
+                        <td class="categoryextra">@m_CATEGORY_EXTRA_MODEL.GetCategoryExtraName(@product.CATEGORY_EXTRA_ID)</td>
+                        <td class="price">@product.UNIT_PRICE</td>
+                        @*@{
+                            if (@product.IMAGE != null)
+                            {
+                                <td><img src="@Url.Content(@product.IMAGE)" alt="@product.SUPPLIER_NAME" width="200" /></td>
+                            }
+                            else
+                            {
+                                <td>Không có hình ảnh...</td>
+                            }
+                                }*@
+                        <td class="btn-group">
+                            <button onclick="showCustomer(@product.SUPPLIER_ID)" id="btnUpdate" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-refresh"></span></button>
+                            <a data-ajax="true" href="/ManagingSuppliers/Delete/@product.SUPPLIER_ID" type="button" data-ajax-confirm="Bạn có muốn xóa nhà cung cấp này không?" data-ajax-complete="$('#row_@product.SUPPLIER_ID').remove()" data-ajax-method="Delete" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div style="margin-left: 500px;">
+            <div class="my-navigation">
+                <div class="simple-pagination-first"></div>
+                <div class="simple-pagination-previous"></div>
+                <div class="simple-pagination-page-numbers"></div>
+                <div class="simple-pagination-next"></div>
+                <div class="simple-pagination-last"></div>
+            </div>
+            <div class="simple-pagination-page-x-of-x"></div>
+            <div class="simple-pagination-showing-x-of-x"></div>
+            <div>
+                Display <select class="simple-pagination-items-per-page"></select> items per page.
+            </div>
+            <div>
+                Go directly to page <select class="simple-pagination-select-specific-page"></select>.
+            </div>
+        </div>
+    </div>
 </div>
+
+@section masterjs{
+<style>
+    .simple-pagination-page-numbers a {
+        display: block;
+        float: left;
+        width: 2rem;
+        text-align: center;
+    }
+
+    .my-navigation:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    .my-navigation div {
+        float: left;
+    }
+
+        .my-navigation div + div {
+            margin-left: .5rem;
+        }
+</style>
+
+}
+@section footerjs{
+    <script src="~/Content/Admin_Layout/js/jquery-simple-pagination-plugin.js"></script>
+    <script>
+        (function ($) {
+
+            $('#first-container').simplePagination({
+                items_per_page: 5
+            });        
+
+        })(jQuery);
+    </script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.2.0/list.min.js"></script>
+<script>
+    var options = {
+        valueNames: ['name', 'id', 'supplier', 'category', 'categoryextra', 'price']
+    };
+
+    var userList = new List('categories', options);
+</script>
+
+}

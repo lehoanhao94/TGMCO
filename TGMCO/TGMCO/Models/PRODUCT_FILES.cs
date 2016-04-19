@@ -15,11 +15,11 @@ namespace TGMCO.Models
     public partial class PRODUCT_FILES
     {
         public int PRODUCT_FILE_ID { get; set; }
-        public int PRUDUCT_ID { get; set; }
         public string FILE_1 { get; set; }
         public string FILE_2 { get; set; }
         public string FILE_3 { get; set; }
         public string FILE_4 { get; set; }
         public string FILE_5 { get; set; }
+        public int PRODUCT_ID { get; set; }
     }
 }

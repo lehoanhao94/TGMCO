@@ -299,12 +299,12 @@
       <PropertyRef Name="PRODUCT_FILE_ID" />
     </Key>
     <Property Name="PRODUCT_FILE_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="PRUDUCT_ID" Type="Int32" Nullable="false" />
-    <Property Name="FILE_1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="FILE_2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="FILE_3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="FILE_4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="FILE_5" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FILE_1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FILE_2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FILE_3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FILE_4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FILE_5" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PRODUCT_ID" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="PRODUCT_IMAGES">
     <Key>

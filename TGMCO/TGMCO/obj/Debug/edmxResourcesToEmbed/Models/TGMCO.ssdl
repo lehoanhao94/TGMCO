@@ -142,12 +142,12 @@
       <PropertyRef Name="PRODUCT_FILE_ID" />
     </Key>
     <Property Name="PRODUCT_FILE_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="PRUDUCT_ID" Type="int" Nullable="false" />
-    <Property Name="FILE_1" Type="nvarchar" MaxLength="50" />
-    <Property Name="FILE_2" Type="nvarchar" MaxLength="50" />
-    <Property Name="FILE_3" Type="nvarchar" MaxLength="50" />
-    <Property Name="FILE_4" Type="nvarchar" MaxLength="50" />
-    <Property Name="FILE_5" Type="nvarchar" MaxLength="50" />
+    <Property Name="PRODUCT_ID" Type="int" Nullable="false" />
+    <Property Name="FILE_1" Type="nvarchar(max)" />
+    <Property Name="FILE_2" Type="nvarchar(max)" />
+    <Property Name="FILE_3" Type="nvarchar(max)" />
+    <Property Name="FILE_4" Type="nvarchar(max)" />
+    <Property Name="FILE_5" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="PRODUCT_IMAGES">
     <Key>

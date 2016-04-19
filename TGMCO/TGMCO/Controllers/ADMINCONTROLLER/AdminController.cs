@@ -88,6 +88,7 @@ namespace TGMCO.Controllers
             }
             catch (Exception ex)
             {
+                throw ex;
                 return RedirectToAction("Http404", "Error"); // 404
             }
 

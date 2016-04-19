@@ -277,12 +277,12 @@
     <EntitySetMapping Name="PRODUCT_FILES">
       <EntityTypeMapping TypeName="TGMCOModel.PRODUCT_FILES">
         <MappingFragment StoreEntitySet="PRODUCT_FILES">
+          <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
           <ScalarProperty Name="FILE_5" ColumnName="FILE_5" />
           <ScalarProperty Name="FILE_4" ColumnName="FILE_4" />
           <ScalarProperty Name="FILE_3" ColumnName="FILE_3" />
           <ScalarProperty Name="FILE_2" ColumnName="FILE_2" />
           <ScalarProperty Name="FILE_1" ColumnName="FILE_1" />
-          <ScalarProperty Name="PRUDUCT_ID" ColumnName="PRUDUCT_ID" />
           <ScalarProperty Name="PRODUCT_FILE_ID" ColumnName="PRODUCT_FILE_ID" />
         </MappingFragment>
       </EntityTypeMapping>
