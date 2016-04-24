@@ -4,9 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TGMCO.Models;
+using TGMCO.Models.Entity;
 using System.Security.Cryptography;
 using PagedList;
 using PagedList.Mvc;
+using TGMCO.Controllers.ADMINCONTROLLER;
 
 namespace TGMCO.Controllers
 {
@@ -71,7 +73,7 @@ namespace TGMCO.Controllers
                         if(Password.Equals(StringCipher.Decrypt(_User.PASSWORD, _User.USER_NAME)) && (_User.IS_ADMIN == true) && (_User.IS_ACTIVE == true))
                         {
                             Session["SS_USER"] = _User;
-                            Session["SS_USER_PROFILE"] = db.USER_PROFILES.Where(user => user.USER_ID.Equals(_User.USER_ID));
+                            Session["SS_USER_PROFILE"] = db.USER_PROFILES.Where(user => user.USER_ID.Equals(_User.USER_ID)).FirstOrDefault();
                             return RedirectToAction("Index", "Admin");                          
                         }
                         else
@@ -216,8 +218,32 @@ namespace TGMCO.Controllers
                 }
                 else
                 {
-                    List<PRODUCT> _lstPRODUCT = db.PRODUCTS.OrderByDescending(n => n.SUPPLIER_ID).ToList();
+                    List<PRODUCT> _lstPRODUCT = db.PRODUCTS.OrderByDescending(n => n.SUPPLIER_ID).OrderByDescending(n => n.IS_ACTIVE).OrderByDescending(n => n.IDX).ToList();
                     return View(_lstPRODUCT);
+                }
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Http404", "Error"); // 404
+            }
+        }
+
+        public ActionResult ManagingUsers()
+        {
+            try
+            {
+                if (Session["SS_USER"] == null)
+                {
+                    return RedirectToAction("Login", "Admin");
+                }
+                else
+                {
+                    var lstUserProfiles = from u in db.USERS
+                                join upr in db.USER_PROFILES on u.USER_ID equals upr.USER_ID
+                                orderby upr.POINTS descending
+                                select new UserProfilesModel {USER = u, USER_PROFILES = upr };
+
+                    return View(lstUserProfiles.ToList());
                 }
             }
             catch (Exception ex)

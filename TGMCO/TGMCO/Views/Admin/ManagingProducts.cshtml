@@ -1,5 +1,5 @@
 ﻿@model List<TGMCO.Models.PRODUCT>
-  @using TGMCO.Models.Entity;         
+@using TGMCO.Models.Entity;
 
 @{
     ViewBag.Title = "ManagingProducts";
@@ -7,6 +7,7 @@
     SupplierModel m_SUPPLIER_MODEL = new SupplierModel();
     CategoryModel m_CATEGORY_MODEL = new CategoryModel();
     CategoryExtraModel m_CATEGORY_EXTRA_MODEL = new CategoryExtraModel();
+    ProductModel m_PRODUCT_MODEL = new ProductModel();
 }
 
 
@@ -25,9 +26,8 @@
     <a href="@Url.Action("Create", "ManagingProducts")" class="btn btn-success btn-md"><span class="glyphicon glyphicon-pencil"></span> Thêm mới </a>
 
     <div style="float: right;">
-        <input class="search form-control" placeholder="Tìm kiếm theo mã, tên sản phẩm..." style="width: 300px;" />
+        <input class="search form-control" placeholder="Tìm kiếm theo mã, tên đăng nhập, tên người dùng..." style="width: 300px;" />
     </div>
-    
     @{
         if (@TempData["SuccessCreate"] != null)
         {
@@ -43,13 +43,16 @@
         <table id="table" class="table table-hover">
             <thead>
                 <tr>
-                    <th style="width:100px;">Mã SP</th>
-                    <th>Tên sản phẩm</th>
-                    <th>Nhà cung cấp</th>
-                    <th>Danh mục</th>
+                    <th style="width:100px;" class="sort" data-sort="id">Mã SP</th>
+                    <th class="sort" data-sort="name">Tên sản phẩm</th>
+                    <th class="sort" data-sort="supplier">Nhà cung cấp</th>
+                    <th class="sort" data-sort="category">Danh mục</th>
                     <th>Danh mục con</th>
-                    <th>Đơn giá</th>
-                    <th style="width:300px;">Hình ảnh đại diện</th>
+                    <th class="sort" data-sort="price">Đơn giá</th>
+                    <th style="width:100px;">Hình ảnh</th>
+                    <th class="sort" data-sort="activebtn">Trạng thái</th>
+                    <th>Còn hàng</th>
+                    <th>SP mới</th>
                     <th></th>
                 </tr>
             </thead>
@@ -62,20 +65,64 @@
                         <td class="supplier">@m_SUPPLIER_MODEL.GetSupplierName(@product.SUPPLIER_ID)</td>
                         <td class="category">@m_CATEGORY_MODEL.GetCategoryName(@product.CATEGORY_ID)</td>
                         <td class="categoryextra">@m_CATEGORY_EXTRA_MODEL.GetCategoryExtraName(@product.CATEGORY_EXTRA_ID)</td>
-                        <td class="price">@product.UNIT_PRICE</td>
-                        @*@{
-                            if (@product.IMAGE != null)
-                            {
-                                <td><img src="@Url.Content(@product.IMAGE)" alt="@product.SUPPLIER_NAME" width="200" /></td>
-                            }
-                            else
-                            {
-                                <td>Không có hình ảnh...</td>
-                            }
-                                }*@
+                        <td class="price">@string.Format("{0:0,0}", @product.UNIT_PRICE)</td>
+                        @{
+                    if (@m_PRODUCT_MODEL.GetFirstImageProduct(@product.PRODUCT_ID) != null)
+                    {
+                        <td>
+                            <img src="@Url.Content(@m_PRODUCT_MODEL.GetFirstImageProduct(@product.PRODUCT_ID))" alt="@product.PRODUCT_NAME" width="50" />
+
+                        </td>
+                    }
+                    else
+                    {
+                        <td>None.</td>
+                    }
+                        }
+                        @{
+                    if (@product.IS_ACTIVE == true)
+                    {
+                        <td>
+                            <a data-ajax="true" href="/ManagingProducts/ChangeStatusActive/@product.PRODUCT_ID" type="button" data-ajax-complete="location.reload()" data-ajax-method="POST"><span style="color: #337ab7; " class="glyphicon glyphicon-ok"></span></a>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            <a data-ajax="true" href="/ManagingProducts/ChangeStatusActive/@product.PRODUCT_ID" type="button" data-ajax-complete="location.reload()" data-ajax-method="POST"><span style="color:red;" class="glyphicon glyphicon-remove"></span></a>
+                        </td>
+                    }
+}@{
+                    if (@product.IS_STILL == true)
+                    {
+                        <td>
+                            <a data-ajax="true" href="/ManagingProducts/ChangeStatusStill/@product.PRODUCT_ID" type="button" data-ajax-complete="location.reload()" data-ajax-method="POST"><span style="color: #337ab7; " class="glyphicon glyphicon-ok"></span></a>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            <a data-ajax="true" href="/ManagingProducts/ChangeStatusStill/@product.PRODUCT_ID" type="button" data-ajax-complete="location.reload()" data-ajax-method="POST"><span style="color:red;" class="glyphicon glyphicon-remove"></span></a>
+                        </td>
+                    }
+                        }
+                        @{
+                    if (@product.IS_NEW == true)
+                    {
+                        <td>
+                            <a data-ajax="true" href="/ManagingProducts/ChangeStatusNew/@product.PRODUCT_ID" type="button" data-ajax-complete="location.reload()" data-ajax-method="POST"><span style="color: #337ab7; " class="glyphicon glyphicon-ok"></span></a>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            <a data-ajax="true" href="/ManagingProducts/ChangeStatusNew/@product.PRODUCT_ID" type="button" data-ajax-complete="location.reload()" data-ajax-method="POST"><span style="color:red;" class="glyphicon glyphicon-remove"></span></a>
+                        </td>
+                    }
+                        }
                         <td class="btn-group">
-                            <button onclick="showCustomer(@product.SUPPLIER_ID)" id="btnUpdate" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-refresh"></span></button>
-                            <a data-ajax="true" href="/ManagingSuppliers/Delete/@product.SUPPLIER_ID" type="button" data-ajax-confirm="Bạn có muốn xóa nhà cung cấp này không?" data-ajax-complete="$('#row_@product.SUPPLIER_ID').remove()" data-ajax-method="Delete" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
+                            <button onclick="showCustomer(@product.PRODUCT_ID)" id="btnUpdate" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-refresh"></span></button>
+                            <a data-ajax="true" href="/ManagingProducts/Delete/@product.PRODUCT_ID" type="button" data-ajax-confirm="Bạn có muốn xóa sản phẩm @product.PRODUCT_CODE không?" data-ajax-complete="$('#row_@product.PRODUCT_ID').remove()" data-ajax-method="Delete" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
                         </td>
                     </tr>
                 }
@@ -102,28 +149,28 @@
 </div>
 
 @section masterjs{
-<style>
-    .simple-pagination-page-numbers a {
-        display: block;
-        float: left;
-        width: 2rem;
-        text-align: center;
-    }
-
-    .my-navigation:after {
-        content: "";
-        display: table;
-        clear: both;
-    }
-
-    .my-navigation div {
-        float: left;
-    }
-
-        .my-navigation div + div {
-            margin-left: .5rem;
+    <style>
+        .simple-pagination-page-numbers a {
+            display: block;
+            float: left;
+            width: 2rem;
+            text-align: center;
         }
-</style>
+
+        .my-navigation:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .my-navigation div {
+            float: left;
+        }
+
+            .my-navigation div + div {
+                margin-left: .5rem;
+            }
+    </style>
 
 }
 @section footerjs{
@@ -132,19 +179,18 @@
         (function ($) {
 
             $('#first-container').simplePagination({
-                items_per_page: 5
-            });        
+                items_per_page: 100
+            });
 
         })(jQuery);
     </script>
 
-<script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.2.0/list.min.js"></script>
-<script>
-    var options = {
-        valueNames: ['name', 'id', 'supplier', 'category', 'categoryextra', 'price']
-    };
+    <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.2.0/list.min.js"></script>
+    <script>
+        var options = {
+            valueNames: ['name', 'id', 'supplier', 'category', 'categoryextra', 'price']
+        };
 
-    var userList = new List('categories', options);
-</script>
-
+        var userList = new List('categories', options);
+    </script>
 }

@@ -30,6 +30,7 @@ namespace TGMCO.Controllers.ADMINCONTROLLER
         /// 
         /// </summary>
         private StringRandom m_STRING_RANDOM_IMAGE = new StringRandom(10);
+
         /// <summary>
         /// 
         /// </summary>
@@ -38,21 +39,40 @@ namespace TGMCO.Controllers.ADMINCONTROLLER
         {
             try
             {
-                ViewBag.ListSupplier = new SelectList(db.SUPPLIERS.ToList(), "Supplier_ID", "Supplier_Name");
-                ViewBag.ListCategory = new SelectList(db.CATEGORIES.ToList(), "Category_ID", "Category_Name");
-                ViewBag.ListCategoryExtra = new SelectList(db.CATEGORIES_EXTRA.ToList(), "Category_Extra_ID", "Category_Extra_Name");
+                if (Session["SS_USER"] == null)
+                {
+                    return RedirectToAction("Login", "Admin");
+                }
+                else
+                {
+                    ViewBag.ListSupplier = new SelectList(db.SUPPLIERS.ToList(), "Supplier_ID", "Supplier_Name");
+                    ViewBag.ListCategory = new SelectList(db.CATEGORIES.ToList(), "Category_ID", "Category_Name");
+                    ViewBag.ListCategoryExtra = new SelectList(db.CATEGORIES_EXTRA.ToList(), "Category_Extra_ID", "Category_Extra_Name");
 
-                return View();
+                    return View();
+                }
             }
             catch 
             {
                 return RedirectToAction("Http404", "Error"); // 404
             }
         }
-
         //
         // POST: /ManagingProducts/Create
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="collection"></param>
+        /// <param name="Image"></param>
+        /// <param name="Image_1"></param>
+        /// <param name="Image_2"></param>
+        /// <param name="Image_3"></param>
+        /// <param name="Image_4"></param>
+        /// <param name="Image_5"></param>
+        /// <param name="fileUpload_1"></param>
+        /// <param name="fileUpload_2"></param>
+        /// <param name="fileUpload_3"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Create(FormCollection collection, HttpPostedFileBase Image, HttpPostedFileBase Image_1,
             HttpPostedFileBase Image_2, HttpPostedFileBase Image_3, HttpPostedFileBase Image_4, HttpPostedFileBase Image_5,
@@ -84,7 +104,31 @@ namespace TGMCO.Controllers.ADMINCONTROLLER
                     m_PRODUCT.DESCRIPTION_7 = collection.Get("DESCRIPTION_7").ToString();
                     m_PRODUCT.DESCRIPTION_8 = collection.Get("DESCRIPTION_8").ToString();
                     m_PRODUCT.DESCRIPTION_9 = collection.Get("DESCRIPTION_9").ToString();
-
+                    m_PRODUCT.IDX = int.Parse(collection.Get("IDX").ToString());
+                    if (collection.GetValue("IsActive") != null)
+                    {
+                        m_PRODUCT.IS_ACTIVE = true;
+                    }
+                    else
+                    {
+                        m_PRODUCT.IS_ACTIVE = false;
+                    }
+                    if (collection.GetValue("IsStill") != null)
+                    {
+                        m_PRODUCT.IS_STILL = true;
+                    }
+                    else
+                    {
+                        m_PRODUCT.IS_STILL = false;
+                    }
+                    if (collection.GetValue("IsNew") != null)
+                    {
+                        m_PRODUCT.IS_NEW = true;
+                    }
+                    else
+                    {
+                        m_PRODUCT.IS_NEW = false;
+                    }
                     db.PRODUCTS.Add(m_PRODUCT);
                     db.SaveChanges();
 
@@ -200,7 +244,99 @@ namespace TGMCO.Controllers.ADMINCONTROLLER
                 return RedirectToAction("Http404", "Error"); // 404
             }
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult ChangeStatusActive(int id)
+        {
+            try
+            {
+                var _Product = db.PRODUCTS.Find(id);
+                _Product.IS_ACTIVE = !_Product.IS_ACTIVE;
+                db.SaveChanges();
 
+                return RedirectToAction("ManagingProducts", "Admin");
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult ChangeStatusStill(int id)
+        {
+            try
+            {
+                var _Product = db.PRODUCTS.Find(id);
+                _Product.IS_STILL = !_Product.IS_STILL;
+                db.SaveChanges();
+
+                return RedirectToAction("ManagingProducts", "Admin");
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult ChangeStatusNew(int id)
+        {
+            try
+            {
+                var _Product = db.PRODUCTS.Find(id);
+                _Product.IS_NEW = !_Product.IS_NEW;
+                db.SaveChanges();
+
+                return RedirectToAction("ManagingProducts", "Admin");
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete]
+        public ActionResult Delete(int id)
+        {
+            try
+            {
+                var _Product = db.PRODUCTS.Find(id);
+                db.PRODUCTS.Remove(_Product);
+                db.SaveChanges();
+                return RedirectToAction("ManagingProducts", "Admin");
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Http404", "Error"); // 404
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
             db.Dispose();

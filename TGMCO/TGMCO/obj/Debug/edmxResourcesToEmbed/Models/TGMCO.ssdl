@@ -238,11 +238,11 @@
     </Key>
     <Property Name="USER_PROFILE_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="USER_ID" Type="int" Nullable="false" />
-    <Property Name="FULL_NAME" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="EMAIL" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="ADDRESS" Type="nvarchar" MaxLength="50" />
+    <Property Name="FULL_NAME" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="EMAIL" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ADDRESS" Type="nvarchar(max)" />
     <Property Name="MOBILE" Type="nchar" MaxLength="12" />
-    <Property Name="AVATAR" Type="nvarchar" MaxLength="50" />
+    <Property Name="AVATAR" Type="nvarchar(max)" />
     <Property Name="POINTS" Type="int" />
   </EntityType>
   <EntityType Name="USERS">

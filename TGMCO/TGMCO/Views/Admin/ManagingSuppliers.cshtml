@@ -80,7 +80,7 @@
                 }
                     }
                     <td class="btn-group">
-                        <button id="btnUpdate" onclick="clearFields()" type="button" class="edit-item-btn btn btn-primary"><span class="glyphicon glyphicon-refresh"></span></button>
+                        <button type="button" class="edit-item-btn btn btn-primary"><span class="glyphicon glyphicon-refresh"></span></button>
                         <a data-ajax="true" href="/ManagingSuppliers/Delete/@supplier.SUPPLIER_ID" type="button" data-ajax-confirm="Bạn có muốn xóa nhà cung cấp này không?" data-ajax-complete="$('#row_@supplier.SUPPLIER_ID').remove()" data-ajax-method="Delete" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
                     </td>
                 </tr>
@@ -91,5 +91,4 @@
 
 @section footerjs{
 
-}
 

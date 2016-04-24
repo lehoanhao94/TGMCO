@@ -212,11 +212,11 @@
     </Key>
     <Property Name="USER_PROFILE_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="USER_ID" Type="Int32" Nullable="false" />
-    <Property Name="FULL_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="ADDRESS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FULL_NAME" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="EMAIL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ADDRESS" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="MOBILE" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
-    <Property Name="AVATAR" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AVATAR" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="POINTS" Type="Int32" />
   </EntityType>
   <EntityType Name="USER">

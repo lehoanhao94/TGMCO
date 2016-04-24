@@ -1,0 +1,180 @@
+﻿@model IList<TGMCO.Models.Entity.UserProfilesModel>
+@using TGMCO.Models.Entity;
+@{
+    ViewBag.Title = "ManagingUsers";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section Page_Header {
+    <h1>
+        QUẢN LÝ TÀI KHOẢN NGƯỜI DÙNG
+        <small>Thêm, xóa, cập nhập</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Admin")"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">@ViewBag.Title</li>
+    </ol>
+}
+
+<div class="jquery-script-clear"></div>
+<div class="table-responsive" id="categories">
+    <a href="@Url.Action("Create", "ManagingUsers")" class="btn btn-success btn-md"><span class="glyphicon glyphicon-pencil"></span> Thêm mới </a>
+
+    <div style="float: right;">
+        <input class="search form-control" placeholder="Tìm kiếm theo mã, tên sản phẩm..." style="width: 300px;" />
+    </div>
+    @{
+        if (@TempData["SuccessCreate"] != null)
+        {
+            <div class="alert alert-success alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4>	<i class="icon fa fa-check"></i> THÀNH CÔNG!</h4>
+                @TempData["SuccessCreate"]
+            </div>
+        }
+    }
+
+    <div id="first-container">
+        <table id="table" class="table table-hover">
+            <thead>
+                <tr>
+                    <th style="width:30px;" class="sort" data-sort="id">#</th>
+                    <th class="sort" data-sort="name">Tên đăng nhập</th>
+                    <th class="sort" data-sort="supplier">Họ và tên</th>
+                    <th class="sort" data-sort="category">Email</th>
+                    <th>Địa chỉ</th>
+                    <th class="sort" data-sort="price">Số điện thoại</th>
+                    <th style="width:100px;">Avatar</th>
+                    <th class="sort" data-sort="activebtn">Trạng thái</th>
+                    <th>Loại TK</th>
+                    <th>Điểm</th>
+                    <th>Ngày tạo</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody class="list">
+                @foreach (var user in Model)
+                {
+                    <tr id="row_@user.USER.USER_ID">
+                        <td class="id">@user.USER.USER_ID</td>
+                        <td class="name">@user.USER.USER_NAME</td>
+                        <td class="supplier">@user.USER_PROFILES.FULL_NAME</td>
+                        <td class="category">@user.USER_PROFILES.EMAIL</td>
+                        <td class="categoryextra">@user.USER_PROFILES.ADDRESS</td>
+                        <td class="price">@user.USER_PROFILES.MOBILE</td>
+                        @{
+                    if (@user.USER_PROFILES.AVATAR != null)
+                    {
+                        <td>
+                            <img src="@Url.Content(@user.USER_PROFILES.AVATAR)" alt="@user.USER.USER_NAME" width="50" />
+                        </td>
+                    }
+                    else
+                    {
+                        <td>None.</td>
+                    }
+                        }
+                        @{
+                    if (@user.USER.IS_ACTIVE == true)
+                    {
+                        <td>
+                            <a data-ajax="true" href="/ManagingUsers/ChangeStatusActive/@user.USER.USER_ID" type="button" data-ajax-complete="location.reload()" data-ajax-method="POST"><span style="color: #337ab7; " class="glyphicon glyphicon-ok"></span></a>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            <a data-ajax="true" href="/ManagingUsers/ChangeStatusActive/@user.USER.USER_ID" type="button" data-ajax-complete="location.reload()" data-ajax-method="POST"><span style="color:red;" class="glyphicon glyphicon-remove"></span></a>
+                        </td>
+                    }
+                        }
+                        @{
+                    if (@user.USER.IS_ADMIN == true)
+                    {
+                        <td><span class="glyphicon glyphicon-star" style="color: red;"></span></td>                       
+                    }
+                    else if (@user.USER.IS_EMPLOYEE == true)
+                    {
+                        <td><span class="glyphicon glyphicon-star-empty" style="color: #008D4C;"></span></td>
+                    }
+                    else
+                    {
+                       <td><span class="glyphicon glyphicon-user"></span></td>
+                    }
+                        }
+                        <td>@user.USER_PROFILES.POINTS</td>
+                        <td>@string.Format("{0:dd/MM/yyyy}", @user.USER.CREATED_DATE)</td>
+                        <td class="btn-group">
+                            <button onclick="showCustomer(@user.USER.USER_ID)" id="btnUpdate" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-refresh"></span></button>
+                            <a data-ajax="true" href="/ManagingUsers/Delete/@user.USER.USER_ID" type="button" data-ajax-confirm="Bạn có muốn xóa tài khoản @user.USER.USER_NAME  không?" data-ajax-complete="$('#row_@user.USER.USER_ID').remove()" data-ajax-method="Delete" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div style="margin-left: 500px;">
+            <div class="my-navigation">
+                <div class="simple-pagination-first"></div>
+                <div class="simple-pagination-previous"></div>
+                <div class="simple-pagination-page-numbers"></div>
+                <div class="simple-pagination-next"></div>
+                <div class="simple-pagination-last"></div>
+            </div>
+            <div class="simple-pagination-page-x-of-x"></div>
+            <div class="simple-pagination-showing-x-of-x"></div>
+            <div>
+                Display <select class="simple-pagination-items-per-page"></select> items per page.
+            </div>
+            <div>
+                Go directly to page <select class="simple-pagination-select-specific-page"></select>.
+            </div>
+        </div>
+    </div>
+</div>
+
+@section masterjs{
+    <style>
+        .simple-pagination-page-numbers a {
+            display: block;
+            float: left;
+            width: 2rem;
+            text-align: center;
+        }
+
+        .my-navigation:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .my-navigation div {
+            float: left;
+        }
+
+            .my-navigation div + div {
+                margin-left: .5rem;
+            }
+    </style>
+
+}
+@section footerjs{
+    <script src="~/Content/Admin_Layout/js/jquery-simple-pagination-plugin.js"></script>
+    <script>
+        (function ($) {
+
+            $('#first-container').simplePagination({
+                items_per_page: 100
+            });
+
+        })(jQuery);
+    </script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.2.0/list.min.js"></script>
+    <script>
+        var options = {
+            valueNames: ['name', 'id', 'supplier', 'category', 'categoryextra', 'price']
+        };
+
+        var userList = new List('categories', options);
+    </script>
+}

@@ -62,5 +62,31 @@ namespace TGMCO.Models
                 throw ex;
             }
         }
+
+        public int GetNumOfProducts()
+        {
+            try
+            {
+                List<PRODUCT> _lstProduct = db.PRODUCTS.ToList();
+                return _lstProduct.Count;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public int GetNumOfUsers()
+        {
+            try
+            {
+                List<USER> _lstUser = db.USERS.ToList();
+                return _lstUser.Count;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

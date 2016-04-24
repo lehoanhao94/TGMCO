@@ -56,6 +56,18 @@ namespace TGMCO.Models.Entity
             {
                 throw ex;
             }
+        }
+
+        public string GetFirstImageProduct(int id_product)
+        {
+            try
+            {
+                return db.PRODUCT_IMAGES.Where(n => n.PRODUCT_ID == id_product).FirstOrDefault().IMAGE_1;
+            }
+            catch
+            {
+                return null;
+            }
 
         }
     }
