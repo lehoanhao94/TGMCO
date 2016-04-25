@@ -56,7 +56,7 @@
                         <input type="file" id="btnAvatar_In" name="fileUpload" value="Chọn hình..." style="height: 33px;width: 300px; ">
                     </td>
                     <td>
-                        <button type="submit" class="btn btn-success btn-md"><span class="glyphicon glyphicon-pencil"></span> Thêm </button>
+                        <button type="submit" class="btn btn-success btn-md"><i class="fa fa-pencil" aria-hidden="true"></i> Thêm </button>
                     </td>
                 </tr>
             }
@@ -80,8 +80,8 @@
                 }
                     }
                     <td class="btn-group">
-                        <button type="button" class="edit-item-btn btn btn-primary"><span class="glyphicon glyphicon-refresh"></span></button>
-                        <a data-ajax="true" href="/ManagingSuppliers/Delete/@supplier.SUPPLIER_ID" type="button" data-ajax-confirm="Bạn có muốn xóa nhà cung cấp này không?" data-ajax-complete="$('#row_@supplier.SUPPLIER_ID').remove()" data-ajax-method="Delete" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
+                        <button type="button" class="edit-item-btn btn btn-primary"><i class="fa fa-pencil-square-o fa-2" aria-hidden="true"></i></button>
+                        <a data-ajax="true" href="/ManagingSuppliers/Delete/@supplier.SUPPLIER_ID" type="button" data-ajax-confirm="Bạn có muốn xóa nhà cung cấp này không?" data-ajax-complete="$('#row_@supplier.SUPPLIER_ID').remove()" data-ajax-method="Delete" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
                     </td>
                 </tr>
             }
@@ -91,4 +91,4 @@
 
 @section footerjs{
 
-
+}

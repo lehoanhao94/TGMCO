@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TGMCO.Models;
+using TGMCO.Models.Entity;
 
 
 namespace TGMCO.Controllers.ADMINCONTROLLER
@@ -23,7 +24,7 @@ namespace TGMCO.Controllers.ADMINCONTROLLER
         {
             try
             {
-                    return View();
+                return View();
             }
             catch (Exception ex)
             {
@@ -86,7 +87,7 @@ namespace TGMCO.Controllers.ADMINCONTROLLER
                         TempData["ErrorCreate"] = "Email đã tồn tại, vui lòng nhập email khác.";
                         return RedirectToAction("Create", "ManagingUsers", FormMethod.Get);
                     }
-                } 
+                }
                 else
                 {
                     TempData["ErrorCreate"] = "Tên đăng nhập đã tồn tại, vui lòng chọn tên đăng nhập khác";
@@ -140,6 +141,71 @@ namespace TGMCO.Controllers.ADMINCONTROLLER
             catch (Exception ex)
             {
                 return RedirectToAction("Http404", "Error"); // 404
+            }
+        }
+
+        [HttpGet]
+        public ActionResult Update(int id)
+        {
+            try
+            {
+                var UserProfiles = from u in db.USERS
+                                   join upr in db.USER_PROFILES on u.USER_ID equals upr.USER_ID
+                                   where u.USER_ID == id
+                                   select new UserProfilesModel { USER = u, USER_PROFILES = upr };
+
+                return View(UserProfiles.FirstOrDefault());
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Http404", "Error"); // 404
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Update(int id, FormCollection collection, HttpPostedFileBase AVATAR)
+        {
+            try
+            {
+                m_USER = db.USERS.Find(id);
+
+                switch (collection.Get("r3").ToString())
+                {
+                    case "user":
+                        m_USER.IS_ADMIN = false;
+                        m_USER.IS_EMPLOYEE = false;
+                        break;
+                    case "employee":
+                        m_USER.IS_EMPLOYEE = true;
+                        m_USER.IS_ADMIN = false;
+                        break;
+                    case "admin":
+                        m_USER.IS_ADMIN = true;
+                        m_USER.IS_EMPLOYEE = false;
+                        break;
+                }
+                db.SaveChanges();
+
+                m_USER_PROFILES = db.USER_PROFILES.Where(n => n.USER_ID == id).Single();
+                m_USER_PROFILES.FULL_NAME = collection.Get("FULL_NAME").ToString();
+                m_USER_PROFILES.ADDRESS = collection.Get("ADDRESS").ToString();
+                m_USER_PROFILES.MOBILE = collection.Get("MOBILE").ToString();
+                m_USER_PROFILES.POINTS = 0;
+
+                if (AVATAR != null)
+                {
+                    string _fileNameRandom = m_STRING_RANDOM_IMAGE.RandomString();
+                    m_USER_PROFILES.AVATAR = "~/Images/AVATAR/" + _fileNameRandom + AVATAR.FileName;
+                    string _path = Path.Combine(Server.MapPath("~/Images/AVATAR/" + _fileNameRandom + AVATAR.FileName));
+                    AVATAR.SaveAs(_path);
+                }
+                db.SaveChanges();
+                TempData["SuccessCreate"] = "Cập nhật thông tin tài khoản thành công.";
+                return RedirectToAction("ManagingUsers", "Admin");
+            }
+            catch
+            {
+                return View();
             }
         }
         /// <summary>

@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "ManagingOrders";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<button id="edit" class="btn btn-primary" onclick="edit()" type="button">Edit</button>
+<button id="save" class="btn btn-primary" onclick="save()" type="button">Save</button>
+<div class="click2edit"><table style="box-sizing: border-box; border-spacing: 0px; border-collapse: collapse; font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif; font-size: 12.6px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 18px; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; width: 513px;" border="0" cellpadding="0" cellspacing="0" width="513"><col style="box-sizing: border-box;"><col style="box-sizing: border-box;"><tbody style="box-sizing: border-box;"><tr style="box-sizing: border-box;" height="19"><td style="box-sizing: border-box; padding: 0px; height: 19px; width: 223px;" height="19">Công suất</td><td style="box-sizing: border-box; padding: 0px; width: 291px;">1,050W</td></tr><tr style="box-sizing: border-box;" height="19"><td style="box-sizing: border-box; padding: 0px; height: 19px;" height="19">Lưu lượng khí tối đa</td><td style="box-sizing: border-box; padding: 0px;">2.0m³ / min</td></tr><tr style="box-sizing: border-box;" height="19"><td style="box-sizing: border-box; padding: 0px; height: 19px;" height="19">Lưu lượng hút tối đa</td><td style="box-sizing: border-box; padding: 0px;">22.0kPa</td></tr><tr style="box-sizing: border-box;" height="19"><td style="box-sizing: border-box; padding: 0px; height: 19px;" height="19">(lượng nước)</td><td style="box-sizing: border-box; padding: 0px;">(2,240mmH2O)</td></tr><tr style="box-sizing: border-box;" height="19"><td style="box-sizing: border-box; padding: 0px; height: 19px;" height="19">Bình chứa</td><td style="box-sizing: border-box; padding: 0px;">Bụi 22L</td></tr><tr style="box-sizing: border-box;" height="19"><td style="box-sizing: border-box; padding: 0px; height: 19px;" height="19">&nbsp;</td><td style="box-sizing: border-box; padding: 0px;">Nước 17L</td></tr><tr style="box-sizing: border-box;" height="19"><td style="box-sizing: border-box; padding: 0px; height: 19px;" height="19">Kích thước</td><td style="box-sizing: border-box; padding: 0px;">552x398x569mm</td></tr><tr style="box-sizing: border-box;" height="19"><td style="box-sizing: border-box; padding: 0px; height: 19px;" height="19">Trọng lượng</td><td style="box-sizing: border-box; padding: 0px;">16.3kg</td></tr><tr style="box-sizing: border-box;" height="19"><td style="box-sizing: border-box; padding: 0px; height: 19px;" height="19">Dây dẫn điện</td><td style="box-sizing: border-box; padding: 0px;">5.0m</td></tr></tbody></table><p><br></p>
+</div>
+
+@section footerjs{
+    <script src="~/Content/Admin_Layout/js/summernote-vi-VN.js"></script>
+
+    <script>
+        var edit = function () {
+            $('.click2edit').summernote({ focus: true });
+        };
+
+        var save = function () {
+            var makrup = $('.click2edit').summernote('code');
+            $('.click2edit').summernote('destroy');
+        };
+    </script>
+}

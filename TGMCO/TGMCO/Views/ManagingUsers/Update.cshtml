@@ -1,0 +1,249 @@
+﻿@model TGMCO.Models.Entity.UserProfilesModel
+@using TGMCO.Models.Entity;
+
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section Page_Header {
+    <h1>
+        QUẢN LÝ TÀI KHOẢN NGƯỜI DÙNG
+        <small>Cập nhật tài khoản:  @Model.USER.USER_NAME</small>
+        @{
+            if (@Model.USER_PROFILES.AVATAR != null)
+            {
+                <img src="@Url.Content(@Model.USER_PROFILES.AVATAR)" alt="@Model.USER.USER_NAME" width="50" />
+            }
+        }
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Admin")"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="@Url.Action("ManagingUsers", "Admin")"> ManagingUsers</a></li>
+        <li class="active">@ViewBag.Title</li>
+    </ol>
+}
+
+<div class="box box-success">
+    @using (Html.BeginForm("Update", "ManagingUsers", FormMethod.Post, new {id = Model.USER.USER_ID, enctype = "multipart/form-data" }))
+    {
+        <div class="box-header">
+            <div class="form-group" style="color: red;">
+                @{
+        if (Model.USER.IS_ADMIN == true)
+        {
+                <label class="col-xs-2">
+                    <input type="radio" value="user" name="r3" class="flat-red" />
+                    Người dùng
+                </label>
+                <label class="col-xs-2">
+                    <input type="radio" value="employee" name="r3" class="flat-red" />
+                    Nhân viên
+                </label>
+                <label class="col-xs-2">
+                    <input type="radio" value="admin" name="r3" class="flat-red" checked />
+                    Quản trị viên
+                </label>
+        }
+        else if (Model.USER.IS_EMPLOYEE == true)
+        {
+                <label class="col-xs-2">
+                    <input type="radio" value="user" name="r3" class="flat-red" />
+                    Người dùng
+                </label>
+                <label class="col-xs-2">
+                    <input type="radio" value="employee" name="r3" class="flat-red" checked />
+                    Nhân viên
+                </label>
+                <label class="col-xs-2">
+                    <input type="radio" value="admin" name="r3" class="flat-red" />
+                    Quản trị viên
+                </label>
+        }
+        else
+        {
+                <label class="col-xs-2">
+                    <input type="radio" value="user" name="r3" class="flat-red" checked />
+                    Người dùng
+                </label>
+                <label class="col-xs-2">
+                    <input type="radio" value="employee" name="r3" class="flat-red" />
+                    Nhân viên
+                </label>
+                <label class="col-xs-2">
+                    <input type="radio" value="admin" name="r3" class="flat-red" />
+                    Quản trị viên
+                </label>
+        }
+                }
+            </div>
+        </div>
+
+        <div class="box-body">
+            @{
+        if (@TempData["ErrorUpdate"] != null)
+        {
+            <div class="alert alert-danger alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4><i class="icon fa fa-ban"></i> LỖI !</h4>
+                @TempData["ErrorUpdate"]
+            </div>
+        }
+            }
+
+            <div class="row">
+                <div class="col-xs-2 form-group">
+                    <i class="file-image">
+                        <input id="_" name="AVATAR" type="file" onchange="readImage(this)" title="" />
+                        <i class="reset" onclick="resetImage(this.previousElementSibling)"></i>
+                        <label for="_" class="image"></label>
+                    </i>
+                </div>
+                <div class="col-xs-2 form-group">
+                    <label>Tên đăng nhập <i style="color:red;">*</i></label>
+                    <input name="USER_NAME" value="@Model.USER.USER_NAME" disabled type="text" class="form-control" placeholder="Tên đăng nhập" required maxlength="50" pattern="[a-z,A-Z,1-9]{6,15}" title="Tên đăng nhập phải dài trên 6 ký tự và không chứa ký tự đặc biệt">
+                </div>
+                <div class="col-xs-2 form-group">
+                    <label>Mật khẩu <i style="color:red;">*</i></label>
+                    <input name="PASSWORD" type="text" class="form-control" disabled placeholder="Mật khẩu" required maxlength="50" min="6" pattern="[a-z,A-Z,1-9]{6,15}" title="Mật khẩu phải dài trên 6 ký tự và không chứa ký tự đặc biệt">
+                </div>
+
+                <div class="col-xs-2 form-group">
+                    <label>Họ & tên <i style="color:red;">*</i></label>
+                    <input name="FULL_NAME" class="form-control" type="text" value="@Model.USER_PROFILES.FULL_NAME" required maxlength="30" placeholder="Họ và tên ">
+                </div>
+                <div class="col-xs-3 form-group">
+                    <label>Email <i style="color:red;">*</i></label>
+                    <input name="EMAIL" type="email" class="form-control" value="@Model.USER_PROFILES.EMAIL" disabled placeholder="Địa chỉ email" required maxlength="50">
+                </div>
+                <div class="col-xs-4 form-group">
+                    <label>Địa chỉ</label>
+                    <input name="ADDRESS" type="text" class="form-control" value="@Model.USER_PROFILES.ADDRESS" placeholder="Địa chỉ " maxlength="150">
+                </div>
+                <div class="col-xs-2 form-group">
+                    <label>Số điện thoại</label>
+                    <input name="MOBILE" type="tel" class="form-control" placeholder="Số điện thoại" value="@Model.USER_PROFILES.MOBILE.Trim()" maxlength="12" pattern="[0-9]{9,11}">
+                </div>
+                <div class="col-xs-2 form-group">
+                    <label style="color: white;">.</label>
+                    <button type="submit" class="btn btn-primary btn-block">CẬP NHẬT</button>
+                </div>
+                <div class="col-xs-1 form-group">
+                    <label style="color: white;">.</label>
+                    <a href="@Url.Action("ManagingUsers", "Admin")" class="btn btn-warning btn-block">HỦY</a>
+                </div>
+            </div>
+        </div><!-- /.box-body -->
+    }
+</div><!-- /.box -->
+@section masterjs{
+    <style>
+        .file-image {
+            display: inline-block;
+            position: relative;
+        }
+
+            .file-image input {
+                position: absolute;
+                overflow: hidden;
+                opacity: 0;
+                width: 0;
+            }
+
+            .file-image .reset {
+                cursor: pointer;
+                display: block;
+                position: absolute;
+                right: 0;
+                width: 40px;
+                height: 40px;
+                text-align: center;
+                background: rgba(0,0,0,.8);
+            }
+
+                .file-image .reset:before {
+                    content: '\d7';
+                    font: normal normal 40px/39px sans-serif, Arial;
+                    color: #fa8e8e;
+                }
+
+            .file-image .image {
+                cursor: pointer;
+                display: block;
+                box-sizing: border-box;
+                width: 130px;
+                height: 130px;
+                border: 1px solid #dbdbdb;
+                background-color: #f0f0f0;
+                background-repeat: no-repeat;
+                background-position: center center;
+                background-size: 100% 100%;
+            }
+
+                .file-image .image:before, .file-image .image:after {
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    top: 50%;
+                    font: normal normal 14px sans-serif, Arial;
+                    line-height: 0;
+                    color: #ababab;
+                    text-align: center;
+                }
+
+                .file-image .image:before {
+                    content: "+";
+                    font-size: 100px;
+                    margin-top: -20px;
+                    color: #3C8DBC;
+                }
+
+                .file-image .image:after {
+                    content: "Thêm ảnh";
+                    margin-top: 30px;
+                    color: #3C8DBC;
+                }
+
+            .file-image .reset {
+                display: none;
+            }
+
+            .file-image input:not([title=""]) ~ .reset {
+                display: block;
+            }
+
+            .file-image input:not([title=""]) ~ .image {
+                border: 0 none;
+            }
+
+                .file-image input:not([title=""]) ~ .image:before,
+                .file-image input:not([title=""]) ~ .image:after {
+                    display: none;
+                }
+    </style>
+}
+@section footerjs{
+    <script>
+        function resetImage(input) {
+            input.value = '';
+            input.onchange();
+        }
+        function readImage(input) {
+            var receiver = input.nextElementSibling.nextElementSibling;
+            input.setAttribute('title', input.value.replace(/^.*[\\/]/, ''));
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    receiver.style.backgroundImage = 'url(' + e.target.result + ')';
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+            else receiver.style.backgroundImage = 'none';
+        }
+    </script>
+
+}
+
+

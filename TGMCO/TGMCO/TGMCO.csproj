@@ -347,6 +347,7 @@
     <Content Include="Content\Admin_Layout\js\jquery-1.12.2.min.js" />
     <Content Include="Content\Admin_Layout\js\jquery-simple-pagination-plugin.js" />
     <Content Include="Content\Admin_Layout\js\login.js" />
+    <Content Include="Content\Admin_Layout\js\summernote-vi-VN.js" />
     <Content Include="Content\Admin_Layout\plugins\bootstrap-slider\bootstrap-slider.js" />
     <Content Include="Content\Admin_Layout\plugins\bootstrap-slider\slider.css" />
     <Content Include="Content\Admin_Layout\plugins\bootstrap-wysihtml5\bootstrap3-wysihtml5.all.min.js" />
@@ -1160,6 +1161,8 @@
     <Content Include="Views\ManagingProducts\Create.cshtml" />
     <Content Include="Views\Admin\ManagingUsers.cshtml" />
     <Content Include="Views\ManagingUsers\Create.cshtml" />
+    <Content Include="Views\ManagingUsers\Update.cshtml" />
+    <Content Include="Views\Admin\ManagingOrders.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
