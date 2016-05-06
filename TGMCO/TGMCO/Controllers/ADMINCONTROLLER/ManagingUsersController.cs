@@ -153,7 +153,7 @@ namespace TGMCO.Controllers.ADMINCONTROLLER
                                    join upr in db.USER_PROFILES on u.USER_ID equals upr.USER_ID
                                    where u.USER_ID == id
                                    select new UserProfilesModel { USER = u, USER_PROFILES = upr };
-
+                ViewBag.ListOrder = db.ORDERS.Where(n => n.USER_ID == id).OrderByDescending(n => n.ORDER_STATUS_ID).ToList();
                 return View(UserProfiles.FirstOrDefault());
             }
             catch (Exception ex)
@@ -190,7 +190,6 @@ namespace TGMCO.Controllers.ADMINCONTROLLER
                 m_USER_PROFILES.FULL_NAME = collection.Get("FULL_NAME").ToString();
                 m_USER_PROFILES.ADDRESS = collection.Get("ADDRESS").ToString();
                 m_USER_PROFILES.MOBILE = collection.Get("MOBILE").ToString();
-                m_USER_PROFILES.POINTS = 0;
 
                 if (AVATAR != null)
                 {
@@ -201,7 +200,7 @@ namespace TGMCO.Controllers.ADMINCONTROLLER
                 }
                 db.SaveChanges();
                 TempData["SuccessCreate"] = "Cập nhật thông tin tài khoản thành công.";
-                return RedirectToAction("ManagingUsers", "Admin");
+                return RedirectToAction("Update", "ManagingUsers", new {id = id });
             }
             catch
             {

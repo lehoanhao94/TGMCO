@@ -221,6 +221,7 @@
       <DependentUpon>TGMCO.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Entity\CategoryExtraModel.cs" />
+    <Compile Include="Models\Entity\OrderStatusModel.cs" />
     <Compile Include="Models\Entity\ProductModel.cs" />
     <Compile Include="Models\Entity\UserProfilesModel.cs" />
     <Compile Include="Models\Entity\SupplierModel.cs" />
@@ -1163,6 +1164,8 @@
     <Content Include="Views\ManagingUsers\Create.cshtml" />
     <Content Include="Views\ManagingUsers\Update.cshtml" />
     <Content Include="Views\Admin\ManagingOrders.cshtml" />
+    <Content Include="Views\ManagingProducts\Update.cshtml" />
+    <Content Include="Views\Admin\ManagingAgencies.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -8,7 +8,7 @@ using TGMCO.Models;
 
 namespace TGMCO.Controllers.ADMINCONTROLLER
 {
-    public class ManagingProductsController : Controller
+    public class ManagingProductsController : BaseController
     {
         /// <summary>
         /// 
@@ -327,6 +327,23 @@ namespace TGMCO.Controllers.ADMINCONTROLLER
                 db.PRODUCTS.Remove(_Product);
                 db.SaveChanges();
                 return RedirectToAction("ManagingProducts", "Admin");
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Http404", "Error"); // 404
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Update(int id)
+        {
+            try
+            {               
+                return View(db.PRODUCTS.Find(id));
             }
             catch (Exception ex)
             {

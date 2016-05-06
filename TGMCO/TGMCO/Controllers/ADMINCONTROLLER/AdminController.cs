@@ -273,5 +273,24 @@ namespace TGMCO.Controllers
                 return RedirectToAction("Http404", "Error"); // 404
             }
         }
+
+        public ActionResult ManagingAgencies()
+        {
+            try
+            {
+                if (Session["SS_USER"] == null)
+                {
+                    return RedirectToAction("Login", "Admin");
+                }
+                else
+                {
+                    return View();
+                }
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Http404", "Error"); // 404
+            }
+        }
     }
 }

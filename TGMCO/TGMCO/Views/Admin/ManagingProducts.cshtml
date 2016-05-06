@@ -67,10 +67,10 @@
                         <td class="categoryextra">@m_CATEGORY_EXTRA_MODEL.GetCategoryExtraName(@product.CATEGORY_EXTRA_ID)</td>
                         <td class="price">@string.Format("{0:0,0}", @product.UNIT_PRICE)</td>
                         @{
-                    if (@m_PRODUCT_MODEL.GetFirstImageProduct(@product.PRODUCT_ID) != null)
+                    if (@m_PRODUCT_MODEL.GetImage1(@product.PRODUCT_ID) != null)
                     {
                         <td>
-                            <img src="@Url.Content(@m_PRODUCT_MODEL.GetFirstImageProduct(@product.PRODUCT_ID))" alt="@product.PRODUCT_NAME" width="50" />
+                            <img src="@Url.Content(@m_PRODUCT_MODEL.GetImage1(@product.PRODUCT_ID))" alt="@product.PRODUCT_NAME" width="50" />
 
                         </td>
                     }
@@ -121,7 +121,7 @@
                     }
                         }
                         <td class="btn-group">
-                            <button onclick="showCustomer(@product.PRODUCT_ID)" id="btnUpdate" type="button" class="btn btn-primary"><i class="fa fa-pencil-square-o fa-2" aria-hidden="true"></i></button>
+                            <a href="@Url.Action("Update", "ManagingProducts", new { id = @product.PRODUCT_ID })" id=" btnupdate" type="button" class="btn btn-primary"><i class="fa fa-pencil-square-o fa-2" aria-hidden="true"></i></a>
                             <a data-ajax="true" href="/ManagingProducts/Delete/@product.PRODUCT_ID" type="button" data-ajax-confirm="Bạn có muốn xóa sản phẩm @product.PRODUCT_CODE không?" data-ajax-complete="$('#row_@product.PRODUCT_ID').remove()" data-ajax-method="Delete" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
                         </td>
                     </tr>
@@ -150,6 +150,9 @@
 
 @section masterjs{
     <style>
+        #table th:hover {
+            cursor: pointer;
+        }
         .simple-pagination-page-numbers a {
             display: block;
             float: left;

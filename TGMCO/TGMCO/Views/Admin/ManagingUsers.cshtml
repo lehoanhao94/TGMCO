@@ -39,16 +39,16 @@
             <thead>
                 <tr>
                     <th style="width:30px;" class="sort" data-sort="id">#</th>
-                    <th class="sort" data-sort="name">Tên đăng nhập</th>
-                    <th class="sort" data-sort="supplier">Họ và tên</th>
-                    <th class="sort" data-sort="category">Email</th>
+                    <th class="sort" data-sort="username">Tên đăng nhập</th>
+                    <th class="sort" data-sort="fullname">Họ và tên</th>
+                    <th class="sort" data-sort="email">Email</th>
                     <th>Địa chỉ</th>
-                    <th class="sort" data-sort="price">Số điện thoại</th>
+                    <th class="sort" data-sort="mobile">Số điện thoại</th>
                     <th style="width:100px;">Avatar</th>
                     <th class="sort" data-sort="activebtn">Trạng thái</th>
-                    <th>Loại TK</th>
-                    <th>Điểm</th>
-                    <th>Ngày tạo</th>
+                    <th class="sort" data-sort="access">Loại TK</th>
+                    <th class="sort" data-sort="point">Điểm</th>
+                    <th class="sort" data-sort="createdate">Ngày tạo</th>
                     <th></th>
                 </tr>
             </thead>
@@ -57,13 +57,13 @@
                 {
                     <tr id="row_@user.USER.USER_ID">
                         <td class="id">@user.USER.USER_ID</td>
-                        <td class="name">@user.USER.USER_NAME</td>
-                        <td class="supplier">@user.USER_PROFILES.FULL_NAME</td>
-                        <td class="category">@user.USER_PROFILES.EMAIL</td>
-                        <td class="categoryextra">@user.USER_PROFILES.ADDRESS</td>
-                        <td class="price">@user.USER_PROFILES.MOBILE</td>
+                        <td class="username">@user.USER.USER_NAME</td>
+                        <td class="fullname">@user.USER_PROFILES.FULL_NAME</td>
+                        <td class="email">@user.USER_PROFILES.EMAIL</td>
+                        <td>@user.USER_PROFILES.ADDRESS</td>
+                        <td class="mobile">@user.USER_PROFILES.MOBILE</td>
                         @{
-                    if (@user.USER_PROFILES.AVATAR != null)
+                    if (!string.IsNullOrEmpty(@user.USER_PROFILES.AVATAR))
                     {
                         <td>
                             <img src="@Url.Content(@user.USER_PROFILES.AVATAR)" alt="@user.USER.USER_NAME" width="50" />
@@ -71,39 +71,41 @@
                     }
                     else
                     {
-                        <td>None.</td>
+                        <td>
+                            <img src="@Url.Content("/Images/AVATAR/default-avatar.png")" alt="@user.USER.USER_NAME" width="50" />
+                        </td>
                     }
                         }
                         @{
                     if (@user.USER.IS_ACTIVE == true)
                     {
-                        <td>
+                        <td class="activebtn">
                             <a data-ajax="true" href="/ManagingUsers/ChangeStatusActive/@user.USER.USER_ID" type="button" data-ajax-complete="location.reload()" data-ajax-method="POST"><span style="color: #337ab7; " class="glyphicon glyphicon-ok"></span></a>
                         </td>
                     }
                     else
                     {
-                        <td>
+                        <td class="activebtn">
                             <a data-ajax="true" href="/ManagingUsers/ChangeStatusActive/@user.USER.USER_ID" type="button" data-ajax-complete="location.reload()" data-ajax-method="POST"><span style="color:red;" class="glyphicon glyphicon-remove"></span></a>
                         </td>
                     }
-                        }
+}
                         @{
                     if (@user.USER.IS_ADMIN == true)
                     {
-                        <td><span class="glyphicon glyphicon-star" style="color: red;"></span></td>                       
+                        <td class="access"><span class="glyphicon glyphicon-star" style="color: red;"></span></td>
                     }
                     else if (@user.USER.IS_EMPLOYEE == true)
                     {
-                        <td><span class="glyphicon glyphicon-star-empty" style="color: #008D4C;"></span></td>
+                        <td class="access"><span class="glyphicon glyphicon-star-empty" style="color: #008D4C;"></span></td>
                     }
                     else
                     {
-                       <td><span class="glyphicon glyphicon-user"></span></td>
+                        <td class="access"><span class="glyphicon glyphicon-user"></span></td>
                     }
-                        }
-                        <td>@user.USER_PROFILES.POINTS</td>
-                        <td>@string.Format("{0:dd/MM/yyyy}", @user.USER.CREATED_DATE)</td>
+}
+                        <td class="point">@user.USER_PROFILES.POINTS</td>
+                        <td class="createdate">@string.Format("{0:dd/MM/yyyy}", @user.USER.CREATED_DATE)</td>
                         <td class="btn-group">
                             <a href="@Url.Action("Update", "ManagingUsers", new {id = @user.USER.USER_ID })" id="btnUpdate" type="button" class="btn btn-primary"><i class="fa fa-pencil-square-o fa-2" aria-hidden="true"></i></a>
                             <a data-ajax="true" href="/ManagingUsers/Delete/@user.USER.USER_ID" type="button" data-ajax-confirm="Bạn có muốn xóa tài khoản @user.USER.USER_NAME  không?" data-ajax-complete="$('#row_@user.USER.USER_ID').remove()" data-ajax-method="Delete" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
@@ -134,6 +136,9 @@
 
 @section masterjs{
     <style>
+        #table th:hover {
+            cursor: pointer;
+        }
         .simple-pagination-page-numbers a {
             display: block;
             float: left;
@@ -172,7 +177,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.2.0/list.min.js"></script>
     <script>
         var options = {
-            valueNames: ['name', 'id', 'supplier', 'category', 'categoryextra', 'price']
+            valueNames: ['username', 'id', 'fullname', 'email', 'createdate', 'point', 'mobile', 'access', 'activebtn']
         };
 
         var userList = new List('categories', options);

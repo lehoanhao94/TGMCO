@@ -1,142 +1,330 @@
 ﻿@model TGMCO.Models.Entity.UserProfilesModel
 @using TGMCO.Models.Entity;
+@using TGMCO.Models;
 
 @{
     ViewBag.Title = "Update";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    List<ORDER> m_LIST_ORDER = (List<ORDER>)(ViewBag.ListOrder);
+    OrderStatusModel m_ORDER_STATUS = new OrderStatusModel();
 }
 
 @section Page_Header {
     <h1>
         QUẢN LÝ TÀI KHOẢN NGƯỜI DÙNG
         <small>Cập nhật tài khoản:  @Model.USER.USER_NAME</small>
-        @{
-            if (@Model.USER_PROFILES.AVATAR != null)
-            {
-                <img src="@Url.Content(@Model.USER_PROFILES.AVATAR)" alt="@Model.USER.USER_NAME" width="50" />
-            }
-        }
     </h1>
     <ol class="breadcrumb">
-        <li><a href="@Url.Action("Index", "Admin")"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="@Url.Action("ManagingUsers", "Admin")"> ManagingUsers</a></li>
+        <li><a href="@Url.Action("Index", "Admin" )"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="@Url.Action("Managingusers", "Admin" )"> ManagingUsers</a></li>
         <li class="active">@ViewBag.Title</li>
     </ol>
 }
 
-<div class="box box-success">
-    @using (Html.BeginForm("Update", "ManagingUsers", FormMethod.Post, new {id = Model.USER.USER_ID, enctype = "multipart/form-data" }))
-    {
-        <div class="box-header">
-            <div class="form-group" style="color: red;">
-                @{
-        if (Model.USER.IS_ADMIN == true)
-        {
-                <label class="col-xs-2">
-                    <input type="radio" value="user" name="r3" class="flat-red" />
-                    Người dùng
-                </label>
-                <label class="col-xs-2">
-                    <input type="radio" value="employee" name="r3" class="flat-red" />
-                    Nhân viên
-                </label>
-                <label class="col-xs-2">
-                    <input type="radio" value="admin" name="r3" class="flat-red" checked />
-                    Quản trị viên
-                </label>
-        }
-        else if (Model.USER.IS_EMPLOYEE == true)
-        {
-                <label class="col-xs-2">
-                    <input type="radio" value="user" name="r3" class="flat-red" />
-                    Người dùng
-                </label>
-                <label class="col-xs-2">
-                    <input type="radio" value="employee" name="r3" class="flat-red" checked />
-                    Nhân viên
-                </label>
-                <label class="col-xs-2">
-                    <input type="radio" value="admin" name="r3" class="flat-red" />
-                    Quản trị viên
-                </label>
-        }
-        else
-        {
-                <label class="col-xs-2">
-                    <input type="radio" value="user" name="r3" class="flat-red" checked />
-                    Người dùng
-                </label>
-                <label class="col-xs-2">
-                    <input type="radio" value="employee" name="r3" class="flat-red" />
-                    Nhân viên
-                </label>
-                <label class="col-xs-2">
-                    <input type="radio" value="admin" name="r3" class="flat-red" />
-                    Quản trị viên
-                </label>
-        }
-                }
-            </div>
-        </div>
+<div class="box box-primary" style="width: 70%; float: left;">
+    <div class="col-lg-12">
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#profile">Chỉnh sửa thông tin</a></li>
+            <li><a data-toggle="tab" href="#buyhistory">Danh sách đơn hàng</a></li>
+        </ul>
 
-        <div class="box-body">
-            @{
-        if (@TempData["ErrorUpdate"] != null)
-        {
-            <div class="alert alert-danger alert-dismissable">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <h4><i class="icon fa fa-ban"></i> LỖI !</h4>
-                @TempData["ErrorUpdate"]
+        <div class="tab-content">
+            <div id="profile" class="tab-pane fade in active">
+                @using (Html.BeginForm("Update", "ManagingUsers", FormMethod.Post, new { id = Model.USER.USER_ID, enctype = "multipart/form-data" }))
+                        {
+                        <div class="box-header">
+                            <div class="form-group" style="color: red;">
+                                <label class="col-xs-4">
+                                </label>
+                                @{
+                                if (Model.USER.IS_ADMIN == true)
+                                {
+                                <label class="col-xs-2">
+                                    <input type="radio" value="user" name="r3" class="flat-red" />
+                                    Người dùng
+                                </label>
+                                <label class="col-xs-2">
+                                    <input type="radio" value="employee" name="r3" class="flat-red" />
+                                    Nhân viên
+                                </label>
+                                <label class="col-xs-3">
+                                    <input type="radio" value="admin" name="r3" class="flat-red" checked />
+                                    Quản trị viên
+                                </label>
+                                }
+                                else if (Model.USER.IS_EMPLOYEE == true)
+                                {
+                                <label class="col-xs-2">
+                                    <input type="radio" value="user" name="r3" class="flat-red" />
+                                    Người dùng
+                                </label>
+                                <label class="col-xs-2">
+                                    <input type="radio" value="employee" name="r3" class="flat-red" checked />
+                                    Nhân viên
+                                </label>
+                                <label class="col-xs-3">
+                                    <input type="radio" value="admin" name="r3" class="flat-red" />
+                                    Quản trị viên
+                                </label>
+                                }
+                                else
+                                {
+                                <label class="col-xs-2">
+                                    <input type="radio" value="user" name="r3" class="flat-red" checked />
+                                    Người dùng
+                                </label>
+                                <label class="col-xs-2">
+                                    <input type="radio" value="employee" name="r3" class="flat-red" />
+                                    Nhân viên
+                                </label>
+                                <label class="col-xs-3">
+                                    <input type="radio" value="admin" name="r3" class="flat-red" />
+                                    Quản trị viên
+                                </label>
+                                }
+                                }
+                            </div>
+                        </div>
+
+                        <div class="box-body">
+                            @{
+                            if (@TempData["SuccessCreate"] != null)
+                            {
+                        <div class="alert alert-success alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <h4>	<i class="icon fa fa-check"></i> THÀNH CÔNG!</h4>
+                            @TempData["SuccessCreate"]
+                        </div>
+                            }
+                            }
+
+                            <div class="row">
+                                <div class="col-xs-4 form-group" style="text-align: center;">
+                                    <i class="file-image">
+                                        <input id="_" name="AVATAR" type="file" onchange="readImage(this)" title="" />
+                                        <i class="reset" onclick="resetImage(this.previousElementSibling)"></i>
+                                        <label for="_" class="image"></label>
+                                    </i>
+                                </div>
+                                <div class="col-xs-7 form-group" style="width">
+                                    <label>Họ & tên <i style="color:red;">*</i></label>
+                                    <input name="FULL_NAME" class="form-control" type="text" value="@Model.USER_PROFILES.FULL_NAME" required maxlength="30" placeholder="Họ và tên ">
+                                </div>
+                                <div class="col-xs-7 form-group">
+                                    <label>Địa chỉ</label>
+                                    <input name="ADDRESS" type="text" class="form-control" value="@Model.USER_PROFILES.ADDRESS" placeholder="Địa chỉ " maxlength="150">
+                                </div>
+                                <div class="col-xs-7 form-group">
+                                    <label>Số điện thoại</label>
+                                    <input name="MOBILE" type="tel" class="form-control" placeholder="Số điện thoại" value="@Model.USER_PROFILES.MOBILE.Trim()" maxlength="12" pattern="[0-9]{9,11}">
+                                </div>
+
+                                <div class="col-xs-4 form-group">
+                                    <button type="submit" class="btn btn-primary btn-block">CẬP NHẬT</button>
+                                </div>
+                                <div class="col-xs-3 form-group">
+                                    <a href="@Url.Action("Managingusers", "Admin" )" class="btn btn-warning btn-block">HỦY</a>
+                                </div>
+                            </div>
+                        </div><!-- /.box-body -->
+                        }
             </div>
+            <div id="buyhistory" class="tab-pane fade">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Ngày đặt hàng</th>
+                                <th>Mã giao hàng</th>
+                                <th>Ngày giao hàng</th>
+                                <th>Tổng tiền</th>
+                                <th>Trạng thái</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var order in m_LIST_ORDER)
+                            {
+                                if (order.ORDER_STATUS_ID == 1)
+                                {
+                                    <tr class="success">
+                                        <td><a href="#">@order.ORDER_ID</a></td>
+                                        <td>@string.Format("{0:dd/MM/yyyy}", @order.ORDER_DATE)</td>
+                                        <td>@order.SHIP_CODE</td>
+                                        <td>@string.Format("{0:dd/MM/yyyy}", @order.SHIPPED_DATE)</td>
+                                        <td>@string.Format("{0:0,0}", @order.SUBTOTAL)</td>
+                                        <td>@m_ORDER_STATUS.GetName(@order.ORDER_STATUS_ID)</td>
+                                    </tr>
+                                }
+                                if (order.ORDER_STATUS_ID == 2)
+                                {
+                                    <tr class="danger">
+                                        <td><a href="#">@order.ORDER_ID</a></td>
+                                        <td>@string.Format("{0:dd/MM/yyyy}", @order.ORDER_DATE)</td>
+                                        <td>@order.SHIP_CODE</td>
+                                        <td>@string.Format("{0:dd/MM/yyyy}", @order.SHIPPED_DATE)</td>
+                                        <td>@string.Format("{0:0,0}", @order.SUBTOTAL)</td>
+                                        <td>@m_ORDER_STATUS.GetName(@order.ORDER_STATUS_ID)</td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+</div><!-- /.box -->
+<div class="col-xs-12 col-sm-4" style="float: right; max-width: 30%; padding-right: 0;">
+    <div class="card">
+        <a class="img-card" href="#">
+            @{
+                if (!string.IsNullOrEmpty(@Model.USER_PROFILES.AVATAR))
+                {
+                    <img src="@Url.Content(@Model.USER_PROFILES.AVATAR)" />
+                }
+                else
+                {
+                    <img src="/Images/AVATAR/default-avatar.png" alt="@Model.USER.USER_NAME" />
+                }
+            }
+        </a>
+        <div class="card-content">
+            <h4 class="card-title">
+                @Model.USER_PROFILES.FULL_NAME
+            </h4>
+            <p class="">
+                <i class="fa fa-user" style="font-size:20px; padding-right: 5px;" aria-hidden="true"></i> @Model.USER.USER_NAME
+            </p>
+            <p class="">
+                <i class="fa fa-envelope-o" style="font-size: 20px; padding-right: 5px;" aria-hidden="true"></i> @Model.USER_PROFILES.EMAIL
+            </p>
+            <p class="">
+                <i class="fa fa-home" style="font-size: 20px; padding-right: 5px;" aria-hidden="true"></i> @Model.USER_PROFILES.ADDRESS
+            </p>
+            <p class="">
+                <i class="fa fa-phone" style="font-size: 20px; padding-right: 5px;" aria-hidden="true"></i> @Model.USER_PROFILES.MOBILE
+            </p>
+            <p class="">
+                <i class="fa fa-heart" style="font-size: 20px; padding-right: 5px;" aria-hidden="true"></i> @Model.USER_PROFILES.POINTS
+            </p>
+        </div>
+        <div class="card-read-more">
+            @{
+                if (@Model.USER.IS_ADMIN == true)
+                {
+                    <a href="#" class="btn btn-link btn-block">
+                        QUẢN TRỊ VIÊN
+                    </a>
+                }
+                else if (@Model.USER.IS_EMPLOYEE == true)
+                {
+                    <a href="#" class="btn btn-link btn-block">
+                        NHÂN VIÊN
+                    </a>
+                }
+                else
+                {
+                    <a href="#" class="btn btn-link btn-block">
+                        NGƯỜI DÙNG
+                    </a>
+                }
+            }
+        </div>
+    </div>
+</div>
+
+<div class="clearfix"></div>
+
+@section masterjs{
+    <style>
+        .wrapper {
+            display: table;
+            height: 100%;
+            width: 100%;
         }
+
+        .container-fostrap {
+            display: table-cell;
+            padding: 1em;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .fostrap-logo {
+            width: 100px;
+            margin-bottom: 15px;
+        }
+
+        h1.heading {
+            color: #fff;
+            font-size: 1.15em;
+            font-weight: 900;
+            margin: 0 0 0.5em;
+            color: #505050;
+        }
+
+
+
+        .card {
+            display: block;
+            margin-bottom: 20px;
+            line-height: 1.42857143;
+            background-color: #fff;
+            border-radius: 2px;
+            box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+            transition: box-shadow .25s;
+        }
+
+            .card:hover {
+                box-shadow: 0 8px 17px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
             }
 
-            <div class="row">
-                <div class="col-xs-2 form-group">
-                    <i class="file-image">
-                        <input id="_" name="AVATAR" type="file" onchange="readImage(this)" title="" />
-                        <i class="reset" onclick="resetImage(this.previousElementSibling)"></i>
-                        <label for="_" class="image"></label>
-                    </i>
-                </div>
-                <div class="col-xs-2 form-group">
-                    <label>Tên đăng nhập <i style="color:red;">*</i></label>
-                    <input name="USER_NAME" value="@Model.USER.USER_NAME" disabled type="text" class="form-control" placeholder="Tên đăng nhập" required maxlength="50" pattern="[a-z,A-Z,1-9]{6,15}" title="Tên đăng nhập phải dài trên 6 ký tự và không chứa ký tự đặc biệt">
-                </div>
-                <div class="col-xs-2 form-group">
-                    <label>Mật khẩu <i style="color:red;">*</i></label>
-                    <input name="PASSWORD" type="text" class="form-control" disabled placeholder="Mật khẩu" required maxlength="50" min="6" pattern="[a-z,A-Z,1-9]{6,15}" title="Mật khẩu phải dài trên 6 ký tự và không chứa ký tự đặc biệt">
-                </div>
+        .img-card {
+            width: 100%;
+            height: 200px;
+            border-top-left-radius: 2px;
+            border-top-right-radius: 2px;
+            display: block;
+            overflow: hidden;
+        }
 
-                <div class="col-xs-2 form-group">
-                    <label>Họ & tên <i style="color:red;">*</i></label>
-                    <input name="FULL_NAME" class="form-control" type="text" value="@Model.USER_PROFILES.FULL_NAME" required maxlength="30" placeholder="Họ và tên ">
-                </div>
-                <div class="col-xs-3 form-group">
-                    <label>Email <i style="color:red;">*</i></label>
-                    <input name="EMAIL" type="email" class="form-control" value="@Model.USER_PROFILES.EMAIL" disabled placeholder="Địa chỉ email" required maxlength="50">
-                </div>
-                <div class="col-xs-4 form-group">
-                    <label>Địa chỉ</label>
-                    <input name="ADDRESS" type="text" class="form-control" value="@Model.USER_PROFILES.ADDRESS" placeholder="Địa chỉ " maxlength="150">
-                </div>
-                <div class="col-xs-2 form-group">
-                    <label>Số điện thoại</label>
-                    <input name="MOBILE" type="tel" class="form-control" placeholder="Số điện thoại" value="@Model.USER_PROFILES.MOBILE.Trim()" maxlength="12" pattern="[0-9]{9,11}">
-                </div>
-                <div class="col-xs-2 form-group">
-                    <label style="color: white;">.</label>
-                    <button type="submit" class="btn btn-primary btn-block">CẬP NHẬT</button>
-                </div>
-                <div class="col-xs-1 form-group">
-                    <label style="color: white;">.</label>
-                    <a href="@Url.Action("ManagingUsers", "Admin")" class="btn btn-warning btn-block">HỦY</a>
-                </div>
-            </div>
-        </div><!-- /.box-body -->
-    }
-</div><!-- /.box -->
-@section masterjs{
+            .img-card img {
+                width: 100%;
+                height: 200px;
+                object-fit: cover;
+                transition: all .25s ease;
+            }
+
+        .card-content {
+            padding: 15px;
+            text-align: left;
+        }
+
+        .card-title {
+            margin-top: 0px;
+            font-weight: 700;
+            font-size: 1.65em;
+            text-align: center;
+        }
+
+            .card-title a {
+                color: #000;
+                text-decoration: none !important;
+            }
+
+        .card-read-more {
+            border-top: 1px solid #D4D4D4;
+        }
+
+            .card-read-more a {
+                text-decoration: none !important;
+                padding: 10px;
+                font-weight: 600;
+                text-transform: uppercase;
+            }
+    </style>
     <style>
         .file-image {
             display: inline-block;
@@ -171,8 +359,8 @@
                 cursor: pointer;
                 display: block;
                 box-sizing: border-box;
-                width: 130px;
-                height: 130px;
+                width: 230px;
+                height: 230px;
                 border: 1px solid #dbdbdb;
                 background-color: #f0f0f0;
                 background-repeat: no-repeat;
@@ -243,7 +431,6 @@
             else receiver.style.backgroundImage = 'none';
         }
     </script>
-
 }
 
 
