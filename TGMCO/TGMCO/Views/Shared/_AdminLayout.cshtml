@@ -60,7 +60,7 @@
 
         <header class="main-header">
             <!-- Logo -->
-            <a href="index2.html" class="logo">
+            <a href="@Url.Action("Index", "Admin")" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>T</b>GM</span>
                 <!-- logo for regular state and mobile devices -->
@@ -368,7 +368,7 @@
                 <ul class="sidebar-menu">
                     <li class="header"> BẢNG ĐIỀU KHIỂN </li>
                     <li>
-                        <a href="#">
+                        <a href="@Url.Action("Index", "Admin")">
                             <i class="fa fa-dashboard"></i> <span> DASHBOARD </span>
                         </a>
                     </li>
@@ -405,7 +405,7 @@
                     </li>
                     <li>
                         <a href="@Url.Action("ManagingOrders", "Admin")">
-                            <i class="fa fa-cart-plus"></i> <span> QUẢN LÝ ĐƠN ĐẶT HÀNG</span> <span class="label label-primary pull-right">21</span>
+                            <i class="fa fa-cart-plus"></i> <span> QUẢN LÝ ĐƠN ĐẶT HÀNG <small class="label label-primary">@m_NUMBER_OBJECT.GetNumOfOrders()</small></span>
                         </a>
                     </li>
                     <li class="treeview">
@@ -413,13 +413,13 @@
                             <i class="fa fa-newspaper-o"></i> <span>QUẢN LÝ TIN TỨC</span> <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li class="active"><a href="index.html"><i class="fa fa-file-text-o"></i> TIN TỨC</a></li>
-                            <li><a href="index2.html"><i class="fa fa-gift"></i> TIN KHUYẾN MÃI</a></li>
+                            <li><a href="@Url.Action("ManagingNews", "Admin")"><i class="fa fa-file-text-o"></i> TIN TỨC</a></li>
+                            <li><a href="@Url.Action("ManagingNewsPromotion", "Admin")"><i class="fa fa-gift"></i> TIN KHUYẾN MÃI</a></li>
                         </ul>
                     </li>
                     <li>
                         <a href="@Url.Action("ManagingAgencies","Admin")">
-                            <i class="fa fa-sitemap"></i> <span> QUẢN LÝ CHI NHÁNH </span> <span class="label label-primary pull-right">3</span>
+                            <i class="fa fa-sitemap"></i> <span> QUẢN LÝ CHI NHÁNH <small class="label label-primary">@m_NUMBER_OBJECT.GetNumOfAgencies()</small></span>
                         </a>
                     </li>
                 </ul>

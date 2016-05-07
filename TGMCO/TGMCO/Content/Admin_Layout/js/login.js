@@ -1,4 +1,4 @@
-
+﻿
 var form = $('.form');
 var btn = $('#submit');
 var topbar = $('.topbar');
@@ -19,7 +19,7 @@ btn.on('click',function(){
   if(tries<=2){
     var pass = $('#password').val();
     console.log(pass);
-    if(pass==='this-is-soo-cool'){
+    if(pass==='ADMINTGM'){
     setTimeout(function(){
       btn.text('Success!');
     },250);
@@ -37,12 +37,12 @@ btn.on('click',function(){
           break;
         case 1:
           setTimeout(function(){
-          btn.text('You have 2 tries left');
+          btn.text('Đang đăng nhập...');
           },300);
           break;
         case 2:
           setTimeout(function(){
-          btn.text('Only 1 more');
+          btn.text('Vui lòng đợi...');
           },300);
           break;
         case 3:
@@ -57,7 +57,7 @@ btn.on('click',function(){
           btn.addClass('recover');
           break;
          defaut:
-          btn.text('Login');
+          btn.text('Đăng nhập');
           break;
       }
     } 

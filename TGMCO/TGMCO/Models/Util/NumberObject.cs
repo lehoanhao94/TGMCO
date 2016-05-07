@@ -88,5 +88,16 @@ namespace TGMCO.Models
                 throw ex;
             }
         }
+
+        public int GetNumOfOrders()
+        {
+            return 0;
+        }
+
+        public int GetNumOfAgencies()
+        {
+            return 0;
+            
+        }
     }
 }
