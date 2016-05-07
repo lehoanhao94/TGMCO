@@ -23,7 +23,7 @@ namespace TGMCO.Models
                 throw ex;
             }
         }
-        // \cường
+        // cường
         public int GetNumOfCategories()
         {
             try
@@ -98,6 +98,12 @@ namespace TGMCO.Models
         {
             return 0;
             
+        }
+
+        public int GetNumOfcuong()
+        {
+            return 0;
+
         }
     }
 }
