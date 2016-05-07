@@ -74,22 +74,32 @@ namespace TGMCO.Models.Entity
         {
             try
             {
-                return db.PRODUCT_IMAGES.Where(n => n.PRODUCT_ID == id_product).FirstOrDefault().IMAGE_1;
+                string result = db.PRODUCT_IMAGES.Where(n => n.PRODUCT_ID == id_product).FirstOrDefault().IMAGE_1;
+                if(!string.IsNullOrEmpty(result))
+                {
+                    return result;
+                }
+                return "";
             }
             catch
             {
-                return null;
+                return "";
             }
         }
         public string GetFile1(int id_product)
         {
             try
             {
-                return db.PRODUCT_FILES.Where(n => n.PRODUCT_ID == id_product).FirstOrDefault().FILE_1;
+                string result = db.PRODUCT_FILES.Where(n => n.PRODUCT_ID == id_product).FirstOrDefault().FILE_1;
+                if (!string.IsNullOrEmpty(result))
+                {
+                    return result;
+                }
+                return "";
             }
             catch
             {
-                return null;
+                return "";
             }
         }
     }
