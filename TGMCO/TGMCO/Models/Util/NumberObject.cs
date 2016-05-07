@@ -23,7 +23,7 @@ namespace TGMCO.Models
                 throw ex;
             }
         }
-
+        // \cường
         public int GetNumOfCategories()
         {
             try
