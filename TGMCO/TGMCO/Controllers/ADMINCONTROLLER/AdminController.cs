@@ -8,7 +8,6 @@ using TGMCO.Models.Entity;
 using System.Security.Cryptography;
 using PagedList;
 using PagedList.Mvc;
-using TGMCO.Controllers.ADMINCONTROLLER;
 
 namespace TGMCO.Controllers
 {
