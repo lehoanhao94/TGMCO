@@ -26,20 +26,12 @@ namespace TGMCO.Models
         public bool IS_STILL { get; set; }
         public bool IS_ACTIVE { get; set; }
         public int QUANTITY_SOLD { get; set; }
-        public string CAPACITY { get; set; }
         public string WEIGHT { get; set; }
-        public string DESCRIPTION_1 { get; set; }
-        public string DESCRIPTION_2 { get; set; }
-        public string DESCRIPTION_3 { get; set; }
-        public string DESCRIPTION_4 { get; set; }
-        public string DESCRIPTION_5 { get; set; }
-        public string DESCRIPTION_6 { get; set; }
-        public string DESCRIPTION_7 { get; set; }
-        public string DESCRIPTION_8 { get; set; }
-        public string DESCRIPTION_9 { get; set; }
         public string FEATURED { get; set; }
         public string ACCESSORIES { get; set; }
         public string MADE_IN { get; set; }
         public string UNIT { get; set; }
+        public string DESCRIPTION { get; set; }
+        public string WARRANTY { get; set; }
     }
 }

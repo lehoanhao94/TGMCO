@@ -90,16 +90,15 @@ namespace TGMCO.Models.Entity
         {
             try
             {
-                string result = db.PRODUCT_FILES.Where(n => n.PRODUCT_ID == id_product).FirstOrDefault().FILE_1;
-                if (!string.IsNullOrEmpty(result))
+                if (db.PRODUCT_FILES.Where(n => n.PRODUCT_ID == id_product).FirstOrDefault() != null)
                 {
-                    return result;
+                    return db.PRODUCT_FILES.Where(n => n.PRODUCT_ID == id_product).FirstOrDefault().FILE_1;
                 }
-                return "";
+                return "#";
             }
             catch
             {
-                return "";
+                return "#";
             }
         }
     }

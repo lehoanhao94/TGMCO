@@ -92,11 +92,11 @@
                     <input name="UNIT" type="text" class="form-control" placeholder="Loại, chiếc, bộ, cặp...." required>
                 </div>
                 <div class="col-xs-1 form-group">
-                    <label>Công suất</label>
-                    <input name="CAPACITY" type="text" class="form-control" placeholder="Công suất">
+                    <label>Bảo hành</label>
+                    <input name="WARRANTY" type="text" class="form-control" placeholder="Bảo hành">
                 </div>
                 <div class="col-xs-1 form-group">
-                    <label>Tr/Lượng</label>
+                    <label>TLượng</label>
                     <input name="WEIGHT" type="text" class="form-control" placeholder="Trọng lượng">
                 </div>
                 <div class="col-xs-2 form-group">
@@ -113,83 +113,35 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-4 form-group">
-                    <label>Mô tả 1</label>
-                    <textarea name="DESCRIPTION_1" class="form-control" placeholder="Mô tả 1"></textarea>
-                </div>
-                <div class="col-xs-4 form-group">
-                    <label>Mô tả 2</label>
-                    <input name="DESCRIPTION_2" type="text" class="form-control" placeholder="Mô tả 2">
-                </div>
-                <div class="col-xs-4 form-group">
-                    <label>Mô tả 3</label>
-                    <input name="DESCRIPTION_3" type="text" class="form-control" placeholder="Mô tả 3">
-                </div>
-            </div>
+             
+            </div>         
             <div class="row">
                 <div class="col-xs-4 form-group">
-                    <label>Mô tả 4</label>
-                    <input name="DESCRIPTION_4" class="form-control" type="text" placeholder="Mô tả 1">
+                    <label>Chi tiết kỹ thuật</label>
+                    <textarea style="max-width:400px; height: 130px;" name="DESCRIPTION_1" class="form-control" placeholder="Chi tiết kỹ thuật..."></textarea>
+                </div> 
+                <div class="col-xs-4 form-group">
+                    <label>Hình ảnh sản phẩm</label>
+                    <div>
+                        <i class="file-image">
+                            <input id="_" name="Image" type="file" onchange="readImage(this)" title="" />
+                            <i class="reset" onclick="resetImage(this.previousElementSibling)"></i>
+                            <label for="_" class="image"></label>
+                        </i>
+                        <i class="file-image">
+                            <input id="_1" name="Image_1" type="file" onchange="readImage(this)" title="" />
+                            <i class="reset" onclick="resetImage(this.previousElementSibling)"></i>
+                            <label for="_1" class="image"></label>
+                        </i>
+                        <i class="file-image">
+                            <input id="_2" name="Image_2" type="file" onchange="readImage(this)" title="" />
+                            <i class="reset" onclick="resetImage(this.previousElementSibling)"></i>
+                            <label for="_2" class="image"></label>
+                        </i>
+                    </div>
                 </div>
                 <div class="col-xs-4 form-group">
-                    <label>Mô tả 5</label>
-                    <input name="DESCRIPTION_5" type="text" class="form-control" placeholder="Mô tả 2">
-                </div>
-                <div class="col-xs-4 form-group">
-                    <label>Mô tả 6</label>
-                    <input name="DESCRIPTION_6" type="text" class="form-control" placeholder="Mô tả 3">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-4 form-group">
-                    <label>Mô tả 7</label>
-                    <input name="DESCRIPTION_7" class="form-control" type="text" placeholder="Mô tả 1">
-                </div>
-                <div class="col-xs-4 form-group">
-                    <label>Mô tả 8</label>
-                    <input name="DESCRIPTION_8" type="text" class="form-control" placeholder="Mô tả 2">
-                </div>
-                <div class="col-xs-4 form-group">
-                    <label>Mô tả 9</label>
-                    <input name="DESCRIPTION_9" type="text" class="form-control" placeholder="Mô tả 3">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-4 form-group">
-                    <i class="file-image">
-                        <input id="_" name="Image" type="file" onchange="readImage(this)" title="" />
-                        <i class="reset" onclick="resetImage(this.previousElementSibling)"></i>
-                        <label for="_" class="image"></label>
-                    </i>
-                    <i class="file-image">
-                        <input id="_1" name="Image_1" type="file" onchange="readImage(this)" title="" />
-                        <i class="reset" onclick="resetImage(this.previousElementSibling)"></i>
-                        <label for="_1" class="image"></label>
-                    </i>
-                    <i class="file-image">
-                        <input id="_2" name="Image_2" type="file" onchange="readImage(this)" title="" />
-                        <i class="reset" onclick="resetImage(this.previousElementSibling)"></i>
-                        <label for="_2" class="image"></label>
-                    </i>
-                </div>
-                <div class="col-xs-4 form-group">
-                    <i class="file-image">
-                        <input id="_3" name="Image_3" type="file" onchange="readImage(this)" title="" />
-                        <i class="reset" onclick="resetImage(this.previousElementSibling)"></i>
-                        <label for="_3" class="image"></label>
-                    </i>
-                    <i class="file-image">
-                        <input id="_4" name="Image_4" type="file" onchange="readImage(this)" title="" />
-                        <i class="reset" onclick="resetImage(this.previousElementSibling)"></i>
-                        <label for="_4" class="image"></label>
-                    </i>
-                    <i class="file-image">
-                        <input id="_5" name="Image_5" type="file" onchange="readImage(this)" title="" />
-                        <i class="reset" onclick="resetImage(this.previousElementSibling)"></i>
-                        <label for="_5" class="image"></label>
-                    </i>
-                </div>
-                <div class="col-xs-4 form-group">
+                    <label>Files đính kèm</label>
                     <input type="file" class="form-group" id="btnAvatar_In" name="fileUpload_1" value="Chọn hình..." style="height: 33px;width: 300px; ">
                     <input type="file" class="form-group" id="btnAvatar_In" name="fileUpload_2" value="Chọn hình..." style="height: 33px;width: 300px; ">
                     <input type="file" class="form-group" id="btnAvatar_In" name="fileUpload_3" value="Chọn hình..." style="height: 33px;width: 300px; ">

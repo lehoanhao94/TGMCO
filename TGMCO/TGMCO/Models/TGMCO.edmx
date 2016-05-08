@@ -107,13 +107,13 @@
           <Key>
             <PropertyRef Name="ORDER_DETAIL_ID" />
           </Key>
+          <Property Name="ORDER_DETAIL_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ORDER_ID" Type="int" Nullable="false" />
           <Property Name="PRODUCT_ID" Type="int" Nullable="false" />
           <Property Name="UNIT_PRICE" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="QUANTITY" Type="int" Nullable="false" />
           <Property Name="DISCOUNT" Type="float" />
           <Property Name="EXTENDED_PRICE" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="ORDER_DETAIL_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UNIT" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="ORDER_STATUS">
@@ -184,21 +184,13 @@
           <Property Name="IS_STILL" Type="bit" Nullable="false" />
           <Property Name="IS_ACTIVE" Type="bit" Nullable="false" />
           <Property Name="QUANTITY_SOLD" Type="int" Nullable="false" />
-          <Property Name="CAPACITY" Type="nvarchar" MaxLength="50" />
           <Property Name="WEIGHT" Type="nvarchar" MaxLength="50" />
-          <Property Name="DESCRIPTION_1" Type="nvarchar" MaxLength="350" />
-          <Property Name="DESCRIPTION_2" Type="nvarchar" MaxLength="350" />
-          <Property Name="DESCRIPTION_3" Type="nvarchar" MaxLength="350" />
-          <Property Name="DESCRIPTION_4" Type="nvarchar" MaxLength="350" />
-          <Property Name="DESCRIPTION_5" Type="nvarchar" MaxLength="350" />
-          <Property Name="DESCRIPTION_6" Type="nvarchar" MaxLength="350" />
-          <Property Name="DESCRIPTION_7" Type="nvarchar" MaxLength="350" />
-          <Property Name="DESCRIPTION_8" Type="nvarchar" MaxLength="350" />
-          <Property Name="DESCRIPTION_9" Type="nvarchar" MaxLength="350" />
+          <Property Name="DESCRIPTION" Type="nvarchar(max)" />
           <Property Name="FEATURED" Type="nvarchar" MaxLength="350" />
           <Property Name="ACCESSORIES" Type="nvarchar" MaxLength="350" />
           <Property Name="MADE_IN" Type="nvarchar" MaxLength="150" />
           <Property Name="UNIT" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="WARRANTY" Type="nvarchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="SHIPPERS">
           <Key>
@@ -472,21 +464,13 @@
           <Property Name="IS_STILL" Type="Boolean" Nullable="false" />
           <Property Name="IS_ACTIVE" Type="Boolean" Nullable="false" />
           <Property Name="QUANTITY_SOLD" Type="Int32" Nullable="false" />
-          <Property Name="CAPACITY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="WEIGHT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DESCRIPTION_1" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
-          <Property Name="DESCRIPTION_2" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
-          <Property Name="DESCRIPTION_3" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
-          <Property Name="DESCRIPTION_4" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
-          <Property Name="DESCRIPTION_5" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
-          <Property Name="DESCRIPTION_6" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
-          <Property Name="DESCRIPTION_7" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
-          <Property Name="DESCRIPTION_8" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
-          <Property Name="DESCRIPTION_9" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
           <Property Name="FEATURED" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
           <Property Name="ACCESSORIES" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
           <Property Name="MADE_IN" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="UNIT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="WARRANTY" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="SHIPPER">
           <Key>
@@ -796,6 +780,8 @@
           <EntitySetMapping Name="PRODUCTS">
             <EntityTypeMapping TypeName="TGMCOModel.PRODUCT">
               <MappingFragment StoreEntitySet="PRODUCTS">
+                <ScalarProperty Name="WARRANTY" ColumnName="WARRANTY" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
                 <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
                 <ScalarProperty Name="PRODUCT_CODE" ColumnName="PRODUCT_CODE" />
                 <ScalarProperty Name="PRODUCT_NAME" ColumnName="PRODUCT_NAME" />
@@ -808,17 +794,7 @@
                 <ScalarProperty Name="IS_STILL" ColumnName="IS_STILL" />
                 <ScalarProperty Name="IS_ACTIVE" ColumnName="IS_ACTIVE" />
                 <ScalarProperty Name="QUANTITY_SOLD" ColumnName="QUANTITY_SOLD" />
-                <ScalarProperty Name="CAPACITY" ColumnName="CAPACITY" />
                 <ScalarProperty Name="WEIGHT" ColumnName="WEIGHT" />
-                <ScalarProperty Name="DESCRIPTION_1" ColumnName="DESCRIPTION_1" />
-                <ScalarProperty Name="DESCRIPTION_2" ColumnName="DESCRIPTION_2" />
-                <ScalarProperty Name="DESCRIPTION_3" ColumnName="DESCRIPTION_3" />
-                <ScalarProperty Name="DESCRIPTION_4" ColumnName="DESCRIPTION_4" />
-                <ScalarProperty Name="DESCRIPTION_5" ColumnName="DESCRIPTION_5" />
-                <ScalarProperty Name="DESCRIPTION_6" ColumnName="DESCRIPTION_6" />
-                <ScalarProperty Name="DESCRIPTION_7" ColumnName="DESCRIPTION_7" />
-                <ScalarProperty Name="DESCRIPTION_8" ColumnName="DESCRIPTION_8" />
-                <ScalarProperty Name="DESCRIPTION_9" ColumnName="DESCRIPTION_9" />
                 <ScalarProperty Name="FEATURED" ColumnName="FEATURED" />
                 <ScalarProperty Name="ACCESSORIES" ColumnName="ACCESSORIES" />
                 <ScalarProperty Name="MADE_IN" ColumnName="MADE_IN" />
