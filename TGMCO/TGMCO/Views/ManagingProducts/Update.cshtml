@@ -5,6 +5,7 @@
     ViewBag.Title = "Update";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     ProductModel m_PRODUCT = new ProductModel();
+    SupplierModel m_SUPPLIER = new SupplierModel();
 }
 
 @section Page_Header {
@@ -55,28 +56,71 @@
                 </div>
 
                 <div class="col-sm-9">
-                    <div class="col-md-4">
-                        <div class="product-title">@Model.PRODUCT_NAME</div>
+                    <div class="col-md-5">
+                        <div class="product-title"> @Model.PRODUCT_NAME</div>
                         <div class="divider"></div>
-                        <div class="product-desc">Mã: @Model.PRODUCT_CODE</div>
-                        Tình trạng: Còn hàng
-                        <hr>  
-                        <div class="product-price">Giá: @string.Format("{0:0,0}", @Model.UNIT_PRICE) VNĐ</div> 
-                        <div class="input-group number-spinner">
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
-                            </span>
-                            <input type="text" class="form-control text-center" pattern="[0-9]" value="1">
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
-                            </span>
-                        </div>
+                        <br />
+                        <table class="product-desc">
+                            <tbody>
+                                <tr>
+                                    <td>Mã sản phẩm: </td>
+                                    <td class="product-info">@Model.PRODUCT_CODE</td>
+                                </tr>
+                                <tr>
+                                    <td>Nhà sản xuất: </td>
+                                    <td class="product-info">@m_SUPPLIER.GetSupplierName(Model.SUPPLIER_ID)</td>
+                                </tr>                               
+                                <tr>
+                                    <td>Xuất xứ: </td>
+                                    <td class="product-info">@Model.MADE_IN</td>
+                                </tr>
+                                <tr>
+                                    <td>Tình trạng: </td>
+                                    @{
+                                        if(Model.IS_STILL)
+                                        {
+                                            <td class="product-info"><small class="label label-success pull-left">Còn hàng</small></td>
+                                        }
+                                        else
+                                        {
+                                            <td class="product-info"><small class="label label-danger pull-left">Hết hàng</small></td>
+                                            
+                                        }
+                                    }                                  
+                                </tr>
+                                <tr>
+                                    <td>Bảo hành: </td>
+                                    <td class="product-info">@Model.WARRANTY</td>
+                                </tr>
+                                <tr>
+                                    <td>Trọng lượng: </td>
+                                    <td class="product-info">@Model.WEIGHT</td>
+                                </tr>
+                                <tr>
+                                    <td>Giá: </td>
+                                    <td class="product-info"><small class="label product-price label-info pull-left">@string.Format("{0:0,0}", @Model.UNIT_PRICE) VNĐ</small></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Số lượng:
+                                    </td>
+                                    <td class="product-info product-rating">                                      
+                                            <input type="number" class="form-control text-center" pattern="[0-9]" required value="1">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="product-stock" colspan="2">
+                                        <button type="button" class="btn btnShopNow" aria-label="Left Align">
+                                            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> <strong>Thêm vào giỏ</strong>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table> 
 
-                        <button type="button" class="btn btnShopNow" aria-label="Left Align">
-                            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> <strong>Thêm vào giỏ</strong>
-                        </button>   
+                          
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-6">
                         <div class="product col-md-8 service-image-left">
                             <center>
                                 <img id="item-display" src="@Url.Content(@m_PRODUCT.GetImage1(@Model.PRODUCT_ID))" alt=""/>
@@ -88,8 +132,7 @@
                                 <a id="item-1" class="service1-item">
                                     <img id="item-display" src="@Url.Content(@m_PRODUCT.GetImage1(@Model.PRODUCT_ID))" alt="" />
                                 </a>
-                                <a id="item-2" class="service1-item">
-                                    <img src="" alt=""></img>
+                                <a id="item-2" class="service1-item">   
                                 </a>
                             </center>
                         </div>
@@ -100,13 +143,10 @@
                             <li class="active"><a href="#service-one" data-toggle="tab">CHI TIẾT KỸ THUẬT</a></li>
                             <li><a href="#service-two" data-toggle="tab">ĐẶC TRƯNG</a></li>
                             <li><a href="#service-three" data-toggle="tab">FILES ĐÍNH KÈM</a></li>
-                            <li><a href="#service-four" data-toggle="tab">XUẤT XỨ</a></li>
-
-
                         </ul>
                         <div id="myTabContent" class="tab-content">
                             <div class="tab-pane fade in active" id="service-one">
-                                @Html.Raw(Model.DESCRIPTION_1.Replace(Environment.NewLine, "<br/> <tab/>"))                              
+                                @Html.Raw(Model.DESCRIPTION.Replace(Environment.NewLine, "<br/> <tab/>"))                              
                             </div>
                             <div class="tab-pane fade" id="service-two">
                                 <ul><li>@Model.FEATURED</li></ul>
@@ -133,29 +173,148 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="tab-pane fade" id="service-four">
-                                <ul><li>@Model.MADE_IN</li></ul>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div id="buyhistory" class="tab-pane fade">
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Ngày đặt hàng</th>
-                                <th>Mã giao hàng</th>
-                                <th>Ngày giao hàng</th>
-                                <th>Tổng tiền</th>
-                                <th>Trạng thái</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
+                <div class="box box-success">
+                    @using (Html.BeginForm("Create", "ManagingProducts", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        <div class="box-header">
+                            <div class="col-xs-1">
+                                <input name="IDX" type="number" class="form-control" placeholder="IDX" required value="0">
+                            </div>
+                            <div class="col-xs-1">
+                                <div class="checkbox checkbox-primary" style="width: 100px;">
+                                    <input name="IsActive" id="checkbox1" type="checkbox" checked>
+                                    <label for="checkbox1">
+                                        Hoạt động
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-xs-1">
+                                <div class="checkbox checkbox-primary" style="width: 100px;">
+                                    <input name="IsStill" id="checkbox2" type="checkbox" checked>
+                                    <label for="checkbox2">
+                                        Còn hàng
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-xs-1">
+                                <div class="checkbox checkbox-primary" style="width: 100px;">
+                                    <input name="IsNew" id="checkbox3" type="checkbox" checked>
+                                    <label for="checkbox3">
+                                        SP mới
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="box-body">
+                            @{
+                        if (@TempData["ErrorCreate"] != null)
+                        {
+                            <div class="alert alert-danger alert-dismissable">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                <h4><i class="icon fa fa-ban"></i> LỖI !</h4>
+                                @TempData["ErrorCreate"]
+                            </div>
+                        }
+                            }
+
+                            <div class="row">
+                                <div class="col-xs-2 form-group">
+                                    <label>Mã SP <i style="color:red;">*</i></label>
+                                    <input name="PRODUCT_CODE" type="text" class="form-control" required value="@Model.PRODUCT_CODE">
+                                </div>
+                                <div class="col-xs-3 form-group">
+                                    <label>Tên sản phẩm <i style="color:red;">*</i></label>
+                                    <input name="PRODUCT_NAME" type="text" class="form-control" placeholder="Tên sản phẩm" value="@Model.PRODUCT_NAME" required>
+                                </div>
+                                <div class="col-xs-2 form-group">
+                                    <label>Nhà cung cấp <i style="color:red;">*</i></label> 
+                                    @Html.DropDownListFor(x => x.SUPPLIER_ID , (IEnumerable<SelectListItem>)ViewBag.ListSupplier, new { @class = "form-control"})                      
+                                </div>
+                                <div class="col-xs-3 form-group">
+                                    <label>Danh mục <i style="color:red;">*</i></label>
+                                    @Html.DropDownListFor(x => x.CATEGORY_ID, (IEnumerable<SelectListItem>)ViewBag.ListCategory, new { @class = "form-control" })
+                                </div>
+                                <div class="col-xs-2 form-group">
+                                    <label>Danh mục con</label>
+                                    @Html.DropDownListFor(x => x.CATEGORY_EXTRA_ID, (IEnumerable<SelectListItem>)ViewBag.ListCategoryExtra,"Chọn danh mục con", new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-2 form-group">
+                                    <label>Đơn giá <i style="color:red;">*</i></label>
+                                    <input name="UNIT_PRICE" class="form-control" type="number" required min="1000" placeholder="Đơn giá ">
+                                </div>
+                                <div class="col-xs-1 form-group">
+                                    <label>ĐVT <i style="color:red;">*</i></label>
+                                    <input name="UNIT" type="text" class="form-control" placeholder="Loại, chiếc, bộ, cặp...." required>
+                                </div>
+                                <div class="col-xs-1 form-group">
+                                    <label>Bảo hành</label>
+                                    <input name="WARRANTY" type="text" class="form-control" placeholder="Bảo hành">
+                                </div>
+                                <div class="col-xs-1 form-group">
+                                    <label>TLượng</label>
+                                    <input name="WEIGHT" type="text" class="form-control" placeholder="Trọng lượng">
+                                </div>
+                                <div class="col-xs-2 form-group">
+                                    <label>Xuất xứ</label>
+                                    <input name="MADE_IN" type="text" class="form-control" placeholder="Xuất xứ">
+                                </div>
+                                <div class="col-xs-3 form-group">
+                                    <label>Phụ kiện đi kèm</label>
+                                    <input name="ACCESSORIES" type="text" class="form-control" placeholder="Phụ kiện">
+                                </div>
+                                <div class="col-xs-2 form-group">
+                                    <label>Tính năng nổi bật</label>
+                                    <input name="FEATURED" type="text" class="form-control" placeholder="Tính năng nổi bật">
+                                </div>
+                            </div>
+                            <div class="row">
+
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-4 form-group">
+                                    <label>Chi tiết kỹ thuật</label>
+                                    <textarea style="max-width:400px; height: 130px;" name="DESCRIPTION_1" class="form-control" placeholder="Chi tiết kỹ thuật..."></textarea>
+                                </div>
+                                <div class="col-xs-4 form-group">
+                                    <label>Hình ảnh sản phẩm</label>
+                                    <div>
+                                        <i class="file-image">
+                                            <input id="_" name="Image" type="file" onchange="readImage(this)" title="" />
+                                            <i class="reset" onclick="resetImage(this.previousElementSibling)"></i>
+                                            <label for="_" class="image"></label>
+                                        </i>
+                                        <i class="file-image">
+                                            <input id="_1" name="Image_1" type="file" onchange="readImage(this)" title="" />
+                                            <i class="reset" onclick="resetImage(this.previousElementSibling)"></i>
+                                            <label for="_1" class="image"></label>
+                                        </i>
+                                        <i class="file-image">
+                                            <input id="_2" name="Image_2" type="file" onchange="readImage(this)" title="" />
+                                            <i class="reset" onclick="resetImage(this.previousElementSibling)"></i>
+                                            <label for="_2" class="image"></label>
+                                        </i>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4 form-group">
+                                    <label>Files đính kèm</label>
+                                    <input type="file" class="form-group" id="btnAvatar_In" name="fileUpload_1" value="Chọn hình..." style="height: 33px;width: 300px; ">
+                                    <input type="file" class="form-group" id="btnAvatar_In" name="fileUpload_2" value="Chọn hình..." style="height: 33px;width: 300px; ">
+                                    <input type="file" class="form-group" id="btnAvatar_In" name="fileUpload_3" value="Chọn hình..." style="height: 33px;width: 300px; ">
+                                    <button type="submit" class="btn btn-success btn-block">THÊM MỚI</button>
+                                </div>
+
+                            </div>
+                        </div><!-- /.box-body -->
+                    }
+                </div><!-- /.box -->
             </div>
 
         </div>
@@ -167,40 +326,43 @@
     <link rel="stylesheet/less" type="text/css" href="~/Content/Admin_Layout/css/products.less">
 
     <style>
-
-                .product {
-                    border: 1px solid #dddddd;
-                    height: 321px;
-                }
+        .divider {
+            border: 1px solid #FED208;
+        } 
+        .product {
+            border: 1px solid #dddddd;
+            height: 321px;
+        }
 
                     .product > img {
                         max-width: 277px;
                     }
 
                 .product-rating {
-                    font-size: 20px;
-                    margin-bottom: 25px;
+                    width: 120px;
                 }
 
                 .product-title {
-                    font-size: 20px;
+                    font-size: 25px;
                 }
 
                 .product-desc {
-                    font-size: 14px;
+                    font-size: 16px;
+                    margin-left: 10px;
+                    line-height: 1.5;
                 }
 
                 .product-price {
-                    font-size: 22px;
+                    font-size: 20px;
+                    color: red;
                 }
 
                 .product-stock {
-                    color: #74DF00;
-                    font-size: 16px;
+                    padding-top: 10px;
                 }
 
                 .product-info {
-                    margin-top: 50px;
+                    padding-left: 50px;
                 }
 
                 /*********************************************
@@ -344,91 +506,92 @@
         }
     </style>
     <style>
-        .file-image {
-            display: inline-block;
-            position: relative;
+    .file-image {
+        display: inline-block;
+        position: relative;
+    }
+
+        .file-image input {
+            position: absolute;
+            overflow: hidden;
+            opacity: 0;
+            width: 0;
         }
 
-            .file-image input {
-                position: absolute;
-                overflow: hidden;
-                opacity: 0;
-                width: 0;
+        .file-image .reset {
+            cursor: pointer;
+            display: block;
+            position: absolute;
+            right: 0;
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            background: rgba(0,0,0,.8);
+        }
+
+            .file-image .reset:before {
+                content: '\d7';
+                font: normal normal 40px/39px sans-serif, Arial;
+                color: #fa8e8e;
             }
 
-            .file-image .reset {
-                cursor: pointer;
+        .file-image .image {
+            cursor: pointer;
+            display: block;
+            box-sizing: border-box;
+            width: 120px;
+            height: 120px;
+            border: 1px solid #dbdbdb;
+            background-color: #f0f0f0;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: 100% 100%;
+        }
+
+            .file-image .image:before, .file-image .image:after {
+                content: "";
                 display: block;
                 position: absolute;
+                left: 0;
                 right: 0;
-                width: 40px;
-                height: 40px;
+                top: 50%;
+                font: normal normal 14px sans-serif, Arial;
+                line-height: 0;
+                color: #ababab;
                 text-align: center;
-                background: rgba(0,0,0,.8);
             }
 
-                .file-image .reset:before {
-                    content: '\d7';
-                    font: normal normal 40px/39px sans-serif, Arial;
-                    color: #fa8e8e;
-                }
-
-            .file-image .image {
-                cursor: pointer;
-                display: block;
-                box-sizing: border-box;
-                width: 230px;
-                height: 230px;
-                border: 1px solid #dbdbdb;
-                background-color: #f0f0f0;
-                background-repeat: no-repeat;
-                background-position: center center;
-                background-size: 100% 100%;
+            .file-image .image:before {
+                content: "+";
+                font-size: 100px;
+                margin-top: -20px;
+                color: #3C8DBC;
             }
 
-                .file-image .image:before, .file-image .image:after {
-                    content: "";
-                    display: block;
-                    position: absolute;
-                    left: 0;
-                    right: 0;
-                    top: 50%;
-                    font: normal normal 14px sans-serif, Arial;
-                    line-height: 0;
-                    color: #ababab;
-                    text-align: center;
-                }
+            .file-image .image:after {
+                content: "Thêm ảnh";
+                margin-top: 30px;
+                color: #3C8DBC;
+            }
 
-                .file-image .image:before {
-                    content: "+";
-                    font-size: 100px;
-                    margin-top: -20px;
-                    color: #3C8DBC;
-                }
+        .file-image .reset {
+            display: none;
+        }
 
-                .file-image .image:after {
-                    content: "Thêm ảnh";
-                    margin-top: 30px;
-                    color: #3C8DBC;
-                }
+        .file-image input:not([title=""]) ~ .reset {
+            display: block;
+        }
 
-            .file-image .reset {
+        .file-image input:not([title=""]) ~ .image {
+            border: 0 none;
+        }
+
+            .file-image input:not([title=""]) ~ .image:before,
+            .file-image input:not([title=""]) ~ .image:after {
                 display: none;
             }
+</style>
 
-            .file-image input:not([title=""]) ~ .reset {
-                display: block;
-            }
-
-            .file-image input:not([title=""]) ~ .image {
-                border: 0 none;
-            }
-
-                .file-image input:not([title=""]) ~ .image:before,
-                .file-image input:not([title=""]) ~ .image:after {
-                    display: none;
-                }
-    </style>
 }
 @section footerjs{
 
@@ -449,23 +612,6 @@
             }
             else receiver.style.backgroundImage = 'none';
         }
-
-        $(document).on('click', '.number-spinner button', function () {
-            var btn = $(this),
-                oldValue = btn.closest('.number-spinner').find('input').val().trim(),
-                newVal = 0;
-
-            if (btn.attr('data-dir') == 'up') {
-                newVal = parseInt(oldValue) + 1;
-            } else {
-                if (oldValue > 1) {
-                    newVal = parseInt(oldValue) - 1;
-                } else {
-                    newVal = 1;
-                }
-            }
-            btn.closest('.number-spinner').find('input').val(newVal);
-        });
     </script>
 }
 
