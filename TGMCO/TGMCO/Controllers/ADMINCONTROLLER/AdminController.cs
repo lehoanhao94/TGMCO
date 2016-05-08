@@ -118,7 +118,6 @@ namespace TGMCO.Controllers
         {
             try
             {
-                //aaaaacccccccccccccccc
                 if(Session["SS_USER"] == null)
                 {
                     return RedirectToAction("Login", "Admin");

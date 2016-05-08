@@ -102,6 +102,7 @@ namespace TGMCO.Models
 
         public int GetNumOfcuong()
         {
+            //commit thử nè
             return 0;
 
         }
