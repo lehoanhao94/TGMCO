@@ -18,49 +18,13 @@ input.on('focus',function(){
 btn.on('click',function(){
   if(tries<=2){
     var pass = $('#password').val();
-    console.log(pass);
-    if(pass==='ADMINTGM'){
     setTimeout(function(){
       btn.text('Success!');
     },250);
-    topbar.addClass('success');
+    topbar.addClass('Đang đăng nhập');
     form.addClass('goAway');
     article.addClass('active');
     tries=0;
-  }
-    else{
-      topbar.addClass('error');
-      tries++;
-      switch(tries){
-        case 0:
-          btn.text('Login');
-          break;
-        case 1:
-          setTimeout(function(){
-          btn.text('Đang đăng nhập...');
-          },300);
-          break;
-        case 2:
-          setTimeout(function(){
-          btn.text('Vui lòng đợi...');
-          },300);
-          break;
-        case 3:
-          setTimeout(function(){
-          btn.text('Recover password?');
-          },300);
-          input.prop('disabled', true);
-          input2.prop('disabled', true);
-          topbar.removeClass('error');
-          input.addClass('disabled');
-          input2.addClass('disabled');
-          btn.addClass('recover');
-          break;
-         defaut:
-          btn.text('Đăng nhập');
-          break;
-      }
-    } 
   }
   else{
     topbar.addClass('disabled');

@@ -19,7 +19,27 @@
         <li class="active">@ViewBag.Title</li>
     </ol>
 }
+@{
+    if (@TempData["SuccessCreate"] != null)
+    {
+        <div class="alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4>	<i class="icon fa fa-check"></i> THÀNH CÔNG!</h4>
+            @TempData["SuccessCreate"]
+        </div>
+    }
+}
 
+@{
+    if (@TempData["ErrorCreate"] != null)
+    {
+        <div class="alert alert-danger alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4><i class="icon fa fa-ban"></i> LỖI !</h4>
+            @TempData["ErrorCreate"]
+        </div>
+    }
+}
 <div class="box box-primary">
     <div class="col-lg-12">
         <ul class="nav nav-tabs">
@@ -30,32 +50,54 @@
         <div class="tab-content">
             <div id="profile" class="tab-pane fade in active">
                 <br />
-                <div class="col-sm-3">
-                    <div class="col-item">
-                        <div class="photo">
-                            <img id="Image-Product" src="@Url.Content(@m_PRODUCT.GetImage1(@Model.PRODUCT_ID))" class="img-responsive" alt="a" />
-                        </div>
-                        <div class="info">
-                            <div class="Name-Product">
-                                <h5>@Model.PRODUCT_NAME</h5>
-                            </div>
-                            <div class="Price-Product">
-                                <h5 class="price-text-color">
-                                    <strong>Giá: </strong> @string.Format("{0:0,0}", @Model.UNIT_PRICE) VNĐ
-                                </h5>
-                            </div>
-                            <div class="separator">
-                                <button type="button" class="btn btnShopNow" aria-label="Left Align">
-                                    <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> <strong>Thêm vào giỏ</strong>
-                                </button>
-                            </div>
-                            <div class="clearfix">
+                <div class="col-sm-12 col-sm-3">
+                    <div class="offer offer-radius offer-danger">
+                        @{
+                            if (@Model.IS_NEW && @Model.IS_STILL)
+                            {
+                                <div class="shape">
+                                    <div class="shape-text">
+                                        Mới
+                                    </div>
+                                </div>
+                            }
+                            else if (@Model.IS_STILL == false)
+                            {
+                                <div class="shape shape-danger">
+                                    <div class="shape-text">
+                                        Hết
+                                    </div>
+                                </div>
+                            }
+}
+                        <div class="offer-content">
+                            <div class="col-item">
+                                <div class="photo">
+                                    <img id="Image-Product" src="@Url.Content(@m_PRODUCT.GetImage1(@Model.PRODUCT_ID))" class="img-responsive" alt="a" />
+                                </div>
+                                <div class="info">
+                                    <div class="Name-Product">
+                                        <h5>@Model.PRODUCT_NAME</h5>
+                                    </div>
+                                    <div class="Price-Product">
+                                        <h5 class="price-text-color">
+                                            <strong>Giá: </strong> @string.Format("{0:0,0}", @Model.UNIT_PRICE) VNĐ
+                                        </h5>
+                                    </div>
+                                    <div class="separator">
+                                        <button type="button" class="btn btnShopNow" aria-label="Left Align">
+                                            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> <strong>Thêm vào giỏ</strong>
+                                        </button>
+                                    </div>
+                                    <div class="clearfix">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-sm-9">
+                
+                <div class="col-sm-12 col-sm-9">
                     <div class="col-md-5">
                         <div class="product-title"> @Model.PRODUCT_NAME</div>
                         <div class="divider"></div>
@@ -64,52 +106,55 @@
                             <tbody>
                                 <tr>
                                     <td>Mã sản phẩm: </td>
-                                    <td class="product-info">@Model.PRODUCT_CODE</td>
+                                    <td class="col-lg-6">@Model.PRODUCT_CODE</td>
                                 </tr>
                                 <tr>
                                     <td>Nhà sản xuất: </td>
-                                    <td class="product-info">@m_SUPPLIER.GetSupplierName(Model.SUPPLIER_ID)</td>
+                                    <td class="col-lg-6">@m_SUPPLIER.GetSupplierName(Model.SUPPLIER_ID)</td>
                                 </tr>                               
                                 <tr>
                                     <td>Xuất xứ: </td>
-                                    <td class="product-info">@Model.MADE_IN</td>
+                                    <td class="col-lg-6">@Model.MADE_IN</td>
                                 </tr>
                                 <tr>
                                     <td>Tình trạng: </td>
                                     @{
-                                        if(Model.IS_STILL)
-                                        {
-                                            <td class="product-info"><small class="label label-success pull-left">Còn hàng</small></td>
-                                        }
-                                        else
-                                        {
-                                            <td class="product-info"><small class="label label-danger pull-left">Hết hàng</small></td>
-                                            
-                                        }
-                                    }                                  
+    if (Model.IS_STILL)
+    {
+        <td class="col-lg-6"><small class="label label-success pull-left">Còn hàng</small></td>
+    }
+    else
+    {
+        <td class="col-lg-6"><small class="label label-danger pull-left">Hết hàng</small></td>
+
+    }
+}                                  
                                 </tr>
                                 <tr>
                                     <td>Bảo hành: </td>
-                                    <td class="product-info">@Model.WARRANTY</td>
+                                    <td class="col-lg-6">@Model.WARRANTY</td>
                                 </tr>
                                 <tr>
                                     <td>Trọng lượng: </td>
-                                    <td class="product-info">@Model.WEIGHT</td>
+                                    <td class="col-lg-6">@Model.WEIGHT</td>
                                 </tr>
                                 <tr>
                                     <td>Giá: </td>
-                                    <td class="product-info"><small class="label product-price label-info pull-left">@string.Format("{0:0,0}", @Model.UNIT_PRICE) VNĐ</small></td>
+                                    <td class="col-lg-6"><small class="label product-price label-info pull-left">@string.Format("{0:0,0}", @Model.UNIT_PRICE) VNĐ</small></td>
                                 </tr>
                                 <tr>
                                     <td>
                                         Số lượng:
                                     </td>
-                                    <td class="product-info product-rating">                                      
-                                            <input type="number" class="form-control text-center" pattern="[0-9]" required value="1">
+                                    <td class="col-lg-6 product-rating">
+                                        <input type="number" class="form-control text-center" pattern="[0-9]" required value="1">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="product-stock" colspan="2">
+                                    <td>
+                                        <div class="fb-share-button" data-href="@Request.RawUrl" data-layout="button" data-mobile-iframe="true"></div>
+                                    </td>
+                                    <td class="product-stock col-lg-6">
                                         <button type="button" class="btn btnShopNow" aria-label="Left Align">
                                             <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> <strong>Thêm vào giỏ</strong>
                                         </button>
@@ -117,7 +162,7 @@
                                 </tr>
                             </tbody>
                         </table> 
-
+                        <br/>
                           
                     </div>
                     <div class="col-md-6">
@@ -127,12 +172,10 @@
                             </center>
                         </div>
 
-                        <div class="container service1-items col-sm-2 col-md-4 pull-left">
+                        <div class="col-sm-2 col-md-4 pull-left">
                             <center>
                                 <a id="item-1" class="service1-item">
                                     <img id="item-display" src="@Url.Content(@m_PRODUCT.GetImage1(@Model.PRODUCT_ID))" alt="" />
-                                </a>
-                                <a id="item-2" class="service1-item">   
                                 </a>
                             </center>
                         </div>
@@ -142,14 +185,19 @@
 
                             <li class="active"><a href="#service-one" data-toggle="tab">CHI TIẾT KỸ THUẬT</a></li>
                             <li><a href="#service-two" data-toggle="tab">ĐẶC TRƯNG</a></li>
+                            <li><a href="#service-four" data-toggle="tab">PHỤ KIỆN ĐI KÈM</a></li>
                             <li><a href="#service-three" data-toggle="tab">FILES ĐÍNH KÈM</a></li>
                         </ul>
                         <div id="myTabContent" class="tab-content">
                             <div class="tab-pane fade in active" id="service-one">
-                                @Html.Raw(Model.DESCRIPTION.Replace(Environment.NewLine, "<br/> <tab/>"))                              
+                                <div style="padding-left: 40px;">@Html.Raw(Model.DESCRIPTION.Replace(Environment.NewLine, "<br/>")) </div>
+                                                             
                             </div>
                             <div class="tab-pane fade" id="service-two">
                                 <ul><li>@Model.FEATURED</li></ul>
+                            </div>
+                            <div class="tab-pane fade" id="service-four">
+                                <ul><li>@Model.ACCESSORIES</li></ul>
                             </div>
                             <div class="tab-pane fade" id="service-three">
                                 <ul>
@@ -179,7 +227,7 @@
             </div>
             <div id="buyhistory" class="tab-pane fade">
                 <div class="box box-success">
-                    @using (Html.BeginForm("Create", "ManagingProducts", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    @using (Html.BeginForm("Update", "ManagingProducts", FormMethod.Post, new { enctype = "multipart/form-data", id = @Model.PRODUCT_ID }))
                     {
                         <div class="box-header">
                             <div class="col-xs-1">
@@ -212,16 +260,6 @@
                         </div>
 
                         <div class="box-body">
-                            @{
-                        if (@TempData["ErrorCreate"] != null)
-                        {
-                            <div class="alert alert-danger alert-dismissable">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                <h4><i class="icon fa fa-ban"></i> LỖI !</h4>
-                                @TempData["ErrorCreate"]
-                            </div>
-                        }
-                            }
 
                             <div class="row">
                                 <div class="col-xs-2 form-group">
@@ -248,31 +286,31 @@
                             <div class="row">
                                 <div class="col-xs-2 form-group">
                                     <label>Đơn giá <i style="color:red;">*</i></label>
-                                    <input name="UNIT_PRICE" class="form-control" type="number" required min="1000" placeholder="Đơn giá ">
+                                    <input name="UNIT_PRICE" class="form-control" type="number" value="@Model.UNIT_PRICE" required min="1000" placeholder="Đơn giá ">
                                 </div>
                                 <div class="col-xs-1 form-group">
                                     <label>ĐVT <i style="color:red;">*</i></label>
-                                    <input name="UNIT" type="text" class="form-control" placeholder="Loại, chiếc, bộ, cặp...." required>
+                                    <input name="UNIT" type="text" class="form-control" value="@Model.UNIT" placeholder="Loại, chiếc, bộ, cặp...." required>
                                 </div>
                                 <div class="col-xs-1 form-group">
                                     <label>Bảo hành</label>
-                                    <input name="WARRANTY" type="text" class="form-control" placeholder="Bảo hành">
+                                    <input name="WARRANTY" type="text" class="form-control" value="@Model.WARRANTY" placeholder="Bảo hành">
                                 </div>
                                 <div class="col-xs-1 form-group">
                                     <label>TLượng</label>
-                                    <input name="WEIGHT" type="text" class="form-control" placeholder="Trọng lượng">
+                                    <input name="WEIGHT" type="text" class="form-control" value="@Model.WEIGHT" placeholder="Trọng lượng">
                                 </div>
                                 <div class="col-xs-2 form-group">
                                     <label>Xuất xứ</label>
-                                    <input name="MADE_IN" type="text" class="form-control" placeholder="Xuất xứ">
+                                    <input name="MADE_IN" type="text" class="form-control" value="@Model.MADE_IN" placeholder="Xuất xứ">
                                 </div>
                                 <div class="col-xs-3 form-group">
                                     <label>Phụ kiện đi kèm</label>
-                                    <input name="ACCESSORIES" type="text" class="form-control" placeholder="Phụ kiện">
+                                    <input name="ACCESSORIES" type="text" class="form-control" value="@Model.ACCESSORIES" placeholder="Phụ kiện">
                                 </div>
                                 <div class="col-xs-2 form-group">
                                     <label>Tính năng nổi bật</label>
-                                    <input name="FEATURED" type="text" class="form-control" placeholder="Tính năng nổi bật">
+                                    <input name="FEATURED" type="text" class="form-control" value="@Model.FEATURED" placeholder="Tính năng nổi bật">
                                 </div>
                             </div>
                             <div class="row">
@@ -281,7 +319,7 @@
                             <div class="row">
                                 <div class="col-xs-4 form-group">
                                     <label>Chi tiết kỹ thuật</label>
-                                    <textarea style="max-width:400px; height: 130px;" name="DESCRIPTION_1" class="form-control" placeholder="Chi tiết kỹ thuật..."></textarea>
+                                    <textarea style="max-width:400px; height: 130px;" name="DESCRIPTION_1" class="form-control" placeholder="Chi tiết kỹ thuật...">@Model.DESCRIPTION</textarea>
                                 </div>
                                 <div class="col-xs-4 form-group">
                                     <label>Hình ảnh sản phẩm</label>
@@ -305,10 +343,10 @@
                                 </div>
                                 <div class="col-xs-4 form-group">
                                     <label>Files đính kèm</label>
-                                    <input type="file" class="form-group" id="btnAvatar_In" name="fileUpload_1" value="Chọn hình..." style="height: 33px;width: 300px; ">
+                                    <input type="file" class="form-group" id="btnAvatar_In" name="fileUpload_1" value="@m_PRODUCT.GetFile1(@Model.PRODUCT_ID)" style="height: 33px;width: 300px; ">
                                     <input type="file" class="form-group" id="btnAvatar_In" name="fileUpload_2" value="Chọn hình..." style="height: 33px;width: 300px; ">
                                     <input type="file" class="form-group" id="btnAvatar_In" name="fileUpload_3" value="Chọn hình..." style="height: 33px;width: 300px; ">
-                                    <button type="submit" class="btn btn-success btn-block">THÊM MỚI</button>
+                                    <button type="submit" class="btn btn-primary btn-block">CẬP NHẬT</button>
                                 </div>
 
                             </div>
@@ -323,8 +361,73 @@
 <div class="clearfix"></div>
 
 @section masterjs{
-    <link rel="stylesheet/less" type="text/css" href="~/Content/Admin_Layout/css/products.less">
+    <style>
+        .fb-share-button {
+            transform: scale(1.5);
+            -ms-transform: scale(1.5);
+            -webkit-transform: scale(1.5);
+            -o-transform: scale(1.5);
+            -moz-transform: scale(1.6);
+            transform-origin: top left;
+            -ms-transform-origin: top left;
+            -webkit-transform-origin: top left;
+            -moz-transform-origin: top left;    
+            -webkit-transform-origin: top left;
+            margin-bottom: 10px;
+        }
+        .shape {
+            border-style: solid;
+            border-width: 0 70px 60px 0;
+            float: right;
+            height: 0px;
+            width: 0px;
+            -ms-transform: rotate(360deg); /* IE 9 */
+            -o-transform: rotate(360deg); /* Opera 10.5 */
+            -webkit-transform: rotate(360deg); /* Safari and Chrome */
+            transform: rotate(360deg);
+        }
 
+        .offer {
+            background: #fff;
+            border: 1px solid #ddd;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            margin: 15px 0;
+            overflow: hidden;
+        }
+
+        .offer-radius {
+            border-radius: 7px;
+        }
+
+        .offer-danger {
+            
+        }
+
+            .offer-danger .shape {
+                border-color: transparent #FED208 transparent transparent;
+            }
+        .shape-danger {
+            border-color: transparent #d9534f transparent transparent !important;
+        }
+        .shape-text {
+            color: red;
+            font-size: 16px;
+            font-weight: bold;
+            position: relative;
+            right: -40px;
+            top: 2px;
+            white-space: nowrap;
+            -ms-transform: rotate(30deg); /* IE 9 */
+            -o-transform: rotate(360deg); /* Opera 10.5 */
+            -webkit-transform: rotate(30deg); /* Safari and Chrome */
+            transform: rotate(30deg);
+        }
+        .shape-danger .shape-text {
+            color: white;
+        } .offer-content {
+            padding: 0 20px 10px;
+        }
+    </style>
     <style>
         .divider {
             border: 1px solid #FED208;
@@ -340,6 +443,7 @@
 
                 .product-rating {
                     width: 120px;
+                    padding-top: 5px;
                 }
 
                 .product-title {
@@ -448,8 +552,6 @@
         }
 
         .col-item {
-            border: 1px solid #E1E1E1;
-            border-radius: 5px;
             background: #FFF;
         }
 
@@ -594,6 +696,15 @@
 
 }
 @section footerjs{
+<div id="fb-root"></div>
+<script>
+(function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.6&appId=1454298961531347";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 
     <script>
         function resetImage(input) {

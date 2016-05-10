@@ -328,6 +328,151 @@ namespace TGMCO.Controllers.ADMINCONTROLLER
                 return RedirectToAction("Http404", "Error"); // 404
             }
         }
+        [HttpPost]
+        public ActionResult Update(int id, FormCollection collection, HttpPostedFileBase Image, HttpPostedFileBase Image_1, HttpPostedFileBase Image_2,
+            HttpPostedFileBase fileUpload_1, HttpPostedFileBase fileUpload_2, HttpPostedFileBase fileUpload_3)
+        {
+            try
+            {
+                m_PRODUCT = db.PRODUCTS.Find(id);
+                m_PRODUCT_IMAGES = db.PRODUCT_IMAGES.Where(n => n.PRODUCT_ID == id).SingleOrDefault();
+                m_PRODUCT_FILES = db.PRODUCT_FILES.Where(n => n.PRODUCT_ID == id).SingleOrDefault();
+                string _Temp = m_PRODUCT.PRODUCT_CODE;
+                m_PRODUCT.PRODUCT_CODE = collection.Get("PRODUCT_CODE").ToString();
+                if (db.PRODUCTS.Where(n => n.PRODUCT_CODE.Equals(m_PRODUCT.PRODUCT_CODE)).Count() == 0 || _Temp.Equals(m_PRODUCT.PRODUCT_CODE))
+                {
+                    m_PRODUCT.PRODUCT_NAME = collection.Get("PRODUCT_NAME").ToString();
+                    if (!string.IsNullOrEmpty(collection.Get("SUPPLIER_ID").ToString()))
+                    {
+                        if (!string.IsNullOrEmpty(collection.Get("CATEGORY_ID").ToString()))
+                        {
+                            m_PRODUCT.SUPPLIER_ID = Int32.Parse(collection.Get("SUPPLIER_ID").ToString());
+                            m_PRODUCT.CATEGORY_ID = Int32.Parse(collection.Get("CATEGORY_ID").ToString());
+                            if (!string.IsNullOrEmpty(collection.Get("CATEGORY_EXTRA_ID").ToString()))
+                                m_PRODUCT.CATEGORY_EXTRA_ID = Int32.Parse(collection.Get("CATEGORY_EXTRA_ID").ToString());
+                            m_PRODUCT.UNIT_PRICE = decimal.Parse(collection.Get("UNIT_PRICE").ToString());
+                            m_PRODUCT.UNIT = collection.Get("UNIT").ToString();
+                            m_PRODUCT.WARRANTY = collection.Get("WARRANTY").ToString();
+                            m_PRODUCT.WEIGHT = collection.Get("WEIGHT").ToString();
+                            m_PRODUCT.MADE_IN = collection.Get("MADE_IN").ToString();
+                            m_PRODUCT.FEATURED = collection.Get("FEATURED").ToString();
+                            m_PRODUCT.ACCESSORIES = collection.Get("ACCESSORIES").ToString();
+                            m_PRODUCT.DESCRIPTION = collection.Get("DESCRIPTION_1").ToString();
+                            m_PRODUCT.IDX = int.Parse(collection.Get("IDX").ToString());
+                            if (collection.GetValue("IsActive") != null)
+                            {
+                                m_PRODUCT.IS_ACTIVE = true;
+                            }
+                            else
+                            {
+                                m_PRODUCT.IS_ACTIVE = false;
+                            }
+                            if (collection.GetValue("IsStill") != null)
+                            {
+                                m_PRODUCT.IS_STILL = true;
+                            }
+                            else
+                            {
+                                m_PRODUCT.IS_STILL = false;
+                            }
+                            if (collection.GetValue("IsNew") != null)
+                            {
+                                m_PRODUCT.IS_NEW = true;
+                            }
+                            else
+                            {
+                                m_PRODUCT.IS_NEW = false;
+                            }
+                            db.SaveChanges();
+
+                            #region UPLOAD IMAGE
+                            //Upload File
+                            if (Image != null)
+                            {
+                                m_PRODUCT_IMAGES.PRODUCT_ID = m_PRODUCT.PRODUCT_ID;
+                                string _fileNameRandom = m_STRING_RANDOM_IMAGE.RandomString();
+                                m_PRODUCT_IMAGES.IMAGE_1 = "~/Images/PRODUCTS/" + _fileNameRandom + Image.FileName;
+                                string _path = Path.Combine(Server.MapPath("~/Images/PRODUCTS/" + _fileNameRandom + Image.FileName));
+                                Image.SaveAs(_path);
+                            }
+
+                            if (Image_1 != null)
+                            {
+                                m_PRODUCT_IMAGES.PRODUCT_ID = m_PRODUCT.PRODUCT_ID;
+                                string _fileNameRandom = m_STRING_RANDOM_IMAGE.RandomString();
+                                m_PRODUCT_IMAGES.IMAGE_2 = "~/Images/PRODUCTS/" + _fileNameRandom + Image.FileName;
+                                string _path = Path.Combine(Server.MapPath("~/Images/PRODUCTS/" + _fileNameRandom + Image.FileName));
+                                Image.SaveAs(_path);
+                            }
+
+                            if (Image_2 != null)
+                            {
+                                m_PRODUCT_IMAGES.PRODUCT_ID = m_PRODUCT.PRODUCT_ID;
+                                string _fileNameRandom = m_STRING_RANDOM_IMAGE.RandomString();
+                                m_PRODUCT_IMAGES.IMAGE_3 = "~/Images/PRODUCTS/" + _fileNameRandom + Image.FileName;
+                                string _path = Path.Combine(Server.MapPath("~/Images/PRODUCTS/" + _fileNameRandom + Image.FileName));
+                                Image.SaveAs(_path);
+
+                            }
+                            #endregion
+
+                            #region UPLOAD FILES
+                            //Upload File
+                            if (fileUpload_1 != null)
+                            {
+                                m_PRODUCT_FILES.PRODUCT_ID = m_PRODUCT.PRODUCT_ID;
+                                string _fileNameRandom = m_STRING_RANDOM_IMAGE.RandomString();
+                                m_PRODUCT_FILES.FILE_1 = "~/FilesUpload/PRODUCTS/" + _fileNameRandom + "-" + fileUpload_1.FileName;
+                                string _path = Path.Combine(Server.MapPath("~/FilesUpload/PRODUCTS/" + _fileNameRandom + "-" + fileUpload_1.FileName));
+                                fileUpload_1.SaveAs(_path);
+
+                            }
+
+                            if (fileUpload_2 != null)
+                            {
+                                m_PRODUCT_FILES.PRODUCT_ID = m_PRODUCT.PRODUCT_ID;
+                                string _fileNameRandom = m_STRING_RANDOM_IMAGE.RandomString();
+                                m_PRODUCT_FILES.FILE_2 = "~/FilesUpload/PRODUCTS/" + _fileNameRandom + "-" + fileUpload_2.FileName;
+                                string _path = Path.Combine(Server.MapPath("~/FilesUpload/PRODUCTS/" + _fileNameRandom + "-" + fileUpload_2.FileName));
+                                fileUpload_2.SaveAs(_path);
+                            }
+
+                            if (fileUpload_3 != null)
+                            {
+                                m_PRODUCT_FILES.PRODUCT_ID = m_PRODUCT.PRODUCT_ID;
+                                string _fileNameRandom = m_STRING_RANDOM_IMAGE.RandomString();
+                                m_PRODUCT_FILES.FILE_3 = "~/FilesUpload/PRODUCTS/" + _fileNameRandom + "-" + fileUpload_3.FileName;
+                                string _path = Path.Combine(Server.MapPath("~/FilesUpload/PRODUCTS/" + _fileNameRandom + "-" + fileUpload_3.FileName));
+                                fileUpload_3.SaveAs(_path);
+                            }
+                            #endregion
+
+                            db.SaveChanges();
+
+                            TempData["SuccessCreate"] = "Cập nhật thành công sản phẩm mã: " + m_PRODUCT.PRODUCT_CODE + ".";
+                            return RedirectToAction("Update", "ManagingProducts", FormMethod.Get);
+                        }
+                        else
+                        {
+                            TempData["ErrorCreate"] = "Chưa chọn danh mục sản phẩm.";
+                        }
+                    }
+                    else
+                    {
+                        TempData["ErrorCreate"] = "Chưa chọn nhà cung cấp.";
+                    }
+                }
+                else
+                {
+                    TempData["ErrorCreate"] = "Mã sản phẩm đã tồn tại.";
+                }
+                return RedirectToAction("Update", "ManagingProducts", FormMethod.Get);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Http404", "Error"); // 404
+            }
+        }
         /// <summary>
         /// 
         /// </summary>
