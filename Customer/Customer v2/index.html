@@ -27,6 +27,10 @@
       <link rel="stylesheet" type="text/css" href="css/startup.css">
 
       <link rel="stylesheet" type="text/css" href="css/animate.css">
+
+      <link rel="stylesheet" href="css/style.css">
+
+
       <!-- FONT + ICON -->
       <link rel="font" type="font" href="font/glyphicons-halflings-regular.woff">
       <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
@@ -38,7 +42,7 @@
       <script src="js/myjs.js"></script>
       <script src="js/home-menu.js"></script>
       <script src="js/right-content.js"></script>
-      <script src="js/news.js"></script>
+
       <!-- END INCLUDE -->
       <title>TRANG CHỦ</title>
     </head>
@@ -303,72 +307,38 @@
         <div id="Center-Content">
           
           <div id="Top-Center-Content">
-          <h4>NHÀ CUNG CẤP</h4>
-            <a href="#"><img src="img/stanley-logo.gif" width="160"></a>
-
-            <a href="#"><img src="img/dewalt-logo.png" width="160"></a>
-            <a href="#"><img src="img/black-logo.jpg" width="160"></a>
-            <a href="makita.html"><img src="img/makita-logo.jpg" width="160"></a>
-            <a href="#"><img src="img/bosch-logo.jpg" width="160"></a>
+            <a href="#"><img class="Logo-Suppliers" src="img/stanley-logo.gif"></a>
+            <a href="#"><img class="Logo-Suppliers" src="img/stanley-logo.gif"></a>
+            <a href="#"><img class="Logo-Suppliers" src="img/dewalt-logo.png"></a>
+            <a href="#"><img class="Logo-Suppliers" src="img/black-logo.jpg"></a>
+            <a href="makita.html"><img class="Logo-Suppliers" src="img/makita-logo.jpg"></a>
+            <a href="#"><img class="Logo-Suppliers" src="img/bosch-logo.jpg"></a>
           </div>
+
           <div id="Main-Center-Content">
-            
-            <div id="Main-Center-Content-News" class="news-holder cf">
-            <h5>TIN TỨC KHUYẾN MÃI</h5>
-              <ul class="news-headlines">
-                <li class="selected">Khuyến mãi + Thưởng <br> (19/01/2015)</li>
-                <li>Giảm giá hot nhất năm <br> (16/02/2015)</li>
-                <li>Mua 1 tặng 1 <br> (11/01/2015)</li>
-                <li>Mua hàng trả góp 0 % <br> (01/02/2015)</li>
-                <li>Khai trương cửa hàng tặng 10 phần quà <br> (08/06/2016)</li>
-                <!-- li.highlight gets inserted here -->
-              </ul>
 
-              <div class="news-preview">
+<div class="Contact-Info pull-left">
+  <div class="Title-Contact-Info"><strong>HỖ TRỢ TRỰC TUYẾN </strong></div>
 
-                <div class="news-content top-content">
-                  <img src="img/sales.jpg">
-                  <p><a href="#">Khuyến mãi + Thưởng</a></p>
+</div>
 
-                  <p>- Thời gian: 16/02/2015</p>
-                  <p>- Nội dung: Giảm giá tất cả mặt hàng...aaaaa <a href="#">xem chi tiết...</a></p>
-                </div><!-- .news-content -->
+<section id="slider" class="container-slides pull-right">
+    <ul class="slider-wrapper">
+    <li class="current-slide">
+      <img src="img/s2.jpg" title="" alt="">
+    </li>
 
-                <div class="news-content">
-                  <img src="img/sales2.jpg">
-                  <p><a href="#">Giảm giá hot nhất năm</a></p>
+    <li>
+      <img src="img/s1.jpg" title="" alt="">
+    </li>
 
-                  <p>- Thời gian: 11/01/2015</p>
-                  <p>- Nội dung: Giảm giá tất cả mặt hàng... <a href="#">xem chi tiết...</a></p>
-                </div><!-- .news-content -->
-
-                <div class="news-content">
-                  <img src="img/sales.jpg">
-                  <p><a href="#">Mua 1 tặng 1</a></p>
-
-                  <p>- Thời gian: 01/02/2015</p>
-                  <p>- Nội dung: Giảm giá tất cả mặt hàng... <a href="#">xem chi tiết...</a></p>
-                </div><!-- .news-content -->
-
-                <div class="news-content">
-                  <img src="img/sales2.jpg">
-                  <p><a href="#">Mua hàng trả góp 0 % </a></p>
-
-                  <p>- Thời gian: 08/06/2016</p>
-                  <p>- Nội dung: Giảm giá tất cả mặt hàng... <a href="#">xem chi tiết...</a></p>
-                </div><!-- .news-content -->
-
-                <div class="news-content">
-                  <img src="img/sales.jpg">
-                  <p><a href="#">Khai trương cửa hàng tặng 10 phần quà </a></p>
-
-                  <p>- Thời gian: 05/11 đến hết 31/12/2014</p>
-                  <p>- Nội dung: Giảm giá tất cả mặt hàng... <a href="#">xem chi tiết...</a></p>
-                </div><!-- .news-content -->
-              
-              </div><!-- .news-preview -->
-
-            </div><!-- .news-holder -->
+    <li>
+      <img src="img/s3.jpg" title="" alt="">
+    </li>
+    </ul>
+    <!-- Sombras -->
+    
+  </section>
           </div>
 
           <div id="Slides-Center-Content">
@@ -875,6 +845,6 @@
       </script>
 
       <script lang="javascript">(function() {var pname = ( (document.title !='')? document.title : document.querySelector('meta[property="og:title"]').getAttribute('content') );var ga = document.createElement('script'); ga.type = 'text/javascript';ga.src = '//live.vnpgroup.net/js/web_client_box.php?hash=68d46082ba3e9658febe7e66bbafeefa&data=eyJoYXNoIjoiMTI0ZTVhOWQ4MTk0MDNjNTdjZjFkYThmMTdhM2FjYWIiLCJzc29faWQiOjM3MzQwNzZ9&pname='+pname;var s = document.getElementsByTagName('script');s[0].parentNode.insertBefore(ga, s[0]);})();</script><noscript><a href="http://www.vatgia.com" title="vatgia.com" target="_blank">Tài trợ bởi vatgia.com</a></noscript><noscript><a href="http://vchat.vn" title="vchat.vn" target="_blank">Phát triển bởi vchat.vn</a></noscript>  
-
+<script src="js/index.js"></script>
   </body>
 </html>

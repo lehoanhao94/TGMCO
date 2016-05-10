@@ -5,3 +5,21 @@
     margin-right: auto;
     height: auto;
 }
+
+.Logo-Suppliers{
+  width: 135px;
+}
+
+.Contact-Info{
+  width: 186px;
+  height: 188px;
+  background: #353D47;
+  border: 1px solid #2E353E;
+}
+
+.Title-Contact-Info{
+  background-color: #FED208;
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
