@@ -1,0 +1,37 @@
+﻿@using TGMCO.Models;
+
+@{
+    USER m_USER = (USER)Session["SS_USER"];
+    USER_PROFILES m_USER_PROFILES = (USER_PROFILES)Session["SS_USER_PROFILE"];
+}
+
+@{
+    if (m_USER == null)
+    {
+        <a href="#Login-Register" class="btn" data-toggle="modal"><strong>ĐĂNG KÝ / ĐĂNG NHẬP</strong></a>
+    }
+    else
+    {
+        <div class="dropdown">
+            <a href="#" data-toggle="dropdown" class="btn"><strong>Xin chào, @m_USER_PROFILES.FULL_NAME <span class="caret"></span></strong></a>
+            <ul class="dropdown-menu user-dropdown">
+                <li><a href="#">Thông tin cá nhân </a></li>
+                <li><a href="#">Lịch sử mua hàng</a></li>
+                <li class="divider"></li>
+                <li><a href="/User/Logout"><span class="glyphicon glyphicon-log-out"></span> Đăng xuất</a></li>
+            </ul>
+        </div>
+    }
+}
+
+<style>
+    .user-dropdown {
+        width: 100%;
+    }
+    .user-dropdown li a{
+        color: black !important;
+    }
+</style>
+
+
+

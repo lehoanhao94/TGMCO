@@ -1,0 +1,135 @@
+﻿@using TGMCO.Models.Entity;
+@using TGMCO.Models;
+
+@model List<PRODUCT>
+
+@{
+    SUPPLIER m_SUPPLIER = (SUPPLIER)ViewBag.Supplier;
+    ProductModel m_PRODUCT = new ProductModel();
+}
+
+@{
+    if (Session["SUPPLIER"].ToString().Equals("MAKITA"))
+    {
+        <style>
+            .Top-New-Product div, .btnShopNow {
+                background-color: #018A9C !important;
+            }
+
+            .row-product {
+                border: 2px solid #018A9C !important;
+            }
+            .btnShopNow:hover {
+                background-color: #084C51 !important;
+            }
+            .Top-New-Product{
+                color: white;
+            }
+        </style>
+    }
+}
+
+@if (@Model != null)
+{
+    <div class="Stanley-Center">
+        <div class="row row-product">
+            <div class="Top-New-Product">
+                <div class="col-md-9">
+                    <h3><strong>@ViewBag.TITLE</strong></h3>
+                </div>
+                <div class="col-md-3">
+                    <!-- Controls -->
+                    <div class="controls pull-right hidden-xs">
+                        <a class="left fa fa-chevron-left btn btn-success" href="#carousel-@m_SUPPLIER.SUPPLIER_ID" data-slide="prev"></a>
+                        <a class="right fa fa-chevron-right btn btn-success" href="#carousel-@m_SUPPLIER.SUPPLIER_ID" data-slide="next"></a>
+                    </div>
+                </div>
+            </div>
+            <div id="carousel-@m_SUPPLIER.SUPPLIER_ID" class="carousel slide hidden-xs" data-ride="carousel">
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <div class="row">
+                            @{
+    for (int i = 0; i < 4; i++)
+    {
+        <div class="col-sm-3">
+            <div class="col-item">
+                <div class="shape">
+                    <div class="shape-text">
+                        Mới
+                    </div>
+                </div>
+                <div class="photo">
+                    <img id="Image-Product" src="@Url.Content(@m_PRODUCT.GetImage1(Model[i].PRODUCT_ID))" class="img-responsive" alt="@Model[i].PRODUCT_NAME" title="@Model[i].PRODUCT_NAME" />
+                </div>
+                <div class="info">
+                    <div class="Name-Product">
+                        <h5>@Model[i].PRODUCT_NAME</h5>
+                    </div>
+                    <div class="Price-Product">
+                        <h5 class="price-text-color">
+                            <strong>Giá: </strong>
+                            @string.Format("{0:0,0}", @Model[i].UNIT_PRICE) VND
+                        </h5>
+                    </div>
+                    <div class="separator">
+                        <button type="button" class="btn btn-default btnShopNow" aria-label="Left Align">
+                            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> <strong>Thêm vào giỏ</strong>
+                        </button>
+                    </div>
+                    <div class="clearfix">
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+                            }
+
+
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="row">
+                            @{
+    for (int i = 4; i < 8; i++)
+    {
+        <div class="col-sm-3">
+            <div class="col-item">
+                <div class="shape">
+                    <div class="shape-text">
+                        Mới
+                    </div>
+                </div>
+                <div class="photo">
+                    <img id="Image-Product" src="@Url.Content(@m_PRODUCT.GetImage1(Model[i].PRODUCT_ID))" class="img-responsive" alt="@Model[i].PRODUCT_NAME" title="@Model[i].PRODUCT_NAME" />
+                </div>
+                <div class="info">
+                    <div class="Name-Product">
+                        <h5>@Model[i].PRODUCT_NAME</h5>
+                    </div>
+                    <div class="Price-Product">
+                        <h5 class="price-text-color">
+                            <strong>Giá: </strong>
+                            @string.Format("{0:0,0}", @Model[i].UNIT_PRICE) VND
+                        </h5>
+                    </div>
+                    <div class="separator">
+                        <button type="button" class="btn btn-default btnShopNow" aria-label="Left Align">
+                            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> <strong>Thêm vào giỏ</strong>
+                        </button>
+                    </div>
+                    <div class="clearfix">
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

@@ -42,7 +42,6 @@ namespace TGMCO.Models
         public DbSet<PRODUCT> PRODUCTS { get; set; }
         public DbSet<SHIPPER> SHIPPERS { get; set; }
         public DbSet<SUPPLIER> SUPPLIERS { get; set; }
-        public DbSet<sysdiagram> sysdiagrams { get; set; }
         public DbSet<TECHNOLOGy> TECHNOLOGIES { get; set; }
         public DbSet<USER_PROFILES> USER_PROFILES { get; set; }
         public DbSet<USER> USERS { get; set; }

@@ -19,7 +19,6 @@
         <EntityTypeShape EntityType="TGMCOModel.PRODUCT" Width="1.5" PointX="4.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TGMCOModel.SHIPPER" Width="1.5" PointX="8.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TGMCOModel.SUPPLIER" Width="1.5" PointX="6.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TGMCOModel.sysdiagram" Width="1.5" PointX="8.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TGMCOModel.TECHNOLOGy" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TGMCOModel.USER_PROFILES" Width="1.5" PointX="10.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TGMCOModel.USER" Width="1.5" PointX="10.75" PointY="7.75" IsExpanded="true" />

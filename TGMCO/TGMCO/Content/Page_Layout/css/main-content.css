@@ -1,0 +1,40 @@
+#Main-Content{
+    margin-top: 45px;
+    width: 1336px;
+    margin-left: auto;
+    margin-right: auto;
+    height: auto;
+}
+
+.Logo-Suppliers{
+  width: 136px;
+  height: 79px;
+}
+
+.Contact-Info{
+  width: 186px;
+  height: 188px;
+  background: #353D47;
+  border: 1px solid #2E353E;
+}
+
+.Title-Contact-Info{
+  background-color: #FED208;
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.Panel-Center{
+  height: 200px;
+}
+
+.Stanley-Center{
+  height: auto;
+  width: 100%;
+}
+
+.Stanley-Center .row{
+  margin-right: 0;
+  margin-left: 0;
+}

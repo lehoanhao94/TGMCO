@@ -1,0 +1,44 @@
+﻿@{
+    if (Session["SUPPLIER"].ToString().Equals("MAKITA"))
+    {
+        <style>
+            #Main-Menu, #vgc_bc_off, .vgc_control_send {
+                background-color: #018A9C !important;
+            }
+
+            #Register .btn {
+                color: white !important;
+            }
+            
+        </style>
+    }
+}
+
+
+<div class="container">
+    <!-- LOGO-->
+    <div id="Logo">
+        <a href=""><img src="~/Content/Page_Layout/img/logo.png" alt="LOGO"></a>
+    </div>
+    <div id="btnHome">
+        <a href="index.html"><button class="btn" data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-home"></span></button></a>
+    </div>
+    <!-- SEARCH BOX-->
+    <div class="search input-group" role="search" id="Search">
+        <input type="search" class="form-control" placeholder="Nhập tên sản phẩm hoặc mã sản phẩm..." />
+        <span class="input-group-btn">
+            <button id="btnSearch" class="btn btn-default" type="button">
+                <span class="glyphicon glyphicon-search"></span>
+                <span class="sr-only">Search</span>
+            </button>
+        </span>
+    </div>
+    <!-- SHOPPING CART-->
+    <div id="Shopping-Cart">
+        @Html.Partial("~/Views/Partial/ShoppingCart.cshtml")
+    </div>
+    <!-- REGISTER & LOGIN-->
+    <div id="Register">
+        @Html.Partial("~/Views/User/Login.cshtml")
+    </div>
+</div>

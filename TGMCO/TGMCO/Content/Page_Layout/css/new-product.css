@@ -1,0 +1,205 @@
+#Image-Product{
+	height: 210px;
+	width: 196px;
+}
+.Top-New-Product{
+		height: 40px;
+}
+.Top-New-Product div{
+	background-color: #FED208;
+	height: 40px;
+}
+
+.row-product .carousel{
+	width: 100% !important;
+}
+
+.row-product .carousel .col-sm-3{
+    padding-left: 2px;
+    padding-right: 2px;
+    }
+
+.Top-New-Product .col-md-3{
+	-webkit-border-top-right-radius: 20px;
+	-webkit-border-top-right-radius: 100px;
+	-moz-border-radius: 20px;
+	-moz-border-radius-topright: 100px;
+	border-top-right-radius: 100px;
+}
+
+.Top-New-Product .col-md-3 .controls{
+	margin-top: 5px;
+	margin-right: 30px;
+	height: 35px;
+	}
+
+.Top-New-Product .col-md-3 .controls .btn-success{
+	background-color: #F37232;
+	border-color: white;
+}
+
+.Top-New-Product .col-md-3 .controls .btn-success:hover{
+	background-color: #084C51;
+}
+.Top-New-Product div h3{
+		margin-top: 15px;
+		margin-bottom: 3px;
+		font-size: 15px;
+}
+
+.row-product{
+	width: 100% !important;
+	border: 2px solid #FED208 ;
+	-webkit-border-radius: 20px;
+	-webkit-border-top-right-radius: 50px;
+	-moz-border-radius: 20px;
+	-moz-border-radius-topright: 50px;
+	border-top-right-radius: 50px;
+}
+
+.col-item
+{
+    border: 1px solid #E1E1E1;
+    border-radius: 5px;
+    background: #FFF;
+}
+.col-item .photo img
+{
+    margin: 0 auto;
+    width: 100%;
+}
+
+.col-item .info
+{
+    padding: 10px;
+    border-radius: 0 0 5px 5px;
+    margin-top: 1px;
+}
+
+.col-item:hover .info {
+    background-color: #F5F5DC;
+}
+.col-item .price
+{
+    /*width: 50%;*/
+    float: left;
+    margin-top: 5px;
+}
+
+.col-item .price h5
+{
+    line-height: 20px;
+    margin: 0;
+}
+
+.price-text-color
+{
+    color: #219FD1;
+}
+
+.col-item .info .rating
+{
+    color: #777;
+}
+
+.col-item .rating
+{
+    /*width: 50%;*/
+    float: left;
+    font-size: 17px;
+    text-align: right;
+    line-height: 52px;
+    margin-bottom: 10px;
+    height: 52px;
+}
+
+.col-item .separator
+{
+    border-top: 1px solid #E1E1E1;
+    text-align: center;
+}
+
+.btnShopNow{
+	width: 100%;
+	background-color: #FED208;
+}
+
+.btnShopNow:focus, .btnShopNow:hover{
+	background-color: #F37232;
+}
+
+.clear-left
+{
+    clear: left;
+}
+
+.col-item .separator p
+{
+    line-height: 20px;
+    margin-bottom: 0;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.col-item .separator p i
+{
+    margin-right: 5px;
+}
+.col-item .btn-add
+{
+    width: 100%;
+}
+
+.col-item .btn-add
+{
+    border-right: 1px solid #E1E1E1;
+}
+
+.col-item .btn-details
+{
+    width: 50%;
+    float: left;
+    padding-left: 10px;
+}
+.controls
+{
+    margin-top: 20px;
+}
+[data-slide="prev"]
+{
+    margin-right: 10px;
+}
+
+
+.shape {
+            border-style: solid;
+            border-width: 0 70px 60px 0;
+            right: 2px;
+            height: 0px;
+            width: 0px;
+            -ms-transform: rotate(360deg); /* IE 9 */
+            -o-transform: rotate(360deg); /* Opera 10.5 */
+            -webkit-transform: rotate(360deg); /* Safari and Chrome */
+            transform: rotate(360deg);
+            position: absolute;
+        }     
+
+            .shape {
+                border-color: transparent #E30613 transparent transparent;
+}   
+        .shape-text {
+            color: #FFFFFF;
+            font-size: 16px;
+            font-weight: bold;
+            position: relative;
+            right: -40px;
+            top: 2px;
+            white-space: nowrap;
+            -ms-transform: rotate(30deg); /* IE 9 */
+            -o-transform: rotate(360deg); /* Opera 10.5 */
+            -webkit-transform: rotate(30deg); /* Safari and Chrome */
+            transform: rotate(40deg);
+        }
+        .shape-danger .shape-text {
+            color: white;
+        } 

@@ -47,5 +47,18 @@ namespace TGMCO.Models.Entity
             }
 
         }
+
+        public List<CATEGORIES_EXTRA> GetListCategoryExtra(int id)
+        {
+            try
+            {
+                return db.CATEGORIES_EXTRA.Where(n => n.CATEGORY_ID == id).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
     }
 }

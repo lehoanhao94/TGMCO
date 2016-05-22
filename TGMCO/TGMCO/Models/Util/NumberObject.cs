@@ -67,8 +67,9 @@ namespace TGMCO.Models
         {
             try
             {
-                List<PRODUCT> _lstProduct = db.PRODUCTS.ToList();
-                return _lstProduct.Count;
+                //List<PRODUCT> _lstProduct = db.PRODUCTS.ToList();
+                //return _lstProduct.Count;
+                return 1;
             }
             catch (Exception ex)
             {

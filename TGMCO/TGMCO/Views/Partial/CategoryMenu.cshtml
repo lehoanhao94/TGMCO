@@ -1,0 +1,59 @@
+﻿@using TGMCO.Models.Entity;
+@using TGMCO.Models;
+
+@model List<CATEGORIES_BY_SUPPLIER>
+
+
+@{
+    CategoryModel m_CATEGORY = new CategoryModel();
+}
+
+@{
+    if(Session["SUPPLIER"].ToString().Equals("MAKITA"))
+    {
+        <style>
+            .brand {
+                background-color: #018A9C !important;
+                color: white !important;
+            }
+            .nav-side-menu li:hover {
+                border-left: 3px solid #018A9C;
+            }
+        </style>
+    }
+}
+
+<div id="Left-Menu">
+    <div class="nav-side-menu">
+        <div class="brand"><strong> DANH MỤC SẢN PHẨM </strong></div>
+        <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+
+        <div class="menu-list">
+
+            <ul id="menu-content" class="menu-content collapse out">
+                @{
+                    
+                    foreach (var category in Model)
+                    {
+                        List<CATEGORIES_EXTRA> _lstCATEGORY_EXTRA = m_CATEGORY.GetListCategoryExtra(category.CATEGORY_ID);
+                        <li data-toggle="collapse" data-target="#Category_@category.CATEGORY_ID" class="collapsed">
+                            <a><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> @category.CATEGORY_NAME </a>
+                        </li>
+                       
+                        if (_lstCATEGORY_EXTRA != null)
+                        {
+                            <ul class="sub-menu collapse" id="Category_@category.CATEGORY_ID">
+                                @foreach (var category_extra in _lstCATEGORY_EXTRA)
+                                {
+                                    <li><a href="#">@category_extra.CATEGORY_EXTRA_NAME</a></li>
+                                }
+                            </ul>
+                        }
+
+                    }
+                }
+            </ul>
+        </div>
+    </div>
+    <!--END LEFT-MENU-->
+</div>

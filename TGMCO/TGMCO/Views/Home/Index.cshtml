@@ -1,0 +1,100 @@
+﻿@using TGMCO.Models;
+
+@{
+    ViewBag.Title = "Nhà phân phối dụng cụ xây dựng Tuấn Gia Minh";
+    Layout = "~/Views/Shared/_StanleyLayout.cshtml";
+
+    List<SUPPLIER> m_lstSUPPLIERS = (List<SUPPLIER>)ViewBag.Suppliers;
+}
+
+<div id="Top-Center-Content">
+    @{
+        foreach (var supplier in m_lstSUPPLIERS)
+        {
+            <a href="/Home/Supplier/@supplier.SUPPLIER_ID"><img class="Logo-Suppliers" src="@Url.Content(supplier.IMAGE)" alt="@supplier.SUPPLIER_NAME" title="@supplier.SUPPLIER_NAME"></a>
+        }
+    } 
+</div>
+
+<div id="Main-Center-Content">
+
+    <div class="Panel-Center">
+        <div class="fb-page" data-href="https://www.facebook.com/TGM-1036380143099408/" data-width="186" data-height="188" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"></div>
+
+        <section id="slider" class="container-slides pull-right">
+            <ul class="slider-wrapper">
+                <li class="current-slide">
+                    <img src="~/Content/Page_Layout/img/s2.jpg" title="Giới thiệu Tuấn Gia Minh" alt="Giới thiệu Tuấn Gia Minh">
+                </li>
+
+                <li>
+                    <img src="~/Content/Page_Layout/img/s1.jpg" title="Giới thiệu Tuấn Gia Minh" alt="Giới thiệu Tuấn Gia Minh">
+                </li>
+
+                <li>
+                    <img src="~/Content/Page_Layout/img/s3.jpg" title="Giới thiệu Tuấn Gia Minh" alt="Giới thiệu Tuấn Gia Minh">
+                </li>
+            </ul>
+            <!-- Sombras -->
+
+        </section>
+    </div>
+
+    @{
+        foreach (var supplier in m_lstSUPPLIERS)
+        {
+            Html.RenderAction("HotProducts", "Partial", new { id = supplier.SUPPLIER_ID });
+        }      
+    }   
+</div>
+
+<div id="Slides-Center-Content">
+
+    <!--Carousel -->
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+            <div class="item active">
+                <a href="#"><img src="img/stanley.jpg"></a>
+                <div class="carousel-caption">
+
+                </div>
+            </div>
+            <!-- End Item -->
+            <div class="item">
+                <a href="#"><img src="img/dewalt.jpg"></a>
+                <div class="carousel-caption">
+
+                </div>
+            </div>
+            <!-- End Item -->
+            <div class="item">
+                <a href="#"><img src="img/blackandecker.jpg"></a>
+                <div class="carousel-caption">
+                </div>
+            </div>
+            <!-- End Item -->
+            <div class="item">
+                <a href="#"><img src="img/bosch.png"></a>
+                <div class="carousel-caption">
+                </div>
+            </div>
+            <!-- End Item -->
+            <div class="item">
+                <a href="#"><img src="img/makita.jpg"></a>
+                <div class="carousel-caption">
+                </div>
+            </div>
+            <!-- End Item -->
+        </div>
+        <!-- End Carousel Inner -->
+        <ul class="nav nav-pills nav-justified">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"><a href="#"><strong>STANLEY</strong></a></li>
+            <li data-target="#myCarousel" data-slide-to="1"><a href="#"><strong>DEWALT</strong></a></li>
+            <li data-target="#myCarousel" data-slide-to="2"><a href="#"><strong>BLACK & DECKER</strong></a></li>
+            <li data-target="#myCarousel" data-slide-to="3"><a href="#"><strong>BOSCH</strong></a></li>
+            <li data-target="#myCarousel" data-slide-to="4"><a href="#"><strong>MAKITA</strong></a></li>
+        </ul>
+    </div>
+    <!-- End Carousel -->
+</div>

@@ -153,21 +153,13 @@
     <Property Name="IS_STILL" Type="Boolean" Nullable="false" />
     <Property Name="IS_ACTIVE" Type="Boolean" Nullable="false" />
     <Property Name="QUANTITY_SOLD" Type="Int32" Nullable="false" />
-    <Property Name="CAPACITY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="WEIGHT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="DESCRIPTION_1" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
-    <Property Name="DESCRIPTION_2" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
-    <Property Name="DESCRIPTION_3" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
-    <Property Name="DESCRIPTION_4" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
-    <Property Name="DESCRIPTION_5" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
-    <Property Name="DESCRIPTION_6" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
-    <Property Name="DESCRIPTION_7" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
-    <Property Name="DESCRIPTION_8" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
-    <Property Name="DESCRIPTION_9" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
     <Property Name="FEATURED" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
     <Property Name="ACCESSORIES" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
     <Property Name="MADE_IN" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
     <Property Name="UNIT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DESCRIPTION" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="WARRANTY" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="SHIPPER">
     <Key>
@@ -186,16 +178,6 @@
     <Property Name="DESCRIPTION" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
     <Property Name="SUPPLIER_CODE" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
     <Property Name="IMAGE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="sysdiagram">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="TECHNOLOGy">
     <Key>
@@ -246,7 +228,6 @@
     <EntitySet Name="PRODUCTS" EntityType="Self.PRODUCT" />
     <EntitySet Name="SHIPPERS" EntityType="Self.SHIPPER" />
     <EntitySet Name="SUPPLIERS" EntityType="Self.SUPPLIER" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <EntitySet Name="TECHNOLOGIES" EntityType="Self.TECHNOLOGy" />
     <EntitySet Name="USER_PROFILES" EntityType="Self.USER_PROFILES" />
     <EntitySet Name="USERS" EntityType="Self.USER" />

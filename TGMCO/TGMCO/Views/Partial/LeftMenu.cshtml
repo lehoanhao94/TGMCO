@@ -1,0 +1,211 @@
+﻿
+
+
+<div id="Left-Menu">
+    <div class="nav-side-menu">
+        <div class="brand"><strong>MENU </strong></div>
+        <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+
+        <div class="menu-list">
+
+            <ul id="menu-content" class="menu-content collapse out">
+
+                <li data-toggle="collapse" data-target="#gioithieu" class="collapsed">
+                    <a><i class="fa fa-gift fa-lg"></i> GIỚI THIỆU <span class="arrow"></span></a>
+                </li>
+                <ul class="sub-menu collapse" id="gioithieu">
+                    <li><a href="#">Giới thiệu công ty</a></li>
+                    <li><a href="#">Lịch sử hình thành</a></li>
+                    <li><a href="#">Lĩnh vực hoạt động</a></li>
+                    <li><a href="#">Sơ đồ tổ chức</a></li>
+                </ul>
+
+
+                <li data-toggle="collapse" data-target="#tintuc" class="collapsed">
+                    <a><i class="fa fa-globe fa-lg"></i> TIN TỨC <span class="arrow"></span></a>
+                </li>
+                <ul class="sub-menu collapse" id="tintuc">
+                    <li>Tin tức sự kiện</li>
+                    <li>Tin khuyến mãi</li>
+                </ul>
+
+
+                <li data-toggle="collapse" data-target="#huongdan" class="collapsed">
+                    <a><i class="fa fa-globe fa-lg"></i> HƯỚNG DẪN <span class="arrow"></span></a>
+                </li>
+                <ul class="sub-menu collapse" id="huongdan">
+                    <li>Hướng dẫn đăng nhập</li>
+                    <li>Hướng dẫn mua hàng</li>
+                    <li>Hướng dẫn lấy lại mật khẩu</li>
+                </ul>
+
+                <li data-toggle="collapse" data-target="#chinhsach" class="collapsed">
+                    <a><i class="fa fa-globe fa-lg"></i> CHÍNH SÁCH <span class="arrow"></span></a>
+                </li>
+                <ul class="sub-menu collapse" id="chinhsach">
+                    <li>Chính sách bảo mật</li>
+                    <li>Chính sách vận chuyển</li>
+                    <li>Quy trình giao hàng</li>
+                    <li>Chính sách đổi trả hàng </li>
+                </ul>
+            </ul>
+        </div>
+    </div>
+    <!--END LEFT-MENU-->
+</div>
+<!-- DANH MỤC SP-->
+<div id="Left-Menu">
+    <div class="nav-side-menu">
+        <div class="brand"><strong> DANH MỤC SẢN PHẨM </strong></div>
+        <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+
+        <div class="menu-list">
+
+            <ul id="menu-content" class="menu-content collapse out">
+
+                <li data-toggle="collapse" data-target="#products" class="collapsed">
+                    <a><i class="fa fa-gift fa-lg"></i> NHÀ SẢN XUẤT <span class="arrow"></span></a>
+                </li>
+                <ul class="sub-menu collapse" id="products">
+                    <li><a href="#">Stanley</a></li>
+                    <li><a href="#">Dewalt</a></li>
+                    <li><a href="#">Black and decker</a></li>
+                    <li><a href="#">Bosch</a></li>
+                    <li><a href="makita.html">Makita</a></li>
+                </ul>
+
+
+                <li data-toggle="collapse" data-target="#service" class="collapsed">
+                    <a><i class="fa fa-globe fa-lg"></i> DỤNG CỤ ĐIỆN <span class="arrow"></span></a>
+                </li>
+                <ul class="sub-menu collapse" id="service">
+                    <li>Máy khoan</li>
+                    <li>Máy mài</li>
+                    <li>Máy cưa</li>
+                    <li>Máy cắt </li>
+                    <li>Máy bào</li>
+                </ul>
+
+
+                <li data-toggle="collapse" data-target="#abc" class="collapsed">
+                    <a><i class="fa fa-globe fa-lg"></i> PHỤ KIỆN <span class="arrow"></span></a>
+                </li>
+                <ul class="sub-menu collapse" id="abc">
+                    <li>Lưỡi cưa</li>
+                    <li>Mũi khoan</li>
+                </ul>
+
+                <li data-toggle="collapse" data-target="#abcd" class="collapsed">
+                    <a><i class="fa fa-globe fa-lg"></i> DỤNG CỤ CẦM TAY <span class="arrow"></span></a>
+                </li>
+                <ul class="sub-menu collapse" id="abcd">
+                    <li>Búa rìu</li>
+                    <li>Cào</li>
+                    <li>Đá cắt</li>
+                    <li>Đá mài </li>
+                    <li>Giấy nháp</li>
+                </ul>
+            </ul>
+        </div>
+    </div>
+    <!--END LEFT-MENU-->
+</div>
+
+@{
+    Html.RenderAction("CategoryMenu", "Partial", new { id = 21 });
+}
+
+<div id="Left-Menu">
+    <div class="nav-side-menu">
+        <div class="brand"><strong> CHI NHÁNH CỬA HÀNG</strong></div>
+        <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+
+        <div class="menu-list">
+
+            <ul id="menu-content" class="menu-content collapse in">
+
+                <li data-toggle="collapse" data-target="#agencies" class="" aria-expanded="true">
+                    <a><i class="fa fa-gift fa-lg"></i> CHI NHÁNH <span class="arrow"></span></a>
+                </li>
+                <ul class="sub-menu collapse in" id="agencies" aria-expanded="true">
+                    <li onmouseover="tooltip.pop(this, '#sub1', {position:1, offsetX:-20, effect:'slide'})"><a href="#">Hà Nội</a></li>
+                    <li onmouseover="tooltip.pop(this, '#sub2', {position:1, offsetX:-20, effect:'slide'})"><a href="#">Đà Nẵng</a></li>
+                    <li onmouseover="tooltip.pop(this, '#sub3', {position:1, offsetX:-20, effect:'slide'})"><a href="#">TP.HCM</a></li>
+                    <li onmouseover="tooltip.pop(this, '#sub4', {position:1, offsetX:-20, effect:'slide'})"><a href="#">Cần Thơ</a></li>
+                </ul>
+            </ul>
+        </div>
+    </div>
+
+    <!--Menu Data-->
+    <div style="display:none;">
+        <div id="sub1">
+            <div class="column">
+                <h4> CHI NHÁNH HÀ NỘI</h4>
+            </div>
+            <div style="clear:both;"></div>
+            <div style="width:250px;margin-top:16px;padding-top:12px;border-top:2px solid #666;">
+            </div>
+            <div>
+                <span class="glyphicon glyphicon-home"></span> 64 Trần Quang Diệu, Q.Đống Đa
+            </div>
+            <div>
+                <span class="glyphicon glyphicon-phone-alt"></span> Điện thoại: 0603.881.882
+            </div>
+            <div>
+                <span class="glyphicon glyphicon-phone-alt"></span> 0603.881.882
+            </div>
+        </div>
+        <div id="sub2">
+            <div class="column">
+                <h4> CHI NHÁNH ĐÀ NẴNG</h4>
+            </div>
+            <div style="clear:both;"></div>
+            <div style="width:250px;margin-top:16px;padding-top:12px;border-top:2px solid #666;">
+            </div>
+            <div>
+                <span class="glyphicon glyphicon-home"></span> 64 Trần Quang Diệu, Q.Đống Đa
+            </div>
+            <div>
+                <span class="glyphicon glyphicon-phone-alt"></span> Điện thoại: 0603.881.882
+            </div>
+            <div>
+                <span class="glyphicon glyphicon-phone-alt"></span> 0603.881.882
+            </div>
+        </div>
+        <div id="sub3">
+            <div class="column">
+                <h4> CHI NHÁNH TP.HCM</h4>
+            </div>
+            <div style="clear:both;"></div>
+            <div style="width:250px;margin-top:16px;padding-top:12px;border-top:2px solid #666;">
+            </div>
+            <div>
+                <span class="glyphicon glyphicon-home"></span> 64 Trần Quang Diệu, Q.Đống Đa
+            </div>
+            <div>
+                <span class="glyphicon glyphicon-phone-alt"></span> Điện thoại: 0603.881.882
+            </div>
+            <div>
+                <span class="glyphicon glyphicon-phone-alt"></span> 0603.881.882
+            </div>
+        </div>
+        <div id="sub4">
+            <div class="column">
+                <h4> CHI NHÁNH CẦN THƠ</h4>
+            </div>
+            <div style="clear:both;"></div>
+            <div style="width:250px;margin-top:16px;padding-top:12px;border-top:2px solid #666;">
+            </div>
+            <div>
+                <span class="glyphicon glyphicon-home"></span> 64 Trần Quang Diệu, Q.Đống Đa
+            </div>
+            <div>
+                <span class="glyphicon glyphicon-phone-alt"></span> Điện thoại: 0603.881.882
+            </div>
+            <div>
+                <span class="glyphicon glyphicon-phone-alt"></span> 0603.881.882
+            </div>
+        </div>
+    </div>
+</div>

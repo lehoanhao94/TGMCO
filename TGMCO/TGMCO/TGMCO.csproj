@@ -198,7 +198,9 @@
     <Compile Include="Controllers\ADMINCONTROLLER\ManagingSuppliersController.cs" />
     <Compile Include="Controllers\ADMINCONTROLLER\ManagingUsersController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PAGECONTROLLER\HomeController.cs" />
+    <Compile Include="Controllers\PAGECONTROLLER\PartialController.cs" />
+    <Compile Include="Controllers\PAGECONTROLLER\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -263,9 +265,6 @@
     <Compile Include="Models\Util\StringCipher.cs" />
     <Compile Include="Models\Util\StringRandom.cs" />
     <Compile Include="Models\SUPPLIER.cs">
-      <DependentUpon>TGMCO.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>TGMCO.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TECHNOLOGy.cs">
@@ -1020,6 +1019,79 @@
     <Content Include="Content\Admin_Layout\plugins\timepicker\bootstrap-timepicker.min.css" />
     <Content Include="Content\Admin_Layout\plugins\timepicker\bootstrap-timepicker.min.js" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\Page_Layout\css\animate.css" />
+    <Content Include="Content\Page_Layout\css\bootstrap-theme.css" />
+    <Content Include="Content\Page_Layout\css\bootstrap-theme.min.css" />
+    <Content Include="Content\Page_Layout\css\bootstrap.min.css" />
+    <Content Include="Content\Page_Layout\css\center-content.css" />
+    <Content Include="Content\Page_Layout\css\footer.css" />
+    <Content Include="Content\Page_Layout\css\left-content.css" />
+    <Content Include="Content\Page_Layout\css\left-menu.css" />
+    <Content Include="Content\Page_Layout\css\login-register.css" />
+    <Content Include="Content\Page_Layout\css\main-content-news.css" />
+    <Content Include="Content\Page_Layout\css\main-content.css" />
+    <Content Include="Content\Page_Layout\css\main-menu.css" />
+    <Content Include="Content\Page_Layout\css\makita.css" />
+    <Content Include="Content\Page_Layout\css\new-product.css" />
+    <Content Include="Content\Page_Layout\css\right-content.css" />
+    <Content Include="Content\Page_Layout\css\shopping-cart.css" />
+    <Content Include="Content\Page_Layout\css\startup.css" />
+    <Content Include="Content\Page_Layout\css\style.css" />
+    <Content Include="Content\Page_Layout\css\sub-menu.css" />
+    <Content Include="Content\Page_Layout\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\Page_Layout\img\banner-makita.jpg" />
+    <Content Include="Content\Page_Layout\img\banner-makita2.jpg" />
+    <Content Include="Content\Page_Layout\img\black-logo.jpg" />
+    <Content Include="Content\Page_Layout\img\blackandecker.jpg" />
+    <Content Include="Content\Page_Layout\img\bosch-logo.jpg" />
+    <Content Include="Content\Page_Layout\img\bosch.png" />
+    <Content Include="Content\Page_Layout\img\cn1.png" />
+    <Content Include="Content\Page_Layout\img\cn2.png" />
+    <Content Include="Content\Page_Layout\img\cn3.png" />
+    <Content Include="Content\Page_Layout\img\cn4.png" />
+    <Content Include="Content\Page_Layout\img\cn5.png" />
+    <Content Include="Content\Page_Layout\img\cn6.png" />
+    <Content Include="Content\Page_Layout\img\dewalt-logo.png" />
+    <Content Include="Content\Page_Layout\img\dewalt.jpg" />
+    <Content Include="Content\Page_Layout\img\lienhequangcao.jpg" />
+    <Content Include="Content\Page_Layout\img\logo.png" />
+    <Content Include="Content\Page_Layout\img\makita-logo.jpg" />
+    <Content Include="Content\Page_Layout\img\Makita-qc.jpg" />
+    <Content Include="Content\Page_Layout\img\makita-test1.jpg" />
+    <Content Include="Content\Page_Layout\img\makita-test1.png" />
+    <Content Include="Content\Page_Layout\img\makita-test2.png" />
+    <Content Include="Content\Page_Layout\img\makita-test3.png" />
+    <Content Include="Content\Page_Layout\img\makita-test4.jpg" />
+    <Content Include="Content\Page_Layout\img\makita.jpg" />
+    <Content Include="Content\Page_Layout\img\product-test.jpg" />
+    <Content Include="Content\Page_Layout\img\product-test2.jpg" />
+    <Content Include="Content\Page_Layout\img\product-test3.jpg" />
+    <Content Include="Content\Page_Layout\img\product-test4.jpg" />
+    <Content Include="Content\Page_Layout\img\product-test5.jpg" />
+    <Content Include="Content\Page_Layout\img\product-test6.jpg" />
+    <Content Include="Content\Page_Layout\img\s1.jpg" />
+    <Content Include="Content\Page_Layout\img\s2.jpg" />
+    <Content Include="Content\Page_Layout\img\s3.jpg" />
+    <Content Include="Content\Page_Layout\img\sales-startup.jpg" />
+    <Content Include="Content\Page_Layout\img\sales-startup.png" />
+    <Content Include="Content\Page_Layout\img\sales.jpg" />
+    <Content Include="Content\Page_Layout\img\sales2.jpg" />
+    <Content Include="Content\Page_Layout\img\stanley-logo.gif" />
+    <Content Include="Content\Page_Layout\img\stanley.jpg" />
+    <Content Include="Content\Page_Layout\img\stl.jpg" />
+    <Content Include="Content\Page_Layout\img\stlh.jpg" />
+    <Content Include="Content\Page_Layout\js\bootstrap.min.js" />
+    <Content Include="Content\Page_Layout\js\home-menu.js" />
+    <Content Include="Content\Page_Layout\js\index.js" />
+    <Content Include="Content\Page_Layout\js\jquery-1.12.2.min.js" />
+    <Content Include="Content\Page_Layout\js\jquery.bootstrap.newsbox.min.js" />
+    <Content Include="Content\Page_Layout\js\myjs.js" />
+    <Content Include="Content\Page_Layout\js\right-content.js" />
+    <Content Include="Content\Page_Layout\js\shopping-cart.js" />
+    <Content Include="Content\Page_Layout\themes\3\bg_ptn.png" />
+    <Content Include="Content\Page_Layout\themes\3\rain-bg.jpg" />
+    <Content Include="Content\Page_Layout\themes\3\tooltip.css" />
+    <Content Include="Content\Page_Layout\themes\3\tooltip.js" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -1106,6 +1178,24 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>TGMCO.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Images\ADMIN\SUPPLIERS\makita1.jpg" />
+    <Content Include="Images\ADMIN\SUPPLIERS\makita2.jpg" />
+    <Content Include="Images\ADMIN\SUPPLIERS\makita3.jpg" />
+    <Content Include="Images\PRODUCTS\ALZUJKWMFR1433494193_dhp45.jpg" />
+    <Content Include="Images\PRODUCTS\EDMZPUYFDE1460008567_sub_product_324x32.png" />
+    <Content Include="Images\PRODUCTS\EEMMSPNGLOENNROGZQUQ149743_147966385336793_1378683679_n.jpg" />
+    <Content Include="Images\PRODUCTS\ESITVLTTHPVYXEMNSJNZ149743_147966385336793_1378683679_n.jpg" />
+    <Content Include="Images\PRODUCTS\GUHFIQBGGD13059900_666473946827239_1825658132_n.jpg" />
+    <Content Include="Images\PRODUCTS\LHSLKDEPMY1435405002_btd147-.jpg" />
+    <Content Include="Images\PRODUCTS\MKUCBQYSAACPMPLDRDFU149743_147966385336793_1378683679_n.jpg" />
+    <Content Include="Images\PRODUCTS\NKFVYIOTVB1460008567_sub_product_324x32.png" />
+    <Content Include="Images\PRODUCTS\OBLZVBCEGYXZVHPMUNKG149743_147966385336793_1378683679_n.jpg" />
+    <Content Include="Images\PRODUCTS\RHACVOEVTFAHMGUTMNOZ149743_147966385336793_1378683679_n.jpg" />
+    <Content Include="Images\PRODUCTS\SGREBCVOKPs1.jpg" />
+    <Content Include="Images\PRODUCTS\UUSFGXEDXU1460008567_sub_product_324x32.png" />
+    <Content Include="Images\PRODUCTS\VCHGDINKOX1460008567_sub_product_324x32.png" />
+    <Content Include="Images\PRODUCTS\YNLOPFUSERBZJWJFUUSW149743_147966385336793_1378683679_n.jpg" />
+    <Content Include="Images\SYSTEM\icon.png" />
     <Content Include="Models\TGMCO.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>TGMCO.edmx</DependentUpon>
@@ -1119,6 +1209,10 @@
       <DependentUpon>TGMCO.edmx</DependentUpon>
       <LastGenOutput>TGMCO.cs</LastGenOutput>
     </Content>
+    <Content Include="Content\Page_Layout\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\Page_Layout\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\Page_Layout\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\Page_Layout\fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\app.min.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -1168,13 +1262,24 @@
     <Content Include="Views\Admin\ManagingOrders.cshtml" />
     <Content Include="Views\ManagingProducts\Update.cshtml" />
     <Content Include="Views\Admin\ManagingAgencies.cshtml" />
+    <Content Include="Views\Shared\_StanleyLayout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Partial\LeftMenu.cshtml" />
+    <Content Include="Views\Partial\MainMenu.cshtml" />
+    <Content Include="Views\Partial\ShoppingCart.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\Partial\HotProducts.cshtml" />
+    <Content Include="Views\Shared\_PageLayout.cshtml" />
+    <Content Include="Views\Partial\CategoryMenu.cshtml" />
+    <Content Include="Views\Partial\VerticalSlider.cshtml" />
+    <Content Include="Views\Partial\LoginRegister.cshtml" />
+    <Content Include="Views\Home\Supplier.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Admin_Layout\dist\img\" />
     <Folder Include="FilesUpload\PRODUCTS\" />
     <Folder Include="Images\ADMIN\CATEGORIES\" />
-    <Folder Include="Images\ADMIN\SUPPLIERS\" />
     <Folder Include="Images\AVATAR\" />
     <Folder Include="Views\ManagingSuppliers\" />
   </ItemGroup>

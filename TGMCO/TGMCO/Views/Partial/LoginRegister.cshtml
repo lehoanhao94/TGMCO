@@ -1,0 +1,130 @@
+﻿<div id="Login-Register" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-6 col-sm-6 no-padng">
+                    <h4 class="modal-title">ĐĂNG NHẬP</h4>
+                    <div class="model-l">
+
+                        <form id="logFrm" class="log-frm" name="logFrm">
+                            <ul>
+                                <li>Tên đăng nhập</li>
+                                <li> <input type="text" placeholder="Nhập tên đăng nhập của bạn" id="userName" name="UserName" required class="form-control"></li>
+                                <li>Mật khẩu</li>
+                                <li><input type="password" placeholder="Nhập mật khẩu của bạn" id="password" name="Password" required class="form-control"></li>
+                                <li><br /><button type="button" id="btnLog" class="btn btn-default">Đăng nhập</button></li>
+                                <div class="sign">
+                                    <li> <font color="red" id="loginFail">  </font></li>
+                                </div>
+                            </ul>
+                        </form>
+                        <div class="clearfix"></div>
+                        <form method="post" id="logFrm1" class="log-frm" name="logFrm1">
+                            <ul>
+                                <li>
+                                    <a class="for-got" onclick="ayantoggle();" href="javascript:;">Quên mật khẩu?</a>
+                                    <div class="forgot">
+                                        <ul>
+                                            <li><p>Nhập địa chỉ Email đăng ký tài khoản để nhận lại mật khẩu.</p></li>
+                                            <li>Email đăng ký</li>
+                                            <li><input type="text" placeholder="Nhập địa chỉ Email đăng ký" id="forgetemailId" class="form-control" name="forgetemailId"></li>
+                                            <li><button id="btnSentMail" type="button" class="btn btn-default">Gửi Email</button></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 no-padng">
+                    <h4 class="modal-title">ĐĂNG KÝ TÀI KHOẢN MỚI</h4>
+                    <div class="model-r">
+                        <div class="o-r">
+                            <span>OR</span>
+                        </div>
+                        <form method="post" id="userRegisterFrm" class="log-frm" name="userRegisterFrm">
+                            <ul>
+                                <li>Tên đăng nhập</li>
+                                <li><input type="text" placeholder="Tên đăng nhập" name="fName" class="form-control"></li>
+                                <li>Email</li>
+                                <li><input type="text" placeholder="Email" name="emailId" class="form-control"></li>
+                                <li>Mật khẩu</li>
+                                <li><input type="password" placeholder="Mật khẩu" name="password" class="form-control"></li>
+                                <li>Nhập lại mật khẩu</li>
+                                <li><input type="password" placeholder="Xác nhận lại mật khẩu" name="repassword" class="form-control"></li>
+                                <br>
+                                <li><button id="btnRes" type="button" name="userRegBtn" class="btn btn-default">Đăng ký ngay</button></li>
+                                <div style="display:none;" class="sign greenglow">
+                                    <li>
+                                        <i class="icon-check"></i><br>
+                                        <font color="red">
+                                            User registration successful.<br>
+                                            Your login Url already send to your email.
+                                        </font>
+                                    </li>
+                                </div>
+                                <div style="display:none;" id="regnSuc11" class="sign redglow">
+                                    <li>
+                                        <i class="icon-mail"></i><br>
+                                        <font color="red">    Email Exist.</font>
+                                    </li>
+                                </div>
+                            </ul>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        $("#btnLog").click(function () {
+            var UserName = $("#userName").val();
+            var Password = $("#password").val();
+
+            if ($("#userName").val() == "")
+            {
+                if ($("#password").val() == "")
+                {
+                    $("#loginFail").html("Vui lòng nhập tên đăng nhập và mật khẩu để đăng nhập");
+                }
+                else
+                {
+                    $("#loginFail").html("Vui lòng nhập tên đăng nhập...");
+                }                 
+            }
+            else if ($("#password").val() == "") {
+                $("#loginFail").html("Vui lòng nhập mật khẩu...");
+            }
+            else {
+                $.ajax({
+                    url: '/User/Login?UserName=' + UserName + '&Password=' + Password,
+                    data: UserName,
+                    dataType: "html",
+                    type: "POST",
+                    contentType: 'application/html; charset=utf-8',
+                    success: function (data) {
+                        if (data == "True") {
+                            location.reload()
+                        }
+                        else {
+                            $("#loginFail").html("Sai tên đăng nhập hoặc mật khẩu...!")
+                        }
+                    },
+                    error: function (xhr) {
+                        alert(xhr);
+                    }
+                });
+            }
+        });
+    });
+</script>

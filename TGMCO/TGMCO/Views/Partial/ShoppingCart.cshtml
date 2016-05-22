@@ -1,0 +1,17 @@
+﻿<button id="btnOpenShoppingCart" class="btn" data-toggle="tooltip" data-placement="bottom" title="Số sản phẩm trong giỏ: "><span class="glyphicon glyphicon-shopping-cart"></span> <span id="num" class="items">0</span></button>
+<script type="text/javascript">
+    $(function () {
+        $.ajax({
+            url: '@Url.Action("GetNumItemsCart","Home")',
+            dataType: "html",
+            type: "GET",
+            contentType: 'application/html; charset=utf-8',
+            success: function (data) {
+                $("#num").html(data);
+            },
+            error: function (xhr) {
+                alert(xhr);
+            }
+        });
+    });
+</script>

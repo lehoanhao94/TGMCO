@@ -152,6 +152,8 @@
     <EntitySetMapping Name="PRODUCTS">
       <EntityTypeMapping TypeName="TGMCOModel.PRODUCT">
         <MappingFragment StoreEntitySet="PRODUCTS">
+          <ScalarProperty Name="WARRANTY" ColumnName="WARRANTY" />
+          <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
           <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
           <ScalarProperty Name="PRODUCT_CODE" ColumnName="PRODUCT_CODE" />
           <ScalarProperty Name="PRODUCT_NAME" ColumnName="PRODUCT_NAME" />
@@ -164,17 +166,7 @@
           <ScalarProperty Name="IS_STILL" ColumnName="IS_STILL" />
           <ScalarProperty Name="IS_ACTIVE" ColumnName="IS_ACTIVE" />
           <ScalarProperty Name="QUANTITY_SOLD" ColumnName="QUANTITY_SOLD" />
-          <ScalarProperty Name="CAPACITY" ColumnName="CAPACITY" />
           <ScalarProperty Name="WEIGHT" ColumnName="WEIGHT" />
-          <ScalarProperty Name="DESCRIPTION_1" ColumnName="DESCRIPTION_1" />
-          <ScalarProperty Name="DESCRIPTION_2" ColumnName="DESCRIPTION_2" />
-          <ScalarProperty Name="DESCRIPTION_3" ColumnName="DESCRIPTION_3" />
-          <ScalarProperty Name="DESCRIPTION_4" ColumnName="DESCRIPTION_4" />
-          <ScalarProperty Name="DESCRIPTION_5" ColumnName="DESCRIPTION_5" />
-          <ScalarProperty Name="DESCRIPTION_6" ColumnName="DESCRIPTION_6" />
-          <ScalarProperty Name="DESCRIPTION_7" ColumnName="DESCRIPTION_7" />
-          <ScalarProperty Name="DESCRIPTION_8" ColumnName="DESCRIPTION_8" />
-          <ScalarProperty Name="DESCRIPTION_9" ColumnName="DESCRIPTION_9" />
           <ScalarProperty Name="FEATURED" ColumnName="FEATURED" />
           <ScalarProperty Name="ACCESSORIES" ColumnName="ACCESSORIES" />
           <ScalarProperty Name="MADE_IN" ColumnName="MADE_IN" />
@@ -199,17 +191,6 @@
           <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
           <ScalarProperty Name="SUPPLIER_CODE" ColumnName="SUPPLIER_CODE" />
           <ScalarProperty Name="IMAGE" ColumnName="IMAGE" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="sysdiagrams">
-      <EntityTypeMapping TypeName="TGMCOModel.sysdiagram">
-        <MappingFragment StoreEntitySet="sysdiagrams">
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-          <ScalarProperty Name="version" ColumnName="version" />
-          <ScalarProperty Name="definition" ColumnName="definition" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -250,30 +231,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="TGMCOModel.Store.sp_alterdiagram" />
-    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="TGMCOModel.Store.sp_creatediagram" />
-    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="TGMCOModel.Store.sp_dropdiagram" />
-    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="TGMCOModel.Store.sp_helpdiagramdefinition">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="TGMCOModel.sp_helpdiagramdefinition_Result">
-          <ScalarProperty Name="version" ColumnName="version" />
-          <ScalarProperty Name="definition" ColumnName="definition" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="TGMCOModel.Store.sp_helpdiagrams">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="TGMCOModel.sp_helpdiagrams_Result">
-          <ScalarProperty Name="Database" ColumnName="Database" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="Owner" ColumnName="Owner" />
-          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="TGMCOModel.Store.sp_renamediagram" />
-    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="TGMCOModel.Store.sp_upgraddiagrams" />
     <EntitySetMapping Name="PRODUCT_FILES">
       <EntityTypeMapping TypeName="TGMCOModel.PRODUCT_FILES">
         <MappingFragment StoreEntitySet="PRODUCT_FILES">
