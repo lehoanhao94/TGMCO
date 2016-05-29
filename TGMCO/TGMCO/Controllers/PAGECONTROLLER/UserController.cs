@@ -12,7 +12,7 @@ namespace TGMCO.Controllers.PAGECONTROLLER
         TGMCOEntitiesDB db = new TGMCOEntitiesDB();
 
         [HttpPost]
-        public bool Login(string UserName, string Password)
+        public PartialViewResult Login(string UserName, string Password)
         {
             try
             {
@@ -25,12 +25,12 @@ namespace TGMCO.Controllers.PAGECONTROLLER
                         {
                             Session["SS_USER"] = _User;
                             Session["SS_USER_PROFILE"] = db.USER_PROFILES.Where(user => user.USER_ID.Equals(_User.USER_ID)).FirstOrDefault();
-                            return true;
+                            return PartialView();                       
                         }
                     }
                 }
 
-                return false;
+                return null;
             }
             catch (Exception ex)
             {

@@ -1,13 +1,14 @@
-﻿<button id="btnOpenShoppingCart" class="btn" data-toggle="tooltip" data-placement="bottom" title="Số sản phẩm trong giỏ: "><span class="glyphicon glyphicon-shopping-cart"></span> <span id="num" class="items">0</span></button>
-<script type="text/javascript">
+﻿<a id="btnOpenShoppingCart" href="@Url.Action("ShoppingCart", "ShoppingCart")" class="btn" data-toggle="tooltip" data-placement="bottom" title="Giỏ hàng"><span class="glyphicon glyphicon-shopping-cart"></span> <span id="numProduct" class="items">0</span></a>
+
+<script>
     $(function () {
         $.ajax({
-            url: '@Url.Action("GetNumItemsCart","Home")',
+            url: '/ShoppingCart/GetTotalQuantity',
             dataType: "html",
-            type: "GET",
+            type: "POST",
             contentType: 'application/html; charset=utf-8',
             success: function (data) {
-                $("#num").html(data);
+                $("#numProduct").html(data)
             },
             error: function (xhr) {
                 alert(xhr);

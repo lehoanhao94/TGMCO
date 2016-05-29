@@ -19,10 +19,12 @@
             .row-product {
                 border: 2px solid #018A9C !important;
             }
+
             .btnShopNow:hover {
                 background-color: #084C51 !important;
             }
-            .Top-New-Product{
+
+            .Top-New-Product {
                 color: white;
             }
         </style>
@@ -74,7 +76,7 @@
                         </h5>
                     </div>
                     <div class="separator">
-                        <button type="button" class="btn btn-default btnShopNow" aria-label="Left Align">
+                        <button type="button" onclick="AddProduct(this)" id="btnAddProduct" data-ajax="true" data-id="@Model[i].PRODUCT_ID" data-code="@Model[i].PRODUCT_CODE" class="btn btn-default btnShopNow" aria-label="Left Align">
                             <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> <strong>Thêm vào giỏ</strong>
                         </button>
                     </div>
@@ -115,7 +117,7 @@
                         </h5>
                     </div>
                     <div class="separator">
-                        <button type="button" class="btn btn-default btnShopNow" aria-label="Left Align">
+                        <button type="button" onclick="AddProduct(this)" id="btnAddProduct" data-ajax="true" data-id="@Model[i].PRODUCT_ID" data-code="@Model[i].PRODUCT_CODE" class="btn btn-default btnShopNow" aria-label="Left Align">
                             <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> <strong>Thêm vào giỏ</strong>
                         </button>
                     </div>
@@ -133,3 +135,23 @@
         </div>
     </div>
 }
+
+<script>
+    function AddProduct(obj) {
+        var id = $(obj).data("id")
+        var code = $(obj).data("code")
+        $.ajax({
+            url: '/ShoppingCart/AddProductToShoppingCart?id=' + id + '&quantity=1',
+            dataType: "html",
+            type: "POST",
+            contentType: 'application/html; charset=utf-8',
+            success: function (data) {
+                $("#numProduct").html(data)
+                alert("Đã thêm sản phẩm " + code + " vào giỏ hàng.");
+            },
+            error: function (xhr) {
+                alert(xhr);
+            }
+        });       
+    }
+</script>

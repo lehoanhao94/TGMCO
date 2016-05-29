@@ -113,8 +113,10 @@
                     type: "POST",
                     contentType: 'application/html; charset=utf-8',
                     success: function (data) {
-                        if (data == "True") {
-                            location.reload()
+                        if (data != "") {
+                            $("#Register").html(data)
+                            $("#Login-Register").modal("hide");
+                            alert('Đăng nhập thành công, xin chào ' + UserName + " !");
                         }
                         else {
                             $("#loginFail").html("Sai tên đăng nhập hoặc mật khẩu...!")

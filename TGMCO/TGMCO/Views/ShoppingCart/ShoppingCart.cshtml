@@ -1,0 +1,385 @@
+﻿@using TGMCO.Models;
+@using TGMCO.Models.Entity;
+
+@model List<ProductCart>
+
+@{
+    ViewBag.Title = "Tuấn Gia Minh | Giỏ hàng";
+    Layout = "~/Views/Shared/_PageLayout.cshtml";
+}
+
+@{
+    if (Session["SUPPLIER"].ToString().Equals("MAKITA"))
+    {
+        <style>
+            h1, .wizard-inner {
+                background-color: #018A9C !important;
+                color: white;
+            }   
+        </style>
+    }
+
+    SUPPLIER m_SUPPLIER = (SUPPLIER)Session["SUPPLIER_MODEL"];
+}
+
+@section LeftMenu{
+    <div id="Left-Menu">
+        <div class="nav-side-menu">
+            <div class="brand makita-menu-header"><strong> MENU </strong></div>
+            <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+
+            <div class="menu-list">
+
+                <ul id="menu-content" class="menu-content collapse out">
+                    <li data-toggle="collapse" data-target="#abcde" class="collapsed">
+                        <a><i class="fa fa-globe fa-lg"></i> TRANG CHỦ MAKITA </a>
+                    </li>
+                    <li data-toggle="collapse" data-target="#abcde" class="collapsed">
+                        <a><i class="fa fa-globe fa-lg"></i> SẢN PHẨM MỚI </a>
+                    </li>
+                    <li data-toggle="collapse" data-target="#service" class="collapsed">
+                        <a><i class="fa fa-globe fa-lg"></i> PHỤ KIỆN <span class="arrow"></span></a>
+                    </li>
+                    <ul class="sub-menu collapse" id="service">
+                        <li>Máy khoan</li>
+                        <li>Máy mài</li>
+                        <li>Máy cưa</li>
+                        <li>Máy cắt </li>
+                        <li>Máy bào</li>
+                    </ul>
+
+                    <li data-toggle="collapse" data-target="#abcd" class="collapsed">
+                        <a><i class="fa fa-globe fa-lg"></i> CÔNG NGHỆ <span class="arrow"></span></a>
+                    </li>
+                    <ul class="sub-menu collapse" id="abcd">
+                        <li>Công nghệ AVT</li>
+                        <li>Công nghệ MM4</li>
+                        <li>Công nghệ LXT</li>
+                        <li>Công nghệ DXT </li>
+                        <li>Công nghệ XPT</li>
+                    </ul>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    @{
+        Html.RenderAction("CategoryMenu", "Partial", new { id = m_SUPPLIER.SUPPLIER_ID });
+    }
+}
+
+<div class="wizard">
+    <div class="wizard-inner">
+        <div class="connecting-line"></div>
+        <ul class="nav nav-tabs" role="tablist">
+
+            <li role="presentation" class="active">
+                <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Giỏ hàng">
+                    <span class="round-tab">
+                        <i class="glyphicon glyphicon-shopping-cart"></i>
+                    </span>
+                </a>
+            </li>
+
+            <li role="presentation" class="">
+                <a href="#" title="Thông tin nhận hàng">
+                    <span class="round-tab">
+                        <i class="glyphicon glyphicon-pencil"></i>
+                    </span>
+                </a>
+            </li>
+            <li role="presentation" class="">
+                <a href="#" title="Thanh toán">
+                    <span class="round-tab">
+                        <i class="glyphicon glyphicon-usd"></i>
+                    </span>
+                </a>
+            </li>
+
+            <li role="presentation" class="">
+                <a href="#" title="Xác nhận">
+                    <span class="round-tab">
+                        <i class="glyphicon glyphicon-ok"></i>
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <form role="form">
+        <div class="tab-content">
+            <div class="tab-pane active" role="tabpanel" id="step1">
+                <h3 style="text-align: center;">Giỏ hàng</h3>
+                <table id="cart" class="table table-hover table-condensed">
+                    <thead>
+                        <tr>
+                            <th style="width:40%" class="text-center">Sản phẩm</th>
+                            <th style="width:20%" class="text-center">Đơn giá</th>
+                            <th style="width:10%" class="text-center">Số lượng</th>
+                            <th style="width:20%" class="text-center">Thành tiền</th>
+                            <th style="width:10%" class="text-center"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (var product in Model)
+                            {
+                                <tr>
+                                    <td data-th="Product">
+                                        <div class="row">
+                                            <div class="col-sm-3 hidden-xs"><img src="@Url.Content(product.IMAGE_1)" width="100" alt="@product.PRODUCT_NAME" class="img-responsive" /></div>
+                                            <div class="col-sm-9">
+                                                <h4 class="nomargin">@product.PRODUCT_NAME</h4>
+
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><h5 class="text-center">@string.Format("{0:0,0}", @product.UNIT_PRICE)</h5></td>
+
+                                    <td data-th="Quantity">
+                                        <input type="number" class="form-control text-center" value="@product.QUANTITY">
+                                    </td>
+                                    <td><h5 class="text-center">@string.Format("{0:0,0}", @product.TOTAL_PRICE)</h5></td>
+                                    <td class="actions" data-th="">
+                                        <button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
+                                        <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
+                                    </td>
+                                </tr>
+                            }
+                        }                      
+                    </tbody>
+                    <tfoot style="margin-top: 10px;">
+                        <tr class="visible-xs">
+                            <td class="text-center"><strong></strong></td>
+                        </tr>
+                        <tr>
+                            <td><a href="/Home/Supplier/@m_SUPPLIER.SUPPLIER_ID" class="btn btn-warning"><i class="fa fa-angle-left"></i> Tiếp tục mua hàng</a></td>
+                            <td colspan="1" class="hidden-xs"></td>
+                            <td class="hidden-xs text-center" colspan="2"><h4><strong>Tổng tiền: @string.Format("{0:0,0}", @ViewBag.TotalPrice) VNĐ</strong></h4></td>
+                            <td><a href="" class="btn btn-success btn-block next-step">Mua hàng <i class="fa fa-angle-right"></i></a></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </form>
+</div>
+@section RightContent{
+    <img class="ads-right" src="~/Content/Page_Layout/img/Makita-qc.jpg" width="238">
+    <img class="ads-right" src="~/Content/Page_Layout/img/lienhequangcao.jpg" width="238">
+    <img class="ads-right" src="~/Content/Page_Layout/img/lienhequangcao.jpg" width="238">
+    <img class="ads-right" src="~/Content/Page_Layout/img/lienhequangcao.jpg" width="238">
+    <img class="ads-right" src="~/Content/Page_Layout/img/lienhequangcao.jpg" width="238">
+}
+
+
+<style>
+    .wizard {
+        background: #fff;
+    }
+
+        .wizard .nav-tabs {
+            position: relative;
+            margin-bottom: 0;
+            border-bottom-color: #e0e0e0;
+        }
+
+        .wizard > div.wizard-inner {
+            position: relative;
+            background-color: #FED208;
+        }
+
+    .connecting-line {
+        height: 2px;
+        background: #F37232;
+        position: absolute;
+        width: 80%;
+        margin: 0 auto;
+        left: 0;
+        right: 0;
+        top: 50%;
+        z-index: 1;
+    }
+
+    .wizard .nav-tabs > li.active > a, .wizard .nav-tabs > li.active > a:hover, .wizard .nav-tabs > li.active > a:focus {
+        color: #555555;
+        cursor: default;
+        border: 0;
+        border-bottom-color: transparent;
+    }
+
+    span.round-tab {
+        width: 70px;
+        height: 70px;
+        line-height: 70px;
+        display: inline-block;
+        border-radius: 100px;
+        background: #fff;
+        border: 2px solid #F37232;
+        z-index: 2;
+        position: absolute;
+        left: 0;
+        text-align: center;
+        font-size: 25px;
+    }
+
+        span.round-tab i {
+            color: #555555;
+            line-height: 2.3;
+        }
+
+    .wizard li.active span.round-tab {
+        background: #F37232;
+        border: 2px solid white;
+    }
+
+        .wizard li.active span.round-tab i {
+            color: white;
+        }
+
+    span.round-tab:hover {
+        color: #333;
+        border: 2px solid #333;
+    }
+
+    .wizard .nav-tabs > li {
+        width: 25%;
+    }
+
+    .wizard li:after {
+        content: " ";
+        position: absolute;
+        left: 46%;
+        opacity: 0;
+        margin: 0 auto;
+        bottom: 0px;
+        border: 5px solid transparent;
+        border-bottom-color: #084C51;
+        transition: 0.1s ease-in-out;
+    }
+
+    .wizard li.active:after {
+        content: " ";
+        position: absolute;
+        left: 46%;
+        opacity: 1;
+        margin: 0 auto;
+        bottom: 0px;
+        border: 10px solid transparent;
+        border-bottom-color: white;
+    }
+
+    .wizard .nav-tabs > li a {
+        width: 70px;
+        height: 70px;
+        margin: 20px auto;
+        border-radius: 100%;
+        padding: 0;
+    }
+
+        .wizard .nav-tabs > li a:hover {
+            background: transparent;
+        }
+
+    .wizard .tab-pane {
+        position: relative;
+        padding-top: 20px;
+        padding-left: 5px;
+    }
+
+    .wizard h3 {
+        margin-top: 0;
+    }
+
+    .actions button {
+        font-size: 15px;
+    }
+
+    .Info-Order {
+        width: 700px;
+        padding-left: 100px;
+    }
+
+        .Info-Order .form-group {
+            padding-bottom: 30px;
+        }
+
+
+    .funkyradio {
+        margin-bottom: 40px;
+        padding-left: 200px;
+    }
+
+        .funkyradio div {
+            clear: both;
+            margin: 0 50px;
+        }
+
+        .funkyradio label {
+            width: 330px;
+            border-radius: 3px;
+            border: 1px solid #D1D3D4;
+        }
+
+    input[type="radio"]:empty {
+        margin-left: -999px;
+    }
+
+        input[type="radio"]:empty ~ label {
+            position: relative;
+            float: left;
+            line-height: 2.5em;
+            text-indent: 3.25em;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+            input[type="radio"]:empty ~ label:before {
+                position: absolute;
+                display: block;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                content: '';
+                width: 2.5em;
+                background: #D1D3D4;
+                border-radius: 3px 0 0 3px;
+            }
+
+    input[type="radio"]:hover:not(:checked) ~ label:before {
+        content: '\2714';
+        text-indent: .9em;
+        color: #C2C2C2;
+    }
+
+    input[type="radio"]:hover:not(:checked) ~ label {
+        color: #888;
+    }
+
+    input[type="radio"]:checked ~ label:before {
+        content: '\2714';
+        text-indent: .9em;
+        color: #fff;
+        background-color: #F37232;
+    }
+
+    input[type="radio"]:checked ~ label {
+        color: #777;
+    }
+
+    input[type="radio"]:focus ~ label:before {
+        box-shadow: 0 0 0 3px #999;
+    }
+</style>
+
+<script>
+    $(document).ready(function () {
+        //Initialize tooltips
+        $('.nav-tabs > li a[title]').tooltip();
+        
+    });
+</script>

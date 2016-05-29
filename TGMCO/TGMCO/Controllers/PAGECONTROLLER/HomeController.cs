@@ -35,7 +35,7 @@ namespace TGMCO.Controllers.PAGECONTROLLER
                 if (_Supplier.SUPPLIER_NAME.Contains("MAKITA"))
                 {
                     Session["SUPPLIER"] = "MAKITA";
-                    
+                    Session["SUPPLIER_MODEL"] = _Supplier;
                 }
                 return View(_Supplier);
             }
