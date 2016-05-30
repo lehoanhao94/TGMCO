@@ -18,6 +18,8 @@ namespace TGMCO.Controllers.PAGECONTROLLER
             try
             {
                 Session["SUPPLIER"] = "STANLEY";
+                SUPPLIER _Supplier = db.SUPPLIERS.First();
+                Session["SUPPLIER_MODEL"] = _Supplier;
                 ViewBag.Suppliers = db.SUPPLIERS.ToList();
                 return View();
             }

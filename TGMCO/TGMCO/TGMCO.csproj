@@ -200,6 +200,8 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\PAGECONTROLLER\HomeController.cs" />
     <Compile Include="Controllers\PAGECONTROLLER\PartialController.cs" />
+    <Compile Include="Controllers\PAGECONTROLLER\ProductController.cs" />
+    <Compile Include="Controllers\PAGECONTROLLER\ShoppingCartController.cs" />
     <Compile Include="Controllers\PAGECONTROLLER\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -224,6 +226,7 @@
     </Compile>
     <Compile Include="Models\Entity\CategoryExtraModel.cs" />
     <Compile Include="Models\Entity\OrderStatusModel.cs" />
+    <Compile Include="Models\Entity\ProductCart.cs" />
     <Compile Include="Models\Entity\ProductModel.cs" />
     <Compile Include="Models\Entity\UserProfilesModel.cs" />
     <Compile Include="Models\Entity\SupplierModel.cs" />
@@ -1274,6 +1277,8 @@
     <Content Include="Views\Partial\VerticalSlider.cshtml" />
     <Content Include="Views\Partial\LoginRegister.cshtml" />
     <Content Include="Views\Home\Supplier.cshtml" />
+    <Content Include="Views\ShoppingCart\ShoppingCart.cshtml" />
+    <Content Include="Views\Product\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

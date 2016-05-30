@@ -62,9 +62,9 @@
                         Mới
                     </div>
                 </div>
-                <div class="photo">
+                <a href="@Url.Action("Detail", "Product", new { id = @Model[i].PRODUCT_ID })" class="photo">
                     <img id="Image-Product" src="@Url.Content(@m_PRODUCT.GetImage1(Model[i].PRODUCT_ID))" class="img-responsive" alt="@Model[i].PRODUCT_NAME" title="@Model[i].PRODUCT_NAME" />
-                </div>
+                </a>
                 <div class="info">
                     <div class="Name-Product">
                         <h5>@Model[i].PRODUCT_NAME</h5>
@@ -103,9 +103,9 @@
                         Mới
                     </div>
                 </div>
-                <div class="photo">
+                <a href="@Url.Action("Detail", "Product", new { id = @Model[i].PRODUCT_ID })" class="photo">
                     <img id="Image-Product" src="@Url.Content(@m_PRODUCT.GetImage1(Model[i].PRODUCT_ID))" class="img-responsive" alt="@Model[i].PRODUCT_NAME" title="@Model[i].PRODUCT_NAME" />
-                </div>
+                </a>
                 <div class="info">
                     <div class="Name-Product">
                         <h5>@Model[i].PRODUCT_NAME</h5>
@@ -150,7 +150,7 @@
                 alert("Đã thêm sản phẩm " + code + " vào giỏ hàng.");
             },
             error: function (xhr) {
-                alert(xhr);
+                
             }
         });       
     }
