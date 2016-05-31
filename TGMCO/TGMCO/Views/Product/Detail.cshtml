@@ -134,7 +134,7 @@
                     Số lượng:
                 </td>
                 <td class="col-lg-6 product-rating">
-                    <input type="number" id="numProduct" class="form-control text-center numProduct" pattern="[0-9]" required value="1">
+                    <input type="number" id="numProduct" class="form-control text-center numProduct" pattern="[0-9]" required value="1" max="10">
                 </td>
             </tr>
             <tr>
@@ -407,6 +407,12 @@
         var id = $(obj).data("id");
         var code = $(obj).data("code");
         var num = $('.numProduct').val();
+        if (num > 20)
+        {
+            alert('Bạn nhập số quá lớn, vui lòng nhập số lượng dưới 20.')
+        }
+        else
+        {
         $.ajax({
             url: '/ShoppingCart/AddProductToShoppingCart?id=' + id + '&quantity=' + num,
             dataType: "html",
@@ -420,5 +426,6 @@
 
             }
         });
+        }
     }
 </script>

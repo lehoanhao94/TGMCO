@@ -24,13 +24,31 @@ namespace TGMCO
                 url: "chi-tiet/san-pham-{id}",
                 defaults: new { controller = "Product", action = "Detail", id = UrlParameter.Optional }
             );
-
+            routes.MapRoute(
+                name: "Search",
+                url: "ket-qua-tim-kiem",
+                defaults: new { controller = "Product", action = "Search" }
+            );
             routes.MapRoute(
                 name: "Category",
                 url: "{supplier_code}/danh-muc/{supplier_id}-{cate_id}",
                 defaults: new { controller = "Category", action = "Category" }
             );
-
+            routes.MapRoute(
+                name: "Order",
+                url: "thong-tin-dat-hang",
+                defaults: new { controller = "Order", action = "Order" }
+            );
+            routes.MapRoute(
+                name: "Payment",
+                url: "thanh-toan",
+                defaults: new { controller = "Payment", action = "Payment" }
+            );
+            routes.MapRoute(
+                name: "Success",
+                url: "xac-nhan-HD-{id}",
+                defaults: new { controller = "Order", action = "PrintBill" }
+            );
             routes.MapRoute(
                 name: "Supplier",
                 url: "makita",

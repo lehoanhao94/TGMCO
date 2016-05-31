@@ -84,7 +84,7 @@ namespace TGMCO.Controllers.PAGECONTROLLER
                 }
                 else
                 {
-                    _ProductCart.QUANTITY++;
+                    _ProductCart.QUANTITY+= quantity;
                 }
 
                 return GetTotalQuantity();

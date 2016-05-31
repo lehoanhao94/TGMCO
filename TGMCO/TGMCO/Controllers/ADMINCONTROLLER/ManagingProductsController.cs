@@ -418,6 +418,8 @@ namespace TGMCO.Controllers.ADMINCONTROLLER
 
                             #region UPLOAD FILES
                             //Upload File
+                            if (m_PRODUCT_FILES == null)
+                                m_PRODUCT_FILES = new PRODUCT_FILES();
                             if (fileUpload_1 != null)
                             {
                                 m_PRODUCT_FILES.PRODUCT_ID = m_PRODUCT.PRODUCT_ID;

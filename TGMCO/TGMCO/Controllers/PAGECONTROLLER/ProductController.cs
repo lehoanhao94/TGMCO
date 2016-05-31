@@ -23,6 +23,23 @@ namespace TGMCO.Controllers.PAGECONTROLLER
                 return RedirectToAction("Http404", "Error"); // 404
             }          
         }
+        [HttpPost]
+        public ActionResult Search(FormCollection f)
+        {
+            try
+            {
+                string key = f.Get("txtKeySearch").ToString().Trim();
+                SUPPLIER _SUPPLIER = (SUPPLIER)Session["SUPPLIER_MODEL"];
+                List<PRODUCT> _lstPRODUCT = db.PRODUCTS.Where(n => (n.PRODUCT_CODE.Contains(key) || n.PRODUCT_NAME.Contains(key)) && n.SUPPLIER_ID == _SUPPLIER.SUPPLIER_ID).ToList();
+                ViewBag.KeySearch = key;
+                ViewBag.NumProduct = _lstPRODUCT.Count;
+                return View(_lstPRODUCT);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Http404", "Error"); // 404
+            }
+        }
 
     }
 }
