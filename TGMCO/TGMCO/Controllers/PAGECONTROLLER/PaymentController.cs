@@ -36,5 +36,20 @@ namespace TGMCO.Controllers.PAGECONTROLLER
             }
         }
 
+        public ActionResult UpdatePaymentMethod(int id, FormCollection f)
+        {
+            try
+            {
+                ORDER _ORDER = new ORDER();
+                _ORDER = db.ORDERS.Find(id);
+                _ORDER.PAYMENT_METHOD_ID = int.Parse(f.Get("Payment").ToString());
+                db.SaveChanges();
+                return RedirectToAction("PrintBill", "Order", new { id = _ORDER.ORDER_ID});
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Http404", "Error"); // 404
+            }
+        }
     }
 }

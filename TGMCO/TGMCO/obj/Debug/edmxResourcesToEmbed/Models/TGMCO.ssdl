@@ -138,6 +138,7 @@
     <Property Name="ORDER_STATUS_ID" Type="int" Nullable="false" />
     <Property Name="SHIP_EMAIL" Type="nvarchar" MaxLength="150" />
     <Property Name="NOTE" Type="nvarchar" MaxLength="250" />
+    <Property Name="PAYMENT_METHOD_ID" Type="int" />
   </EntityType>
   <EntityType Name="PRODUCT_FILES">
     <Key>
@@ -256,6 +257,13 @@
     <Property Name="LINK" Type="nvarchar(max)" Nullable="false" />
     <Property Name="IDX" Type="int" />
   </EntityType>
+  <EntityType Name="PAYMENT_METHOD">
+    <Key>
+      <PropertyRef Name="PAYMENT_METHOD_ID" />
+    </Key>
+    <Property Name="PAYMENT_METHOD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DESCRIPTION" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
   <EntityType Name="SLIDERS">
     <Key>
       <PropertyRef Name="SLIDER_ID" />
@@ -292,6 +300,7 @@
     <EntitySet Name="USER_PROFILES" EntityType="Self.USER_PROFILES" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ADS" EntityType="Self.ADS" Schema="vieb2155_admin" store:Type="Tables" />
+    <EntitySet Name="PAYMENT_METHOD" EntityType="Self.PAYMENT_METHOD" Schema="vieb2155_admin" store:Type="Tables" />
     <EntitySet Name="SLIDERS" EntityType="Self.SLIDERS" Schema="vieb2155_admin" store:Type="Tables" />
   </EntityContainer>
 </Schema>

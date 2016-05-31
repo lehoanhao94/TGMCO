@@ -133,6 +133,7 @@
     <EntitySetMapping Name="ORDERS">
       <EntityTypeMapping TypeName="TGMCOModel.ORDER">
         <MappingFragment StoreEntitySet="ORDERS">
+          <ScalarProperty Name="PAYMENT_METHOD_ID" ColumnName="PAYMENT_METHOD_ID" />
           <ScalarProperty Name="NOTE" ColumnName="NOTE" />
           <ScalarProperty Name="SHIP_EMAIL" ColumnName="SHIP_EMAIL" />
           <ScalarProperty Name="ORDER_ID" ColumnName="ORDER_ID" />
@@ -290,6 +291,14 @@
           <ScalarProperty Name="IMAGE_1" ColumnName="IMAGE_1" />
           <ScalarProperty Name="SUPPLIER_ID" ColumnName="SUPPLIER_ID" />
           <ScalarProperty Name="SLIDER_ID" ColumnName="SLIDER_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PAYMENT_METHOD">
+      <EntityTypeMapping TypeName="TGMCOModel.PAYMENT_METHOD">
+        <MappingFragment StoreEntitySet="PAYMENT_METHOD">
+          <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+          <ScalarProperty Name="PAYMENT_METHOD_ID" ColumnName="PAYMENT_METHOD_ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -138,6 +138,7 @@
     <Property Name="ORDER_STATUS_ID" Type="Int32" Nullable="false" />
     <Property Name="SHIP_EMAIL" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
     <Property Name="NOTE" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="PAYMENT_METHOD_ID" Type="Int32" />
   </EntityType>
   <EntityType Name="PRODUCT">
     <Key>
@@ -269,6 +270,7 @@
     <EntitySet Name="PRODUCT_IMAGES" EntityType="TGMCOModel.PRODUCT_IMAGES" />
     <EntitySet Name="ADS" EntityType="TGMCOModel.ADS" />
     <EntitySet Name="SLIDERS" EntityType="TGMCOModel.SLIDER" />
+    <EntitySet Name="PAYMENT_METHOD" EntityType="TGMCOModel.PAYMENT_METHOD" />
   </EntityContainer>
   <ComplexType Name="sp_helpdiagramdefinition_Result">
     <Property Type="Int32" Name="version" Nullable="true" />
@@ -334,5 +336,12 @@
     <Property Name="DESCRIPTION_2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="DESCRIPTION_3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="DESCRIPTION_4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="PAYMENT_METHOD">
+    <Key>
+      <PropertyRef Name="PAYMENT_METHOD_ID" />
+    </Key>
+    <Property Name="PAYMENT_METHOD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DESCRIPTION" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
 </Schema>

@@ -20,6 +20,7 @@ namespace TGMCO.Controllers.PAGECONTROLLER
                 List<ProductCart> _lstProductCart = GetShoppingCart();
                 ViewBag.TotalPrice = GetTotalPrice();
                 Session["TOTAL_PRICE"] = GetTotalPrice();
+                Session["Order_Id"] = null;
                 return View(_lstProductCart);
             }
             catch (Exception ex)

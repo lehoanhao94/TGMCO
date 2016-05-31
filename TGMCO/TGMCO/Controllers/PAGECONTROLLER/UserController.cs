@@ -58,13 +58,16 @@ namespace TGMCO.Controllers.PAGECONTROLLER
                 _USER.PASSWORD = StringCipher.Encrypt(Password, UserName);
                 _USER.IS_ACTIVE = true;
                 _USER.IS_ADMIN = _USER.IS_EMPLOYEE = false;
-                _USER.CREATED_DATE = DateTime.Now;
+                _USER.CREATED_DATE = DateTime.Now;               
                 db.USERS.Add(_USER);
                 db.SaveChanges();
 
                 _USER_PROFILES.FULL_NAME = UserName;
                 _USER_PROFILES.EMAIL = Email;
                 _USER_PROFILES.USER_ID = _USER.USER_ID;
+                _USER_PROFILES.POINTS = 0;
+                _USER_PROFILES.ADDRESS = "";
+                _USER_PROFILES.MOBILE = "";
                 _USER_PROFILES.AVATAR = "~/Content/Page_Layout/img/default-avatar.jpg";
 
                 db.USER_PROFILES.Add(_USER_PROFILES);

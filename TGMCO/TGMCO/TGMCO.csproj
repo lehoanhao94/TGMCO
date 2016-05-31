@@ -231,6 +231,8 @@
       <DependentUpon>TGMCO.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Entity\CategoryExtraModel.cs" />
+    <Compile Include="Models\Entity\ShipperModel.cs" />
+    <Compile Include="Models\Entity\PaymentMethodModel .cs" />
     <Compile Include="Models\Entity\OrderStatusModel.cs" />
     <Compile Include="Models\Entity\ProductCart.cs" />
     <Compile Include="Models\Entity\ProductModel.cs" />
@@ -241,6 +243,9 @@
       <DependentUpon>TGMCO.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\NEWS_PROMOTION.cs">
+      <DependentUpon>TGMCO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PAYMENT_METHOD.cs">
       <DependentUpon>TGMCO.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PRODUCT_IMAGES.cs">
@@ -1292,6 +1297,7 @@
     <Content Include="Views\Category\Category.cshtml" />
     <Content Include="Views\Order\Order.cshtml" />
     <Content Include="Views\Payment\Payment.cshtml" />
+    <Content Include="Views\Order\PrintBill.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

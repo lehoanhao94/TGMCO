@@ -101,5 +101,27 @@ namespace TGMCO.Models.Entity
                 return "#";
             }
         }
+        public string GetCode(int id)
+        {
+            try
+            {
+                return db.PRODUCTS.Find(id).PRODUCT_CODE;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public string GetName(int id)
+        {
+            try
+            {
+                return db.PRODUCTS.Find(id).PRODUCT_NAME;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

@@ -118,5 +118,22 @@ namespace TGMCO.Controllers.PAGECONTROLLER
                 return RedirectToAction("Http404", "Error"); // 404
             }
         }
+
+        public ActionResult PrintBill(int id)
+        {
+            try
+            {
+                Session["ShoppingCart"] = null;
+                Session["Order_Id"] = null;
+                ORDER _ORDER = db.ORDERS.Find(id);
+                ViewBag.ORDER_DETAIL = db.ORDER_DETAILS.Where(n => n.ORDER_ID == id).ToList();
+                
+                return View(_ORDER);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Http404", "Error"); // 404
+            }
+        }
     }
 }

@@ -106,26 +106,26 @@
             </li>
         </ul>
     </div>
-    <form role="form" method="post">
+    <form role="form" method="post" action="@Url.Action("UpdatePaymentMethod", "Payment", new { id = Session["Order_Id"]})">
         <div class="tab-content">
-            <div class="tab-pane active" role="tabpanel" id="step2" style="height: 300px;">
+            <div class="tab-pane active" role="tabpanel" id="step2" style="height: 310px;">
                 <h3 style="text-align: center;">Thông tin đặt hàng</h3>
                 <br />
                 <div class="funkyradio">
                     <div>
-                        <input type="radio" name="radio" id="radio1" checked />
+                        <input type="radio" name="Payment" value="1" id="radio1" checked />
                         <label for="radio1">Thanh toán khi nhận hàng</label>
                     </div>
                     <div>
-                        <input type="radio" name="radio" id="radio2" />
+                        <input type="radio" name="Payment" value="2" id="radio2" />
                         <label for="radio2">Chuyển khoản qua ngân hàng</label>
                     </div>
                     <div>
-                        <input type="radio" name="radio" id="radio3" />
+                        <input type="radio" name="Payment" value="3" id="radio3" />
                         <label for="radio3">Thanh toán qua ngân lượng</label>
                     </div>
                     <div>
-                        <input type="radio" name="radio" id="radio4" />
+                        <input type="radio" name="Payment" value="4" id="radio4" />
                         <label for="radio4">Thanh toán qua OnePay</label>
                     </div>
                 </div>
@@ -135,7 +135,7 @@
                         <a href="@Url.Action("Order", "Order")" class="btn btn-warning"><i class="fa fa-angle-left"></i> Quay lại sửa thông tin</a>
 
                     </ul>
-                    <ul class="list-inline pull-right">
+                    <ul class="list-inline pull-right" style="margin-bottom: 10px;">
 
                         <button type="submit" class="btn btn-success btn-block next-step">Đặt hàng <i class="fa fa-angle-right"></i></button>
                     </ul>

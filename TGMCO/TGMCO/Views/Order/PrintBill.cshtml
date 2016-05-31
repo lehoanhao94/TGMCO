@@ -19,8 +19,12 @@
         </style>
     }
 
-    SUPPLIER m_SUPPLIER = new SUPPLIER();
-    m_SUPPLIER = (SUPPLIER)Session["SUPPLIER_MODEL"];
+    SUPPLIER m_SUPPLIER = (SUPPLIER)Session["SUPPLIER_MODEL"];
+    List<ORDER_DETAILS> m_lstORDER_DETAIL = (List<ORDER_DETAILS>)ViewBag.ORDER_DETAIL;
+    PaymentMethodModel m_Payment_Method = new PaymentMethodModel();
+    OrderStatusModel m_Order_Status = new OrderStatusModel();
+    ShipperModel m_Shipper = new ShipperModel();
+    ProductModel m_Product = new ProductModel();
 }
 
 @section LeftMenu{
@@ -83,7 +87,7 @@
                 </a>
             </li>
 
-            <li role="presentation" class="active">
+            <li role="presentation" class="">
                 <a href="#" title="Thông tin nhận hàng">
                     <span class="round-tab">
                         <i class="glyphicon glyphicon-pencil"></i>
@@ -98,8 +102,8 @@
                 </a>
             </li>
 
-            <li role="presentation" class="">
-                <a href="#" title="Xác nhận">
+            <li role="presentation" class="active">
+                <a href="#" title="Thành công">
                     <span class="round-tab">
                         <i class="glyphicon glyphicon-ok"></i>
                     </span>
@@ -107,96 +111,103 @@
             </li>
         </ul>
     </div>
-    <form role="form" method="post" action="@Url.Action("Create", "Order")">
-        <div class="tab-content">
-            <div class="tab-pane active" role="tabpanel" id="step2">
-                <h3 style="text-align: center;">Thông tin đặt hàng</h3>
-                <br />
 
-                <div class="Info-Order">
+    <div class="tab-content">
+        <div class="tab-pane active" role="tabpanel" id="step4">
+            <h3 style="text-align: center;">Đặt hàng thành công !</h3>
+            <br />
+            <ul style="padding-left: 15px;">
+                <li>
+                    <label>Mã đơn hàng: </label> #VNT-@Model.ORDER_ID
+                </li>
+                <li>
+                    <label>Thời gian đặt hàng: </label> @Model.ORDER_DATE
+                </li>
+                <li>
+                    <label>Tên người nhận hàng: </label> @Model.SHIP_NAME
+                </li>
+                <li>
+                    <label>Địa chỉ giao hàng: </label> @Model.SHIP_ADDRESS
+                </li>
+                <li>
+                    <label>Số điện thoại: </label> @Model.SHIP_PHONE
+                </li>
+                <li>
+                    <label>Email: </label> @Model.SHIP_EMAIL
+                </li>
+                <li>
+                    <label>Ghi chú: </label> @Model.NOTE
+                </li>
+                <li>
+                    <label>Hình thức chuyển hàng: </label> <span class="label label-primary">@m_Shipper.GetName(Model.SHIP_VIA_ID)</span>
+                </li>
+                <li>
+                    <label>Hình thức thanh toán: </label> <span class="label label-success">@m_Payment_Method.GetName((int)@Model.PAYMENT_METHOD_ID)</span>
+                </li>
+                <li>
+                    <label>Tình trạng thanh toán: </label> <span class="label label-danger">@m_Order_Status.GetName(Model.ORDER_STATUS_ID)</span>
+                </li>
+            </ul>
+            <table id="cart" class="table table-hover table-condensed">
+                <thead>
+                    <tr>
+                        <th style="width:15%" class="text-center">Mã</th>
+                        <th style="width:35%" class="text-center">Tên sản phẩm</th>
+                        <th style="width:20%" class="text-center">Đơn giá</th>
+                        <th style="width:10%" class="text-center">Số lượng</th>
+                        <th style="width:20%" class="text-center">Thành tiền</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var product in m_lstORDER_DETAIL)
+                        {
+                            <tr>
+                                <td data-th="Product">
+                                    <h4 class="nomargin">@m_Product.GetCode(product.PRODUCT_ID)</h4>
+                                </td>
+                                <td data-th="Product">
+                                    <h4 class="nomargin">@m_Product.GetName(product.PRODUCT_ID)</h4>
+                                </td>
+                                <td><h5 class="text-center">@string.Format("{0:0,0}", @product.UNIT_PRICE)</h5></td>
 
 
-                    <fieldset>
+                                <td><h5 class="text-center">@product.QUANTITY</h5></td>
 
-
-                        <!-- Text input-->
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="Name">Họ và tên</label>
-                            <div class="col-md-8">
-                                <input id="textinputname" name="Name" type="text" placeholder="Họ và tên người nhận hàng" class="form-control input-md" required="" value="@Model.SHIP_NAME">
-
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="Address">Địa chỉ</label>
-                            <div class="col-md-8">
-                                <input id="textinputname" name="Address" type="text" placeholder="Địa chỉ nhận hàng" class="form-control input-md" required="" value="@Model.SHIP_ADDRESS">
-
-                            </div>
-                        </div>
-                        <!-- Text input-->
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="Mobile">Điện thoại</label>
-                            <div class="col-md-8">
-                                <input id="textinputmobile" name="Mobile" type="tel" placeholder="Số điện thoại nhận hàng" class="form-control input-md" value="@Model.SHIP_PHONE">
-
-                            </div>
-                        </div>
-
-                        <!-- Text input-->
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="Email">Email</label>
-                            <div class="col-md-8">
-                                <input id="textinputmobilealt" name="Email" type="email" placeholder="Địa chỉ email" class="form-control input-md" value="@Model.SHIP_EMAIL">
-
-                            </div>
-                        </div>
-                        <!-- Text input-->
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="Note">Ghi chú</label>
-                            <div class="col-md-8">
-                                <input id="textinputmobilealt" name="Note" type="text" placeholder="Ghi chú nhận hàng" class="form-control input-md" value="@Model.NOTE">
-
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="Note">Phương thức giao hàng</label>
-                            <div class="col-md-8">
-                                @Html.DropDownList("ListShipper", (IEnumerable<SelectListItem>)ViewBag.ListShipper, new { @class = "form-control" })
-                            </div>
-                        </div>
-
-
-
-                </div>
-                </fieldset>
-            </div>
-            <div style="padding-left: 10px; padding-right: 10px;">
-                <ul class="list-inline pull-left">
-                    <a href="@Url.Action("ShoppingCart", "ShoppingCart")" class="btn btn-warning"><i class="fa fa-angle-left"></i> Quay lại giỏ hàng</a>
-
-                </ul>
-                <ul class="list-inline pull-right">
-
-                    <button type="submit" class="btn btn-success btn-block next-step">Thanh toán <i class="fa fa-angle-right"></i></button>
-                </ul>
-            </div>
-            </div>
-
-            <div class="clearfix"></div>
-            @if (TempData["Fail"] != null)
-            {
-                <div class="alert alert-danger fade in">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    <strong>Lỗi !</strong> @TempData["Fail"].
-                </div>
-
-                <script>
-                    $("#Login-Register").modal();
-                </script>
-            }
+                                <td><h5 class="pull-right">@string.Format("{0:0,0}", @product.EXTENDED_PRICE)</h5></td>
+                            </tr>
+                        }
+                    }                  
+                </tbody>
+                <tfoot style="margin-top: 10px;">
+                    <tr class="visible-xs">
+                        <td class="text-center"><strong></strong></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td colspan="1" class="hidden-xs"></td>
+                        <td colspan="2"><h4 class="pull-right">Tổng tiền hàng:</h4></td>
+                        <td class="hidden-xs"><h5 class="pull-right"> @string.Format("{0:0,0}", @Model.SUBTOTAL)</h5></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td colspan="1" class="hidden-xs"></td>
+                        <td colspan="2"><h4 class="pull-right">Tiền vận chuyển:</h4></td>
+                        <td class="hidden-xs"><h5 class="pull-right"> @string.Format("{0:0,0}", @Model.FREIGHT)</h5></td>
+                    </tr>
+                    <tr>
+                        <td><a href="/@m_SUPPLIER.SUPPLIER_CODE.Trim()" class="btn btn-success"><i class="fa fa-angle-left"></i> Tiếp tục mua hàng</a></td>
+                        <td colspan="1" class="hidden-xs"></td>
+                        <td colspan="2"><h4 class="pull-right">TỔNG TIỀN:</h4></td>
+                        <td class="hidden-xs"><h4 class="pull-right"><strong> @string.Format("{0:0,0}", @Model.FREIGHT + @Model.SUBTOTAL) VNĐ</strong></h4></td>
+                    </tr>
+                </tfoot>
+            </table>
         </div>
-    </form>
+    </div>
+
+</div>
 
 @section RightContent{
     <img class="ads-right" src="~/Content/Page_Layout/img/Makita-qc.jpg" width="238">

@@ -167,6 +167,17 @@
                                         <td>@m_ORDER_STATUS.GetName(@order.ORDER_STATUS_ID)</td>
                                     </tr>
                                 }
+                                else
+                                {
+                                    <tr class="info">
+                                        <td><a href="#">@order.ORDER_ID</a></td>
+                                        <td>@string.Format("{0:dd/MM/yyyy}", @order.ORDER_DATE)</td>
+                                        <td>@order.SHIP_CODE</td>
+                                        <td>@string.Format("{0:dd/MM/yyyy}", @order.SHIPPED_DATE)</td>
+                                        <td>@string.Format("{0:0,0}", @order.SUBTOTAL)</td>
+                                        <td>@m_ORDER_STATUS.GetName(@order.ORDER_STATUS_ID)</td>
+                                    </tr>
+                                }
                             }
                         </tbody>
                     </table>
