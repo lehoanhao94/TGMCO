@@ -17,13 +17,9 @@ namespace TGMCO.Controllers.PAGECONTROLLER
         {
             try
             {
-                if(Session["ShoppingCart"] == null)
-                {
-
-                }
-
                 List<ProductCart> _lstProductCart = GetShoppingCart();
                 ViewBag.TotalPrice = GetTotalPrice();
+                Session["TOTAL_PRICE"] = GetTotalPrice();
                 return View(_lstProductCart);
             }
             catch (Exception ex)

@@ -34,8 +34,48 @@ namespace TGMCO.Controllers.PAGECONTROLLER
             }
             catch (Exception ex)
             {
+                return null;
+            }
+        }
+
+        [HttpPost]
+        public int Register(string UserName, string Email, string Password)
+        {
+            try
+            {
+                USER _USER = db.USERS.Where(n => n.USER_NAME == UserName).SingleOrDefault();
+                USER_PROFILES _USER_PROFILES = db.USER_PROFILES.Where(n => n.EMAIL == Email).SingleOrDefault();
+
+                if (_USER != null)
+                    return 1;
+                else if(_USER_PROFILES != null)
+                {
+                    return 2;
+                }
+                _USER = new USER();
+                _USER_PROFILES = new USER_PROFILES();
+                _USER.USER_NAME = UserName;
+                _USER.PASSWORD = StringCipher.Encrypt(Password, UserName);
+                _USER.IS_ACTIVE = true;
+                _USER.IS_ADMIN = _USER.IS_EMPLOYEE = false;
+                _USER.CREATED_DATE = DateTime.Now;
+                db.USERS.Add(_USER);
+                db.SaveChanges();
+
+                _USER_PROFILES.FULL_NAME = UserName;
+                _USER_PROFILES.EMAIL = Email;
+                _USER_PROFILES.USER_ID = _USER.USER_ID;
+                _USER_PROFILES.AVATAR = "~/Content/Page_Layout/img/default-avatar.jpg";
+
+                db.USER_PROFILES.Add(_USER_PROFILES);
+                db.SaveChanges();
+                return 0;
+            }
+            catch (Exception ex)
+            {
                 throw ex;
             }
+
         }
 
         public ActionResult Logout()

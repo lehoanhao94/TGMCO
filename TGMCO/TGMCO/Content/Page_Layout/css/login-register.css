@@ -79,6 +79,7 @@
 }
 .modal-header{
     background-color: #FED208;
+        height: 40px;
 }
 
 #btnLog, #btnRes, #btnSentMail{

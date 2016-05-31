@@ -4,7 +4,7 @@
 @model List<ProductCart>
 
 @{
-    ViewBag.Title = "Tuấn Gia Minh | Giỏ hàng";
+    ViewBag.Title = "Tuấn Gia Minh | Thông tin đặt hàng";
     Layout = "~/Views/Shared/_PageLayout.cshtml";
 }
 
@@ -74,8 +74,8 @@
         <div class="connecting-line"></div>
         <ul class="nav nav-tabs" role="tablist">
 
-            <li role="presentation" class="active">
-                <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Giỏ hàng">
+            <li role="presentation">
+                <a href="#" title="Giỏ hàng">
                     <span class="round-tab">
                         <i class="glyphicon glyphicon-shopping-cart"></i>
                     </span>
@@ -89,7 +89,7 @@
                     </span>
                 </a>
             </li>
-            <li role="presentation" class="">
+            <li role="presentation" class="active">
                 <a href="#" title="Thanh toán">
                     <span class="round-tab">
                         <i class="glyphicon glyphicon-usd"></i>
@@ -106,86 +106,48 @@
             </li>
         </ul>
     </div>
-    <form role="form">
+    <form role="form" method="post">
         <div class="tab-content">
-            <div class="tab-pane active" role="tabpanel" id="step1">
-                <h3 style="text-align: center;">Giỏ hàng</h3>
-
-                <table id="cart" class="table table-hover table-condensed">
-                    <thead>
-                        <tr>
-                            <th style="width:40%" class="text-center">Sản phẩm</th>
-                            <th style="width:20%" class="text-center">Đơn giá</th>
-                            <th style="width:10%" class="text-center">Số lượng</th>
-                            <th style="width:20%" class="text-center">Thành tiền</th>
-                            <th style="width:10%" class="text-center"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @{
-                            foreach (var product in Model)
-                            {
-                                <tr>
-                                    <td data-th="Product">
-                                        <div class="row">
-                                            <div class="col-sm-3 hidden-xs"><img src="@Url.Content(product.IMAGE_1)" width="100" alt="@product.PRODUCT_NAME" class="img-responsive" /></div>
-                                            <div class="col-sm-9">
-                                                <h4 class="nomargin">@product.PRODUCT_NAME</h4>
-
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td><h5 class="text-center">@string.Format("{0:0,0}", @product.UNIT_PRICE)</h5></td>
-
-                                    <td data-th="Quantity">
-                                        <input type="number" class="form-control text-center" value="@product.QUANTITY">
-                                    </td>
-                                    <td><h5 class="text-center">@string.Format("{0:0,0}", @product.TOTAL_PRICE)</h5></td>
-                                    <td class="actions" data-th="">
-                                        <button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
-                                        <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
-                                    </td>
-                                </tr>
-                            }
-                        }
-                    </tbody>
-                    <tfoot style="margin-top: 10px;">
-                        <tr class="visible-xs">
-                            <td class="text-center"><strong></strong></td>
-                        </tr>
-                        <tr>
-                            <td><a href="/@m_SUPPLIER.SUPPLIER_CODE.Trim()" class="btn btn-warning"><i class="fa fa-angle-left"></i> Tiếp tục mua hàng</a></td>
-                            <td colspan="1" class="hidden-xs"></td>
-                            @if (Model.Count > 0)
-                            {
-                                <td class="hidden-xs text-center" colspan="2"><h4><strong>Tổng tiền: @string.Format("{0:0,0}", @ViewBag.TotalPrice) VNĐ</strong></h4></td>
-                                <td><a href="@Url.Action("Order", "Order")" class="btn btn-success btn-block next-step">Mua hàng <i class="fa fa-angle-right"></i></a></td>
-                            }
-                            else
-                            {
-                                <td class="hidden-xs text-center" colspan="2"><h4><strong>Giỏ hàng trống.</strong></h4></td>
-                            }
-
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
-
-            <div class="clearfix"></div>
-            @if (TempData["Fail"] != null)
-            {
-                <div class="alert alert-danger fade in">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    <strong>Lỗi !</strong> @TempData["Fail"].
+            <div class="tab-pane active" role="tabpanel" id="step2" style="height: 300px;">
+                <h3 style="text-align: center;">Thông tin đặt hàng</h3>
+                <br />
+                <div class="funkyradio">
+                    <div>
+                        <input type="radio" name="radio" id="radio1" checked />
+                        <label for="radio1">Thanh toán khi nhận hàng</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="radio" id="radio2" />
+                        <label for="radio2">Chuyển khoản qua ngân hàng</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="radio" id="radio3" />
+                        <label for="radio3">Thanh toán qua ngân lượng</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="radio" id="radio4" />
+                        <label for="radio4">Thanh toán qua OnePay</label>
+                    </div>
                 </div>
 
-                <script>
-                    $("#Login-Register").modal();
-                </script>
-            }
+                <div style="padding-left: 10px; padding-right: 10px;">
+                    <ul class="list-inline pull-left">
+                        <a href="@Url.Action("Order", "Order")" class="btn btn-warning"><i class="fa fa-angle-left"></i> Quay lại sửa thông tin</a>
+
+                    </ul>
+                    <ul class="list-inline pull-right">
+
+                        <button type="submit" class="btn btn-success btn-block next-step">Đặt hàng <i class="fa fa-angle-right"></i></button>
+                    </ul>
+                </div>
+            </div>
+                
+
+            </div>
         </div>
-    </form>
-</div>
+
+</form>
+
 @section RightContent{
     <img class="ads-right" src="~/Content/Page_Layout/img/Makita-qc.jpg" width="238">
     <img class="ads-right" src="~/Content/Page_Layout/img/lienhequangcao.jpg" width="238">

@@ -6,21 +6,25 @@
 
 @{
     CategoryModel m_CATEGORY = new CategoryModel();
+    SUPPLIER m_SUPPLIER = (SUPPLIER)Session["SUPPLIER_MODEL"];
 }
 
 @{
-    if(Session["SUPPLIER"].ToString().Equals("MAKITA"))
+    if (Session["SUPPLIER"].ToString().Equals("MAKITA"))
     {
         <style>
             .brand {
                 background-color: #018A9C !important;
                 color: white !important;
             }
+
             .nav-side-menu li:hover {
                 border-left: 3px solid #018A9C;
             }
         </style>
     }
+    
+    
 }
 
 <div id="Left-Menu">
@@ -36,9 +40,11 @@
                     foreach (var category in Model)
                     {
                         List<CATEGORIES_EXTRA> _lstCATEGORY_EXTRA = m_CATEGORY.GetListCategoryExtra(category.CATEGORY_ID);
-                        <li data-toggle="collapse" data-target="#Category_@category.CATEGORY_ID" class="collapsed">
-                            <a><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> @category.CATEGORY_NAME </a>
+                        <a href="@Url.Action("Category", "Category", new { supplier_id = m_SUPPLIER.SUPPLIER_ID, supplier_code = m_SUPPLIER .SUPPLIER_CODE.Trim(), cate_id = category.CATEGORY_ID})">
+                            <li data-toggle="collapse" data-target="#Category_@category.CATEGORY_ID" class="collapsed">
+                            <i class="fa fa-chevron-circle-right" aria-hidden="true"></i> @category.CATEGORY_NAME 
                         </li>
+                        </a>
                        
                         if (_lstCATEGORY_EXTRA != null)
                         {
@@ -57,3 +63,10 @@
     </div>
     <!--END LEFT-MENU-->
 </div>
+
+<style>
+    .menu-content a{
+        color: white;
+        text-decoration: none;
+    }
+</style>

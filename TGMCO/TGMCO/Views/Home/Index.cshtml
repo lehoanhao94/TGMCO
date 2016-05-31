@@ -11,7 +11,7 @@
     @{
         foreach (var supplier in m_lstSUPPLIERS)
         {
-            <a href="/Home/Supplier/@supplier.SUPPLIER_ID"><img class="Logo-Suppliers" src="@Url.Content(supplier.IMAGE)" alt="@supplier.SUPPLIER_NAME" title="@supplier.SUPPLIER_NAME"></a>
+            <a href="@Url.Action(@supplier.SUPPLIER_CODE.Trim(), "Home")"><img class="Logo-Suppliers" src="@Url.Content(supplier.IMAGE)" alt="@supplier.SUPPLIER_NAME" title="@supplier.SUPPLIER_NAME"></a>
         }
     } 
 </div>

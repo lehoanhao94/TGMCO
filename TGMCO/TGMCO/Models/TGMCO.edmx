@@ -141,6 +141,8 @@
           <Property Name="SHIP_PHONE" Type="nchar" MaxLength="12" />
           <Property Name="SUBTOTAL" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="ORDER_STATUS_ID" Type="int" Nullable="false" />
+          <Property Name="SHIP_EMAIL" Type="nvarchar" MaxLength="150" />
+          <Property Name="NOTE" Type="nvarchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="PRODUCT_FILES">
           <Key>
@@ -199,6 +201,7 @@
           <Property Name="SHIPPER_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SHIPPER_NAME" Type="nvarchar" MaxLength="150" Nullable="false" />
           <Property Name="PHONE" Type="nchar" MaxLength="15" />
+          <Property Name="FREIGHT" Type="decimal" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="SUPPLIERS">
           <Key>
@@ -207,7 +210,7 @@
           <Property Name="SUPPLIER_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SUPPLIER_NAME" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="DESCRIPTION" Type="nvarchar" MaxLength="150" />
-          <Property Name="SUPPLIER_CODE" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="SUPPLIER_CODE" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="IMAGE" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="TECHNOLOGIES">
@@ -216,8 +219,9 @@
           </Key>
           <Property Name="TECHNOLOGY_ID" Type="int" Nullable="false" />
           <Property Name="TECHNOLOGY_NAME" Type="nvarchar" MaxLength="150" Nullable="false" />
-          <Property Name="IMAGE" Type="nvarchar" MaxLength="50" />
+          <Property Name="IMAGE" Type="nvarchar(max)" />
           <Property Name="DESCRIPTION" Type="nvarchar(max)" />
+          <Property Name="ICON" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="USER_PROFILES">
           <Key>
@@ -244,6 +248,34 @@
           <Property Name="IS_EMPLOYEE" Type="bit" />
           <Property Name="CREATED_DATE" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="ADS">
+          <Key>
+            <PropertyRef Name="ADS_ID" />
+          </Key>
+          <Property Name="ADS_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SUPPLIER_ID" Type="int" Nullable="false" />
+          <Property Name="POSITION" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="WIDTH" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="HEIGHT" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="IMAGE" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LINK" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IDX" Type="int" />
+        </EntityType>
+        <EntityType Name="SLIDERS">
+          <Key>
+            <PropertyRef Name="SLIDER_ID" />
+          </Key>
+          <Property Name="SLIDER_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SUPPLIER_ID" Type="int" Nullable="false" />
+          <Property Name="IMAGE_1" Type="nvarchar" MaxLength="250" />
+          <Property Name="IMAGE_2" Type="nvarchar" MaxLength="250" />
+          <Property Name="IMAGE_3" Type="nvarchar" MaxLength="250" />
+          <Property Name="IMAGE_4" Type="nvarchar" MaxLength="250" />
+          <Property Name="DESCRIPTION_1" Type="nvarchar(max)" />
+          <Property Name="DESCRIPTION_2" Type="nvarchar(max)" />
+          <Property Name="DESCRIPTION_3" Type="nvarchar(max)" />
+          <Property Name="DESCRIPTION_4" Type="nvarchar(max)" />
+        </EntityType>
         <EntityContainer Name="TGMCOModelStoreContainer">
           <EntitySet Name="ABOUTS" EntityType="Self.ABOUTS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AGENCIES" EntityType="Self.AGENCIES" Schema="dbo" store:Type="Tables" />
@@ -264,6 +296,8 @@
           <EntitySet Name="TECHNOLOGIES" EntityType="Self.TECHNOLOGIES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USER_PROFILES" EntityType="Self.USER_PROFILES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ADS" EntityType="Self.ADS" Schema="vieb2155_admin" store:Type="Tables" />
+          <EntitySet Name="SLIDERS" EntityType="Self.SLIDERS" Schema="vieb2155_admin" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -405,6 +439,8 @@
           <Property Name="SHIP_PHONE" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
           <Property Name="SUBTOTAL" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="ORDER_STATUS_ID" Type="Int32" Nullable="false" />
+          <Property Name="SHIP_EMAIL" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="NOTE" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="PRODUCT">
           <Key>
@@ -437,6 +473,7 @@
           <Property Name="SHIPPER_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SHIPPER_NAME" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PHONE" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="FREIGHT" Type="Decimal" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="SUPPLIER">
           <Key>
@@ -445,7 +482,7 @@
           <Property Name="SUPPLIER_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SUPPLIER_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DESCRIPTION" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="SUPPLIER_CODE" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="SUPPLIER_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IMAGE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="TECHNOLOGy">
@@ -454,8 +491,9 @@
           </Key>
           <Property Name="TECHNOLOGY_ID" Type="Int32" Nullable="false" />
           <Property Name="TECHNOLOGY_NAME" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IMAGE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IMAGE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DESCRIPTION" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ICON" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="USER_PROFILES">
           <Key>
@@ -532,6 +570,8 @@
           <FunctionImport Name="sp_upgraddiagrams" />
           <EntitySet Name="PRODUCT_FILES" EntityType="TGMCOModel.PRODUCT_FILES" />
           <EntitySet Name="PRODUCT_IMAGES" EntityType="TGMCOModel.PRODUCT_IMAGES" />
+          <EntitySet Name="ADS" EntityType="TGMCOModel.ADS" />
+          <EntitySet Name="SLIDERS" EntityType="TGMCOModel.SLIDER" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -569,6 +609,34 @@
           <Property Name="IMAGE_5" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IMAGE_6" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IMAGE_7" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ADS">
+          <Key>
+            <PropertyRef Name="ADS_ID" />
+          </Key>
+          <Property Name="ADS_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SUPPLIER_ID" Type="Int32" Nullable="false" />
+          <Property Name="POSITION" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="WIDTH" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="HEIGHT" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IMAGE" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LINK" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IDX" Type="Int32" />
+        </EntityType>
+        <EntityType Name="SLIDER">
+          <Key>
+            <PropertyRef Name="SLIDER_ID" />
+          </Key>
+          <Property Name="SLIDER_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SUPPLIER_ID" Type="Int32" Nullable="false" />
+          <Property Name="IMAGE_1" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="IMAGE_2" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="IMAGE_3" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="IMAGE_4" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="DESCRIPTION_1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DESCRIPTION_2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DESCRIPTION_3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DESCRIPTION_4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -708,6 +776,8 @@
           <EntitySetMapping Name="ORDERS">
             <EntityTypeMapping TypeName="TGMCOModel.ORDER">
               <MappingFragment StoreEntitySet="ORDERS">
+                <ScalarProperty Name="NOTE" ColumnName="NOTE" />
+                <ScalarProperty Name="SHIP_EMAIL" ColumnName="SHIP_EMAIL" />
                 <ScalarProperty Name="ORDER_ID" ColumnName="ORDER_ID" />
                 <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
                 <ScalarProperty Name="EMPLOYEE_ID" ColumnName="EMPLOYEE_ID" />
@@ -752,6 +822,7 @@
           <EntitySetMapping Name="SHIPPERS">
             <EntityTypeMapping TypeName="TGMCOModel.SHIPPER">
               <MappingFragment StoreEntitySet="SHIPPERS">
+                <ScalarProperty Name="FREIGHT" ColumnName="FREIGHT" />
                 <ScalarProperty Name="SHIPPER_ID" ColumnName="SHIPPER_ID" />
                 <ScalarProperty Name="SHIPPER_NAME" ColumnName="SHIPPER_NAME" />
                 <ScalarProperty Name="PHONE" ColumnName="PHONE" />
@@ -772,6 +843,7 @@
           <EntitySetMapping Name="TECHNOLOGIES">
             <EntityTypeMapping TypeName="TGMCOModel.TECHNOLOGy">
               <MappingFragment StoreEntitySet="TECHNOLOGIES">
+                <ScalarProperty Name="ICON" ColumnName="ICON" />
                 <ScalarProperty Name="TECHNOLOGY_ID" ColumnName="TECHNOLOGY_ID" />
                 <ScalarProperty Name="TECHNOLOGY_NAME" ColumnName="TECHNOLOGY_NAME" />
                 <ScalarProperty Name="IMAGE" ColumnName="IMAGE" />
@@ -831,6 +903,36 @@
                 <ScalarProperty Name="IMAGE_1" ColumnName="IMAGE_1" />
                 <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
                 <ScalarProperty Name="PRODUCT_IMAGES_ID" ColumnName="PRODUCT_IMAGES_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ADS">
+            <EntityTypeMapping TypeName="TGMCOModel.ADS">
+              <MappingFragment StoreEntitySet="ADS">
+                <ScalarProperty Name="IDX" ColumnName="IDX" />
+                <ScalarProperty Name="LINK" ColumnName="LINK" />
+                <ScalarProperty Name="IMAGE" ColumnName="IMAGE" />
+                <ScalarProperty Name="HEIGHT" ColumnName="HEIGHT" />
+                <ScalarProperty Name="WIDTH" ColumnName="WIDTH" />
+                <ScalarProperty Name="POSITION" ColumnName="POSITION" />
+                <ScalarProperty Name="SUPPLIER_ID" ColumnName="SUPPLIER_ID" />
+                <ScalarProperty Name="ADS_ID" ColumnName="ADS_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SLIDERS">
+            <EntityTypeMapping TypeName="TGMCOModel.SLIDER">
+              <MappingFragment StoreEntitySet="SLIDERS">
+                <ScalarProperty Name="DESCRIPTION_4" ColumnName="DESCRIPTION_4" />
+                <ScalarProperty Name="DESCRIPTION_3" ColumnName="DESCRIPTION_3" />
+                <ScalarProperty Name="DESCRIPTION_2" ColumnName="DESCRIPTION_2" />
+                <ScalarProperty Name="DESCRIPTION_1" ColumnName="DESCRIPTION_1" />
+                <ScalarProperty Name="IMAGE_4" ColumnName="IMAGE_4" />
+                <ScalarProperty Name="IMAGE_3" ColumnName="IMAGE_3" />
+                <ScalarProperty Name="IMAGE_2" ColumnName="IMAGE_2" />
+                <ScalarProperty Name="IMAGE_1" ColumnName="IMAGE_1" />
+                <ScalarProperty Name="SUPPLIER_ID" ColumnName="SUPPLIER_ID" />
+                <ScalarProperty Name="SLIDER_ID" ColumnName="SLIDER_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

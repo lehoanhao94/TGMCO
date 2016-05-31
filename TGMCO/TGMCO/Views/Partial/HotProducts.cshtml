@@ -7,7 +7,6 @@
     SUPPLIER m_SUPPLIER = (SUPPLIER)ViewBag.Supplier;
     ProductModel m_PRODUCT = new ProductModel();
 }
-
 @{
     if (Session["SUPPLIER"].ToString().Equals("MAKITA"))
     {
@@ -30,6 +29,7 @@
         </style>
     }
 }
+
 
 @if (@Model != null)
 {

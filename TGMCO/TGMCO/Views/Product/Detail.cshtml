@@ -134,7 +134,7 @@
                     Số lượng:
                 </td>
                 <td class="col-lg-6 product-rating">
-                    <input type="number" class="form-control text-center" pattern="[0-9]" required value="1">
+                    <input type="number" id="numProduct" class="form-control text-center numProduct" pattern="[0-9]" required value="1">
                 </td>
             </tr>
             <tr>
@@ -199,7 +199,7 @@
                     </ul>
                 </div>
                 <div class="tab-pane fade" id="tab5default">
-                    <div class="fb-comments" data-href="@Request.RawUrl" data-width="784" data-numposts="5"></div>
+                    <div class="fb-comments" data-href="@Url.Content("https://developers.facebook.com/docs/plugins/comments#" + @Request.RawUrl)" data-width="784" data-numposts="5"></div>
                 </div>
             </div>
         </div>
@@ -399,5 +399,26 @@
             reader.readAsDataURL(input.files[0]);
         }
         else receiver.style.backgroundImage = 'none';
+    }
+</script>
+
+<script>
+    function AddProduct(obj) {
+        var id = $(obj).data("id");
+        var code = $(obj).data("code");
+        var num = $('.numProduct').val();
+        $.ajax({
+            url: '/ShoppingCart/AddProductToShoppingCart?id=' + id + '&quantity=' + num,
+            dataType: "html",
+            type: "POST",
+            contentType: 'application/html; charset=utf-8',
+            success: function (data) {
+                $("#numProduct").html(data)
+                alert("Đã thêm sản phẩm " + code + " vào giỏ hàng.");
+            },
+            error: function (xhr) {
+
+            }
+        });
     }
 </script>

@@ -133,6 +133,8 @@
     <EntitySetMapping Name="ORDERS">
       <EntityTypeMapping TypeName="TGMCOModel.ORDER">
         <MappingFragment StoreEntitySet="ORDERS">
+          <ScalarProperty Name="NOTE" ColumnName="NOTE" />
+          <ScalarProperty Name="SHIP_EMAIL" ColumnName="SHIP_EMAIL" />
           <ScalarProperty Name="ORDER_ID" ColumnName="ORDER_ID" />
           <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
           <ScalarProperty Name="EMPLOYEE_ID" ColumnName="EMPLOYEE_ID" />
@@ -177,6 +179,7 @@
     <EntitySetMapping Name="SHIPPERS">
       <EntityTypeMapping TypeName="TGMCOModel.SHIPPER">
         <MappingFragment StoreEntitySet="SHIPPERS">
+          <ScalarProperty Name="FREIGHT" ColumnName="FREIGHT" />
           <ScalarProperty Name="SHIPPER_ID" ColumnName="SHIPPER_ID" />
           <ScalarProperty Name="SHIPPER_NAME" ColumnName="SHIPPER_NAME" />
           <ScalarProperty Name="PHONE" ColumnName="PHONE" />
@@ -197,6 +200,7 @@
     <EntitySetMapping Name="TECHNOLOGIES">
       <EntityTypeMapping TypeName="TGMCOModel.TECHNOLOGy">
         <MappingFragment StoreEntitySet="TECHNOLOGIES">
+          <ScalarProperty Name="ICON" ColumnName="ICON" />
           <ScalarProperty Name="TECHNOLOGY_ID" ColumnName="TECHNOLOGY_ID" />
           <ScalarProperty Name="TECHNOLOGY_NAME" ColumnName="TECHNOLOGY_NAME" />
           <ScalarProperty Name="IMAGE" ColumnName="IMAGE" />
@@ -256,6 +260,36 @@
           <ScalarProperty Name="IMAGE_1" ColumnName="IMAGE_1" />
           <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
           <ScalarProperty Name="PRODUCT_IMAGES_ID" ColumnName="PRODUCT_IMAGES_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ADS">
+      <EntityTypeMapping TypeName="TGMCOModel.ADS">
+        <MappingFragment StoreEntitySet="ADS">
+          <ScalarProperty Name="IDX" ColumnName="IDX" />
+          <ScalarProperty Name="LINK" ColumnName="LINK" />
+          <ScalarProperty Name="IMAGE" ColumnName="IMAGE" />
+          <ScalarProperty Name="HEIGHT" ColumnName="HEIGHT" />
+          <ScalarProperty Name="WIDTH" ColumnName="WIDTH" />
+          <ScalarProperty Name="POSITION" ColumnName="POSITION" />
+          <ScalarProperty Name="SUPPLIER_ID" ColumnName="SUPPLIER_ID" />
+          <ScalarProperty Name="ADS_ID" ColumnName="ADS_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SLIDERS">
+      <EntityTypeMapping TypeName="TGMCOModel.SLIDER">
+        <MappingFragment StoreEntitySet="SLIDERS">
+          <ScalarProperty Name="DESCRIPTION_4" ColumnName="DESCRIPTION_4" />
+          <ScalarProperty Name="DESCRIPTION_3" ColumnName="DESCRIPTION_3" />
+          <ScalarProperty Name="DESCRIPTION_2" ColumnName="DESCRIPTION_2" />
+          <ScalarProperty Name="DESCRIPTION_1" ColumnName="DESCRIPTION_1" />
+          <ScalarProperty Name="IMAGE_4" ColumnName="IMAGE_4" />
+          <ScalarProperty Name="IMAGE_3" ColumnName="IMAGE_3" />
+          <ScalarProperty Name="IMAGE_2" ColumnName="IMAGE_2" />
+          <ScalarProperty Name="IMAGE_1" ColumnName="IMAGE_1" />
+          <ScalarProperty Name="SUPPLIER_ID" ColumnName="SUPPLIER_ID" />
+          <ScalarProperty Name="SLIDER_ID" ColumnName="SLIDER_ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

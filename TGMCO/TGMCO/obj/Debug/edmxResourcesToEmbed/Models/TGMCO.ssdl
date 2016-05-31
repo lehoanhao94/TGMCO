@@ -136,6 +136,8 @@
     <Property Name="SHIP_PHONE" Type="nchar" MaxLength="12" />
     <Property Name="SUBTOTAL" Type="decimal" Precision="18" Scale="0" Nullable="false" />
     <Property Name="ORDER_STATUS_ID" Type="int" Nullable="false" />
+    <Property Name="SHIP_EMAIL" Type="nvarchar" MaxLength="150" />
+    <Property Name="NOTE" Type="nvarchar" MaxLength="250" />
   </EntityType>
   <EntityType Name="PRODUCT_FILES">
     <Key>
@@ -194,6 +196,7 @@
     <Property Name="SHIPPER_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="SHIPPER_NAME" Type="nvarchar" MaxLength="150" Nullable="false" />
     <Property Name="PHONE" Type="nchar" MaxLength="15" />
+    <Property Name="FREIGHT" Type="decimal" Precision="18" Scale="0" />
   </EntityType>
   <EntityType Name="SUPPLIERS">
     <Key>
@@ -202,7 +205,7 @@
     <Property Name="SUPPLIER_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="SUPPLIER_NAME" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="DESCRIPTION" Type="nvarchar" MaxLength="150" />
-    <Property Name="SUPPLIER_CODE" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="SUPPLIER_CODE" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="IMAGE" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="TECHNOLOGIES">
@@ -211,8 +214,9 @@
     </Key>
     <Property Name="TECHNOLOGY_ID" Type="int" Nullable="false" />
     <Property Name="TECHNOLOGY_NAME" Type="nvarchar" MaxLength="150" Nullable="false" />
-    <Property Name="IMAGE" Type="nvarchar" MaxLength="50" />
+    <Property Name="IMAGE" Type="nvarchar(max)" />
     <Property Name="DESCRIPTION" Type="nvarchar(max)" />
+    <Property Name="ICON" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="USER_PROFILES">
     <Key>
@@ -239,6 +243,34 @@
     <Property Name="IS_EMPLOYEE" Type="bit" />
     <Property Name="CREATED_DATE" Type="datetime" Nullable="false" />
   </EntityType>
+  <EntityType Name="ADS">
+    <Key>
+      <PropertyRef Name="ADS_ID" />
+    </Key>
+    <Property Name="ADS_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SUPPLIER_ID" Type="int" Nullable="false" />
+    <Property Name="POSITION" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="WIDTH" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="HEIGHT" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="IMAGE" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LINK" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IDX" Type="int" />
+  </EntityType>
+  <EntityType Name="SLIDERS">
+    <Key>
+      <PropertyRef Name="SLIDER_ID" />
+    </Key>
+    <Property Name="SLIDER_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SUPPLIER_ID" Type="int" Nullable="false" />
+    <Property Name="IMAGE_1" Type="nvarchar" MaxLength="250" />
+    <Property Name="IMAGE_2" Type="nvarchar" MaxLength="250" />
+    <Property Name="IMAGE_3" Type="nvarchar" MaxLength="250" />
+    <Property Name="IMAGE_4" Type="nvarchar" MaxLength="250" />
+    <Property Name="DESCRIPTION_1" Type="nvarchar(max)" />
+    <Property Name="DESCRIPTION_2" Type="nvarchar(max)" />
+    <Property Name="DESCRIPTION_3" Type="nvarchar(max)" />
+    <Property Name="DESCRIPTION_4" Type="nvarchar(max)" />
+  </EntityType>
   <EntityContainer Name="TGMCOModelStoreContainer">
     <EntitySet Name="ABOUTS" EntityType="Self.ABOUTS" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AGENCIES" EntityType="Self.AGENCIES" Schema="dbo" store:Type="Tables" />
@@ -259,5 +291,7 @@
     <EntitySet Name="TECHNOLOGIES" EntityType="Self.TECHNOLOGIES" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="USER_PROFILES" EntityType="Self.USER_PROFILES" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ADS" EntityType="Self.ADS" Schema="vieb2155_admin" store:Type="Tables" />
+    <EntitySet Name="SLIDERS" EntityType="Self.SLIDERS" Schema="vieb2155_admin" store:Type="Tables" />
   </EntityContainer>
 </Schema>

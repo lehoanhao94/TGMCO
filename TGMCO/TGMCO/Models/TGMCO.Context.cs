@@ -47,6 +47,8 @@ namespace TGMCO.Models
         public DbSet<USER> USERS { get; set; }
         public DbSet<PRODUCT_FILES> PRODUCT_FILES { get; set; }
         public DbSet<PRODUCT_IMAGES> PRODUCT_IMAGES { get; set; }
+        public DbSet<ADS> ADS { get; set; }
+        public DbSet<SLIDER> SLIDERS { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

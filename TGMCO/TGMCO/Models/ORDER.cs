@@ -27,5 +27,7 @@ namespace TGMCO.Models
         public string SHIP_PHONE { get; set; }
         public decimal SUBTOTAL { get; set; }
         public int ORDER_STATUS_ID { get; set; }
+        public string SHIP_EMAIL { get; set; }
+        public string NOTE { get; set; }
     }
 }

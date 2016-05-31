@@ -18,5 +18,6 @@ namespace TGMCO.Models
         public string TECHNOLOGY_NAME { get; set; }
         public string IMAGE { get; set; }
         public string DESCRIPTION { get; set; }
+        public string ICON { get; set; }
     }
 }

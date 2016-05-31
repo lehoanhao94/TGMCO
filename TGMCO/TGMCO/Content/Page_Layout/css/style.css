@@ -16,7 +16,9 @@
 	border: 3px solid #2E353E;
 	overflow: hidden;
 }
-
+.ads-right {
+        margin-bottom: 5px;
+    }
 .slider-wrapper li {
 	display: none;
 }

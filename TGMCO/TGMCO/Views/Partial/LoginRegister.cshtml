@@ -1,4 +1,6 @@
-﻿<div id="Login-Register" class="modal fade">
+﻿
+
+<div id="Login-Register" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -45,31 +47,30 @@
                         <div class="o-r">
                             <span>OR</span>
                         </div>
-                        <form method="post" id="userRegisterFrm" class="log-frm" name="userRegisterFrm">
+                        <form>
                             <ul>
                                 <li>Tên đăng nhập</li>
-                                <li><input type="text" placeholder="Tên đăng nhập" name="fName" class="form-control"></li>
+                                <li><input type="text" placeholder="Tên đăng nhập" required id="rUserName" name="fName" class="form-control" maxlength="20" pattern="[a-z,A-Z,0-9]{6,15}" title="Tên đăng nhập phải dài trên 6 ký tự và không chứa ký tự đặc biệt"></li>
                                 <li>Email</li>
-                                <li><input type="text" placeholder="Email" name="emailId" class="form-control"></li>
+                                <li><input type="email" placeholder="Email" required id="rEmail" name="emailId" class="form-control" maxlength="30"></li>
                                 <li>Mật khẩu</li>
-                                <li><input type="password" placeholder="Mật khẩu" name="password" class="form-control"></li>
+                                <li><input type="password" placeholder="Mật khẩu" required id="rPass" name="password" class="form-control" pattern="[a-z,A-Z,0-9]{6,15}" title="Mật khẩu phải dài trên 6 ký tự và không chứa ký tự đặc biệt"></li>
                                 <li>Nhập lại mật khẩu</li>
-                                <li><input type="password" placeholder="Xác nhận lại mật khẩu" name="repassword" class="form-control"></li>
+                                <li><input type="password" placeholder="Xác nhận lại mật khẩu" required id="rRePass" name="repassword" class="form-control" pattern="[a-z,A-Z,0-9]{6,15}" title="Mật khẩu phải dài trên 6 ký tự và không chứa ký tự đặc biệt"></li>
                                 <br>
                                 <li><button id="btnRes" type="button" name="userRegBtn" class="btn btn-default">Đăng ký ngay</button></li>
-                                <div style="display:none;" class="sign greenglow">
+                                <di class="sign greenglow">
                                     <li>
                                         <i class="icon-check"></i><br>
-                                        <font color="red">
-                                            User registration successful.<br>
-                                            Your login Url already send to your email.
+                                        <font color="#00a65a" id="regisSuccess">
+
                                         </font>
                                     </li>
-                                </div>
-                                <div style="display:none;" id="regnSuc11" class="sign redglow">
+                                </di>
+                                <div id="regnSuc11" class="sign redglow">
                                     <li>
                                         <i class="icon-mail"></i><br>
-                                        <font color="red">    Email Exist.</font>
+                                        <font color="red" id="regisFail"></font>
                                     </li>
                                 </div>
                             </ul>
@@ -85,6 +86,13 @@
         </div>
     </div>
 </div>
+
+<style>
+    ul {
+        list-style: none;
+        padding-left: 0;
+    }
+</style>
 <script>
     $(function () {
         $("#btnLog").click(function () {
@@ -120,6 +128,61 @@
                         }
                         else {
                             $("#loginFail").html("Sai tên đăng nhập hoặc mật khẩu...!")
+
+                        }
+                    },
+                    error: function (xhr) {
+                        alert(xhr);
+                    }
+                });
+            }
+        });
+
+        $("#btnRes").click(function () {
+            var UserName = $("#rUserName").val();
+            var Password = $("#rPass").val();
+            var RePassword = $("#rRePass").val();
+            var Email = $("#rEmail").val();
+            if (UserName == "") {
+                $("#regisFail").html("Vui lòng nhập tên đăng nhập.");
+            }
+            else if(Email == "")
+            {
+                $("#regisFail").html("Vui lòng nhập địa chỉ email.");
+            }
+            else if (Password == "")
+            {
+                $("#regisFail").html("Vui lòng nhập mật khẩu.");
+            }
+            else if (RePassword == "") {
+                $("#regisFail").html("Vui lòng điền vào ô nhập lại mật khẩu");
+            }
+            else if(Password != RePassword)
+            {              
+                $("#regisFail").html("Mật khẩu nhập lại không khớp.");
+            }
+            else if(UserName.length < 6 || Password.length < 6)
+            {
+                $("#regisFail").html("Tên đăng nhập và mật khẩu phải trên 6 ký tự.");
+            }
+            else {
+                $.ajax({
+                    url: '/User/Register?UserName=' + UserName + '&Password=' + Password +'&Email='+ Email,
+                    data: UserName,
+                    dataType: "html",
+                    type: "POST",
+                    contentType: 'application/html; charset=utf-8',
+                    success: function (data) {
+                        if (data == "1") {
+                            $("#regisFail").html("Tên đăng nhập đã có người sử dụng.")
+                        }
+                        else if(data == "2"){
+                            $("#regisFail").html("Địa chỉ email đã có người sử dụng.")
+                        }
+                        else
+                        {
+                            $("#regisSuccess").html("Đăng ký tài khoản thành công với địa chỉ email: " + Email)
+                            $("#loginFail").html("")
                         }
                     },
                     error: function (xhr) {

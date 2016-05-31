@@ -198,8 +198,11 @@
     <Compile Include="Controllers\ADMINCONTROLLER\ManagingSuppliersController.cs" />
     <Compile Include="Controllers\ADMINCONTROLLER\ManagingUsersController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\PAGECONTROLLER\CategoryController.cs" />
     <Compile Include="Controllers\PAGECONTROLLER\HomeController.cs" />
+    <Compile Include="Controllers\PAGECONTROLLER\OrderController.cs" />
     <Compile Include="Controllers\PAGECONTROLLER\PartialController.cs" />
+    <Compile Include="Controllers\PAGECONTROLLER\PaymentController.cs" />
     <Compile Include="Controllers\PAGECONTROLLER\ProductController.cs" />
     <Compile Include="Controllers\PAGECONTROLLER\ShoppingCartController.cs" />
     <Compile Include="Controllers\PAGECONTROLLER\UserController.cs" />
@@ -207,6 +210,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ABOUT.cs">
+      <DependentUpon>TGMCO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ADS.cs">
       <DependentUpon>TGMCO.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AGENCy.cs">
@@ -238,6 +244,9 @@
       <DependentUpon>TGMCO.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PRODUCT_IMAGES.cs">
+      <DependentUpon>TGMCO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SLIDER.cs">
       <DependentUpon>TGMCO.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Util\NumberObject.cs" />
@@ -1054,6 +1063,7 @@
     <Content Include="Content\Page_Layout\img\cn4.png" />
     <Content Include="Content\Page_Layout\img\cn5.png" />
     <Content Include="Content\Page_Layout\img\cn6.png" />
+    <Content Include="Content\Page_Layout\img\default-avatar.jpg" />
     <Content Include="Content\Page_Layout\img\dewalt-logo.png" />
     <Content Include="Content\Page_Layout\img\dewalt.jpg" />
     <Content Include="Content\Page_Layout\img\lienhequangcao.jpg" />
@@ -1276,9 +1286,12 @@
     <Content Include="Views\Partial\CategoryMenu.cshtml" />
     <Content Include="Views\Partial\VerticalSlider.cshtml" />
     <Content Include="Views\Partial\LoginRegister.cshtml" />
-    <Content Include="Views\Home\Supplier.cshtml" />
+    <Content Include="Views\Home\makita.cshtml" />
     <Content Include="Views\ShoppingCart\ShoppingCart.cshtml" />
     <Content Include="Views\Product\Detail.cshtml" />
+    <Content Include="Views\Category\Category.cshtml" />
+    <Content Include="Views\Order\Order.cshtml" />
+    <Content Include="Views\Payment\Payment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

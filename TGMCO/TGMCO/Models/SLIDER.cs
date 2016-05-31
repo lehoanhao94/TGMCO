@@ -12,11 +12,17 @@ namespace TGMCO.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class SHIPPER
+    public partial class SLIDER
     {
-        public int SHIPPER_ID { get; set; }
-        public string SHIPPER_NAME { get; set; }
-        public string PHONE { get; set; }
-        public Nullable<decimal> FREIGHT { get; set; }
+        public int SLIDER_ID { get; set; }
+        public int SUPPLIER_ID { get; set; }
+        public string IMAGE_1 { get; set; }
+        public string IMAGE_2 { get; set; }
+        public string IMAGE_3 { get; set; }
+        public string IMAGE_4 { get; set; }
+        public string DESCRIPTION_1 { get; set; }
+        public string DESCRIPTION_2 { get; set; }
+        public string DESCRIPTION_3 { get; set; }
+        public string DESCRIPTION_4 { get; set; }
     }
 }

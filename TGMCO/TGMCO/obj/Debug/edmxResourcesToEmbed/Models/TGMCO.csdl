@@ -136,6 +136,8 @@
     <Property Name="SHIP_PHONE" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
     <Property Name="SUBTOTAL" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
     <Property Name="ORDER_STATUS_ID" Type="Int32" Nullable="false" />
+    <Property Name="SHIP_EMAIL" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="NOTE" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="PRODUCT">
     <Key>
@@ -168,6 +170,7 @@
     <Property Name="SHIPPER_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="SHIPPER_NAME" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="PHONE" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+    <Property Name="FREIGHT" Type="Decimal" Precision="18" Scale="0" />
   </EntityType>
   <EntityType Name="SUPPLIER">
     <Key>
@@ -176,7 +179,7 @@
     <Property Name="SUPPLIER_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="SUPPLIER_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="DESCRIPTION" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-    <Property Name="SUPPLIER_CODE" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="SUPPLIER_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="IMAGE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="TECHNOLOGy">
@@ -185,8 +188,9 @@
     </Key>
     <Property Name="TECHNOLOGY_ID" Type="Int32" Nullable="false" />
     <Property Name="TECHNOLOGY_NAME" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="IMAGE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IMAGE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="DESCRIPTION" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ICON" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="USER_PROFILES">
     <Key>
@@ -263,6 +267,8 @@
     <FunctionImport Name="sp_upgraddiagrams" />
     <EntitySet Name="PRODUCT_FILES" EntityType="TGMCOModel.PRODUCT_FILES" />
     <EntitySet Name="PRODUCT_IMAGES" EntityType="TGMCOModel.PRODUCT_IMAGES" />
+    <EntitySet Name="ADS" EntityType="TGMCOModel.ADS" />
+    <EntitySet Name="SLIDERS" EntityType="TGMCOModel.SLIDER" />
   </EntityContainer>
   <ComplexType Name="sp_helpdiagramdefinition_Result">
     <Property Type="Int32" Name="version" Nullable="true" />
@@ -300,5 +306,33 @@
     <Property Name="IMAGE_5" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="IMAGE_6" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="IMAGE_7" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ADS">
+    <Key>
+      <PropertyRef Name="ADS_ID" />
+    </Key>
+    <Property Name="ADS_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SUPPLIER_ID" Type="Int32" Nullable="false" />
+    <Property Name="POSITION" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="WIDTH" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="HEIGHT" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="IMAGE" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LINK" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IDX" Type="Int32" />
+  </EntityType>
+  <EntityType Name="SLIDER">
+    <Key>
+      <PropertyRef Name="SLIDER_ID" />
+    </Key>
+    <Property Name="SLIDER_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SUPPLIER_ID" Type="Int32" Nullable="false" />
+    <Property Name="IMAGE_1" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="IMAGE_2" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="IMAGE_3" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="IMAGE_4" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="DESCRIPTION_1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DESCRIPTION_2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DESCRIPTION_3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DESCRIPTION_4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
 </Schema>

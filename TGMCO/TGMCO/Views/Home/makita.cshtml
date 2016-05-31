@@ -8,15 +8,31 @@
 }
 
 @{
-    if (Session["SUPPLIER"].ToString().Equals("MAKITA"))
-    {
         <style>
-            h1 {
+            h1, #Main-Menu, #vgc_bc_off, .vgc_control_send, .brand,
+            .Top-New-Product div, .btnShopNow, .modal-header {
                 background-color: #018A9C !important;
                 color: white;
             }
+
+            #Register .btn, .brand, .Top-New-Product {
+                color: white !important;
+            }
+
+            .nav-side-menu li:hover {
+                border-left: 3px solid #018A9C;
+            }
+
+            .row-product {
+                border: 2px solid #018A9C !important;
+            }
+
+            .btnShopNow:hover {
+                background-color: #084C51 !important;
+            }
         </style>
-    }
+    
+        
 }
 
 @section LeftMenu{

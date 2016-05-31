@@ -13,6 +13,7 @@ namespace TGMCO.Controllers.PAGECONTROLLER
         // GET: /Home/
         private TGMCOEntitiesDB db = new TGMCOEntitiesDB();
 
+        
         public ActionResult Index()
         {
             try
@@ -29,20 +30,18 @@ namespace TGMCO.Controllers.PAGECONTROLLER
             }          
         }
 
-        public ViewResult Supplier(int id)
+        public ViewResult makita()
         {
             try
             {
-                SUPPLIER _Supplier = db.SUPPLIERS.Find(id);
-                if (_Supplier.SUPPLIER_NAME.Contains("MAKITA"))
-                {
-                    Session["SUPPLIER"] = "MAKITA";
-                    Session["SUPPLIER_MODEL"] = _Supplier;
-                }
+                SUPPLIER _Supplier = db.SUPPLIERS.Where(n => n.SUPPLIER_NAME.Contains("MAKITA")).Single();
+                Session["SUPPLIER"] = "MAKITA";
+                Session["SUPPLIER_MODEL"] = _Supplier;
                 return View(_Supplier);
             }
             catch (Exception ex)
             {
+                Response.StatusCode = 404;
                 throw ex; // 404
             }
         }
