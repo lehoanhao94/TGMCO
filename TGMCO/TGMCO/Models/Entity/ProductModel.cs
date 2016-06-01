@@ -123,5 +123,27 @@ namespace TGMCO.Models.Entity
                 throw ex;
             }
         }
+        public decimal GetMinPrice()
+        {
+            try
+            {
+                return db.PRODUCTS.OrderBy(n => n.UNIT_PRICE).First().UNIT_PRICE;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public decimal GetMaxPrice()
+        {
+            try
+            {
+                return db.PRODUCTS.OrderByDescending(n => n.UNIT_PRICE).First().UNIT_PRICE;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

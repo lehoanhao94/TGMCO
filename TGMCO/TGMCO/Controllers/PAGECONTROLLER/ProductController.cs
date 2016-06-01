@@ -33,6 +33,27 @@ namespace TGMCO.Controllers.PAGECONTROLLER
                 List<PRODUCT> _lstPRODUCT = db.PRODUCTS.Where(n => (n.PRODUCT_CODE.Contains(key) || n.PRODUCT_NAME.Contains(key)) && n.SUPPLIER_ID == _SUPPLIER.SUPPLIER_ID).ToList();
                 ViewBag.KeySearch = key;
                 ViewBag.NumProduct = _lstPRODUCT.Count;
+                ViewBag.ListSupplier = new SelectList(db.SUPPLIERS.OrderByDescending(n => n.SUPPLIER_ID).ToList(), "Supplier_ID", "SUPPLIER_NAME");
+                ViewBag.ListCategory = new SelectList(db.CATEGORIES.OrderByDescending(n => n.CATEGORY_ID).ToList(), "Category_ID", "CATEGORY_NAME");
+                return View(_lstPRODUCT);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Http404", "Error"); // 404
+            }
+        }
+        [HttpGet]
+        public ActionResult Search()
+        {
+            try
+            {
+                string key = "";
+                SUPPLIER _SUPPLIER = (SUPPLIER)Session["SUPPLIER_MODEL"];
+                List<PRODUCT> _lstPRODUCT = db.PRODUCTS.Where(n => (n.PRODUCT_CODE.Contains(key) || n.PRODUCT_NAME.Contains(key)) && n.SUPPLIER_ID == _SUPPLIER.SUPPLIER_ID).ToList();
+                ViewBag.KeySearch = key;
+                ViewBag.NumProduct = _lstPRODUCT.Count;
+                ViewBag.ListSupplier = new SelectList(db.SUPPLIERS.OrderByDescending(n => n.SUPPLIER_ID).ToList(), "Supplier_ID", "SUPPLIER_NAME");
+                ViewBag.ListCategory = new SelectList(db.CATEGORIES.OrderByDescending(n => n.CATEGORY_ID).ToList(), "Category_ID", "CATEGORY_NAME");
                 return View(_lstPRODUCT);
             }
             catch (Exception ex)
