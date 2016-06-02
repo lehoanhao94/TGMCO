@@ -1,0 +1,612 @@
+﻿@using TGMCO.Models;
+@using TGMCO.Models.Entity;
+
+@model TGMCO.Models.Entity.UserProfilesModel
+
+@{
+    ViewBag.Title = "Tuấn Gia Minh | Hồ sơ cá nhân " + Model.USER_PROFILES.FULL_NAME;
+    Layout = "~/Views/Shared/_PageLayout.cshtml";
+}
+
+@{
+    if (Session["SUPPLIER"].ToString().Equals("MAKITA"))
+    {
+        <style>
+            h1, .wizard-inner {
+                background-color: #018A9C !important;
+                color: white;
+            }
+        </style>
+    }
+
+    SUPPLIER m_SUPPLIER = (SUPPLIER)Session["SUPPLIER_MODEL"];
+    List<ORDER> m_lstORDER = (List<ORDER>)ViewBag.ListOrder;
+    OrderStatusModel m_Order_Status = new OrderStatusModel();
+    OrderModel m_Order = new OrderModel();
+}
+
+@section LeftMenu{
+    <div id="Left-Menu">
+        <div class="nav-side-menu">
+            <div class="brand makita-menu-header"><strong> MENU </strong></div>
+            <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+
+            <div class="menu-list">
+
+                <ul id="menu-content" class="menu-content collapse out">
+                    <li data-toggle="collapse" data-target="#abcde" class="collapsed">
+                        <a><i class="fa fa-globe fa-lg"></i> TRANG CHỦ MAKITA </a>
+                    </li>
+                    <li data-toggle="collapse" data-target="#abcde" class="collapsed">
+                        <a><i class="fa fa-globe fa-lg"></i> SẢN PHẨM MỚI </a>
+                    </li>
+                    <li data-toggle="collapse" data-target="#service" class="collapsed">
+                        <a><i class="fa fa-globe fa-lg"></i> PHỤ KIỆN <span class="arrow"></span></a>
+                    </li>
+                    <ul class="sub-menu collapse" id="service">
+                        <li>Máy khoan</li>
+                        <li>Máy mài</li>
+                        <li>Máy cưa</li>
+                        <li>Máy cắt </li>
+                        <li>Máy bào</li>
+                    </ul>
+
+                    <li data-toggle="collapse" data-target="#abcd" class="collapsed">
+                        <a><i class="fa fa-globe fa-lg"></i> CÔNG NGHỆ <span class="arrow"></span></a>
+                    </li>
+                    <ul class="sub-menu collapse" id="abcd">
+                        <li>Công nghệ AVT</li>
+                        <li>Công nghệ MM4</li>
+                        <li>Công nghệ LXT</li>
+                        <li>Công nghệ DXT </li>
+                        <li>Công nghệ XPT</li>
+                    </ul>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    @{
+        Html.RenderAction("CategoryMenu", "Partial", new { id = m_SUPPLIER.SUPPLIER_ID });
+    }
+}
+
+<div class="well well-small clearfix" style="margin-bottom: 0px;">
+    <div class="row-fluid">
+        <div class="col-lg-2">
+            <img alt="@Model.USER.USER_NAME" src="@Url.Content(@Model.USER_PROFILES.AVATAR)" class="img-polaroid" />
+        </div>
+        <div class="col-lg-4">
+            <h3>@Model.USER_PROFILES.FULL_NAME</h3>
+            <ul class="unstyled">
+                <li><i class="fa fa-envelope-o" aria-hidden="true"></i> @Model.USER_PROFILES.EMAIL</li>
+                <li><i class="fa fa-phone-square" aria-hidden="true"></i> @Model.USER_PROFILES.MOBILE</li>
+                <li><i class="fa fa-home" aria-hidden="true"></i> @Model.USER_PROFILES.ADDRESS</li>
+            </ul>
+        </div>
+        <div class="col-lg-6">
+            <ul class="inline stats">
+                <li class="col-lg-2">
+                    <span>275</span>
+                    Hóa đơn
+                </li>
+                <li class="col-lg-2">
+                    <span>354</span>
+                    Sản phẩm
+                </li>
+                <li class="col-lg-2">
+                    <span>@Model.USER_PROFILES.POINTS</span>
+                    Điểm
+                </li>
+            </ul>
+            <div>
+                <!--/span6-->
+            </div><!--/row-->
+        </div>
+        <!--Body content-->
+    </div>
+</div>
+<div class="panel with-nav-tabs panel-default">
+    <div class="panel-heading">
+        <ul class="nav nav-tabs">
+            <li class="active" style="width: 25%; text-align: center"><a href="#tab1default" data-toggle="tab">Chỉnh sửa thông tin</a></li>
+            <li style="width: 25%; text-align: center"><a href="#tab2default" data-toggle="tab">Đổi mật khẩu</a></li>
+            <li style="width: 25%; text-align: center"><a href="#tab3default" data-toggle="tab">Danh sách hóa đơn</a></li>
+            <li style="width: 25%; text-align: center"><a href="#tab4default" data-toggle="tab">Liên lạc với quản trị</a></li>
+        </ul>
+    </div>
+    <div class="panel-body">
+        <div class="tab-content">
+            <div class="tab-pane fade in active" id="tab1default">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="email">Họ tên:</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" required maxlength="30" id="name" placeholder="Nhập họ và tên bạn." value="@Model.USER_PROFILES.FULL_NAME">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="email">Email:</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control disabled" readonly id="name" value="@Model.USER_PROFILES.EMAIL">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="email">Số điện thoại:</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" pattern="[0-9].{6,11}" title="Vui lòng nhập một số điện thoại" maxlength="11" id="name" placeholder="Nhập số điện thoại." value="@Model.USER_PROFILES.MOBILE">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="email">Địa chỉ:</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" required maxlength="150" id="name" placeholder="Nhập địa chỉ." value="@Model.USER_PROFILES.ADDRESS">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="email">Avatar:</label>
+                        <div class="col-sm-6">
+                            <div class="input-group image-preview">
+                                <input type="text" class="form-control image-preview-filename" value="@Url.Content(@Model.USER_PROFILES.AVATAR)" disabled="disabled"> <!-- don't give a name === doesn't send on POST/GET -->
+                                <span class="input-group-btn">
+                                    <!-- image-preview-clear button -->
+                                    <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
+                                        <span class="glyphicon glyphicon-remove"></span> Xóa
+                                    </button>
+                                    <!-- image-preview-input -->
+                                    <div class="btn btn-default image-preview-input">
+                                        <span class="glyphicon glyphicon-folder-open"></span>
+                                        <span class="image-preview-input-title">Chọn ảnh</span>
+                                        <input type="file" accept="image/png, image/jpeg, image/gif" value="@Url.Content(@Model.USER_PROFILES.AVATAR)" name="input-file-preview" /> <!-- rename it -->
+                                    </div>
+                                </span>
+                            </div><!-- /input-group image-preview [TO HERE]-->
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-6">
+                            <button style="width: 100%;" type="submit" class="btn btn-success">Cập nhật</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="tab-pane fade" id="tab2default">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="email">Mật khẩu cũ:</label>
+                        <div class="col-sm-6">
+                            <input type="password" pattern="[A-Za-z0-9].{6,}" title="Mật khẩu không được chưa ký tự đặc biệt, dài trên 6 ký tự." class="form-control" required maxlength="30" id="name" placeholder="Nhập mật khẩu cũ của bạn.">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="email">Mật khẩu mới:</label>
+                        <div class="col-sm-6">
+                            <input type="password" pattern="[A-Za-z0-9].{6,}" title="Mật khẩu không được chưa ký tự đặc biệt, dài trên 6 ký tự." class="form-control" required maxlength="30" id="name" placeholder="Nhập mật khẩu mới của bạn.">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="email">Nhập lại mật khẩu mới:</label>
+                        <div class="col-sm-6">
+                            <input type="password" pattern="[A-Za-z0-9].{6,}" title="Mật khẩu không được chưa ký tự đặc biệt, dài trên 6 ký tự." class="form-control" required maxlength="30" id="name" placeholder="Nhập lại mật khẩu mới.">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-6">
+                            <button style="width: 100%;" type="submit" class="btn btn-success">Cập nhật</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="tab-pane fade" id="tab3default">
+                <div class="panel-body">
+                    <div style="height: 44px;">
+                        <div class="pull-right">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-success btn-filter" data-target="stt-1">Đã giao hàng</button>
+                                <button type="button" class="btn btn-warning btn-filter" data-target="stt-2">Chưa giao hàng</button>
+                                <button type="button" class="btn btn-danger btn-filter" data-target="stt-3">Chưa thanh toán</button>
+                                <button type="button" class="btn btn-default btn-filter" data-target="all">Tất cả</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-container">
+                        <table class="table table-filter">
+                            <tbody>
+                                @foreach (var order in m_lstORDER)
+                                {
+
+                                    <tr data-status="stt-@order.ORDER_STATUS_ID" data-for=".cyruxx-@order.ORDER_ID" class="dropdown-user">
+                                        <td>
+                                            <div class="media">
+                                                <div class="media-body">
+                                                    <span class="media-meta pull-right">@order.ORDER_DATE.ToString("dd/MM/yyyy")</span>
+                                                    <h4 class="title">
+                                                        #VNT-@order.ORDER_ID
+                                                        <span class="pull-right stt-@order.ORDER_STATUS_ID">@string.Format("{0:0,0}", @order.SUBTOTAL) VNĐ - (@m_Order_Status.GetName(@order.ORDER_STATUS_ID))</span>
+                                                    </h4>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <div class="row-fluid user-infos cyruxx-@order.ORDER_ID">
+                                        <div class="span10 offset1">
+                                            
+                                                <ul class="list-group">
+                                                    <li class="list-group-item stt-@order.ORDER_STATUS_ID">
+                                                        <span class="prefix"><strong>Mã hóa đơn:</strong></span>
+                                                        <span class=""><strong>#VNT-@order.ORDER_ID</strong></span>
+                                                        <span class="prefix pull-right">@string.Format("{0:0,0}", @order.SUBTOTAL) VNĐ - (@m_Order_Status.GetName(@order.ORDER_STATUS_ID)) - @order.ORDER_DATE.ToString("dd.MM.yyyy")</span>
+                                                    </li>
+                                                    <li class="list-group-item" style="height: 55px;">                                                       
+                                                        <span class="prefix col-sm-3" style="line-height: 2.3">Họ tên người đặt hàng:</span>
+                                                        <div class="col-sm-9">
+                                                            <input type="text" class="form-control" required maxlength="30" id="name" placeholder="Nhập họ và tên bạn." value="@order.SHIP_NAME">
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-group-item" style="height: 55px;">
+                                                        <span class="prefix col-sm-3" style="line-height: 2.3">Địa chỉ người đặt hàng:</span>
+                                                        <div class="col-sm-9">
+                                                            <input type="text" class="form-control" required maxlength="30" id="name" placeholder="Nhập họ và tên bạn." value="@order.SHIP_ADDRESS">
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-group-item" style="height: 55px;">
+                                                        <span class="prefix col-sm-3" style="line-height: 2.3">Số điện thoại:</span>
+                                                        <div class="col-sm-9">
+                                                            <input type="text" class="form-control" required maxlength="30" id="name" placeholder="Nhập họ và tên bạn." value="@order.SHIP_PHONE">
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-group-item" style="height: 55px;">
+                                                        <span class="prefix col-sm-3" style="line-height: 2.3">Email:</span>
+                                                        <div class="col-sm-9">
+                                                            <input type="text" class="form-control" required maxlength="30" id="name" placeholder="Nhập họ và tên bạn." value="@order.SHIP_EMAIL">
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-group-item" style="height: 55px;">
+                                                        <span class="prefix col-sm-3" style="line-height: 2.3">Ghi chú:</span>
+                                                        <div class="col-sm-9">
+                                                            <input type="text" class="form-control" required maxlength="30" id="name" placeholder="Nhập họ và tên bạn." value="@order.NOTE">
+                                                        </div>
+                                                    </li>
+                                                    @foreach(var order_detail in @m_Order.GetListOrderDetail(order.ORDER_ID))
+                                                    {
+                                                    <li class="list-group-item" style="height: 55px;">
+                                                        <span class="prefix col-sm-2">@order_detail.PRODUCT_ID</span>
+                                                        <span class="prefix col-sm-2">@order_detail.UNIT_PRICE</span>
+                                                        <span class="prefix col-sm-2">@order_detail.QUANTITY</span>
+                   
+                                                    </li>
+                                                    }
+                                                </ul>
+                                                
+                                            </div>
+                                    </div>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="tab4default">Default 4</div>
+        </div>
+    </div>
+</div>
+
+
+@section RightContent{
+    <img class="ads-right" src="~/Content/Page_Layout/img/Makita-qc.jpg" width="238">
+    <img class="ads-right" src="~/Content/Page_Layout/img/lienhequangcao.jpg" width="238">
+    <img class="ads-right" src="~/Content/Page_Layout/img/lienhequangcao.jpg" width="238">
+    <img class="ads-right" src="~/Content/Page_Layout/img/lienhequangcao.jpg" width="238">
+    <img class="ads-right" src="~/Content/Page_Layout/img/lienhequangcao.jpg" width="238">
+}
+<script>
+    $(document).ready(function () {
+        var panels = $('.user-infos');
+        var panelsButton = $('.dropdown-user');
+        panels.hide();
+
+        //Click dropdown
+        panelsButton.click(function () {
+            //get data-for attribute
+            var dataFor = $(this).attr('data-for');
+            var idFor = $(dataFor);
+
+            //current button
+            var currentButton = $(this);
+            idFor.slideToggle(400, function () {
+                //Completed slidetoggle
+            })
+        });
+
+
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+    $('.btn-filter').on('click', function () {
+        var $target = $(this).data('target');
+        if ($target != 'all') {
+            $('.table tr').css('display', 'none');
+            $('.table tr[data-status="' + $target + '"]').fadeIn('slow');
+        } else {
+            $('.table tr').css('display', 'none').fadeIn('slow');
+        }
+    });
+</script>
+<style>
+    .list-group .stt-3 {
+        background-color: #d9534f;
+        color: white;
+    }
+     .media-body {
+        width: 729px;
+    }
+
+    .panel {
+        border: 1px solid #ddd;
+        background-color: #fcfcfc;
+    }
+
+        .panel .btn-group {
+            margin: 0px 0 10px;
+        }
+
+            .panel .btn-group .btn {
+                transition: background-color .3s ease;
+            }
+
+    .table-filter {
+        background-color: #fff;
+        border-bottom: 1px solid #eee;
+    }
+
+        .table-filter tbody tr:hover {
+            cursor: pointer;
+            background-color: #eee;
+        }
+
+        .table-filter tbody tr td {
+            padding: 10px;
+            vertical-align: middle;
+            border-top-color: #eee;
+        }
+
+        .table-filter tbody tr.selected td {
+            background-color: #eee;
+        }
+
+        .table-filter tr td:first-child {
+            width: 38px;
+        }
+
+        .table-filter tr td:nth-child(2) {
+            width: 35px;
+        }
+
+    .ckbox {
+        position: relative;
+    }
+
+        .ckbox input[type="checkbox"] {
+            opacity: 0;
+        }
+
+        .ckbox label {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+
+
+
+    .table-filter .media-photo {
+        width: 35px;
+    }
+
+    .table-filter .media-body {
+        display: block;
+        /* Had to use this style to force the div to expand (wasn't necessary with my bootstrap version 3.3.6) */
+    }
+
+    .table-filter .media-meta {
+        font-size: 11px;
+        color: #999;
+    }
+
+    .table-filter .media .title {
+        color: #2BBCDE;
+        font-size: 14px;
+        font-weight: bold;
+        line-height: normal;
+        margin: 0;
+    }
+
+        .table-filter .media .title span {
+            font-size: .8em;
+            margin-right: 20px;
+        }
+
+            .table-filter .media .title span .stt-1 {
+                color: #5cb85c;
+            }
+
+            .table-filter .media .title span.stt-2 {
+                color: #f0ad4e;
+            }
+
+            .table-filter .media .title span.stt-3 {
+                color: #d9534f;
+            }
+
+    .table-filter .media .summary {
+        font-size: 14px;
+    }
+</style>
+<style>
+    .image-preview-input {
+        position: relative;
+        overflow: hidden;
+        margin: 0px;
+        color: #333;
+        background-color: #fff;
+        border-color: #ccc;
+    }
+
+        .image-preview-input input[type=file] {
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin: 0;
+            padding: 0;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            filter: alpha(opacity=0);
+        }
+
+    .image-preview-input-title {
+        margin-left: 2px;
+    }
+
+    .stats {
+        text-align: center;
+        text-shadow: 1px 1px 0px #fff;
+        margin-top: 25px;
+    }
+
+        .stats li {
+            width: 124px;
+        }
+
+        .stats span {
+            font-family: Helvetica;
+            font-weight: bold;
+            text-shadow: 1px 1px 0px #fff;
+            font-size: 4em;
+            display: block;
+            line-height: 1em;
+        }
+
+
+    .panel.with-nav-tabs .panel-heading {
+        padding: 5px 5px 0 5px;
+    }
+
+    .panel.with-nav-tabs .nav-tabs {
+        border-bottom: none;
+    }
+
+    .panel.with-nav-tabs .nav-justified {
+        margin-bottom: -1px;
+    }
+    /********************************************************************/
+    /*** PANEL DEFAULT ***/
+    .with-nav-tabs.panel-default .nav-tabs > li > a,
+    .with-nav-tabs.panel-default .nav-tabs > li > a:hover,
+    .with-nav-tabs.panel-default .nav-tabs > li > a:focus {
+        color: #777;
+    }
+
+        .with-nav-tabs.panel-default .nav-tabs > .open > a,
+        .with-nav-tabs.panel-default .nav-tabs > .open > a:hover,
+        .with-nav-tabs.panel-default .nav-tabs > .open > a:focus,
+        .with-nav-tabs.panel-default .nav-tabs > li > a:hover,
+        .with-nav-tabs.panel-default .nav-tabs > li > a:focus {
+            color: #777;
+            background-color: #ddd;
+            border-color: transparent;
+        }
+
+    .with-nav-tabs.panel-default .nav-tabs > li.active > a,
+    .with-nav-tabs.panel-default .nav-tabs > li.active > a:hover,
+    .with-nav-tabs.panel-default .nav-tabs > li.active > a:focus {
+        color: #555;
+        background-color: #fff;
+        border-color: #ddd;
+        border-bottom-color: transparent;
+    }
+
+    .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu {
+        background-color: #f5f5f5;
+        border-color: #ddd;
+    }
+
+        .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > li > a {
+            color: #777;
+        }
+
+            .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > li > a:hover,
+            .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > li > a:focus {
+                background-color: #ddd;
+            }
+
+        .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > .active > a,
+        .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > .active > a:hover,
+        .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > .active > a:focus {
+            color: #fff;
+            background-color: #555;
+        }
+    /********************************************************************/
+</style>
+<script>
+    $(document).on('click', '#close-preview', function () {
+        $('.image-preview').popover('hide');
+        // Hover befor close the preview
+        $('.image-preview').hover(
+            function () {
+                $('.image-preview').popover('show');
+            },
+             function () {
+                 $('.image-preview').popover('hide');
+             }
+        );
+    });
+
+    $(function () {
+        // Create the close button
+        var closebtn = $('<button/>', {
+            type: "button",
+            text: 'x',
+            id: 'close-preview',
+            style: 'font-size: initial;',
+        });
+        closebtn.attr("class", "close pull-right");
+        // Set the popover default content
+        $('.image-preview').popover({
+            trigger: 'manual',
+            html: true,
+            title: "<strong>Xem trước</strong>" + $(closebtn)[0].outerHTML,
+            content: "Chưa chọn ảnh nào",
+            placement: 'bottom'
+        });
+        // Clear event
+        $('.image-preview-clear').click(function () {
+            $('.image-preview').attr("data-content", "").popover('hide');
+            $('.image-preview-filename').val("");
+            $('.image-preview-clear').hide();
+            $('.image-preview-input input:file').val("");
+            $(".image-preview-input-title").text("Browse");
+        });
+        // Create the preview image
+        $(".image-preview-input input:file").change(function () {
+            var img = $('<img/>', {
+                id: 'dynamic',
+                width: 250,
+                height: 200
+            });
+            var file = this.files[0];
+            var reader = new FileReader();
+            // Set preview image into the popover data-content
+            reader.onload = function (e) {
+                $(".image-preview-input-title").text("Change");
+                $(".image-preview-clear").show();
+                $(".image-preview-filename").val(file.name);
+                img.attr('src', e.target.result);
+                $(".image-preview").attr("data-content", $(img)[0].outerHTML).popover("show");
+            }
+            reader.readAsDataURL(file);
+        });
+    });
+</script>

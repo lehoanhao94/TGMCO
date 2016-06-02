@@ -27,7 +27,12 @@ namespace TGMCO
             routes.MapRoute(
                 name: "Search",
                 url: "ket-qua-tim-kiem",
-                defaults: new { controller = "Product", action = "Search" }
+                defaults: new { controller = "Product", action = "Search"}
+            );
+            routes.MapRoute(
+                name: "AdvanceSearch",
+                url: "ket-qua-tim-kiem-nang-cao",
+                defaults: new { controller = "Product", action = "AdvanceSearch"}
             );
             routes.MapRoute(
                 name: "Category",

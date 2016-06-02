@@ -4,7 +4,7 @@
 @model List<PRODUCT>
 
 @{
-    ViewBag.Title = "Tuấn Gia Minh | Tìm kiếm, từ khóa:" + ViewBag.KeySearch;
+    ViewBag.Title = "Tuấn Gia Minh | Tìm kiếm, từ khóa: " + ViewBag.KeySearch;
     Layout = "~/Views/Shared/_PageLayout.cshtml";
 }
 
@@ -86,99 +86,114 @@
     }
 }
 
-<h1 style="text-align: center; font-size: 20px;padding-top: 0; margin-top: 0;margin-bottom: 5px;height: 35px;line-height: 1.6;">Tìm thấy @Model.Count kết quả với từ khóa: "@ViewBag.KeySearch"</h1>
+<h1 style="text-align: center; font-size: 20px;padding-top: 0; margin-top: 0;margin-bottom: 5px;height: 35px;line-height: 1.6;">Kết quả tìm kiếm</h1>
 
 
-    <div class="row-fluid user-row">
-        <button type="button" data-for=".cyruxx" class="dropdown-user btn btn-primary" style="width: 100%;">Tìm kiếm nâng cao</button>
-    </div>
-    <div class="row-fluid user-infos cyruxx">
-        <div class="span10 offset1">
-            <div class="panel panel-primary">
-                <div class="panel-body">
-                    <div class="row-fluid">
-                        <form class="form-horizontal" role="form">
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="email">Từ khóa:</label>
-                                <div class="col-sm-10">
-                                    <input type="email" class="form-control" id="email" placeholder="Nhập mã sản phẩm hoặc tên sản phẩm">
-                                </div>
+<div class="row-fluid user-row">
+    <button type="button" data-for=".cyruxx" class="dropdown-user btn btn-primary" style="width: 100%;">Tìm kiếm nâng cao</button>
+</div>
+<div class="row-fluid user-infos cyruxx">
+    <div class="span10 offset1">
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                <div class="row-fluid">
+                    <form class="form-horizontal" role="form" method="post" action="@Url.Action("AdvanceSearch", "Product")">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="email">Từ khóa:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" required maxlength="50" name="txtKeyWordAS" id="key" placeholder="Nhập mã sản phẩm hoặc tên sản phẩm">
                             </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="email">Nhà cung cấp:</label>
-                                <div class="col-sm-4">
-                                    @Html.DropDownList("ListSupplier", (IEnumerable<SelectListItem>)ViewBag.ListSupplier, "Chọn nhà cung cấp", new { @class = "form-control" })
-                                </div>
-                                <label class="control-label col-sm-2" for="email">Danh mục:</label>
-                                <div class="col-sm-4">
-                                    @Html.DropDownList("ListCategory", (IEnumerable<SelectListItem>)ViewBag.ListCategory, "Chọn danh mục sản phẩm", new { @class = "form-control" })
-                                </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="email">Nhà cung cấp:</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownList("ListSupplier", (IEnumerable<SelectListItem>)ViewBag.ListSupplier, "Chọn nhà cung cấp", new { @class = "form-control" })
+                            </div>
+                            <label class="control-label col-sm-2" for="email">Danh mục:</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownList("ListCategory", (IEnumerable<SelectListItem>)ViewBag.ListCategory, "Chọn danh mục sản phẩm", new { @class = "form-control" })
+                            </div>
 
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="email">Giá từ: </label>
-                                <div class="col-sm-10">
-                                    <div ms-controller="range-success" class="range row">
-                                        <div class="col-xs-7 col-sm-8">
-                                            <div class="range-container">
-                                                <div class="range-track progress">
-                                                    <div ms-css-width="value + &quot;%&quot;" class="range-track-bar progress-bar progress-bar-striped active progress-bar-primary"></div>
-                                                </div>
-                                                <input type="range" min="@m_PRODUCT.GetMinPrice()" max="@m_PRODUCT.GetMaxPrice()" step="10000" ms-duplex="value" ms-on-change="setValue" class="range-control" />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="email">Giá từ: </label>
+                            <div class="col-sm-10">
+                                <div ms-controller="range-success" class="range row">
+                                    <div class="col-xs-7 col-sm-8">
+                                        <div class="range-container">
+                                            <div class="range-track progress">
+                                                <div ms-css-width="value + &quot;%&quot;" class="range-track-bar progress-bar progress-bar-striped active progress-bar-primary"></div>
                                             </div>
+                                            <input type="range" min="@m_PRODUCT.GetMinPrice()" max="@m_PRODUCT.GetMaxPrice()" step="10000" ms-duplex="value" ms-on-change="setValue" class="range-control" />
                                         </div>
-                                        <div class="col-xs-5 col-sm-4">
-                                            <div class="range-popover popover right">
-                                                <div class="arrow"></div>
-                                                <div class="popover-content">
-                                                    <input type="number" name="MinPrice" min="@m_PRODUCT.GetMinPrice()" max="@m_PRODUCT.GetMaxPrice()" step="10000" value="50000" ms-duplex-number="value" class="form-control input-lg text-center" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>                              
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="email">Đến:</label>
-                                <div class="col-sm-10">
-                                    <div ms-controller="range-primary" class="range row">
-                                        <div class="col-xs-7 col-sm-8">
-                                            <div class="range-container">
-                                                <div class="range-track progress">
-                                                    <div ms-css-width="value + &quot;%&quot;" class="range-track-bar progress-bar progress-bar-striped active progress-bar-primary"></div>
-                                                </div>
-                                                <input type="range" min="@m_PRODUCT.GetMinPrice()" max="@m_PRODUCT.GetMaxPrice()" ms-duplex="value" step="10000" ms-on-change="setValue" class="range-control" />
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-5 col-sm-4">
-                                            <div class="range-popover popover right">
-                                                <div class="arrow"></div>
-                                                <div class="popover-content">
-                                                    <input type="number" name="MaxPrice" min="@m_PRODUCT.GetMinPrice()" max="@m_PRODUCT.GetMaxPrice()" ms-duplex-number="value" step="10000" class="form-control input-lg text-center" />
-                                                </div>
+                                    </div>
+                                    <div class="col-xs-5 col-sm-4">
+                                        <div class="range-popover popover right">
+                                            <div class="arrow"></div>
+                                            <div class="popover-content">
+                                                <input type="number" name="MinPrice" min="@m_PRODUCT.GetMinPrice()" max="@m_PRODUCT.GetMaxPrice()" step="10000" value="50000" ms-duplex-number="value" class="form-control input-lg text-center" />
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="submit" class="btn btn-primary pull-right">Tìm kiếm</button>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="email">Đến:</label>
+                            <div class="col-sm-10">
+                                <div ms-controller="range-primary" class="range row">
+                                    <div class="col-xs-7 col-sm-8">
+                                        <div class="range-container">
+                                            <div class="range-track progress">
+                                                <div ms-css-width="value + &quot;%&quot;" class="range-track-bar progress-bar progress-bar-striped active progress-bar-primary"></div>
+                                            </div>
+                                            <input type="range" min="@m_PRODUCT.GetMinPrice()" max="@m_PRODUCT.GetMaxPrice()" ms-duplex="value" step="10000" ms-on-change="setValue" class="range-control" />
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-5 col-sm-4">
+                                        <div class="range-popover popover right">
+                                            <div class="arrow"></div>
+                                            <div class="popover-content">
+                                                <input type="number" name="MaxPrice" min="@m_PRODUCT.GetMinPrice()" max="@m_PRODUCT.GetMaxPrice()" ms-duplex-number="value" step="10000" class="form-control input-lg text-center" />
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-
-                            
-                        </form>
-                    </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-primary pull-right">Tìm kiếm</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
 
 @{
+    if(Model != null)
+    {
     if (Model.Count > 0)
     {
+        <div class="alert alert-success">
+            <strong>Tìm thấy @ViewBag.NumProduct sản phẩm !</strong>
+            <ul>
+                <li>- Từ khóa: @ViewBag.KeySearch</li>
+                @if (ViewBag.Supplier != null)
+                {
+                <li>- Nhà cung cấp: @ViewBag.Supplier</li>}
+                @if (ViewBag.Category != null)
+                {
+                <li>- Danh mục: @ViewBag.Category</li>}
+                @if (ViewBag.MinPrice != null)
+                {
+                <li>- Giá từ: @string.Format("{0:0,0}", @ViewBag.MinPrice) VNĐ - Đến: @string.Format("{0:0,0}", @ViewBag.MaxPrice) VNĐ</li>}
+            </ul>
+        </div>
         foreach (var product in Model)
         {
             <div class="col-sm-3 product-cart">
@@ -219,10 +234,22 @@
     else
     {
         <div class="alert alert-warning">
-            <strong>Xin lỗi!</strong> Chúng tôi không tìm thấy kết quả nào với từ khóa @ViewBag.KeySearch.
+            <strong>Xin lỗi chúng tôi không tìm thấy sản phẩm nào với điều kiện vừa nhập!</strong>
+            <ul>
+                <li>- Từ khóa: @ViewBag.KeySearch</li>
+                @if (ViewBag.Supplier != null)
+                {
+                    <li>- Nhà cung cấp: @ViewBag.Supplier</li>}
+                @if (ViewBag.Category != null)
+                {
+                    <li>- Danh mục: @ViewBag.Category</li>}
+                @if (ViewBag.MinPrice != null)
+                {
+                    <li>- Giá từ: @string.Format("{0:0,0}", @ViewBag.MinPrice) VNĐ - Đến: @string.Format("{0:0,0}", @ViewBag.MaxPrice) VNĐ</li>}
+            </ul>
         </div>
     }
-
+    }
 }
 
 @section RightContent{
@@ -236,7 +263,7 @@
     .product-cart {
         padding: 1px;
         padding-bottom: 5px;
-    }   
+    }
 </style>
 <style>
     .range {
@@ -404,7 +431,7 @@
 
     }).call(this);
 </script>
-<script>  
+<script>
     $(document).ready(function () {
         var panels = $('.user-infos');
         var panelsButton = $('.dropdown-user');
@@ -424,7 +451,7 @@
         });
 
 
-        $('[data-toggle="tooltip"]').tooltip();      
+        $('[data-toggle="tooltip"]').tooltip();
     });
 </script>
 

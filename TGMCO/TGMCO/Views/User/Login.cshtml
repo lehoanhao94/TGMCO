@@ -15,8 +15,7 @@
         <div class="dropdown">
             <a href="#" data-toggle="dropdown" class="btn"><strong>Xin chào, @m_USER_PROFILES.FULL_NAME <span class="caret"></span></strong></a>
             <ul class="dropdown-menu user-dropdown">
-                <li><a href="#">Thông tin cá nhân </a></li>
-                <li><a href="#">Lịch sử mua hàng</a></li>
+                <li><a href="@Url.Action("Profile", "User", new { id = m_USER.USER_ID})">Hồ sơ cá nhân </a></li>
                 <li class="divider"></li>
                 <li><a href="/User/Logout"><span class="glyphicon glyphicon-log-out"></span> Đăng xuất</a></li>
             </ul>

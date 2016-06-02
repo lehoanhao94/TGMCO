@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TGMCO.Models;
+using TGMCO.Models.Entity;
 
 namespace TGMCO.Controllers.PAGECONTROLLER
 {
@@ -87,6 +88,24 @@ namespace TGMCO.Controllers.PAGECONTROLLER
             {
                 Session.Clear();
                 return RedirectToAction("Index", "Home");
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Http404", "Error"); // 404
+            }
+        }
+
+        public ActionResult Profile(int id)
+        {
+            try
+            {
+                var UserProfiles = from u in db.USERS
+                                   join upr in db.USER_PROFILES on u.USER_ID equals upr.USER_ID
+                                   where u.USER_ID == id
+                                   select new UserProfilesModel { USER = u, USER_PROFILES = upr };
+                ViewBag.ListOrder = db.ORDERS.Where(n => n.USER_ID == id).OrderByDescending(n => n.ORDER_STATUS_ID).ToList();
+                ViewBag.ListShipper = new SelectList(db.SHIPPERS.OrderByDescending(n => n.SHIPPER_ID).ToList(), "Shipper_ID", "SHIPPER_NAME");
+                return View(UserProfiles.FirstOrDefault());
             }
             catch (Exception ex)
             {

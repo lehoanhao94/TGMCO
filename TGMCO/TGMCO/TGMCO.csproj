@@ -231,6 +231,7 @@
       <DependentUpon>TGMCO.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Entity\CategoryExtraModel.cs" />
+    <Compile Include="Models\Entity\OrderModel.cs" />
     <Compile Include="Models\Entity\ShipperModel.cs" />
     <Compile Include="Models\Entity\PaymentMethodModel .cs" />
     <Compile Include="Models\Entity\OrderStatusModel.cs" />
@@ -1299,6 +1300,7 @@
     <Content Include="Views\Payment\Payment.cshtml" />
     <Content Include="Views\Order\PrintBill.cshtml" />
     <Content Include="Views\Product\Search.cshtml" />
+    <Content Include="Views\User\Profile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
