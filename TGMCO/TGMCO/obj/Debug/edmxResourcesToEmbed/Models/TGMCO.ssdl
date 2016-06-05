@@ -208,6 +208,7 @@
     <Property Name="DESCRIPTION" Type="nvarchar" MaxLength="150" />
     <Property Name="SUPPLIER_CODE" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="IMAGE" Type="nvarchar(max)" />
+    <Property Name="IDX" Type="int" />
   </EntityType>
   <EntityType Name="TECHNOLOGIES">
     <Key>

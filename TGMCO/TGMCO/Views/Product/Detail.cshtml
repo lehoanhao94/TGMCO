@@ -6,6 +6,7 @@
 @{
     ViewBag.Title = "Tuấn Gia Minh | " + Model.PRODUCT_NAME;
     Layout = "~/Views/Shared/_PageLayout.cshtml";
+    ViewBag.Description = "VietNamTool | " + Model.PRODUCT_NAME + " - " + Model.FEATURED + " - " + string.Format("{0:0,0}", Model.UNIT_PRICE) + " VNĐ.";
 }
 
 @{
@@ -139,7 +140,20 @@
             </tr>
             <tr>
                 <td>
-                    <div class="fb-share-button" data-href="@Request.RawUrl" data-layout="button_count" data-mobile-iframe="true"></div>
+                    <!-- AddToAny BEGIN -->
+                    <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+                        <a class="a2a_dd" href="@Request.RawUrl"></a>
+                        <a class="a2a_button_facebook"></a>
+                        <a class="a2a_button_google_plus"></a>
+                        <a class="a2a_button_google_gmail"></a>
+                    </div>
+                    <script>
+                        var a2a_config = a2a_config || {};
+                        a2a_config.locale = "vi";
+                    </script>
+                    <script async src="https://static.addtoany.com/menu/page.js"></script>
+                    <!-- AddToAny END -->
+                    <!--<div class="fb-share-button" data-href="@Request.RawUrl" data-layout="button_count" data-mobile-iframe="true"></div>-->
                 </td>
                 <td class="product-stock col-lg-6">
                     <button type="button" onclick="AddProduct(this)" id="btnAddProduct" data-ajax="true" data-id="@Model.PRODUCT_ID" data-code="@Model.PRODUCT_CODE" class="btn btn-default btnShopNow" aria-label="Left Align">
@@ -178,24 +192,33 @@
                 <div class="tab-pane fade" id="tab3default">@Model.ACCESSORIES</div>
                 <div class="tab-pane fade" id="tab4default">
                     <ul>
-                        <li>
+                        @if (@m_PRODUCT.GetFile1(@Model.PRODUCT_ID) != "#")
+                        {
+                                                    <li>
                             <a target="_blank" href="@Url.Content(@m_PRODUCT.GetFile1(@Model.PRODUCT_ID))" title="FILES1">
                                 <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                                 Parts Diagram
                             </a>
                         </li>
+                        }
+                        @if (@m_PRODUCT.GetFile2(@Model.PRODUCT_ID) != "#")
+                        {
                         <li>
-                            <a target="_blank" href="@Url.Content(@m_PRODUCT.GetFile1(@Model.PRODUCT_ID))" title="FILES1">
+                            <a target="_blank" href="@Url.Content(@m_PRODUCT.GetFile2(@Model.PRODUCT_ID))" title="FILES2">
                                 <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                                 Parts List
                             </a>
                         </li>
+                        }
+                        @if (@m_PRODUCT.GetFile3(@Model.PRODUCT_ID) != "#")
+                        {
                         <li>
-                            <a target="_blank" href="@Url.Content(@m_PRODUCT.GetFile1(@Model.PRODUCT_ID))" title="FILES1">
+                            <a target="_blank" href="@Url.Content(@m_PRODUCT.GetFile3(@Model.PRODUCT_ID))" title="FILES3">
                                 <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                                 Introduction Manual
                             </a>
                         </li>
+                        }
                     </ul>
                 </div>
                 <div class="tab-pane fade" id="tab5default">

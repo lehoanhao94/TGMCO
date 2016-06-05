@@ -6,7 +6,7 @@
 		height: 40px;
 }
 .Top-New-Product div{
-	background-color: #FED208;
+	background-color: #30454A;
 	height: 40px;
 }
 
@@ -48,7 +48,7 @@
 
 .row-product{
 	width: 100% !important;
-	border: 2px solid #FED208 ;
+	border: 2px solid #30454A ;
 	-webkit-border-radius: 0;
 	-webkit-border-top-right-radius: 50px;
 	-moz-border-radius: 20px;
@@ -120,7 +120,7 @@
 
 .btnShopNow{
 	width: 100%;
-	background-color: #FED208;
+	background-color: #30454A;
 }
 
 .btnShopNow:focus, .btnShopNow:hover{

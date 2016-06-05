@@ -4,7 +4,7 @@ body{
 
 #Main-Menu{
   height: 60px;
-  background-color: #FED208;
+  background-color: #30454A;
 }
 
 #btnHome{
@@ -135,7 +135,7 @@ body{
 }
 
 #Register a:hover{
-  color: #084C51;
+  color: white;
   }
 
  .navbar-inverse .navbar-nav > li > a{

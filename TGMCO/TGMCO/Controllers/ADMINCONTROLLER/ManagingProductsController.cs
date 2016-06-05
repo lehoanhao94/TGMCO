@@ -335,8 +335,16 @@ namespace TGMCO.Controllers.ADMINCONTROLLER
             try
             {
                 m_PRODUCT = db.PRODUCTS.Find(id);
+                int _isAddImagesNew = 0;
+                int _isAddFilesNew = 0;
+
                 m_PRODUCT_IMAGES = db.PRODUCT_IMAGES.Where(n => n.PRODUCT_ID == id).SingleOrDefault();
+                if (m_PRODUCT_IMAGES == null)
+                    _isAddImagesNew = 1;
+                
                 m_PRODUCT_FILES = db.PRODUCT_FILES.Where(n => n.PRODUCT_ID == id).SingleOrDefault();
+                if (m_PRODUCT_FILES == null)
+                    _isAddFilesNew = 1;
                 string _Temp = m_PRODUCT.PRODUCT_CODE;
                 m_PRODUCT.PRODUCT_CODE = collection.Get("PRODUCT_CODE").ToString();
                 if (db.PRODUCTS.Where(n => n.PRODUCT_CODE.Equals(m_PRODUCT.PRODUCT_CODE)).Count() == 0 || _Temp.Equals(m_PRODUCT.PRODUCT_CODE))
@@ -414,6 +422,9 @@ namespace TGMCO.Controllers.ADMINCONTROLLER
                                 Image.SaveAs(_path);
 
                             }
+
+                            if (_isAddImagesNew == 1)
+                                db.PRODUCT_IMAGES.Add(m_PRODUCT_IMAGES);
                             #endregion
 
                             #region UPLOAD FILES
@@ -447,6 +458,9 @@ namespace TGMCO.Controllers.ADMINCONTROLLER
                                 string _path = Path.Combine(Server.MapPath("~/FilesUpload/PRODUCTS/" + _fileNameRandom + "-" + fileUpload_3.FileName));
                                 fileUpload_3.SaveAs(_path);
                             }
+
+                            if (_isAddFilesNew == 1)
+                                db.PRODUCT_FILES.Add(m_PRODUCT_FILES);
                             #endregion
 
                             db.SaveChanges();

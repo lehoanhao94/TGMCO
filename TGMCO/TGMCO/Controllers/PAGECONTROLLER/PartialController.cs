@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TGMCO.Models;
+using TGMCO.Models.Entity;
 
 namespace TGMCO.Controllers.PAGECONTROLLER
 {
@@ -17,6 +18,10 @@ namespace TGMCO.Controllers.PAGECONTROLLER
         {
             try
             {
+                SupplierModel _SUPPLIER = new SupplierModel();
+                    Session["SUPPLIER"] = _SUPPLIER.GetSupplierName(id);
+                    Session["SUPPLIER_MODEL"] = db.SUPPLIERS.Find(id);
+
                 ViewBag.Supplier = db.SUPPLIERS.Find(id);
                 ViewBag.TITLE = title;
                 List<PRODUCT> _lstPRODUCT = db.PRODUCTS.Where(n => n.SUPPLIER_ID == id && n.IS_ACTIVE && n.IS_NEW).OrderByDescending(n => n.IDX).Take(8).ToList();
@@ -41,6 +46,10 @@ namespace TGMCO.Controllers.PAGECONTROLLER
         {
             try
             {
+                SupplierModel _SUPPLIER = new SupplierModel();
+                Session["SUPPLIER"] = _SUPPLIER.GetSupplierName(id);
+                Session["SUPPLIER_MODEL"] = db.SUPPLIERS.Find(id);
+
                 ViewBag.SUPPLIER_ID = id;
                 List<CATEGORIES_BY_SUPPLIER> _lstCATEGORY = db.CATEGORIES_BY_SUPPLIER.Where(n => n.SUPPLIER_ID == id).ToList();
                 return PartialView(_lstCATEGORY);

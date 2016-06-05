@@ -182,6 +182,7 @@
     <Property Name="DESCRIPTION" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
     <Property Name="SUPPLIER_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="IMAGE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IDX" Type="Int32" />
   </EntityType>
   <EntityType Name="TECHNOLOGy">
     <Key>

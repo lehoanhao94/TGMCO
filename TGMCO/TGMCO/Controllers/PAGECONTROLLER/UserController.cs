@@ -99,6 +99,15 @@ namespace TGMCO.Controllers.PAGECONTROLLER
         {
             try
             {
+                if(Session["SS_USER"] == null)
+                {
+                    RedirectToAction("Index", "Home");
+                }
+
+                SupplierModel _SUPPLIER = new SupplierModel();
+                Session["SUPPLIER"] = "DEFAULT";
+                Session["SUPPLIER_MODEL"] = db.SUPPLIERS.Find(20);
+
                 var UserProfiles = from u in db.USERS
                                    join upr in db.USER_PROFILES on u.USER_ID equals upr.USER_ID
                                    where u.USER_ID == id

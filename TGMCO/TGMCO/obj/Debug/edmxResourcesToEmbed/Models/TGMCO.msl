@@ -190,6 +190,7 @@
     <EntitySetMapping Name="SUPPLIERS">
       <EntityTypeMapping TypeName="TGMCOModel.SUPPLIER">
         <MappingFragment StoreEntitySet="SUPPLIERS">
+          <ScalarProperty Name="IDX" ColumnName="IDX" />
           <ScalarProperty Name="SUPPLIER_ID" ColumnName="SUPPLIER_ID" />
           <ScalarProperty Name="SUPPLIER_NAME" ColumnName="SUPPLIER_NAME" />
           <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />

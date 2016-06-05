@@ -39,12 +39,13 @@
             <tr>
                 <th style="width:100px;">Mã NCC</th>
                 <th>Tên nhà cung cấp</th>
-                <th>Mô tả</th>
                 <th style="width:300px;">Hình ảnh đại diện</th>
+                <th>Thay đổi ảnh đại diện</th>
+                <th style="width:100px;">IDX</th>
                 <th></th>
             </tr>
         </thead>
-        <tbody>
+        <!-- <tbody>
             @using (Html.BeginForm("Create", "ManagingSuppliers", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
                 @Html.AntiForgeryToken()
@@ -60,16 +61,17 @@
                     </td>
                 </tr>
             }
-        </tbody>
+        </tbody> -->
 
         <tbody class="list">
             @foreach (var supplier in Model)
             {
-                <tr id="row_@supplier.SUPPLIER_ID">
-                    <td class="code">@supplier.SUPPLIER_CODE</td>
-                    <td class="name">@supplier.SUPPLIER_NAME</td>
-                    <td class="description">@supplier.DESCRIPTION</td>
-                    @{
+
+                <form action="~/ManagingSuppliers/Update/@supplier.SUPPLIER_ID" enctype="multipart/form-data" method="post">
+                    <tr id="row_@supplier.SUPPLIER_ID">
+                        <td class="code">@supplier.SUPPLIER_CODE</td>
+                        <td class="name">@supplier.SUPPLIER_NAME</td>
+                        @{
                 if (@supplier.IMAGE != null)
                 {
                     <td><img src="@Url.Content(@supplier.IMAGE)" alt="@supplier.SUPPLIER_NAME" width="200" /></td>
@@ -78,17 +80,20 @@
                 {
                     <td>Không có hình ảnh...</td>
                 }
-                    }
-                    <td class="btn-group">
-                        <button type="button" class="edit-item-btn btn btn-primary"><i class="fa fa-pencil-square-o fa-2" aria-hidden="true"></i></button>
-                        <a data-ajax="true" href="/ManagingSuppliers/Delete/@supplier.SUPPLIER_ID" type="button" data-ajax-confirm="Bạn có muốn xóa nhà cung cấp này không?" data-ajax-complete="$('#row_@supplier.SUPPLIER_ID').remove()" data-ajax-method="Delete" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                    </td>
-                </tr>
+                        }
+                        <td>
+                            <input type="file" id="btnAvatar_In" name="fileUpload" value="Chọn hình..." style="height: 33px;width: 300px; ">
+                        </td>
+                        <td>
+                            <input type="number" name="IDX" class="form-control" value="@supplier.IDX" style="height: 33px;width: 100px; ">
+                        </td>
+                        <td class="btn-group">
+                            <button type="submit" class="edit-item-btn btn btn-primary"><i class="fa fa-pencil-square-o fa-2" aria-hidden="true"></i></button>
+                            <!-- <a data-ajax="true" href="/ManagingSuppliers/Delete/@supplier.SUPPLIER_ID" type="button" data-ajax-confirm="Bạn có muốn xóa nhà cung cấp này không?" data-ajax-complete="$('#row_@supplier.SUPPLIER_ID').remove()" data-ajax-method="Delete" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a> -->
+                        </td>
+                    </tr>
+                </form>
             }
         </tbody>
     </table>
 </div>
-
-@section footerjs{
-
-}

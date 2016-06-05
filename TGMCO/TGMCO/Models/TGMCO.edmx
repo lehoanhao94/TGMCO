@@ -213,6 +213,7 @@
           <Property Name="DESCRIPTION" Type="nvarchar" MaxLength="150" />
           <Property Name="SUPPLIER_CODE" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="IMAGE" Type="nvarchar(max)" />
+          <Property Name="IDX" Type="int" />
         </EntityType>
         <EntityType Name="TECHNOLOGIES">
           <Key>
@@ -494,6 +495,7 @@
           <Property Name="DESCRIPTION" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="SUPPLIER_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IMAGE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IDX" Type="Int32" />
         </EntityType>
         <EntityType Name="TECHNOLOGy">
           <Key>
@@ -851,6 +853,7 @@
           <EntitySetMapping Name="SUPPLIERS">
             <EntityTypeMapping TypeName="TGMCOModel.SUPPLIER">
               <MappingFragment StoreEntitySet="SUPPLIERS">
+                <ScalarProperty Name="IDX" ColumnName="IDX" />
                 <ScalarProperty Name="SUPPLIER_ID" ColumnName="SUPPLIER_ID" />
                 <ScalarProperty Name="SUPPLIER_NAME" ColumnName="SUPPLIER_NAME" />
                 <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />

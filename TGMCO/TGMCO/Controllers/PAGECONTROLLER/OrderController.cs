@@ -16,6 +16,12 @@ namespace TGMCO.Controllers.PAGECONTROLLER
         {
             try
             {
+                if (!string.IsNullOrEmpty(Session["SUPPLIER"].ToString()))
+                {
+                    Session["SUPPLIER"] = "DEFAULT";
+                    Session["SUPPLIER_MODEL"] = db.SUPPLIERS.Find(20);
+                }
+
                 if (Session["SS_USER"] == null)
                 {
                     TempData["Fail"] = "Bạn chưa đăng nhập, vui lòng đăng nhập trước khi mua hàng.";
@@ -123,6 +129,12 @@ namespace TGMCO.Controllers.PAGECONTROLLER
         {
             try
             {
+                if (!string.IsNullOrEmpty(Session["SUPPLIER"].ToString()))
+                {
+                    Session["SUPPLIER"] = "DEFAULT";
+                    Session["SUPPLIER_MODEL"] = db.SUPPLIERS.Find(20);
+                }
+
                 Session["ShoppingCart"] = null;
                 Session["Order_Id"] = null;
                 ORDER _ORDER = db.ORDERS.Find(id);

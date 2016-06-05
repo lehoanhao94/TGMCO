@@ -19,5 +19,6 @@ namespace TGMCO.Models
         public string DESCRIPTION { get; set; }
         public string SUPPLIER_CODE { get; set; }
         public string IMAGE { get; set; }
+        public Nullable<int> IDX { get; set; }
     }
 }

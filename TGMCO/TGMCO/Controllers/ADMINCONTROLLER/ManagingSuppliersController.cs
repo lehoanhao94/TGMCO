@@ -71,6 +71,38 @@ namespace TGMCO.Controllers.ADMINCONTROLLER
             }
         }
 
+        [HttpPost]
+        public ActionResult Update(Int32 id, HttpPostedFileBase fileUpload, FormCollection f)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    m_objSUPPLIER = db.SUPPLIERS.Find(id);
+                   
+                    //Upload File
+                    if (fileUpload != null)
+                    {
+                        string _fileNameRandom = m_STRING_RANDOM_IMAGE.RandomString();
+                        m_objSUPPLIER.IMAGE = "~/Images/ADMIN/SUPPLIERS/" + _fileNameRandom + fileUpload.FileName;
+                        string _path = Path.Combine(Server.MapPath("~/Images/ADMIN/SUPPLIERS/" + _fileNameRandom + fileUpload.FileName));
+                        fileUpload.SaveAs(_path);
+                    }
+                    m_objSUPPLIER.IDX = int.Parse(f.Get("IDX").ToString());
+                    db.SaveChanges();
+                }
+                else
+                {
+                    TempData["VB_ErrorCreate"] = "Thêm không thành công, kiểm tra lại dữ liệu.";
+                }
+
+                return RedirectToAction("ManagingSuppliers", "Admin");
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Http404", "Error"); // 404
+            }
+        }
         //
         // GET: /ManagingSuppliers/Edit/5
 
@@ -87,22 +119,7 @@ namespace TGMCO.Controllers.ADMINCONTROLLER
         //
         // POST: /ManagingSuppliers/Edit/5
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(SUPPLIER supplier)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(supplier).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(supplier);
-        }
-
-        //
-        // GET: /ManagingSuppliers/Delete/5
-
+        
         [HttpDelete]
         public ActionResult Delete(int id)
         {

@@ -17,6 +17,11 @@ namespace TGMCO.Controllers.PAGECONTROLLER
         {
             try
             {
+                if (!string.IsNullOrEmpty(Session["SUPPLIER"].ToString()))
+                {
+                    Session["SUPPLIER"] = "DEFAULT";
+                    Session["SUPPLIER_MODEL"] = db.SUPPLIERS.Find(20);
+                }
                 List<ProductCart> _lstProductCart = GetShoppingCart();
                 ViewBag.TotalPrice = GetTotalPrice();
                 Session["TOTAL_PRICE"] = GetTotalPrice();

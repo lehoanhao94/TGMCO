@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TGMCO.Models;
+using TGMCO.Models.Entity;
 
 namespace TGMCO.Controllers.PAGECONTROLLER
 {
@@ -16,6 +17,12 @@ namespace TGMCO.Controllers.PAGECONTROLLER
         {
             try
             {
+                if (!string.IsNullOrEmpty(Session["SUPPLIER"].ToString()))
+                {
+                    Session["SUPPLIER"] = "DEFAULT";
+                    Session["SUPPLIER_MODEL"] = db.SUPPLIERS.Find(20);
+                }
+
                 if (Session["SS_USER"] == null)
                 {
                     TempData["Fail"] = "Bạn chưa đăng nhập, vui lòng đăng nhập trước khi mua hàng.";

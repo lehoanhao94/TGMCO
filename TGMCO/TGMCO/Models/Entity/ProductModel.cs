@@ -92,7 +92,43 @@ namespace TGMCO.Models.Entity
             {
                 if (db.PRODUCT_FILES.Where(n => n.PRODUCT_ID == id_product).FirstOrDefault() != null)
                 {
-                    return db.PRODUCT_FILES.Where(n => n.PRODUCT_ID == id_product).FirstOrDefault().FILE_1;
+                    string result = db.PRODUCT_FILES.Where(n => n.PRODUCT_ID == id_product).FirstOrDefault().FILE_1;
+                    if(result != null)
+                        return result;
+                }
+                return "#";
+            }
+            catch
+            {
+                return "#";
+            }
+        }
+        public string GetFile2(int id_product)
+        {
+            try
+            {
+                if (db.PRODUCT_FILES.Where(n => n.PRODUCT_ID == id_product).FirstOrDefault() != null)
+                {
+                    string result = db.PRODUCT_FILES.Where(n => n.PRODUCT_ID == id_product).FirstOrDefault().FILE_2;
+                    if (result != null)
+                        return result;
+                }
+                return "#";
+            }
+            catch
+            {
+                return "#";
+            }
+        }
+        public string GetFile3(int id_product)
+        {
+            try
+            {
+                if (db.PRODUCT_FILES.Where(n => n.PRODUCT_ID == id_product).FirstOrDefault() != null)
+                {
+                    string result = db.PRODUCT_FILES.Where(n => n.PRODUCT_ID == id_product).FirstOrDefault().FILE_3;
+                    if (result != null)
+                        return result;
                 }
                 return "#";
             }

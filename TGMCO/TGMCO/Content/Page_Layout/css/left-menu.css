@@ -14,12 +14,12 @@
   color: white;
 }
 .nav-side-menu .brand {
-  background-color: #FED208;
+  background-color: #30454A;
   line-height: 50px;
   display: block;
   text-align: center;
   font-size: 15px;
-  color: black;
+  color: white;
 }
 .nav-side-menu .toggle-btn {
   display: none;

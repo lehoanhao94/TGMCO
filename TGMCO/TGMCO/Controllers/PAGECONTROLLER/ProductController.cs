@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TGMCO.Models;
+using TGMCO.Models.Entity;
 
 namespace TGMCO.Controllers.PAGECONTROLLER
 {
@@ -15,6 +16,11 @@ namespace TGMCO.Controllers.PAGECONTROLLER
         {
             try
             {
+
+                    SupplierModel _SUPPLIER = new SupplierModel();
+                    Session["SUPPLIER"] = _SUPPLIER.GetSupplierName(db.PRODUCTS.Find(id).SUPPLIER_ID);
+                    Session["SUPPLIER_MODEL"] = db.SUPPLIERS.Find(db.PRODUCTS.Find(id).SUPPLIER_ID);
+
                 PRODUCT _PRODUCT = db.PRODUCTS.Find(id);
                 return View(_PRODUCT);
             }
@@ -28,6 +34,12 @@ namespace TGMCO.Controllers.PAGECONTROLLER
         {
             try
             {
+                if(!string.IsNullOrEmpty(Session["SUPPLIER"].ToString()))
+                {
+                    Session["SUPPLIER"] = "DEFAULT";
+                    Session["SUPPLIER_MODEL"] = db.SUPPLIERS.Find(20);
+                }
+
                 string key = f.Get("txtKeySearch").ToString().Trim();
                 SUPPLIER _SUPPLIER = (SUPPLIER)Session["SUPPLIER_MODEL"];
                 List<PRODUCT> _lstPRODUCT = db.PRODUCTS.Where(n => (n.PRODUCT_CODE.Contains(key) || n.PRODUCT_NAME.Contains(key)) && n.SUPPLIER_ID == _SUPPLIER.SUPPLIER_ID).ToList();
@@ -48,6 +60,12 @@ namespace TGMCO.Controllers.PAGECONTROLLER
         {
             try
             {
+                if (!string.IsNullOrEmpty(Session["SUPPLIER"].ToString()))
+                {
+                    Session["SUPPLIER"] = "DEFAULT";
+                    Session["SUPPLIER_MODEL"] = db.SUPPLIERS.Find(20);
+                }
+
                 string key = (string)Session["KeySearch"];
                 SUPPLIER _SUPPLIER = (SUPPLIER)Session["SUPPLIER_MODEL"];
                 List<PRODUCT> _lstPRODUCT = db.PRODUCTS.Where(n => (n.PRODUCT_CODE.Contains(key) || n.PRODUCT_NAME.Contains(key)) && n.SUPPLIER_ID == _SUPPLIER.SUPPLIER_ID).ToList();
@@ -68,6 +86,11 @@ namespace TGMCO.Controllers.PAGECONTROLLER
         {
             try
             {
+                if (!string.IsNullOrEmpty(Session["SUPPLIER"].ToString()))
+                {
+                    Session["SUPPLIER"] = "DEFAULT";
+                    Session["SUPPLIER_MODEL"] = db.SUPPLIERS.Find(20);
+                }
                 string key = f.Get("txtKeyWordAS").ToString().Trim();
                 int supplier_id = 0;
                 int category_id = 0;

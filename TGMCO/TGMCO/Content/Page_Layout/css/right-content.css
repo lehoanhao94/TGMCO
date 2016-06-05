@@ -8,7 +8,7 @@
 }
 
 #Title-Right-Slides{
-    background-color: #FED208;
+    background-color: #30454A;
   line-height: 50px;
   display: block;
   text-align: center;
@@ -18,7 +18,7 @@
 }
 
 #Body-Right-Slides{
-    background-color: #FED208;
+    background-color: #30454A;
     padding: 5px;
 }
 
@@ -51,7 +51,7 @@
     font-size: 16px;
 }
 .panel-footer{
-    background-color: #FED208;
+    background-color: #30454A;
 }
 .panel-footer ul a{
     background-color: #F37232;
