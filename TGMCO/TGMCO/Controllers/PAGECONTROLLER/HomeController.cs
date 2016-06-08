@@ -46,6 +46,85 @@ namespace TGMCO.Controllers.PAGECONTROLLER
             }
         }
 
+        public ViewResult bosch()
+        {
+            try
+            {
+                SUPPLIER _Supplier = db.SUPPLIERS.Where(n => n.SUPPLIER_NAME.Contains("BOSCH")).Single();
+                Session["SUPPLIER"] = "BOSCH";
+                Session["SUPPLIER_MODEL"] = _Supplier;
+                return View(_Supplier);
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = 404;
+                throw ex; // 404
+            }
+        }
+
+        public ViewResult stanleyh()
+        {
+            try
+            {
+                SUPPLIER _Supplier = db.SUPPLIERS.Where(n => n.SUPPLIER_NAME.Contains("STANLEY HAND")).Single();
+                Session["SUPPLIER"] = "STANLEY";
+                Session["SUPPLIER_MODEL"] = _Supplier;
+                return View(_Supplier);
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = 404;
+                throw ex; // 404
+            }
+        }
+
+        public ViewResult stanleyp()
+        {
+            try
+            {
+                SUPPLIER _Supplier = db.SUPPLIERS.Where(n => n.SUPPLIER_NAME.Contains("STANLEY POWER")).Single();
+                Session["SUPPLIER"] = "STANLEY";
+                Session["SUPPLIER_MODEL"] = _Supplier;
+                return View(_Supplier);
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = 404;
+                throw ex; // 404
+            }
+        }
+
+        public ViewResult dewalt()
+        {
+            try
+            {
+                SUPPLIER _Supplier = db.SUPPLIERS.Where(n => n.SUPPLIER_NAME.Contains("DEWALT")).Single();
+                Session["SUPPLIER"] = "DEWALT";
+                Session["SUPPLIER_MODEL"] = _Supplier;
+                return View(_Supplier);
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = 404;
+                throw ex; // 404
+            }
+        }
+
+        public ViewResult blackanddecker()
+        {
+            try
+            {
+                SUPPLIER _Supplier = db.SUPPLIERS.Where(n => n.SUPPLIER_NAME.Contains("BLACK")).Single();
+                Session["SUPPLIER"] = "BLACKANDDECKER";
+                Session["SUPPLIER_MODEL"] = _Supplier;
+                return View(_Supplier);
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = 404;
+                throw ex; // 404
+            }
+        }
         [HttpGet]
         public int GetNumItemsCart()
         {

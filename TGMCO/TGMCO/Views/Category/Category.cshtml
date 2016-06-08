@@ -23,8 +23,34 @@
                 background-color: #018A9C !important;
             }
 
-            .row-product {
+            .row-product {  
                 border: 2px solid #018A9C !important;
+            }
+
+            .btnShopNow:hover {
+                background-color: #084C51 !important;
+            }
+
+            .Top-New-Product {
+                color: white;
+            }
+        </style>
+    }
+    else if (Session["SUPPLIER"].ToString().Equals("BOSCH"))
+    {
+        <style>
+            h1, .wizard-inner {
+                background-color: #013B69 !important;
+                color: white;
+            }
+        </style>
+        <style>
+            .Top-New-Product div, .btnShopNow {
+                background-color: #013B69 !important;
+            }
+
+            .row-product {
+                border: 2px solid #013B69 !important;
             }
 
             .btnShopNow:hover {
@@ -139,7 +165,6 @@
 }
 
 @section RightContent{
-    <img class="ads-right" src="~/Content/Page_Layout/img/Makita-qc.jpg" width="238">
     <img class="ads-right" src="~/Content/Page_Layout/img/lienhequangcao.jpg" width="238">
     <img class="ads-right" src="~/Content/Page_Layout/img/lienhequangcao.jpg" width="238">
     <img class="ads-right" src="~/Content/Page_Layout/img/lienhequangcao.jpg" width="238">

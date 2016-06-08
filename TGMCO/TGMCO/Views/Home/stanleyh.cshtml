@@ -1,0 +1,221 @@
+﻿@using TGMCO.Models;
+
+@model SUPPLIER
+
+@{
+    ViewBag.Title = "Tuấn Gia Minh | " + @Model.SUPPLIER_NAME;
+    Layout = "~/Views/Shared/_PageLayout.cshtml";
+    ViewBag.Description = "Nhà cung cấp dụng cụ xây dựng, dụng cụ điện " + Model.SUPPLIER_NAME;
+}
+
+@{
+    <style>
+        h1, #Main-Menu, #vgc_bc_off, .vgc_control_send, .brand,
+        .Top-New-Product div, .btnShopNow, .modal-header {
+            background-color: #FED208 !important;
+            color: white;
+        }
+
+        #Register .btn, .brand, .Top-New-Product {
+            color: white !important;
+        }
+
+        .nav-side-menu li:hover {
+            border-left: 3px solid #013B69;
+        }
+
+        .row-product {
+            border: 2px solid #013B69 !important;
+        }
+
+        .btnShopNow:hover {
+            background-color: #084C51 !important;
+        }
+    </style>
+}
+
+@section LeftMenu{
+    <div id="Left-Menu">
+        <div class="nav-side-menu">
+            <div class="brand makita-menu-header"><strong> MENU </strong></div>
+            <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+
+            <div class="menu-list">
+
+                <ul id="menu-content" class="menu-content collapse out">
+                    <li data-toggle="collapse" data-target="#abcde" class="collapsed">
+                        <a><i class="fa fa-globe fa-lg"></i> STANLEY HAND TOOL </a>
+                    </li>
+                    <li data-toggle="collapse" data-target="#abcde" class="collapsed">
+                        <a><i class="fa fa-globe fa-lg"></i> SẢN PHẨM MỚI </a>
+                    </li>
+                    <li data-toggle="collapse" data-target="#service" class="collapsed">
+                        <a><i class="fa fa-globe fa-lg"></i> PHỤ KIỆN <span class="arrow"></span></a>
+                    </li>
+                    <ul class="sub-menu collapse" id="service">
+                        <li>Máy khoan</li>
+                        <li>Máy mài</li>
+                        <li>Máy cưa</li>
+                        <li>Máy cắt </li>
+                        <li>Máy bào</li>
+                    </ul>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    @{
+        Html.RenderAction("CategoryMenu", "Partial", new { id = Model.SUPPLIER_ID });
+    }
+
+
+}
+
+<h1 style="text-align: center; padding-top: 0; margin-top: 0;margin-bottom: 5px;">@Model.SUPPLIER_NAME</h1>
+
+
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="margin-bottom: 5px;">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+        <div class="item active">
+            <img src="~/Content/Page_Layout/img/bosch1.jpg" />
+            <div class="carousel-caption">
+                <h2>Thương hiệu Bosch đến từ Đức</h2>
+            </div>
+        </div>
+        <div class="item">
+            <img src="~/Content/Page_Layout/img/bosch3.jpg" />
+            <div class="carousel-caption">
+                <h2>Tuấn Gia Minh</h2>
+            </div>
+        </div>
+        <div class="item">
+            <img src="~/Content/Page_Layout/img/bosch1.jpg" />
+            <div class="carousel-caption">
+                <h2>Nhà phân phối Bosch</h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- Controls -->
+    <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+    <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+</div>
+
+@{
+    Html.RenderAction("HotProducts", "Partial", new { id = Model.SUPPLIER_ID, title = "SẢN PHẨM MỚI" });
+}
+
+<style>
+    #carousel .col-xs-2 {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    #carousel .thumbnail {
+        margin-bottom: 0;
+    }
+</style>
+
+<div class="Stanley-Center" style="margin-top: 5px;">
+    <div class="row row-product">
+        <div class="Top-New-Product">
+            <div class="col-md-9">
+                <h3><strong>VIDEO CLIP</strong></h3>
+            </div>
+            <div class="col-md-3">
+            </div>
+        </div>
+        <div class="col-md-12" style="padding-left: 0; padding-right: 0;">
+            <div class="video-container">
+                <div class="vid">
+                    <!--<img class="responsive placard" src="" alt=""/>-->
+                    <iframe width="842" height="350" src="https://www.youtube.com/embed/y9pf5ZwxXCE?list=PL0862CEC5170906C0" frameborder="0" allowfullscreen=""></iframe>
+                </div><!--End vid-->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section RightContent{
+    <img class="ads-right" src="~/Content/Page_Layout/img/lienhequangcao.jpg" width="238">
+    <img class="ads-right" src="~/Content/Page_Layout/img/lienhequangcao.jpg" width="238">
+}
+
+<style>
+    /* Makes images fully responsive */
+
+    .ads-right {
+        margin-bottom: 5px;
+    }
+
+    .img-responsive,
+    .thumbnail > img,
+    .thumbnail a > img,
+    .carousel-inner > .item > img,
+    .carousel-inner > .item > a > img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    /* ------------------- Carousel Styling ------------------- */
+
+    .carousel-inner {
+        border-radius: 15px;
+    }
+
+    .carousel-caption {
+        background-color: rgba(0,0,0,.5);
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 10;
+        padding: 0 0 10px 25px;
+        color: #fff;
+        text-align: left;
+    }
+
+    .carousel-indicators {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        width: 100%;
+        z-index: 15;
+        margin: 0;
+        padding: 0 25px 25px 0;
+        text-align: right;
+    }
+
+    .carousel-control.left,
+    .carousel-control.right {
+        background-image: none;
+    }
+
+
+    /* ------------------- Section Styling - Not needed for carousel styling ------------------- */
+
+    .section-white {
+        padding: 10px 0;
+    }
+
+    .section-white {
+        background-color: #fff;
+        color: #555;
+    }
+</style>

@@ -17,7 +17,7 @@ namespace TGMCO.Controllers.PAGECONTROLLER
         {
             try
             {
-                if (!string.IsNullOrEmpty(Session["SUPPLIER"].ToString()))
+                if (Session["SUPPLIER"] == null)
                 {
                     Session["SUPPLIER"] = "DEFAULT";
                     Session["SUPPLIER_MODEL"] = db.SUPPLIERS.Find(20);

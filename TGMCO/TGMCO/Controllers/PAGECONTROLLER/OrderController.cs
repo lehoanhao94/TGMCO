@@ -1,37 +1,38 @@
-﻿using System;
+﻿using RazorEngine;
+using RazorEngine.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.IO;
 using TGMCO.Models;
 using TGMCO.Models.Entity;
+using RazorEngine.Templating;
 
 namespace TGMCO.Controllers.PAGECONTROLLER
 {
     public class OrderController : Controller
     {
         TGMCOEntitiesDB db = new TGMCOEntitiesDB();
+        StringRandom m_STRING_RAMDOM = new StringRandom(10);
 
         public ActionResult Order()
         {
             try
             {
-                if (!string.IsNullOrEmpty(Session["SUPPLIER"].ToString()))
+                if (string.IsNullOrEmpty(Session["SUPPLIER"].ToString()))
                 {
                     Session["SUPPLIER"] = "DEFAULT";
                     Session["SUPPLIER_MODEL"] = db.SUPPLIERS.Find(20);
                 }
-
-                if (Session["SS_USER"] == null)
+                List<ProductCart> _lstProductCart = (List<ProductCart>)Session["ShoppingCart"];
+                if (Session["ShoppingCart"] == null || _lstProductCart.Count == 0)
                 {
-                    TempData["Fail"] = "Bạn chưa đăng nhập, vui lòng đăng nhập trước khi mua hàng.";
-                    
-                    return RedirectToAction("ShoppingCart", "ShoppingCart");
-                }
-
-                if(Session["ShoppingCart"] == null)
-                {
-                    return RedirectToAction("ShoppingCart", "ShoppingCart");
+                    return RedirectToAction("Index", "Home");
                 }
                 int id = 0;
                 ORDER _ORDER = new ORDER();
@@ -68,7 +69,11 @@ namespace TGMCO.Controllers.PAGECONTROLLER
                     ORDER_DETAILS _ORDER_DETAILS = null;
 
                     USER _USER = (USER)Session["SS_USER"];
-                    _ORDER.USER_ID = _USER.USER_ID;
+                    if (_USER != null)
+                        _ORDER.USER_ID = _USER.USER_ID;
+                    else
+                        _ORDER.USER_ID = 0;
+                    _ORDER.ORDER_CODE = m_STRING_RAMDOM.RandomString();
                     _ORDER.ORDER_DATE = DateTime.Now;
                     _ORDER.SHIP_NAME = _Name;
                     _ORDER.SHIP_ADDRESS = _Address;
@@ -102,7 +107,12 @@ namespace TGMCO.Controllers.PAGECONTROLLER
                     ORDER _ORDER = db.ORDERS.Find(_Order_Id);
 
                     USER _USER = (USER)Session["SS_USER"];
-                    _ORDER.USER_ID = _USER.USER_ID;
+                    if (_USER != null)
+                        _ORDER.USER_ID = _USER.USER_ID;
+                    else
+                        _ORDER.USER_ID = 0;
+                    _ORDER.ORDER_CODE = m_STRING_RAMDOM.RandomString();
+
                     _ORDER.ORDER_DATE = DateTime.Now;
                     _ORDER.SHIP_NAME = _Name;
                     _ORDER.SHIP_ADDRESS = _Address;
@@ -125,22 +135,67 @@ namespace TGMCO.Controllers.PAGECONTROLLER
             }
         }
 
-        public ActionResult PrintBill(int id)
+        public async Task<ActionResult> PrintBill(int id)
         {
             try
             {
-                if (!string.IsNullOrEmpty(Session["SUPPLIER"].ToString()))
+                if (string.IsNullOrEmpty(Session["SUPPLIER"].ToString()))
                 {
                     Session["SUPPLIER"] = "DEFAULT";
                     Session["SUPPLIER_MODEL"] = db.SUPPLIERS.Find(20);
                 }
-
+                List<ProductCart> _lstProductCart = (List<ProductCart>)Session["ShoppingCart"];
+                if (Session["ShoppingCart"] == null || _lstProductCart.Count == 0)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
                 Session["ShoppingCart"] = null;
                 Session["Order_Id"] = null;
-                ORDER _ORDER = db.ORDERS.Find(id);
-                ViewBag.ORDER_DETAIL = db.ORDER_DETAILS.Where(n => n.ORDER_ID == id).ToList();
+                ORDER _ORDER = db.ORDERS.Find(id);                
+                List<ORDER_DETAILS> _lstORDER_DETAILS = db.ORDER_DETAILS.Where(n => n.ORDER_ID == id).ToList();
+                ViewBag.ORDER_DETAIL = _lstORDER_DETAILS;
+
+                OrderMailModel _OrderMail = new OrderMailModel(_ORDER, _lstORDER_DETAILS);
+
+                var mailMessage = new MailMessage();
+
+                var _tempOrder = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/EmailTemplates/Order.cshtml"));
+                var _tempService = new TemplateService();
+                
+                mailMessage.To.Add(_ORDER.SHIP_EMAIL);
+                mailMessage.Subject = "Thân chào " + _ORDER.SHIP_NAME + ", đơn hàng [#VNT-" + _ORDER.ORDER_ID + "] đã được đặt thành công !";
+                mailMessage.Body = _tempService.Parse(_tempOrder, _OrderMail, null, null);
+                mailMessage.IsBodyHtml = true;
+
+                await SendMail(mailMessage);
                 
                 return View(_ORDER);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Http404", "Error"); // 404
+            }
+        }
+
+        public async Task SendMail(MailMessage _mailMessage)
+        {
+            try
+            {
+                var smtpClient = new SmtpClient { EnableSsl = false };
+                await smtpClient.SendMailAsync(_mailMessage);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
+        public ActionResult CheckBill()
+        {
+            try
+            {               
+                return View();
             }
             catch (Exception ex)
             {

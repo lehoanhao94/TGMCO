@@ -17,22 +17,23 @@ namespace TGMCO.Controllers.PAGECONTROLLER
         {
             try
             {
-                if (!string.IsNullOrEmpty(Session["SUPPLIER"].ToString()))
+                if (string.IsNullOrEmpty(Session["SUPPLIER"].ToString()))
                 {
                     Session["SUPPLIER"] = "DEFAULT";
                     Session["SUPPLIER_MODEL"] = db.SUPPLIERS.Find(20);
                 }
 
-                if (Session["SS_USER"] == null)
+                List<ProductCart> _lstProductCart = (List<ProductCart>)Session["ShoppingCart"];
+                if (Session["ShoppingCart"] == null || _lstProductCart.Count == 0)
                 {
-                    TempData["Fail"] = "Bạn chưa đăng nhập, vui lòng đăng nhập trước khi mua hàng.";
-
-                    return RedirectToAction("ShoppingCart", "ShoppingCart");
+                    return RedirectToAction("Index", "Home");
                 }
-
-                if (Session["ShoppingCart"] == null)
+                if (Session["Order_Id"] != null)
                 {
-                    return RedirectToAction("ShoppingCart", "ShoppingCart");
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
                 }
 
                 return View();

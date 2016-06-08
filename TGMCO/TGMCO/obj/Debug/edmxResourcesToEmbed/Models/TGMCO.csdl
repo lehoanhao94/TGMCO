@@ -139,6 +139,7 @@
     <Property Name="SHIP_EMAIL" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
     <Property Name="NOTE" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="PAYMENT_METHOD_ID" Type="Int32" />
+    <Property Name="ORDER_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="PRODUCT">
     <Key>

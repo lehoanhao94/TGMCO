@@ -13,7 +13,7 @@
   display: block;
   text-align: center;
   font-size: 15px;
-  color: black;
+  color: white;
   padding: 0;
 }
 
@@ -58,7 +58,7 @@
 }
 .btnShopNow{
     width: 80%;
-    background-color: #F37232;
+    background-color: #30454A;
     color: white;
 }
 

@@ -19,11 +19,11 @@ namespace TGMCO.Controllers.PAGECONTROLLER
             try
             {
                 SupplierModel _SUPPLIER = new SupplierModel();
-                    Session["SUPPLIER"] = _SUPPLIER.GetSupplierName(id);
-                    Session["SUPPLIER_MODEL"] = db.SUPPLIERS.Find(id);
+                Session["SUPPLIER"] = _SUPPLIER.GetSupplierName(id);
+                Session["SUPPLIER_MODEL"] = db.SUPPLIERS.Find(id);
 
                 ViewBag.Supplier = db.SUPPLIERS.Find(id);
-                ViewBag.TITLE = title;
+                ViewBag.Header = title;
                 List<PRODUCT> _lstPRODUCT = db.PRODUCTS.Where(n => n.SUPPLIER_ID == id && n.IS_ACTIVE && n.IS_NEW).OrderByDescending(n => n.IDX).Take(8).ToList();
 
                 if(_lstPRODUCT.Count > 7)
@@ -64,7 +64,7 @@ namespace TGMCO.Controllers.PAGECONTROLLER
         {
             try
             {
-                ViewBag.TITLE = _title;
+                ViewBag.Header = _title;
                 List<PRODUCT> _lstPRODUCT = new List<PRODUCT>();
 
                 switch(_type)

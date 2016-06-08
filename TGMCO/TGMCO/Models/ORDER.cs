@@ -30,5 +30,6 @@ namespace TGMCO.Models
         public string SHIP_EMAIL { get; set; }
         public string NOTE { get; set; }
         public Nullable<int> PAYMENT_METHOD_ID { get; set; }
+        public string ORDER_CODE { get; set; }
     }
 }

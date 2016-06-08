@@ -7,6 +7,7 @@
     ViewBag.Title = "Tuấn Gia Minh | " + Model.PRODUCT_NAME;
     Layout = "~/Views/Shared/_PageLayout.cshtml";
     ViewBag.Description = "VietNamTool | " + Model.PRODUCT_NAME + " - " + Model.FEATURED + " - " + string.Format("{0:0,0}", Model.UNIT_PRICE) + " VNĐ.";
+    
 }
 
 @{
@@ -30,6 +31,27 @@
 
                 .divider {
                     border: 1px solid #084C51 !important;
+                }
+            </style>
+        }
+        else if (Session["SUPPLIER"].ToString().Equals("BOSCH"))
+        {
+            <style>
+                h1, .wizard-inner, .panel.with-nav-tabs .panel-heading {
+                    background-color: #013B69 !important;
+                    color: white;
+                }
+
+                .btnShopNow {
+                    background-color: #013B69 !important;
+                }
+
+                    .btnShopNow:hover {
+                        background-color: #084C51 !important;
+                    }
+
+                .divider {
+                    border: 1px solid #013B69 !important;
                 }
             </style>
         }
@@ -232,7 +254,6 @@
 
 
 @section RightContent{
-    <img class="ads-right" src="~/Content/Page_Layout/img/Makita-qc.jpg" width="238">
     <img class="ads-right" src="~/Content/Page_Layout/img/lienhequangcao.jpg" width="238">
     <img class="ads-right" src="~/Content/Page_Layout/img/lienhequangcao.jpg" width="238">
     <img class="ads-right" src="~/Content/Page_Layout/img/lienhequangcao.jpg" width="238">

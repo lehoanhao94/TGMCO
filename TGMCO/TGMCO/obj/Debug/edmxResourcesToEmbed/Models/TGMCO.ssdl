@@ -139,6 +139,7 @@
     <Property Name="SHIP_EMAIL" Type="nvarchar" MaxLength="150" />
     <Property Name="NOTE" Type="nvarchar" MaxLength="250" />
     <Property Name="PAYMENT_METHOD_ID" Type="int" />
+    <Property Name="ORDER_CODE" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="PRODUCT_FILES">
     <Key>

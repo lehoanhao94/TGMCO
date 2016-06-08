@@ -12,9 +12,26 @@
     if (Session["SUPPLIER"].ToString().Equals("MAKITA"))
     {
         <style>
-            h1, .wizard-inner {
+            h1, .wizard-inner, .modal-header {
                 background-color: #018A9C !important;
                 color: white;
+            }
+        </style>
+    }
+    else if(Session["SUPPLIER"].ToString().Equals("BOSCH"))
+    {
+        <style>
+            h1, .wizard-inner {
+                background-color: #013B69 !important;
+                color: white;
+            }
+            .modal-header {
+                background-color: #013B69 !important;
+                color: white;
+            }
+
+            #Register .btn, .brand, .Top-New-Product {
+                color: white !important;
             }
         </style>
     }

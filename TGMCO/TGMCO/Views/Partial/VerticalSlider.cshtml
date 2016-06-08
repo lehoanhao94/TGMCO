@@ -10,7 +10,7 @@
 <div id="Right-Slides">
     <div class="panel panel-default">
         <div id="Title-Right-Slides" class="panel-heading">
-            <strong>@ViewBag.TITLE</strong>
+            <strong>@ViewBag.Header</strong>
         </div>
         <div id="Body-Right-Slides" class="panel-body">
             <div class="row">
@@ -20,13 +20,8 @@
                         {
                             <li class="news-item">
                                 <div class="col-item">
-                                    <div class="shape">
-                                        <div class="shape-text">
-                                            Mới
-                                        </div>
-                                    </div>
                                     <div class="photo">
-                                        <img id="Image-Product" src="@Url.Content(@m_PRODUCT.GetImage1(Model[i].PRODUCT_ID))" class="img-responsive" alt="@product.PRODUCT_NAME" title="@product.PRODUCT_NAME" />
+                                        <img id="Image-Product" src="@Url.Content(@m_PRODUCT.GetImage1(product.PRODUCT_ID))" class="img-responsive" alt="@product.PRODUCT_NAME" title="@product.PRODUCT_NAME" />
                                     </div>
                                     <div class="info">
                                         <div class="Name-Product">
@@ -39,7 +34,7 @@
                                             </h5>
                                         </div>
                                         <div class="separator">
-                                            <button type="button" class="btn btn-default btnShopNow" aria-label="Left Align">
+                                            <button type="button" onclick="AddProduct(this)" id="btnAddProduct" data-ajax="true" data-id="@product.PRODUCT_ID" data-code="@product.PRODUCT_CODE" class="btn btn-default btnShopNow" aria-label="Left Align">
                                                 <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> <strong>Thêm vào giỏ</strong>
                                             </button>
                                         </div>
@@ -57,3 +52,47 @@
         </div>
     </div>
 </div>
+
+
+<script type="text/javascript">
+    $(function () {
+        $(".Slides").bootstrapNews({
+            newsPerPage: 1,
+            autoplay: true,
+            pauseOnHover: true,
+            direction: 'up',
+            newsTickerInterval: 12000,
+            onToDo: function () {
+                //console.log(this);
+            }
+        });
+
+    });
+</script>
+
+<script type="text/javascript">
+    function AddProduct(obj) {
+        var id = $(obj).data("id");
+        var code = $(obj).data("code");
+        var num = $('.numProduct').val();
+        if (num > 20) {
+            alert('Bạn nhập số quá lớn, vui lòng nhập số lượng dưới 20.')
+        }
+        else {
+            $.ajax({
+                url: '/ShoppingCart/AddProductToShoppingCart?id=' + id + '&quantity=1',
+                dataType: "html",
+                type: "POST",
+                contentType: 'application/html; charset=utf-8',
+                success: function (data) {
+                    $("#numProduct").html(data)
+                    alert("Đã thêm sản phẩm " + code + " vào giỏ hàng.");
+                },
+                error: function (xhr) {
+
+                }
+            });
+        }
+    }
+</script>
+

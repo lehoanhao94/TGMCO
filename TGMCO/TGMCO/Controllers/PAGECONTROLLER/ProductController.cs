@@ -42,7 +42,7 @@ namespace TGMCO.Controllers.PAGECONTROLLER
 
                 string key = f.Get("txtKeySearch").ToString().Trim();
                 SUPPLIER _SUPPLIER = (SUPPLIER)Session["SUPPLIER_MODEL"];
-                List<PRODUCT> _lstPRODUCT = db.PRODUCTS.Where(n => (n.PRODUCT_CODE.Contains(key) || n.PRODUCT_NAME.Contains(key)) && n.SUPPLIER_ID == _SUPPLIER.SUPPLIER_ID).ToList();
+                List<PRODUCT> _lstPRODUCT = db.PRODUCTS.Where(n => (n.PRODUCT_CODE.Contains(key) || n.PRODUCT_NAME.Contains(key))).ToList();
                 ViewBag.KeySearch = key;
                 ViewBag.NumProduct = _lstPRODUCT.Count;
                 ViewBag.ListSupplier = new SelectList(db.SUPPLIERS.OrderByDescending(n => n.SUPPLIER_ID).ToList(), "Supplier_ID", "SUPPLIER_NAME");

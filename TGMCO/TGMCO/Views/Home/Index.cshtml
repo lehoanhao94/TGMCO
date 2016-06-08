@@ -47,7 +47,7 @@
     @{
         foreach (var supplier in m_lstSUPPLIERS)
         {
-            Html.RenderAction("HotProducts", "Partial", new { id = supplier.SUPPLIER_ID });
+            Html.RenderAction("HotProducts", "Partial", new { id = supplier.SUPPLIER_ID, title = @supplier.SUPPLIER_NAME });
         }      
     }   
 </div>
@@ -59,33 +59,33 @@
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
             <div class="item active">
-                <a href="#"><img src="img/stanley.jpg"></a>
+                <a href="#"><img src="~/Content/Page_Layout/img/stanley.jpg"></a>
                 <div class="carousel-caption">
 
                 </div>
             </div>
             <!-- End Item -->
             <div class="item">
-                <a href="#"><img src="img/dewalt.jpg"></a>
+                <a href="#"><img src="~/Content/Page_Layout/img/dewalt.jpg"></a>
                 <div class="carousel-caption">
 
                 </div>
             </div>
             <!-- End Item -->
             <div class="item">
-                <a href="#"><img src="img/blackandecker.jpg"></a>
+                <a href="#"><img src="~/Content/Page_Layout/img/blackandecker.jpg"></a>
                 <div class="carousel-caption">
                 </div>
             </div>
             <!-- End Item -->
             <div class="item">
-                <a href="#"><img src="img/bosch.png"></a>
+                <a href="#"><img src="~/Content/Page_Layout/img/bosch.png"></a>
                 <div class="carousel-caption">
                 </div>
             </div>
             <!-- End Item -->
             <div class="item">
-                <a href="#"><img src="img/makita.jpg"></a>
+                <a href="#"><img src="~/Content/Page_Layout/img/makita.jpg"></a>
                 <div class="carousel-caption">
                 </div>
             </div>
@@ -104,11 +104,11 @@
 </div>
 
 @section RightContent{
-    <img class="ads-right" src="~/Content/Page_Layout/img/Makita-qc.jpg" width="238">
-    <img class="ads-right" src="~/Content/Page_Layout/img/lienhequangcao.jpg" width="238">
-    <img class="ads-right" src="~/Content/Page_Layout/img/lienhequangcao.jpg" width="238">
-    <img class="ads-right" src="~/Content/Page_Layout/img/lienhequangcao.jpg" width="238">
-    <img class="ads-right" src="~/Content/Page_Layout/img/lienhequangcao.jpg" width="238">
+
+        @{
+            Html.RenderAction("VerticalSlider", "Partial", new { _title = "Sản phẩm mới", _type = "New", _supplier_id = 0 });
+         }
+
 }
 
 <div id="fb-root"></div>

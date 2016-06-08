@@ -1,0 +1,43 @@
+﻿@using TGMCO.Models;
+
+@{
+    ViewBag.Title = "Nhà phân phối dụng cụ xây dựng Tuấn Gia Minh";
+    Layout = "~/Views/Shared/_PageLayout.cshtml";
+    ViewBag.Description = "CÔNG TY TNHH TM TUẤN GIA MINH - Cung cấp thiết bị xây dựng, thiết bị công nghiệp, dụng cụ cầm tay, máy hàn, máy mài góc, máy cắt kim loại, dụng cụ đo chính xác, dụng cụ điện...";
+    List<SUPPLIER> m_lstSUPPLIERS = (List<SUPPLIER>)ViewBag.Suppliers;
+}
+
+@section LeftMenu{
+    @Html.Partial("~/Views/Partial/LeftMenu.cshtml")
+}
+<h1 style="text-align: center; font-size: 20px;padding-top: 0; margin-top: 0;margin-bottom: 5px;height: 35px;line-height: 1.6;">Tìm kiếm đơn hàng</h1>
+
+<div class="col-md-8 col-md-offset-2">
+
+    <!-- Search Form -->
+    <form role="form">
+        <!-- Search Field -->
+        <div class="row">
+            <div class="form-group">
+                <div class="input-group">
+                    <input class="form-control" type="text" name="search" placeholder="Nhập mã kiểm tra đơn hàng..." required />
+                    <span class="input-group-btn">
+                        <button class="btn btn-success" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                    
+                    </span>
+                </div>
+            </div>
+        </div>
+
+    </form>
+    <!-- End of Search Form -->
+
+</div>
+
+@section RightContent{
+
+    @{
+        Html.RenderAction("VerticalSlider", "Partial", new { _title = "Sản phẩm mới", _type = "New", _supplier_id = 0 });
+    }
+
+}

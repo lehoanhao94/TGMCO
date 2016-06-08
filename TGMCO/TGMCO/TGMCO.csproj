@@ -46,6 +46,9 @@
     <Reference Include="PagedList.Mvc">
       <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="RazorEngine">
+      <HintPath>..\packages\RazorEngine.3.8.2\lib\net45\RazorEngine.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
@@ -58,6 +61,10 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -105,10 +112,6 @@
     </Reference>
     <Reference Include="System.Web.Optimization">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.0.0\lib\net40\System.Web.Optimization.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.30506.0\lib\net40\System.Web.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -231,6 +234,7 @@
       <DependentUpon>TGMCO.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Entity\CategoryExtraModel.cs" />
+    <Compile Include="Models\Entity\OrderMailModel.cs" />
     <Compile Include="Models\Entity\OrderModel.cs" />
     <Compile Include="Models\Entity\ShipperModel.cs" />
     <Compile Include="Models\Entity\PaymentMethodModel .cs" />
@@ -1061,8 +1065,12 @@
     <Content Include="Content\Page_Layout\img\banner-makita2.jpg" />
     <Content Include="Content\Page_Layout\img\black-logo.jpg" />
     <Content Include="Content\Page_Layout\img\blackandecker.jpg" />
+    <Content Include="Content\Page_Layout\img\bosch-banner.png" />
     <Content Include="Content\Page_Layout\img\bosch-logo.jpg" />
     <Content Include="Content\Page_Layout\img\bosch.png" />
+    <Content Include="Content\Page_Layout\img\bosch1.jpg" />
+    <Content Include="Content\Page_Layout\img\bosch2.jpg" />
+    <Content Include="Content\Page_Layout\img\bosch3.jpg" />
     <Content Include="Content\Page_Layout\img\cn1.png" />
     <Content Include="Content\Page_Layout\img\cn2.png" />
     <Content Include="Content\Page_Layout\img\cn3.png" />
@@ -1165,6 +1173,9 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="EmailTemplates\SuccessOrder.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Admin_Layout\bootstrap\css\bootstrap.css.map" />
@@ -1232,6 +1243,7 @@
     <Content Include="Content\Page_Layout\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\Page_Layout\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\Page_Layout\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="EmailTemplates\Order.cshtml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\app.min.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -1301,6 +1313,12 @@
     <Content Include="Views\Order\PrintBill.cshtml" />
     <Content Include="Views\Product\Search.cshtml" />
     <Content Include="Views\User\Profile.cshtml" />
+    <Content Include="Views\Home\bosch.cshtml" />
+    <Content Include="Views\Home\stanleyh.cshtml" />
+    <Content Include="Views\Home\stanleyp.cshtml" />
+    <Content Include="Views\Home\dewalt.cshtml" />
+    <Content Include="Views\Home\blackanddecker.cshtml" />
+    <Content Include="Views\Order\CheckBill.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
