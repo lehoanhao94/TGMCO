@@ -29,7 +29,17 @@ namespace TGMCO.Controllers.PAGECONTROLLER
                 return RedirectToAction("Http404", "Error"); // 404
             }          
         }
-
+        public ActionResult About()
+        {
+            try
+            {
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Http404", "Error"); // 404
+            }
+        }
         public ViewResult makita()
         {
             try

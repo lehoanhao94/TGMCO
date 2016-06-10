@@ -1,38 +1,146 @@
-﻿@using TGMCO.Models;
+﻿
+@using TGMCO.Models.Entity;
+@using TGMCO.Models;
+@model ORDER
 
 @{
-    ViewBag.Title = "Nhà phân phối dụng cụ xây dựng Tuấn Gia Minh";
+    ViewBag.Title = "Tuấn Gia Minh | Kiểm tra đơn hàng ";
     Layout = "~/Views/Shared/_PageLayout.cshtml";
     ViewBag.Description = "CÔNG TY TNHH TM TUẤN GIA MINH - Cung cấp thiết bị xây dựng, thiết bị công nghiệp, dụng cụ cầm tay, máy hàn, máy mài góc, máy cắt kim loại, dụng cụ đo chính xác, dụng cụ điện...";
-    List<SUPPLIER> m_lstSUPPLIERS = (List<SUPPLIER>)ViewBag.Suppliers;
+    List<ORDER_DETAILS> m_lstORDER_DETAILS = (List<ORDER_DETAILS>)ViewBag.ORDER_DETAILS;
+    OrderStatusModel m_Order_Status = new OrderStatusModel();
+    ProductModel m_Product = new ProductModel();
 }
 
 @section LeftMenu{
     @Html.Partial("~/Views/Partial/LeftMenu.cshtml")
 }
-<h1 style="text-align: center; font-size: 20px;padding-top: 0; margin-top: 0;margin-bottom: 5px;height: 35px;line-height: 1.6;">Tìm kiếm đơn hàng</h1>
+<script src="/Scripts/jquery.unobtrusive-ajax.min.js" type="text/javascript"></script>
+<h1 style="text-align: center;color: white ; font-size: 20px; padding-top: 0; background-color: #30454A; margin-top: 0; margin-bottom: 5px; height: 35px; line-height: 1.6;">Tìm kiếm đơn hàng</h1>
 
-<div class="col-md-8 col-md-offset-2">
+<div class="col-md-8 col-md-offset-2" style="margin-bottom: 10px;">
 
     <!-- Search Form -->
-    <form role="form">
+    <form role="form" action="@Url.Action("CheckBill", "Order", FormMethod.Get)">
         <!-- Search Field -->
         <div class="row">
             <div class="form-group">
-                <div class="input-group">
-                    <input class="form-control" type="text" name="search" placeholder="Nhập mã kiểm tra đơn hàng..." required />
+                <div id="Search" class="input-group">
+                    <input class="form-control" type="text" name="Order_Code" placeholder="Nhập mã kiểm tra đơn hàng..." required />
                     <span class="input-group-btn">
-                        <button class="btn btn-success" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                        <button class="btn btn-default" id="btnSearch" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                     
                     </span>
                 </div>
             </div>
         </div>
-
     </form>
     <!-- End of Search Form -->
 
 </div>
+
+@if (ViewBag.SearchResult == 1)
+{
+    <div class="col-md-12">
+        <div class="row-fluid user-infos">
+            <div class="span10 offset1">
+
+                <ul class="list-group">
+                    <li class="list-group-item stt-@Model.ORDER_STATUS_ID">
+                        <span class="prefix"><strong>Mã hóa đơn:</strong></span>
+                        <span class=""><strong>#VNT-@Model.ORDER_ID</strong></span>
+                        <span class="prefix pull-right">@string.Format("{0:0,0}", @Model.SUBTOTAL + @Model.FREIGHT) VNĐ - (@m_Order_Status.GetName(@Model.ORDER_STATUS_ID)) - @Model.ORDER_DATE.ToString("dd.MM.yyyy")</span>
+                    </li>
+                    <li class="list-group-item" style="height: 55px;">
+                        <span class="prefix col-sm-3" style="line-height: 2.3">Họ tên người đặt hàng:</span>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" required maxlength="30" id="name" placeholder="Nhập họ và tên bạn." value="@Model.SHIP_NAME">
+                        </div>
+                    </li>
+                    <li class="list-group-item" style="height: 55px;">
+                        <span class="prefix col-sm-3" style="line-height: 2.3">Địa chỉ người đặt hàng:</span>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" required maxlength="30" id="name" placeholder="Nhập họ và tên bạn." value="@Model.SHIP_ADDRESS">
+                        </div>
+                    </li>
+                    <li class="list-group-item" style="height: 55px;">
+                        <span class="prefix col-sm-3" style="line-height: 2.3">Số điện thoại:</span>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" required maxlength="30" id="name" placeholder="Nhập họ và tên bạn." value="@Model.SHIP_PHONE">
+                        </div>
+                    </li>
+                    <li class="list-group-item" style="height: 55px;">
+                        <span class="prefix col-sm-3" style="line-height: 2.3">Email:</span>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" required maxlength="30" id="name" placeholder="Nhập họ và tên bạn." value="@Model.SHIP_EMAIL">
+                        </div>
+                    </li>
+                    <li class="list-group-item" style="height: 55px;">
+                        <span class="prefix col-sm-3" style="line-height: 2.3">Ghi chú:</span>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" required maxlength="30" id="name" placeholder="Nhập họ và tên bạn." value="@Model.NOTE">
+                        </div>
+                    </li>
+                    <li class="list-group-item" style="height: 40px;">
+                        <span class="prefix col-sm-6"><strong>Tên SP</strong></span>
+                        <span class="prefix col-sm-2"><strong>Đơn giá</strong></span>
+                        <span class="prefix col-sm-1"><strong>SL</strong></span>
+                        <span class="prefix col-sm-2"><strong>Thành tiền</strong></span>
+                        <span class="prefix col-sm-1"><strong>Xóa</strong></span>
+                    </li>
+                    @foreach (var order_detail in m_lstORDER_DETAILS)
+                    {
+                        <li class="list-group-item" style="height: 55px;">
+                            <span class="prefix col-sm-6">@m_Product.GetName(@order_detail.PRODUCT_ID)<p>@m_Product.GetCode(@order_detail.PRODUCT_ID)</p></span>
+                            <span class="prefix col-sm-2" style="line-height: 2.5; text-align: right">@string.Format("{0:0,0}", @order_detail.UNIT_PRICE)</span>
+                            <span class="prefix col-sm-1"><input class="form-control" type="text" style="width: 40px;" value="@order_detail.QUANTITY"></span>
+                            <span class="prefix col-sm-2" style="line-height: 2.5; text-align: right">@string.Format("{0:0,0}", @order_detail.EXTENDED_PRICE)</span>
+                            <span class="prefix col-sm-1"><a data-ajax="true" href="@Url.Action("DeleteProductFromOrder", "Order", new { order_id = @order_detail.ORDER_ID, product_id = @order_detail.PRODUCT_ID })" type="button" data-ajax-confirm="Bạn có muốn xóa sản phẩm này khỏi đơn hàng không?" data-ajax-complete="location.reload()" data-ajax-method="Delete" class="btn btn-danger btn-sm"><i class="fa fa-times" aria-hidden="true"></i></a></span>
+                        </li>
+                    }
+                    <li class="list-group-item" style="height: 40px;">
+                        <span class="prefix col-sm-3 col-lg-offset-6">Tổng tiền hàng:</span>
+                        <span class="prefix col-sm-2" style="text-align: right">@string.Format("{0:0,0}", @Model.SUBTOTAL)</span>
+                    </li>
+                    <li class="list-group-item" style="height: 40px;">
+                        <span class="prefix col-sm-3 col-lg-offset-6">Phí giao hàng:</span>
+                        <span class="prefix col-sm-2" style="text-align: right">@string.Format("{0:0,0}", @Model.FREIGHT)</span>
+                    </li>
+                    <li class="list-group-item" style="height: 40px;">
+                        <span class="prefix col-sm-3 col-lg-offset-6"><strong>Tổng cộng:</strong></span>
+                        <span class="prefix col-sm-2" style="text-align: right"><strong>@string.Format("{0:0,0}", @Model.SUBTOTAL + @Model.FREIGHT)</strong></span>
+                    </li>
+                    <li class="list-group-item" style="height: 55px;">
+                        <div class="btn-group btn-group-justified">
+                            <a href="#" class="btn btn-danger">Hủy bỏ đơn hàng</a>
+                            <a href="#" class="btn btn-success">Cập nhật đơn hàng</a>
+                        </div>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+
+    </div>
+}
+else if (ViewBag.SearchResult == 0)
+{
+    <div class="col-md-12 alert alert-danger">
+        <strong>Xin lỗi !</strong> Chúng tôi không tìm thấy đơn hàng nào, vui lòng kiểm tra lại mã code.
+    </div>
+}
+else if(ViewBag.SearchResult == 2)
+{
+    <div class="col-md-12 alert alert-danger">
+        <strong>Đơn hàng này đã bị hủy !</strong>
+    </div>
+}
+else
+{
+    <div class="col-md-12 alert alert-success">
+        Nhập mã code kiểm tra đơn hàng mà chúng tôi đã cung cấp qua email khi đặt hàng để xem và chỉnh sửa đơn hàng.
+    </div>
+}
 
 @section RightContent{
 

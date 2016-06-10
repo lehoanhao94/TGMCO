@@ -124,14 +124,14 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="Name">Họ và tên</label>
                             <div class="col-md-8">
-                                <input id="textinputname" name="Name" type="text" placeholder="Họ và tên người nhận hàng" class="form-control input-md" required="" value="@Model.SHIP_NAME">
+                                <input id="textinputname" name="Name" type="text" placeholder="Họ và tên người nhận hàng" class="form-control input-md" maxlength="50" required="" value="@Model.SHIP_NAME">
 
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="Address">Địa chỉ</label>
                             <div class="col-md-8">
-                                <input id="textinputname" name="Address" type="text" placeholder="Địa chỉ nhận hàng" class="form-control input-md" required="" value="@Model.SHIP_ADDRESS">
+                                <input id="textinputname" name="Address" type="text" placeholder="Địa chỉ nhận hàng" class="form-control input-md" maxlength="200" required="" value="@Model.SHIP_ADDRESS">
 
                             </div>
                         </div>
@@ -139,7 +139,7 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="Mobile">Điện thoại</label>
                             <div class="col-md-8">
-                                <input id="textinputmobile" name="Mobile" type="tel" placeholder="Số điện thoại nhận hàng" class="form-control input-md" value="@Model.SHIP_PHONE">
+                                <input id="textinputmobile" name="Mobile" type="tel" placeholder="Số điện thoại nhận hàng" class="form-control input-md" maxlength="15" required value="@Model.SHIP_PHONE">
 
                             </div>
                         </div>
@@ -148,7 +148,7 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="Email">Email</label>
                             <div class="col-md-8">
-                                <input id="textinputmobilealt" name="Email" type="email" placeholder="Địa chỉ email" class="form-control input-md" value="@Model.SHIP_EMAIL">
+                                <input id="textinputmobilealt" name="Email" type="email" placeholder="Địa chỉ email" class="form-control input-md" maxlength="100" required value="@Model.SHIP_EMAIL">
 
                             </div>
                         </div>
@@ -156,7 +156,7 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="Note">Ghi chú</label>
                             <div class="col-md-8">
-                                <input id="textinputmobilealt" name="Note" type="text" placeholder="Ghi chú nhận hàng" class="form-control input-md" value="@Model.NOTE">
+                                <input id="textinputmobilealt" name="Note" type="text" placeholder="Ghi chú nhận hàng" class="form-control input-md" maxlength="100" value="@Model.NOTE">
 
                             </div>
                         </div>
@@ -221,7 +221,7 @@
 
         .wizard > div.wizard-inner {
             position: relative;
-            background-color: #FED208;
+            background-color: #30454A;
         }
 
     .connecting-line {

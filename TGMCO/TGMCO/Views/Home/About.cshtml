@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = "Tuấn Gia Minh | Giới thiệu công ty ";
+    Layout = "~/Views/Shared/_PageLayout.cshtml";
+    ViewBag.Description = "CÔNG TY TNHH TM TUẤN GIA MINH - Cung cấp thiết bị xây dựng, thiết bị công nghiệp, dụng cụ cầm tay, máy hàn, máy mài góc, máy cắt kim loại, dụng cụ đo chính xác, dụng cụ điện...";
+}
+
+@section LeftMenu{
+    @Html.Partial("~/Views/Partial/LeftMenu.cshtml")
+}
+<h1 style="text-align: center;color: white ; font-size: 20px; padding-top: 0; background-color: #30454A; margin-top: 0; margin-bottom: 5px; height: 35px; line-height: 1.6;">Giới thiệu công ty</h1>
+
+<h4>1. VIETNAMTOOL.VN</h4>
+<p class="col-lg-12">VIETNAMTOOL.VN là một Website thương mại điện tử của Công ty TNHH thương mại Tuấn Gia Minh - Chuyên về các thiết bị cơ khí, dụng cụ được ra đời nhằm phục vụ cho nhu cầu mua sắm một cách hiện đại, tiết kiệm tối đa thời gian và chi phí của Quý khách.</p>
+<h4>2. CÔNG TY TNHH THƯƠNG MẠI TUẤN GIA MINH</h4>
+<ul class="col-lg-12">
+    <li>
+        Địa chỉ: Tầng Trệt, 18A Đường Vạn Tượng, Phường 13, Quận 5, Thành Phố Hồ Chí Minh
+    </li>
+    <li>
+        Giám đốc/Đại diện pháp luật: Ngô Duy Tấn
+    </li>
+    <li>
+        Giấy phép kinh doanh: 0310689862 | Ngày cấp: 15/03/2011
+    </li>
+    <li>
+        Mã số thuế: 0310689862
+    </li>
+    <li>
+        Ngày hoạt động: 01/01/2012
+    </li>
+    <li>
+        Hoạt động chính: Bán buôn vật liệu, thiết bị lắp đặt khác trong xây dựng
+    </li>
+    <li>
+        Điện thoại: 091 9977 926 - 090 2333 949 - (08) 38 591 896
+    </li>
+</ul>
+<strong class="col-lg-12">Fanpage Facebook</strong>
+<div class="col-lg-12">
+    <div class="fb-page" data-href="https://www.facebook.com/TGM-1036380143099408/" data-width="846" data-height="300" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/TGM-1036380143099408/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/TGM-1036380143099408/">TGM</a></blockquote></div>
+</div>
+
+
+
+@section RightContent{
+
+    @{
+        Html.RenderAction("VerticalSlider", "Partial", new { _title = "Sản phẩm mới", _type = "New", _supplier_id = 0 });
+    }
+
+}
+
+<div id="fb-root"></div>
+<script>
+(function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.6&appId=1454298961531347";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>

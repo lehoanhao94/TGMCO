@@ -100,6 +100,38 @@ namespace TGMCO.Controllers.PAGECONTROLLER
             }
         }
 
+        [HttpDelete]
+        public ActionResult DeleteProductFromShoppingCart(int id)
+        {
+            try
+            {
+                List<ProductCart> _lstProductCart = GetShoppingCart();
+                ProductCart _ProductCart = _lstProductCart.Find(n => n.PRODUCT_ID == id);
+                _lstProductCart.Remove(_ProductCart);
+
+                return RedirectToAction("ShoppingCart", "ShoppingCart");
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Http404", "Error"); // 404
+            }
+        }
+        [HttpPost]
+        public ActionResult UpdateProductFromShoppingCart(int id, int quantity)
+        {
+            try
+            {
+                List<ProductCart> _lstProductCart = GetShoppingCart();
+                _lstProductCart.Find(n => n.PRODUCT_ID == id).QUANTITY = quantity;
+                
+                return RedirectToAction("ShoppingCart", "ShoppingCart");
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Http404", "Error"); // 404
+            }
+        }
+
         public int GetTotalQuantity()
         {
             try

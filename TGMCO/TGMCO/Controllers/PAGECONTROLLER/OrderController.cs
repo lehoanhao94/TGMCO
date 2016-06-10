@@ -139,7 +139,7 @@ namespace TGMCO.Controllers.PAGECONTROLLER
         {
             try
             {
-                if (string.IsNullOrEmpty(Session["SUPPLIER"].ToString()))
+                if (Session["SUPPLIER"] == null)
                 {
                     Session["SUPPLIER"] = "DEFAULT";
                     Session["SUPPLIER_MODEL"] = db.SUPPLIERS.Find(20);
@@ -149,8 +149,10 @@ namespace TGMCO.Controllers.PAGECONTROLLER
                 {
                     return RedirectToAction("Index", "Home");
                 }
+
                 Session["ShoppingCart"] = null;
                 Session["Order_Id"] = null;
+
                 ORDER _ORDER = db.ORDERS.Find(id);                
                 List<ORDER_DETAILS> _lstORDER_DETAILS = db.ORDER_DETAILS.Where(n => n.ORDER_ID == id).ToList();
                 ViewBag.ORDER_DETAIL = _lstORDER_DETAILS;
@@ -196,6 +198,72 @@ namespace TGMCO.Controllers.PAGECONTROLLER
             try
             {               
                 return View();
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Http404", "Error"); // 404
+            }
+        }
+
+        [HttpGet]
+        public ActionResult CheckBill(string Order_Code)
+        {
+            try
+            {
+                ViewBag.SearchResult = -1;
+                if (Order_Code != null)
+                {
+                    ORDER _ORDER = db.ORDERS.SingleOrDefault(n => n.ORDER_CODE.Equals(Order_Code));
+                    if(_ORDER != null)
+                    {
+                        ViewBag.ORDER_DETAILS = db.ORDER_DETAILS.Where(n => n.ORDER_ID == _ORDER.ORDER_ID).ToList();
+                        if (db.ORDER_DETAILS.Where(n => n.ORDER_ID == _ORDER.ORDER_ID).ToList().Count > 0)
+                        {
+                            ViewBag.SearchResult = 1;
+                            return View(_ORDER);
+                        }
+                        else
+                        {
+                            ViewBag.SearchResult = 2;
+                            return View(_ORDER);
+                        }
+                    }
+                    ViewBag.SearchResult = 0;                 
+                }
+                
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Http404", "Error"); // 404
+            }
+        }
+
+        [HttpDelete]
+        public ActionResult DeleteProductFromOrder(int order_id, int product_id)
+        {
+            try
+            {
+                ORDER_DETAILS ORDER_DETAILS = db.ORDER_DETAILS.Where(n => n.ORDER_ID == order_id && n.PRODUCT_ID == product_id).SingleOrDefault();
+                ORDER ORDER = db.ORDERS.Find(order_id);
+                ORDER.SUBTOTAL = ORDER.SUBTOTAL - ORDER_DETAILS.EXTENDED_PRICE;
+                db.ORDER_DETAILS.Remove(ORDER_DETAILS);
+                db.SaveChanges();
+
+                return RedirectToAction("CheckBill", "ShoppingCart", new { Order_Code = ORDER.ORDER_CODE });
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Http404", "Error"); // 404
+            }
+        }
+        [HttpPost]
+        public ActionResult UpdateProductFromOrder(int id, int quantity)
+        {
+            try
+            {
+
+                return RedirectToAction("ShoppingCart", "ShoppingCart");
             }
             catch (Exception ex)
             {

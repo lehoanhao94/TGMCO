@@ -20,9 +20,9 @@
                         {
                             <li class="news-item">
                                 <div class="col-item">
-                                    <div class="photo">
+                                    <a href="@Url.Action("Detail", "Product", new { id = product.PRODUCT_ID })" class="photo">
                                         <img id="Image-Product" src="@Url.Content(@m_PRODUCT.GetImage1(product.PRODUCT_ID))" class="img-responsive" alt="@product.PRODUCT_NAME" title="@product.PRODUCT_NAME" />
-                                    </div>
+                                    </a>
                                     <div class="info">
                                         <div class="Name-Product">
                                             <h5>@product.PRODUCT_NAME</h5>

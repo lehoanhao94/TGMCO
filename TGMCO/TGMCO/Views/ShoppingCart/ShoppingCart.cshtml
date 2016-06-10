@@ -85,7 +85,7 @@
     }
 }
 
-
+<script src="/Scripts/jquery.unobtrusive-ajax.min.js" type="text/javascript"></script>
 <div class="wizard">
     <div class="wizard-inner">
         <div class="connecting-line"></div>
@@ -140,31 +140,31 @@
                     </thead>
                     <tbody>
                         @{
-                            foreach (var product in Model)
-                            {
-                                <tr>
-                                    <td data-th="Product">
-                                        <div class="row">
-                                            <div class="col-sm-3 hidden-xs"><img src="@Url.Content(product.IMAGE_1)" width="100" alt="@product.PRODUCT_NAME" class="img-responsive" /></div>
-                                            <div class="col-sm-9">
-                                                <h4 class="nomargin">@product.PRODUCT_NAME</h4>
+    foreach (var product in Model)
+    {
+        <tr id="row_@product.PRODUCT_ID">
+            
+                <td data-th="Product">
+                    <div class="row">
+                        <div class="col-sm-3 hidden-xs"><img src="@Url.Content(product.IMAGE_1)" width="100" alt="@product.PRODUCT_NAME" class="img-responsive" /></div>
+                        <div class="col-sm-9">
+                            <h4 class="nomargin">@product.PRODUCT_NAME</h4>
 
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td><h5 class="text-center">@string.Format("{0:0,0}", @product.UNIT_PRICE)</h5></td>
-
-                                    <td data-th="Quantity">
-                                        <input type="number" class="form-control text-center" value="@product.QUANTITY">
-                                    </td>
-                                    <td><h5 class="text-center">@string.Format("{0:0,0}", @product.TOTAL_PRICE)</h5></td>
-                                    <td class="actions" data-th="">
-                                        <button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
-                                        <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
-                                    </td>
-                                </tr>
-                            }
-                        }
+                        </div>
+                    </div>
+                </td>
+                <td><h5 class="text-center">@string.Format("{0:0,0}", @product.UNIT_PRICE)</h5></td>                       
+                <td data-th="Quantity">
+                    <input type="number" onchange="onChangeQuantity(this)" name="numberProduct" class="form-control text-center numberProduct" min="1" max="20" value="@product.QUANTITY">
+                </td>
+                <td><h5 class="text-center">@string.Format("{0:0,0}", @product.TOTAL_PRICE)</h5></td>
+                <td class="actions" data-th="">
+                    <button id="btnUpdate" onclick="UpdateProduct(this)" data-quantity="1" data-id="@product.PRODUCT_ID" class="btn btn-info btn-sm"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+                    <a data-ajax="true" href="/ShoppingCart/DeleteProductFromShoppingCart/@product.PRODUCT_ID" type="button" data-ajax-confirm="Bạn có muốn xóa sản phẩm @product.PRODUCT_CODE khỏi giỏ hàng không?" data-ajax-complete="location.reload()" data-ajax-method="Delete" class="btn btn-danger btn-sm"><i class="fa fa-times" aria-hidden="true"></i></a>
+                </td>           
+        </tr>
+    }
+}
                     </tbody>
                     <tfoot style="margin-top: 10px;">
                         <tr class="visible-xs">
@@ -189,16 +189,12 @@
             </div>
 
             <div class="clearfix"></div>
-            @if (TempData["Fail"] != null)
+            @if (Session["SS_USER"] == null)
             {
-                <div class="alert alert-danger fade in">
+                <div class="alert alert-info fade in">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    <strong>Lỗi !</strong> @TempData["Fail"].
+                    <strong>Lời khuyên: </strong> Bạn nên đăng nhập tài khoản để quản lý đơn hàng tốt hơn.
                 </div>
-
-                <script>
-                    $("#Login-Register").modal();
-                </script>
             }
         </div>
     </form>
@@ -225,7 +221,7 @@
 
         .wizard > div.wizard-inner {
             position: relative;
-            background-color: #FED208;
+            background-color: #30454A;
         }
 
     .connecting-line {
@@ -330,9 +326,6 @@
         margin-top: 0;
     }
 
-    .actions button {
-        font-size: 15px;
-    }
 
     .Info-Order {
         width: 700px;
@@ -420,4 +413,39 @@
         $('.nav-tabs > li a[title]').tooltip();
 
     });
+</script>
+
+<script>
+    var _num = 0;
+    function UpdateProduct(obj) {
+        var id = $(obj).data("id");
+        var num = $('.numberProduct').val();
+        if (_num > 20) {
+            alert('Bạn nhập số quá lớn, vui lòng nhập số lượng dưới 20.')
+        }
+        else {
+            $.ajax({
+                url: '/ShoppingCart/UpdateProductFromShoppingCart?id=' + id + '&quantity=' + _num,
+                dataType: "html",
+                type: "POST",
+                contentType: 'application/html; charset=utf-8',
+                success: function (data) {
+                },
+                error: function (xhr) {
+
+                }
+            });
+        }
+    }
+
+    function onChangeQuantity(obj) {
+        var num = $(obj).val();
+        if (num > 20) {
+            alert('Bạn nhập số quá lớn, vui lòng nhập số lượng dưới 20.');
+            _num = 20;
+        }
+        else {
+            _num = num;
+        }
+    }
 </script>

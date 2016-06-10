@@ -8,7 +8,7 @@
     Layout = "~/Views/Shared/_PageLayout.cshtml";
 }
 
-@{
+@{  
     if (Session["SUPPLIER"].ToString().Equals("MAKITA"))
     {
         <style>
@@ -116,7 +116,13 @@
         <div class="tab-pane active" role="tabpanel" id="step4">
             <h3 style="text-align: center;">Đặt hàng thành công !</h3>
             <br />
+            <p>
+                Cảm ơn bạn đã mua hàng tại Tuấn Gia Minh. Chúng tôi hy vọng bạn hài lòng với những sản phẩm đã chọn. Đơn hàng của bạn đã được đặt thành công và được chuẩn bị sẵn sàng để giao tới bạn.
+            </p>
             <ul style="padding-left: 15px;">
+                <li>
+                    <label>Mã code kiểm tra đơn: </label>@Model.ORDER_CODE
+                </li>
                 <li>
                     <label>Mã đơn hàng: </label> #VNT-@Model.ORDER_ID
                 </li>
@@ -231,7 +237,7 @@
 
         .wizard > div.wizard-inner {
             position: relative;
-            background-color: #FED208;
+            background-color: #30454A;
         }
 
     .connecting-line {

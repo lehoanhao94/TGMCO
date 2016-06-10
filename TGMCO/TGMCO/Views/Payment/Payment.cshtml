@@ -110,7 +110,7 @@
     <form role="form" method="post" action="@Url.Action("UpdatePaymentMethod", "Payment", new { id = Session["Order_Id"]})">
         <div class="tab-content">
             <div class="tab-pane active" role="tabpanel" id="step2" style="height: 310px;">
-                <h3 style="text-align: center;">Thông tin đặt hàng</h3>
+                <h3 style="text-align: center;">Phương thức thanh toán</h3>
                 <br />
                 <div class="funkyradio">
                     <div>
@@ -122,12 +122,12 @@
                         <label for="radio2">Chuyển khoản qua ngân hàng</label>
                     </div>
                     <div>
-                        <input type="radio" name="Payment" value="3" id="radio3" />
-                        <label for="radio3">Thanh toán qua ngân lượng</label>
+                        <input type="radio" name="Payment" value="3" class="disabled" id="radio3" />
+                        <label for="radio3" class="disabled">Thanh toán qua ngân lượng</label>
                     </div>
                     <div>
-                        <input type="radio" name="Payment" value="4" id="radio4" />
-                        <label for="radio4">Thanh toán qua OnePay</label>
+                        <input type="radio" name="Payment" value="4" class="disabled" id="radio4" />
+                        <label for="radio4" class="disabled">Thanh toán qua OnePay</label>
                     </div>
                 </div>
 
@@ -171,7 +171,7 @@
 
         .wizard > div.wizard-inner {
             position: relative;
-            background-color: #FED208;
+            background-color: #30454A;
         }
 
     .connecting-line {
