@@ -26,7 +26,7 @@ namespace TGMCO.Controllers
         {
             try
             {
-                if (Session["SS_USER"] == null)
+                if (Session["SS_USER_ADMIN"] == null)
                 {
                     return RedirectToAction("Login", "Admin");
                 }
@@ -71,7 +71,7 @@ namespace TGMCO.Controllers
                     {
                         if(Password.Equals(StringCipher.Decrypt(_User.PASSWORD, _User.USER_NAME)) && (_User.IS_ADMIN == true) && (_User.IS_ACTIVE == true))
                         {
-                            Session["SS_USER"] = _User;
+                            Session["SS_USER_ADMIN"] = _User;
                             Session["SS_USER_PROFILE"] = db.USER_PROFILES.Where(user => user.USER_ID.Equals(_User.USER_ID)).FirstOrDefault();
                             return RedirectToAction("Index", "Admin");                          
                         }
@@ -118,7 +118,7 @@ namespace TGMCO.Controllers
         {
             try
             {
-                if(Session["SS_USER"] == null)
+                if (Session["SS_USER_ADMIN"] == null)
                 {
                     return RedirectToAction("Login", "Admin");
                 }
@@ -141,7 +141,7 @@ namespace TGMCO.Controllers
         {
             try
             {
-                if (Session["SS_USER"] == null)
+                if (Session["SS_USER_ADMIN"] == null)
                 {
                     return RedirectToAction("Login", "Admin");
                 }
@@ -164,7 +164,7 @@ namespace TGMCO.Controllers
         {
             try
             {
-                if (Session["SS_USER"] == null)
+                if (Session["SS_USER_ADMIN"] == null)
                 {
                     return RedirectToAction("Login", "Admin");
                 }
@@ -188,7 +188,7 @@ namespace TGMCO.Controllers
         {
             try
             {
-                if (Session["SS_USER"] == null)
+                if (Session["SS_USER_ADMIN"] == null)
                 {
                     return RedirectToAction("Login", "Admin");
                 }
@@ -211,7 +211,7 @@ namespace TGMCO.Controllers
         {
             try
             {
-                if (Session["SS_USER"] == null)
+                if (Session["SS_USER_ADMIN"] == null)
                 {
                     return RedirectToAction("Login", "Admin");
                 }
@@ -231,7 +231,7 @@ namespace TGMCO.Controllers
         {
             try
             {
-                if (Session["SS_USER"] == null)
+                if (Session["SS_USER_ADMIN"] == null)
                 {
                     return RedirectToAction("Login", "Admin");
                 }
@@ -254,17 +254,18 @@ namespace TGMCO.Controllers
         /// 
         /// </summary>
         /// <returns></returns>
-        public ActionResult ManagingOrders()
+        public ActionResult ManagingOrders(int order_status_id)
         {
             try
             {
-                if (Session["SS_USER"] == null)
+                if (Session["SS_USER_ADMIN"] == null)
                 {
                     return RedirectToAction("Login", "Admin");
                 }
                 else
                 {
-                    return View();
+                    List<ORDER> _lstORDER = db.ORDERS.Where(n => n.ORDER_STATUS_ID == order_status_id).OrderByDescending(n => n.ORDER_DATE).ToList();
+                    return View(_lstORDER);
                 }
             }
             catch (Exception ex)
@@ -277,7 +278,7 @@ namespace TGMCO.Controllers
         {
             try
             {
-                if (Session["SS_USER"] == null)
+                if (Session["SS_USER_ADMIN"] == null)
                 {
                     return RedirectToAction("Login", "Admin");
                 }

@@ -1,7 +1,7 @@
 ﻿@using TGMCO.Models;
 
 @{
-    USER m_ADMIN = (USER)Session["SS_USER"];
+    USER m_ADMIN = (USER)Session["SS_USER_ADMIN"];
     USER_PROFILES m_ADMIN_PROFILE = (USER_PROFILES)Session["SS_USER_PROFILE"];
     NumberObject m_NUMBER_OBJECT = new NumberObject();
 }
@@ -404,7 +404,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="@Url.Action("ManagingOrders", "Admin")">
+                        <a href="@Url.Action("ManagingOrders", "Admin", new { order_status_id = 3})">
                             <i class="fa fa-cart-plus"></i> <span> QUẢN LÝ ĐƠN ĐẶT HÀNG <small class="label label-primary">@m_NUMBER_OBJECT.GetNumOfOrders()</small></span>
                         </a>
                     </li>

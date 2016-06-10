@@ -33,6 +33,7 @@ namespace TGMCO.Controllers.PAGECONTROLLER
         {
             try
             {
+                Session["SUPPLIER"] = "DEFAULT";
                 return View();
             }
             catch (Exception ex)

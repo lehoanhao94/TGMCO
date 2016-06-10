@@ -93,7 +93,7 @@
                         <li class="list-group-item" style="height: 55px;">
                             <span class="prefix col-sm-6">@m_Product.GetName(@order_detail.PRODUCT_ID)<p>@m_Product.GetCode(@order_detail.PRODUCT_ID)</p></span>
                             <span class="prefix col-sm-2" style="line-height: 2.5; text-align: right">@string.Format("{0:0,0}", @order_detail.UNIT_PRICE)</span>
-                            <span class="prefix col-sm-1"><input class="form-control" type="text" style="width: 40px;" value="@order_detail.QUANTITY"></span>
+                            <span class="prefix col-sm-1"><input class="form-control" type="number" style="width: 40px;" value="@order_detail.QUANTITY"></span>
                             <span class="prefix col-sm-2" style="line-height: 2.5; text-align: right">@string.Format("{0:0,0}", @order_detail.EXTENDED_PRICE)</span>
                             <span class="prefix col-sm-1"><a data-ajax="true" href="@Url.Action("DeleteProductFromOrder", "Order", new { order_id = @order_detail.ORDER_ID, product_id = @order_detail.PRODUCT_ID })" type="button" data-ajax-confirm="Bạn có muốn xóa sản phẩm này khỏi đơn hàng không?" data-ajax-complete="location.reload()" data-ajax-method="Delete" class="btn btn-danger btn-sm"><i class="fa fa-times" aria-hidden="true"></i></a></span>
                         </li>

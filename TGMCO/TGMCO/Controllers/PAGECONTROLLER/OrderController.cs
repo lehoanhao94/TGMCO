@@ -196,7 +196,8 @@ namespace TGMCO.Controllers.PAGECONTROLLER
         public ActionResult CheckBill()
         {
             try
-            {               
+            {
+                Session["SUPPLIER"] = "DEFAULT";
                 return View();
             }
             catch (Exception ex)
@@ -210,6 +211,7 @@ namespace TGMCO.Controllers.PAGECONTROLLER
         {
             try
             {
+                Session["SUPPLIER"] = "DEFAULT";
                 ViewBag.SearchResult = -1;
                 if (Order_Code != null)
                 {
@@ -258,7 +260,7 @@ namespace TGMCO.Controllers.PAGECONTROLLER
             }
         }
         [HttpPost]
-        public ActionResult UpdateProductFromOrder(int id, int quantity)
+        public ActionResult UpdateOrder(int id, int quantity)
         {
             try
             {
@@ -269,6 +271,23 @@ namespace TGMCO.Controllers.PAGECONTROLLER
             {
                 return RedirectToAction("Http404", "Error"); // 404
             }
+        }
+
+        [HttpPost]
+        public void CancelOrder(int id)
+        {
+            try
+            {
+                var ORDER = db.ORDERS.Find(id);
+                ORDER.ORDER_STATUS_ID = 4;
+                TempData["Success"] = "Đã hủy đơn hàng #VNT-" + ORDER.ORDER_ID;
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
         }
     }
 }

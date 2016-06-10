@@ -1320,6 +1320,7 @@
     <Content Include="Views\Home\blackanddecker.cshtml" />
     <Content Include="Views\Order\CheckBill.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Partial\OrderDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

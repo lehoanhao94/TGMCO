@@ -1,0 +1,172 @@
+﻿@using TGMCO.Models;
+@using TGMCO.Models.Entity;
+
+@model ORDER
+
+@{
+    PaymentMethodModel m_Payment_Method = new PaymentMethodModel();
+    OrderStatusModel m_Order_Status = new OrderStatusModel();
+    ShipperModel m_Shipper = new ShipperModel();
+    List<ORDER_DETAILS> m_lstORDER_DETAIL = ViewBag.ListOrderDetails;
+    ProductModel m_Product = new ProductModel();
+}
+
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title col-lg-4"><strong>#VNT-@Model.ORDER_ID</strong></h4>
+            <h4 class="modal-title pull-right">Tổng tiền hàng: @string.Format("{0:0,0}", @Model.SUBTOTAL)</h4>
+        </div>
+        <div class="modal-body">
+            <table class="table table-hover">
+                <tr>
+                    <td class="col-sm-3"><strong>Mã code: </strong></td>
+                    <td>@Model.ORDER_CODE</td>
+                </tr>
+                <tr>
+                    <td><strong>Ngày đặt hàng: </strong></td>
+                    <td>@Model.ORDER_DATE.ToString("dd-MM-yyyy")</td>
+                </tr>
+                <tr>
+                    <td><strong>Tên người đặt: </strong></td>
+                    <td>@Model.SHIP_NAME</td>
+                </tr>
+                <tr>
+                    <td><strong>Địa chỉ: </strong></td>
+                    <td>@Model.SHIP_ADDRESS</td>
+                </tr>
+                <tr>
+                    <td><strong>Số điện thoại: </strong></td>
+                    <td>@Model.SHIP_PHONE</td>
+                </tr>
+                <tr>
+                    <td><strong>Email: </strong></td>
+                    <td>@Model.SHIP_EMAIL</td>
+                </tr>
+                <tr>
+                    <td><strong>Ghi chú: </strong></td>
+                    <td>@Model.NOTE</td>
+                </tr>
+                <tr>
+                    <td><strong>Hình thức chuyển hàng: </strong></td>
+                    <td><span class="label label-primary">@m_Shipper.GetName(Model.SHIP_VIA_ID)</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Hình thức thanh toán: </strong></td>
+                    <td><span class="label label-success">@m_Payment_Method.GetName((int)@Model.PAYMENT_METHOD_ID)</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Trạng thái đơn hàng: </strong></td>
+                    <td><span class="label label-danger">@m_Order_Status.GetName(Model.ORDER_STATUS_ID) </span></td>
+                </tr>
+            </table>
+            <table id="cart" class="table table-hover table-condensed">
+                <thead>
+                    <tr>
+                        <th style="width:15%" class="text-center">Mã</th>
+                        <th style="width:35%" class="text-center">Tên sản phẩm</th>
+                        <th style="width:20%" class="text-center">Đơn giá</th>
+                        <th style="width:10%" class="text-center">Số lượng</th>
+                        <th style="width:20%" class="text-center">Thành tiền</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var product in m_lstORDER_DETAIL)
+                        {
+                            <tr>
+                                <td data-th="Product">
+                                    <h4 class="nomargin">@m_Product.GetCode(product.PRODUCT_ID)</h4>
+                                </td>
+                                <td data-th="Product">
+                                    <h4 class="nomargin">@m_Product.GetName(product.PRODUCT_ID)</h4>
+                                </td>
+                                <td><h5 class="text-center">@string.Format("{0:0,0}", @product.UNIT_PRICE)</h5></td>
+
+
+                                <td><h5 class="text-center">@product.QUANTITY</h5></td>
+
+                                <td><h5 class="pull-right">@string.Format("{0:0,0}", @product.EXTENDED_PRICE)</h5></td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+                <tfoot style="margin-top: 10px;">
+                    <tr class="visible-xs">
+                        <td class="text-center"><strong></strong></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td colspan="1" class="hidden-xs"></td>
+                        <td colspan="2"><h4 class="pull-right">Tổng tiền hàng:</h4></td>
+                        <td class="hidden-xs"><h5 class="pull-right"> @string.Format("{0:0,0}", @Model.SUBTOTAL)</h5></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td colspan="1" class="hidden-xs"></td>
+                        <td colspan="2"><h4 class="pull-right">Tiền vận chuyển:</h4></td>
+                        <td class="hidden-xs"><h5 class="pull-right"> @string.Format("{0:0,0}", @Model.FREIGHT)</h5></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td colspan="1" class="hidden-xs"></td>
+                        <td colspan="2"><h4 class="pull-right">TỔNG TIỀN:</h4></td>
+                        <td class="hidden-xs"><h4 class="pull-right"><strong> @string.Format("{0:0,0}", @Model.FREIGHT + @Model.SUBTOTAL) VNĐ</strong></h4></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="modal-footer">
+            <div class="btn-group btn-group-justified">
+                <a href="#" class="btn btn-success" data-toggle="modal" data-target="#ShipCode">Đã giao hàng</a>
+                <a href="#" class="btn btn-warning">Chưa giao hàng</a>
+                <a href="#" class="btn btn-danger">Chưa thanh toán</a>
+                <a data-ajax="true" href="/Order/CancelOrder/@Model.ORDER_ID" type="button" data-ajax-confirm="Bạn có muốn hủy đơn hàng #VNT-@Model.ORDER_ID không?" data-ajax-complete="location.reload()" data-ajax-method="Post" class="btn btn-default">Hủy đơn hàng</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ShipCode" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Thông tin giao hàng</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="email">Mã giao hàng:</label>
+                        <div class="col-sm-9">
+                            <input type="email" class="form-control" id="email" placeholder="Nhập mã giao hàng">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="pwd">Ngày giao hàng:</label>
+                        <div class="col-sm-9">
+                            <input type="date" required class="form-control" id="pwd" placeholder="Nhập ngày giao hàng">
+                        </div>
+                    </div>      
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="pwd">Phí giao hàng:</label>
+                        <div class="col-sm-9">
+                            <input type="text" required class="form-control" id="pwd" placeholder="Nhập phí giao hàng" value="@Model.FREIGHT">
+                        </div>
+                    </div>       
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="pwd">Ghi chú:</label>
+                        <div class="col-sm-9">
+                            <input type="text" required class="form-control" id="pwd" placeholder="Ghi chú">
+                        </div>
+                    </div>        
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <button type="button" class="btn btn-success pull-right">Đã giao hàng </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

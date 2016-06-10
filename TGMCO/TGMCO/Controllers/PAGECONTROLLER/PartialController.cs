@@ -86,5 +86,20 @@ namespace TGMCO.Controllers.PAGECONTROLLER
 
         }
 
+        public PartialViewResult OrderDetails(int order_id)
+        {
+            try
+            {
+                ORDER ORDER = db.ORDERS.Find(order_id);
+                ViewBag.ListOrderDetails = db.ORDER_DETAILS.Where(n => n.ORDER_ID == order_id).ToList();
+                return PartialView(ORDER);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
     }
 }

@@ -1,24 +1,181 @@
-﻿@{
+﻿@model List<TGMCO.Models.ORDER>
+@using TGMCO.Models.Entity;
+
+@{
     ViewBag.Title = "ManagingOrders";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    SupplierModel m_SUPPLIER_MODEL = new SupplierModel();
+    CategoryModel m_CATEGORY_MODEL = new CategoryModel();
+    CategoryExtraModel m_CATEGORY_EXTRA_MODEL = new CategoryExtraModel();
+    ProductModel m_PRODUCT_MODEL = new ProductModel();
 }
 
-<button id="edit" class="btn btn-primary" onclick="edit()" type="button">Edit</button>
-<button id="save" class="btn btn-primary" onclick="save()" type="button">Save</button>
-<div class="click2edit"><table style="box-sizing: border-box; border-spacing: 0px; border-collapse: collapse; font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif; font-size: 12.6px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 18px; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; width: 513px;" border="0" cellpadding="0" cellspacing="0" width="513"><col style="box-sizing: border-box;"><col style="box-sizing: border-box;"><tbody style="box-sizing: border-box;"><tr style="box-sizing: border-box;" height="19"><td style="box-sizing: border-box; padding: 0px; height: 19px; width: 223px;" height="19">Công suất</td><td style="box-sizing: border-box; padding: 0px; width: 291px;">1,050W</td></tr><tr style="box-sizing: border-box;" height="19"><td style="box-sizing: border-box; padding: 0px; height: 19px;" height="19">Lưu lượng khí tối đa</td><td style="box-sizing: border-box; padding: 0px;">2.0m³ / min</td></tr><tr style="box-sizing: border-box;" height="19"><td style="box-sizing: border-box; padding: 0px; height: 19px;" height="19">Lưu lượng hút tối đa</td><td style="box-sizing: border-box; padding: 0px;">22.0kPa</td></tr><tr style="box-sizing: border-box;" height="19"><td style="box-sizing: border-box; padding: 0px; height: 19px;" height="19">(lượng nước)</td><td style="box-sizing: border-box; padding: 0px;">(2,240mmH2O)</td></tr><tr style="box-sizing: border-box;" height="19"><td style="box-sizing: border-box; padding: 0px; height: 19px;" height="19">Bình chứa</td><td style="box-sizing: border-box; padding: 0px;">Bụi 22L</td></tr><tr style="box-sizing: border-box;" height="19"><td style="box-sizing: border-box; padding: 0px; height: 19px;" height="19">&nbsp;</td><td style="box-sizing: border-box; padding: 0px;">Nước 17L</td></tr><tr style="box-sizing: border-box;" height="19"><td style="box-sizing: border-box; padding: 0px; height: 19px;" height="19">Kích thước</td><td style="box-sizing: border-box; padding: 0px;">552x398x569mm</td></tr><tr style="box-sizing: border-box;" height="19"><td style="box-sizing: border-box; padding: 0px; height: 19px;" height="19">Trọng lượng</td><td style="box-sizing: border-box; padding: 0px;">16.3kg</td></tr><tr style="box-sizing: border-box;" height="19"><td style="box-sizing: border-box; padding: 0px; height: 19px;" height="19">Dây dẫn điện</td><td style="box-sizing: border-box; padding: 0px;">5.0m</td></tr></tbody></table><p><br></p>
+
+@section Page_Header {
+    <h1>
+        QUẢN LÝ ĐƠN HÀNG
+        <small>Xác nhận, hủy, cập nhập</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Admin")"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">@ViewBag.Title</li>
+    </ol>
+}
+<div class="jquery-script-clear"></div>
+<div class="table-responsive" id="categories">
+    <div class="btn-group">
+        <a type="button" href="@Url.Action("ManagingOrders", "Admin", new { order_status_id = 1})" class="btn btn-success btn-filter" data-target="stt-1">Đã giao hàng</a>
+        <a type="button" href="@Url.Action("ManagingOrders", "Admin", new { order_status_id = 2})" class="btn btn-warning btn-filter" data-target="stt-2">Chưa giao hàng</a>
+        <a type="button" href="@Url.Action("ManagingOrders", "Admin", new { order_status_id = 3})" class="btn btn-danger btn-filter" data-target="stt-3">Chưa thanh toán</a>
+        <a type="button" href="@Url.Action("ManagingOrders", "Admin", new { order_status_id = 4})" class="btn btn-default btn-filter" data-target="all">Đơn đã hủy</a>
+    </div>
+
+    <div style="float: right;">
+        <input class="search form-control" placeholder="Tìm kiếm theo mã, code, tên người dùng..." style="width: 300px;" />
+    </div>
+    @{
+        if (@TempData["Success"] != null)
+        {
+            <div class="alert alert-success alert-dismissable" style="margin-top: 5px;">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4>	<i class="icon fa fa-check"></i> Thao tác thành công !</h4>
+                @TempData["Success"]
+            </div>
+        }
+    }
+
+    <div id="first-container">
+        <table id="table" class="table table-hover">
+            <thead>
+                <tr>
+                    <th style="width:100px;" class="sort" data-sort="id">Mã đơn</th>
+                    <th class="sort" data-sort="name">Mã Code</th>
+                    <th class="sort" data-sort="supplier">Tên người đặt</th>
+                    <th class="sort" data-sort="category">Ngày đặt</th>
+                    <th class="sort" data-sort="category">Số điện thoại</th>
+                    <th class="sort" data-sort="price">Tổng tiền</th>
+                    <th style="width:0px;"></th>
+                </tr>
+            </thead>
+            <tbody class="list">
+                @foreach (var order in Model)
+                {
+                    <tr id="row_@order.ORDER_ID" class="danger">
+                        <td class="id">#VNT-@order.ORDER_ID</td>
+                        <td class="id">@order.ORDER_CODE</td>
+                        <td class="name">@order.SHIP_NAME</td>
+                        <td class="supplier">@order.ORDER_DATE.ToString("dd-MM-yyyy")</td>
+                        <td class="category">@order.SHIP_PHONE</td>
+                        <td class="categoryextra">@string.Format("{0:0,0}", @order.SUBTOTAL)</td>
+                        <td class="">
+                            <button data-ajax="true" onclick="OrderDetails(this)" data-toggle="modal" data-target="#myModal" type="button" id="btnOrder" data-id="@order.ORDER_ID" class="btn btn-info">Chi tiết</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div style="margin-left: 500px;">
+            <div class="my-navigation">
+                <div class="simple-pagination-first"></div>
+                <div class="simple-pagination-previous"></div>
+                <div class="simple-pagination-page-numbers"></div>
+                <div class="simple-pagination-next"></div>
+                <div class="simple-pagination-last"></div>
+            </div>
+            <div class="simple-pagination-page-x-of-x"></div>
+            <div class="simple-pagination-showing-x-of-x"></div>
+            <div>
+                Display <select class="simple-pagination-items-per-page"></select> items per page.
+            </div>
+            <div>
+                Go directly to page <select class="simple-pagination-select-specific-page"></select>.
+            </div>
+        </div>
+    </div>
 </div>
 
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><i class="fa fa-spinner fa-spin"></i> Đang tải dữ liệu hóa đơn</h4>
+            </div>
+            <div class="modal-body">
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function OrderDetails(obj) {
+        var id = $(obj).data("id");        
+            $.ajax({
+                url: '/Partial/OrderDetails?order_id=' + id,
+                dataType: "html",
+                type: "POST",
+                contentType: 'application/html; charset=utf-8',
+                success: function (data) {
+                    $("#myModal").html(data)
+                },
+                error: function (xhr) {
+
+                }
+            });
+    }
+</script>
+
+@section masterjs{
+    <style>
+        #table th:hover {
+            cursor: pointer;
+        }
+
+        .simple-pagination-page-numbers a {
+            display: block;
+            float: left;
+            width: 2rem;
+            text-align: center;
+        }
+
+        .my-navigation:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .my-navigation div {
+            float: left;
+        }
+
+            .my-navigation div + div {
+                margin-left: .5rem;
+            }
+    </style>
+
+}
 @section footerjs{
-    <script src="~/Content/Admin_Layout/js/summernote-vi-VN.js"></script>
-
+    <script src="~/Content/Admin_Layout/js/jquery-simple-pagination-plugin.js"></script>
     <script>
-        var edit = function () {
-            $('.click2edit').summernote({ focus: true });
+        (function ($) {
+
+            $('#first-container').simplePagination({
+                items_per_page: 100
+            });
+
+        })(jQuery);
+    </script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.2.0/list.min.js"></script>
+    <script>
+        var options = {
+            valueNames: ['name', 'id', 'supplier', 'category', 'categoryextra', 'price']
         };
 
-        var save = function () {
-            var makrup = $('.click2edit').summernote('code');
-            $('.click2edit').summernote('destroy');
-        };
+        var userList = new List('categories', options);
     </script>
 }
