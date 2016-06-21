@@ -41,6 +41,138 @@ namespace TGMCO.Controllers.PAGECONTROLLER
                 return RedirectToAction("Http404", "Error"); // 404
             }
         }
+        public ActionResult History()
+        {   
+            try
+            {
+                Session["SUPPLIER"] = "DEFAULT";
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Http404", "Error"); // 404
+            }
+        }
+        public ActionResult Business()
+        {
+            try
+            {
+                Session["SUPPLIER"] = "DEFAULT";
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Http404", "Error"); // 404
+            }
+        }
+        public ActionResult OrganizationalChart()
+        {
+            try
+            {
+                Session["SUPPLIER"] = "DEFAULT";
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Http404", "Error"); // 404
+            }
+        }
+        public ActionResult GuideLogin()
+        {
+            try
+            {
+                Session["SUPPLIER"] = "DEFAULT";
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Http404", "Error"); // 404
+            }
+        }
+        public ActionResult GuideShoping()
+        {
+            try
+            {
+                Session["SUPPLIER"] = "DEFAULT";
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Http404", "Error"); // 404
+            }
+        }
+        public ActionResult GuideResetPassword()
+        {
+            try
+            {
+                Session["SUPPLIER"] = "DEFAULT";
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Http404", "Error"); // 404
+            }
+        }
+        public ActionResult PrivacyPolicy()
+        {
+            try
+            {
+                Session["SUPPLIER"] = "DEFAULT";
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Http404", "Error"); // 404
+            }
+        }
+        public ActionResult ShippingPolicy()
+        {
+            try
+            {
+                Session["SUPPLIER"] = "DEFAULT";
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Http404", "Error"); // 404
+            }
+        }
+        public ActionResult OrderProcessing()
+        {
+            try
+            {
+                Session["SUPPLIER"] = "DEFAULT";
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Http404", "Error"); // 404
+            }
+        }
+        public ActionResult ReturnPolicy()
+        {
+            try
+            {
+                Session["SUPPLIER"] = "DEFAULT";
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Http404", "Error"); // 404
+            }
+        }
+        public ActionResult ContactUs()
+        {
+            try
+            {
+                Session["SUPPLIER"] = "DEFAULT";
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Http404", "Error"); // 404
+            }
+        }
         public ViewResult makita()
         {
             try

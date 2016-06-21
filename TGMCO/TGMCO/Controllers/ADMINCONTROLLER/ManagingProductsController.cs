@@ -39,7 +39,7 @@ namespace TGMCO.Controllers.ADMINCONTROLLER
         {
             try
             {
-                if (Session["SS_USER"] == null)
+                if (Session["SS_USER_ADMIN"] == null)
                 {
                     return RedirectToAction("Login", "Admin");
                 }

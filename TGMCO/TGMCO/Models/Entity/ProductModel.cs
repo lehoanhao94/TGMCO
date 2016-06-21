@@ -79,11 +79,11 @@ namespace TGMCO.Models.Entity
                 {
                     return result;
                 }
-                return "";
+                return "http://www.trustvets.com/images/NoImageAvailable.png";
             }
             catch
             {
-                return "";
+                return "http://www.trustvets.com/images/NoImageAvailable.png";
             }
         }
         public string GetFile1(int id_product)

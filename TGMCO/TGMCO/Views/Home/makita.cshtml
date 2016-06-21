@@ -37,17 +37,76 @@
 }
 
 @section LeftMenu{
+
 <div id="Left-Menu">
     <div class="nav-side-menu">
-        <div class="brand makita-menu-header"><strong> MENU </strong></div>
+        <div class="brand"><strong>MENU </strong></div>
         <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
 
         <div class="menu-list">
 
             <ul id="menu-content" class="menu-content collapse out">
                 <li data-toggle="collapse" data-target="#abcde" class="collapsed">
-                    <a><i class="fa fa-globe fa-lg"></i> TRANG CHỦ MAKITA </a>
+                    <a href="@Url.Action("makita", "Home")"><i class="fa fa-home fa-lg"></i> TRANG CHỦ MAKITA </a>
                 </li>
+                <li data-toggle="collapse" data-target="#gioithieu" class="collapsed">
+                    <a><i class="fa fa-info-circle fa-lg"></i> GIỚI THIỆU <span class="arrow"></span></a>
+                </li>
+                <ul class="sub-menu collapse" id="gioithieu">
+                    <a href="@Url.Action("About", "Home")"><li>Giới thiệu công ty</li></a>
+                    <a href="@Url.Action("History", "Home")"><li>Lịch sử hình thành</li></a>
+                    <a href="@Url.Action("Business", "Home")"><li>Lĩnh vực hoạt động</li></a>
+                    <a href="@Url.Action("OrganizationalChart", "Home")"><li>Sơ đồ tổ chức</li></a>
+                </ul>
+
+
+                <li data-toggle="collapse" data-target="#tintuc" class="collapsed">
+                    <a><i class="fa fa-globe fa-lg"></i> TIN TỨC <span class="arrow"></span></a>
+                </li>
+                <ul class="sub-menu collapse" id="tintuc">
+                    <a href="@Url.Action("News", "News")"><li>Tin tức sự kiện</li></a>
+                    <a href="@Url.Action("NewsPromotion", "News")"><li>Tin khuyến mãi</li></a>
+                </ul>
+
+
+                <li data-toggle="collapse" data-target="#huongdan" class="collapsed">
+                    <a><i class="fa fa-question-circle fa-lg"></i> HƯỚNG DẪN <span class="arrow"></span></a>
+                </li>
+                <ul class="sub-menu collapse" id="huongdan">
+                    <a href="@Url.Action("GuideLogin", "Home")"><li>Hướng dẫn đăng nhập</li></a>
+                    <a href="@Url.Action("GuideShoping", "Home")"><li>Hướng dẫn mua hàng</li></a>
+                    <a href="@Url.Action("GuideResetPassword", "Home")"><li>Hướng dẫn lấy lại mật khẩu</li></a>
+                </ul>
+
+                <li data-toggle="collapse" data-target="#chinhsach" class="collapsed">
+                    <a><i class="fa fa-shield fa-lg"></i> CHÍNH SÁCH <span class="arrow"></span></a>
+                </li>
+                <ul class="sub-menu collapse" id="chinhsach">
+                    <a href="@Url.Action("PrivacyPolicy", "Home")"><li>Chính sách bảo mật</li></a>
+                    <a href="@Url.Action("ShippingPolicy", "Home")"><li>Chính sách vận chuyển</li></a>
+                    <a href="@Url.Action("OrderProcessing", "Home")"><li>Quy trình giao hàng</li></a>
+                    <a href="@Url.Action("ReturnPolicy", "Home")"><li>Chính sách đổi trả hàng</li></a>
+                </ul>
+                <li>
+                    <a href="@Url.Action("CheckBill", "Order")"><i class="fa fa-check-circle fa-lg"></i> KIỂM TRA ĐƠN HÀNG</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!--END LEFT-MENU-->
+</div>
+
+    @{
+        Html.RenderAction("CategoryMenu", "Partial", new { id = Model.SUPPLIER_ID });
+     }
+<div id="Left-Menu">
+    <div class="nav-side-menu">
+        <div class="brand"><strong>DANH MỤC PHỤ </strong></div>
+        <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+
+        <div class="menu-list">
+
+            <ul id="menu-content" class="menu-content collapse out">
                 <li data-toggle="collapse" data-target="#abcde" class="collapsed">
                     <a><i class="fa fa-globe fa-lg"></i> SẢN PHẨM MỚI </a>
                 </li>
@@ -61,7 +120,6 @@
                     <li>Máy cắt </li>
                     <li>Máy bào</li>
                 </ul>
-
                 <li data-toggle="collapse" data-target="#abcd" class="collapsed">
                     <a><i class="fa fa-globe fa-lg"></i> CÔNG NGHỆ <span class="arrow"></span></a>
                 </li>
@@ -77,12 +135,9 @@
     </div>
 </div>
 
-    @{
-        Html.RenderAction("CategoryMenu", "Partial", new { id = Model.SUPPLIER_ID });
-     }
-
-
 }
+
+
 
 <h1 style="text-align: center; padding-top: 0; margin-top: 0;margin-bottom: 5px;">@Model.SUPPLIER_NAME</h1>
 

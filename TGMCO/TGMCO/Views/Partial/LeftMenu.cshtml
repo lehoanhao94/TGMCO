@@ -14,10 +14,10 @@
                     <a><i class="fa fa-info-circle fa-lg"></i> GIỚI THIỆU <span class="arrow"></span></a>
                 </li>
                 <ul class="sub-menu collapse" id="gioithieu">
-                    <li><a href="@Url.Action("About", "Home")">Giới thiệu công ty</a></li>
-                    <li><a href="#">Lịch sử hình thành</a></li>
-                    <li><a href="#">Lĩnh vực hoạt động</a></li>
-                    <li><a href="#">Sơ đồ tổ chức</a></li>
+                    <a href="@Url.Action("About", "Home")"><li>Giới thiệu công ty</li></a>
+                    <a href="@Url.Action("History", "Home")"><li>Lịch sử hình thành</li></a>
+                    <a href="@Url.Action("Business", "Home")"><li>Lĩnh vực hoạt động</li></a>
+                    <a href="@Url.Action("OrganizationalChart", "Home")"><li>Sơ đồ tổ chức</li></a>
                 </ul>
 
 
@@ -25,8 +25,8 @@
                     <a><i class="fa fa-globe fa-lg"></i> TIN TỨC <span class="arrow"></span></a>
                 </li>
                 <ul class="sub-menu collapse" id="tintuc">
-                    <li>Tin tức sự kiện</li>
-                    <li>Tin khuyến mãi</li>
+                    <a href="@Url.Action("News", "News")"><li>Tin tức sự kiện</li></a>
+                    <a href="@Url.Action("NewsPromotion", "News")"><li>Tin khuyến mãi</li></a>
                 </ul>
 
 
@@ -34,20 +34,23 @@
                     <a><i class="fa fa-question-circle fa-lg"></i> HƯỚNG DẪN <span class="arrow"></span></a>
                 </li>
                 <ul class="sub-menu collapse" id="huongdan">
-                    <li>Hướng dẫn đăng nhập</li>
-                    <li>Hướng dẫn mua hàng</li>
-                    <li>Hướng dẫn lấy lại mật khẩu</li>
+                    <a href="@Url.Action("GuideLogin", "Home")"><li>Hướng dẫn đăng nhập</li></a>
+                    <a href="@Url.Action("GuideShoping", "Home")"><li>Hướng dẫn mua hàng</li></a>
+                    <a href="@Url.Action("GuideResetPassword", "Home")"><li>Hướng dẫn lấy lại mật khẩu</li></a>
                 </ul>
 
                 <li data-toggle="collapse" data-target="#chinhsach" class="collapsed">
                     <a><i class="fa fa-shield fa-lg"></i> CHÍNH SÁCH <span class="arrow"></span></a>
                 </li>
                 <ul class="sub-menu collapse" id="chinhsach">
-                    <li>Chính sách bảo mật</li>
-                    <li>Chính sách vận chuyển</li>
-                    <li>Quy trình giao hàng</li>
-                    <li>Chính sách đổi trả hàng </li>
+                    <a href="@Url.Action("PrivacyPolicy", "Home")"><li>Chính sách bảo mật</li></a>
+                    <a href="@Url.Action("ShippingPolicy", "Home")"><li>Chính sách vận chuyển</li></a>
+                    <a href="@Url.Action("OrderProcessing", "Home")"><li>Quy trình giao hàng</li></a>
+                    <a href="@Url.Action("ReturnPolicy", "Home")"><li>Chính sách đổi trả hàng</li></a>
                 </ul>
+                <li>
+                    <a href="@Url.Action("ContactUs", "Home")"><i class="fa fa-check-circle fa-lg"></i> LIÊN HỆ</a>
+                </li>
                 <li>
                     <a href="@Url.Action("CheckBill", "Order")"><i class="fa fa-check-circle fa-lg"></i> KIỂM TRA ĐƠN HÀNG</a>
                 </li>
@@ -69,32 +72,14 @@
                 <li data-toggle="collapse" data-target="#products" class="collapsed">
                     <a><i class="fa fa-sitemap fa-lg"></i> NHÀ SẢN XUẤT <span class="arrow"></span></a>
                 </li>
-                <ul class="sub-menu collapse" id="products">
-                    <li><a href="#">Stanley</a></li>
-                    <li><a href="#">Dewalt</a></li>
-                    <li><a href="#">Black and decker</a></li>
-                    <li><a href="#">Bosch</a></li>
-                    <li><a href="makita.html">Makita</a></li>
-                </ul>
-
-                <li data-toggle="collapse" data-target="#abc" class="collapsed">
-                    <a><i class="fa fa-dot-circle-o fa-lg"></i> DANH MỤC <span class="arrow"></span></a>
-                </li>
-                <ul class="sub-menu collapse" id="abc">
-                    <li>Lưỡi cưa</li>
-                    <li>Mũi khoan</li>
-                </ul>
-
-                <li data-toggle="collapse" data-target="#abcd" class="collapsed">
-                    <a><i class="fa fa-dot-circle-o fa-lg"></i> PHỤ KIỆN <span class="arrow"></span></a>
-                </li>
-                <ul class="sub-menu collapse" id="abcd">
-                    <li>Búa rìu</li>
-                    <li>Cào</li>
-                    <li>Đá cắt</li>
-                    <li>Đá mài </li>
-                    <li>Giấy nháp</li>
-                </ul>
+                <ul class="sub-menu collapse in" id="products">
+                    <a href="@Url.Action("makita", "Home")"><li>Makita</li></a>
+                    <a href="@Url.Action("bosch", "Home")"><li>Bosch</li></a>
+                    <a href="@Url.Action("stanleyh", "Home")"><li>Stanley Hand Tool</li></a>
+                    <a href="@Url.Action("stanleyp", "Home")"><li>Stanley Power Tool</li></a>
+                    <a href="@Url.Action("dewalt", "Home")"><li>Dewalt</li></a>
+                    <a href="@Url.Action("blackanddecker", "Home")"><li>Black and decker</li></a>
+                </ul>                
             </ul>
         </div>
     </div>
@@ -195,3 +180,10 @@
         </div>
     </div>
 </div>
+
+<style>
+    #Left-Menu a{
+        text-decoration: none;
+        color: white;
+    }
+</style>

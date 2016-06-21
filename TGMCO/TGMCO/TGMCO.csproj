@@ -203,6 +203,7 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\PAGECONTROLLER\CategoryController.cs" />
     <Compile Include="Controllers\PAGECONTROLLER\HomeController.cs" />
+    <Compile Include="Controllers\PAGECONTROLLER\NewsController.cs" />
     <Compile Include="Controllers\PAGECONTROLLER\OrderController.cs" />
     <Compile Include="Controllers\PAGECONTROLLER\PartialController.cs" />
     <Compile Include="Controllers\PAGECONTROLLER\PaymentController.cs" />
@@ -1321,6 +1322,19 @@
     <Content Include="Views\Order\CheckBill.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Partial\OrderDetails.cshtml" />
+    <Content Include="Views\Home\History.cshtml" />
+    <Content Include="Views\Home\Business.cshtml" />
+    <Content Include="Views\Home\OrganizationalChart.cshtml" />
+    <Content Include="Views\News\News.cshtml" />
+    <Content Include="Views\News\NewsPromotion.cshtml" />
+    <Content Include="Views\Home\GuideLogin.cshtml" />
+    <Content Include="Views\Home\GuideShoping.cshtml" />
+    <Content Include="Views\Home\GuideResetPassword.cshtml" />
+    <Content Include="Views\Home\PrivacyPolicy.cshtml" />
+    <Content Include="Views\Home\ShippingPolicy.cshtml" />
+    <Content Include="Views\Home\OrderProcessing.cshtml" />
+    <Content Include="Views\Home\ReturnPolicy.cshtml" />
+    <Content Include="Views\Home\ContactUs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

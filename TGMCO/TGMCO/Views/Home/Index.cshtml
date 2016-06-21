@@ -108,6 +108,9 @@
         @{
             Html.RenderAction("VerticalSlider", "Partial", new { _title = "Sản phẩm mới", _type = "New", _supplier_id = 0 });
          }
+@{
+    Html.RenderAction("VerticalSlider", "Partial", new { _title = "Sản phẩm nổi bật", _type = "Hot", _supplier_id = 0 });
+}
 
 }
 

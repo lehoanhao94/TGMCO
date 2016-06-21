@@ -65,6 +65,7 @@ namespace TGMCO.Controllers.PAGECONTROLLER
             try
             {
                 ViewBag.Header = _title;
+                ViewBag.Name = _type;
                 List<PRODUCT> _lstPRODUCT = new List<PRODUCT>();
 
                 switch(_type)
