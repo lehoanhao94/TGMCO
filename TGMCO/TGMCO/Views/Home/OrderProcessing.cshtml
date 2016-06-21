@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Tuấn Gia Minh | Quy trình giao hàng";
+    Layout = "~/Views/Shared/_PageLayout.cshtml";
+    ViewBag.Description = "CÔNG TY TNHH TM TUẤN GIA MINH - Cung cấp thiết bị xây dựng, thiết bị công nghiệp, dụng cụ cầm tay, máy hàn, máy mài góc, máy cắt kim loại, dụng cụ đo chính xác, dụng cụ điện...";
+}
+
+@section LeftMenu{
+    @Html.Partial("~/Views/Partial/LeftMenu.cshtml")
+}
+<h1 style="text-align: center;color: white ; font-size: 20px; padding-top: 0; background-color: #30454A; margin-top: 0; margin-bottom: 5px; height: 35px; line-height: 1.6;">Quy trình giao hàng</h1>
+<h4>HÌNH THỨC GIAO NHẬN TỈNH THÀNH</h4>
+<p class="col-lg-12">- Sau khi hoàn tất thủ tục đặt hàng và thỏa thuận thanh toán khách hàng sẽ nhận hàng trong vòng từ 1 đến 10 ngày tùy theo cách thức vận chuyển </p> <br />
+<p class="col-lg-12">- Nhân viên của chúng tôi sẽ liên hệ khách hàng để tư vấn phương thức giao hàng. </p> <br />
+<p class="col-lg-12">- Giao hàng đến đúng địa chỉ trong đơn hàng mà khách hàng thanh toán yêu cầu </p> <br />
+<p class="col-lg-12">- Thời gian giao hàng từ thứ hai đến thứ bảy (8h đến 6h) </p> <br />
+<p class="col-lg-12">- Thời gian chính xác của việc giao hàng không thể chỉ định rõ </p> <br />
+<p class="col-lg-12">- Những đơn hàng đặt mua sau 10h vào ngày thứ 7 hoặc Chủ nhật sẽ được chuyển vào ngày thứ hai của tuần kế tiếp </p> <br />
+<p class="col-lg-12">- Trong trường hợp với các đơn hàng đã được thanh toán nhưng vì một lý do kho hành hết hàng hoặc hàng hóa không đảm bảo chất lượng Công ty sẽ thông báo đến khách hàng bằng điện thoại hoặc email thay đổi thời gian giao hàng. Khách hàng có thể đồng ý hoặc không đồng ý thì đơn hàng sẽ được hủy và tiền của khách hàng sẽ được trả về tài khoản của khách hàng tùy thuộc vào phương thức thanh toán và tiền sẽ được trả về tài khoản từ 1 đến 5 ngày làm việc (theo lịch làm việc của ngân hàng) </p> <br />
+<p class="col-lg-12">- Nếu hàng hóa mà khách hàng nhận được có vấn đề thuộc trách nhiệm của Công ty, Công ty sẽ đổi hàng cho khách hàng trong vòng 1 đến 5 ngày (theo lịch giao nhận) </p> <br />
+<p class="col-lg-12">- Nếu hàng hóa tạm thời không còn trong kho Công ty sẽ hỏi khách hàng đã sẵn sàng chờ có hàng hóa nếu khách hàng sẵn lòng chờ hoặc không thể chờ thì công ty sẽ đề xuất hình thức giao hàng kiểu khác </p> <br />
+<p class="col-lg-12">- Thông báo vấn đề hàng hóa thuộc trách nhiệm của Công ty thì công ty sẽ nhận thông tin phản hồi trong vòng 3 ngày giao hàng </p> <br />
+<div class="col-lg-12" style="text-align: center;"><img src="http://www.sainsmart.com/media/wysiwyg/Procedure_.jpg" /></div> 
+<div class="pull-right"><strong>CÔNG TY TNHH TM TUẤN GIA MINH <br /> Thời gian cập nhật: 12/06/2016</strong> </div>  
+
+@section RightContent{
+
+    @{
+        Html.RenderAction("VerticalSlider", "Partial", new { _title = "Sản phẩm mới", _type = "New", _supplier_id = 0 });
+    }
+
+}

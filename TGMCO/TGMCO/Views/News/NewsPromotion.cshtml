@@ -1,0 +1,129 @@
+﻿@{
+    ViewBag.Title = "Tuấn Gia Minh | Tin tức khuyến mãi ";
+    Layout = "~/Views/Shared/_PageLayout.cshtml";
+    ViewBag.Description = "CÔNG TY TNHH TM TUẤN GIA MINH - Cung cấp thiết bị xây dựng, thiết bị công nghiệp, dụng cụ cầm tay, máy hàn, máy mài góc, máy cắt kim loại, dụng cụ đo chính xác, dụng cụ điện...";
+}
+
+@section LeftMenu{
+    @Html.Partial("~/Views/Partial/LeftMenu.cshtml")
+}
+<h1 style="text-align: center;color: white ; font-size: 20px; padding-top: 0; background-color: #30454A; margin-top: 0; margin-bottom: 5px; height: 35px; line-height: 1.6;">Tin tức khuyến mãi</h1>
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-12 post">
+            <div class="row">
+                <div class="col-md-12">
+                    <h4>
+                        <strong><a href="#" class="post-title">Khuyễn mãi phụ kiện tháng 6, 7 và 8</a></strong>
+                    </h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 post-header-line">
+                    <span class="glyphicon glyphicon-user"></span>by <a href="#">Admin</a> | <span class="glyphicon glyphicon-calendar">
+                    </span>21-06-2016 | <span class="glyphicon glyphicon-comment"></span><a href="#">
+                        3 Comments
+                    </a> | <i class="icon-share"></i><a href="#">69 Shares</a> | <span class="glyphicon glyphicon-tags">
+                    </span>Tags : <a href="#"><span class="label label-info">Bosch</span></a> <a href="#">
+                        <span class="label label-info">Máy cưa</span>
+                    </a> <a href="#">
+                        <span class="label label-info">
+                            Tools
+                        </span>
+                    </a> <a href="#"><span class="label label-info">TGM</span></a>
+                </div>
+            </div>
+            <div class="row post-content">
+                <div class="col-md-3">
+                    <a href="#">
+                        <img src="http://makita.com.vn/static/plugin/ckeditor/plugins/kcfinder/uploads/images/maktec%202%20so.png" alt="" class="img-responsive">
+                    </a>
+                </div>
+                <div class="col-md-9">
+                    <p>
+                        Từ 28/04/2016 đến hết 10/06/2016.
+                    </p>
+                    <p>
+                        <a class="btn btn-read-more" href="#">Chi tiết</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<div style="text-align: center;">
+    <ul class="pagination">
+        <li class="active"><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+    </ul>
+</div>
+
+
+<style>
+    a:hover {
+        text-decoration: none;
+    }
+
+    .btn {
+        transition: all .2s linear;
+        -webkit-transition: all .2s linear;
+        -moz-transition: all .2s linear;
+        -o-transition: all .2s linear;
+    }
+
+    .btn-read-more {
+        padding: 5px;
+        text-align: center;
+        border-radius: 0px;
+        display: inline-block;
+        border: 2px solid #F37232;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 12px;
+        color: #F37232;
+        float: right;
+    }
+
+        .btn-read-more:hover {
+            color: #FFF;
+            background: #F37232;
+        }
+
+    .post {
+        border-bottom: 1px solid #DDD;
+    }
+
+    .post-title {
+        color: #F37232;
+    }
+
+    .post .glyphicon {
+        margin-right: 5px;
+    }
+
+    .post-header-line {
+        border-top: 1px solid #DDD;
+        border-bottom: 1px solid #DDD;
+        padding: 5px 0px 5px 15px;
+        font-size: 12px;
+    }
+
+    .post-content {
+        padding-bottom: 15px;
+        padding-top: 15px;
+    }
+</style>
+
+@section RightContent{
+
+    @{
+        Html.RenderAction("VerticalSlider", "Partial", new { _title = "Sản phẩm mới", _type = "New", _supplier_id = 0 });
+    }
+
+}

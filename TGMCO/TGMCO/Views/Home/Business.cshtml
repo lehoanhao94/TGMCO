@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "Tuấn Gia Minh | Lĩnh vực hoạt động ";
+    Layout = "~/Views/Shared/_PageLayout.cshtml";
+    ViewBag.Description = "CÔNG TY TNHH TM TUẤN GIA MINH - Cung cấp thiết bị xây dựng, thiết bị công nghiệp, dụng cụ cầm tay, máy hàn, máy mài góc, máy cắt kim loại, dụng cụ đo chính xác, dụng cụ điện...";
+}
+
+@section LeftMenu{
+    @Html.Partial("~/Views/Partial/LeftMenu.cshtml")
+}
+<h1 style="text-align: center;color: white ; font-size: 20px; padding-top: 0; background-color: #30454A; margin-top: 0; margin-bottom: 5px; height: 35px; line-height: 1.6;">Lĩnh vực hoạt động</h1>
+<div class="alert alert-warning">
+    <strong>Xin lỗi !</strong> Trang này đang trong thời gian hoàn thiện, xin Quý Khách vui lòng quay lại sau. Xin cám ơn.
+</div>
+
+
+@section RightContent{
+
+    @{
+        Html.RenderAction("VerticalSlider", "Partial", new { _title = "Sản phẩm mới", _type = "New", _supplier_id = 0 });
+    }
+
+}

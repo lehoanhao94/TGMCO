@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "Tuấn Gia Minh | Chính sách đổi trả";
+    Layout = "~/Views/Shared/_PageLayout.cshtml";
+    ViewBag.Description = "CÔNG TY TNHH TM TUẤN GIA MINH - Cung cấp thiết bị xây dựng, thiết bị công nghiệp, dụng cụ cầm tay, máy hàn, máy mài góc, máy cắt kim loại, dụng cụ đo chính xác, dụng cụ điện...";
+}
+
+@section LeftMenu{
+    @Html.Partial("~/Views/Partial/LeftMenu.cshtml")
+}
+<h1 style="text-align: center;color: white ; font-size: 20px; padding-top: 0; background-color: #30454A; margin-top: 0; margin-bottom: 5px; height: 35px; line-height: 1.6;">Chính sách đổi trả</h1>
+<h4>1. ĐIỀU KIỆN TRẢ HÀNG - ĐỔI HÀNG</h4>
+<p class="col-lg-12">Tuỳ theo loại sản phẩm mà chúng tôi có các chính sách đổi hàng hoặc trả lại hàng khác nhau. Chúng tôi đồng ý cho phép quý khách hàng có thể đổi hàng, trả lại hàng trong những trường hợp sau:</p><br />
+<p class="col-lg-12">- Sản phẩm bị lỗi do nhà sản xuất.</p><br />
+<p class="col-lg-12">- Sản phẩm không đúng như mô tả trên website của chúng tôi.</p><br />
+<p class="col-lg-12">- Hàng không đúng chủng loại, mẫu mã như quý khách đặt hàng.</p><br />
+<p class="col-lg-12">- Không đủ số lượng, không đủ bộ như trong đơn hàng.</p><br />
+<p class="col-lg-12">- Tình trạng bên ngoài bị ảnh hưởng như rách bao bì, bong tróc, bể vỡ…</p><br />
+<p class="col-lg-12">- Trong vòng 24 giờ sau khi nhận được hàng, nếu không vừa ý Quý khách có thể hoàn trả lại hàng hoặc yêu cầu chúng tôi đổi hàng khác.</p><br />
+<h4>2. CÁCH THỨC TRẢ HÀNG - ĐỔI HÀNG</h4>
+<p class="col-lg-12">Quý khách vui lòng thông báo chi tiết về tình trạng hàng và lý do đổi hàng, trả hàng.</p><br />
+<h4>3. CÁCH THỨC LIÊN HỆ</h4>
+<p class="col-lg-12">+ Qua điện thoại : (08) 38 591 896 để gặp Nhân viên chăm sóc Khách Hàng.</p><br />
+<p class="col-lg-12">+ Qua mạng : Khách Hàng cũng có thể liên hệ với các Nhân viên kinh doanh trực tuyến bằng chức năng để lại lời nhắn.</p><br />
+<p class="col-lg-12">+ Qua Email : support@tgmco.com.vn</p><br />
+<h4>Chú ý: </h4>
+<p class="col-lg-12">- Nếu quý khách hàng chưa hài lòng với bất kì dịch vụ nào của chúng tôi xin vui lòng liên hệ với số hotline 090 2333 949 .</p><br />
+<p class="col-lg-12">- Chúng tôi sẽ hoàn trả tiền cho Quý khách bằng chuyển khoản hoặc đường bưu điện sau khi đã trừ đi các chi phí phát sinh do việc trả hàng.</p><br />
+<div class="pull-right"><strong>CÔNG TY TNHH TM TUẤN GIA MINH <br /> Thời gian cập nhật: 12/06/2016</strong> </div>
+@section RightContent{
+
+    @{
+        Html.RenderAction("VerticalSlider", "Partial", new { _title = "Sản phẩm mới", _type = "New", _supplier_id = 0 });
+    }
+
+}
