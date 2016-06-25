@@ -274,20 +274,80 @@ namespace TGMCO.Controllers.PAGECONTROLLER
         }
 
         [HttpPost]
-        public void CancelOrder(int id)
+        public void UpdateStatusOrder(int id, int status_id)
         {
             try
             {
                 var ORDER = db.ORDERS.Find(id);
-                ORDER.ORDER_STATUS_ID = 4;
-                TempData["Success"] = "Đã hủy đơn hàng #VNT-" + ORDER.ORDER_ID;
+                ORDER.ORDER_STATUS_ID = status_id;
+                switch(status_id)
+                {
+                    case 2:
+                        TempData["Success"] = "Đã chuyển trạng thái đơn hàng #VNT-" + ORDER.ORDER_ID + " thành 'Đã thanh toán - Chưa giao hàng'.";
+                        break;
+                    case 3:
+                        TempData["Success"] = "Đã chuyển trạng thái đơn hàng #VNT-" + ORDER.ORDER_ID + " thành 'Chưa thanh toán'.";
+                        break;
+                    case 4:
+                        TempData["Success"] = "Đã hủy đơn hàng #VNT-" + ORDER.ORDER_ID;
+                        break;
+                }              
                 db.SaveChanges();
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+        }
 
+        [HttpPost]
+        public ActionResult Deliver(FormCollection f)
+        {
+            try
+            {
+                int _ORDER_ID = int.Parse(f.Get("txtOrderId"));
+                string _SHIP_CODE = f.Get("txtShipCode");
+                DateTime _SHIP_DATE = DateTime.Parse(f.Get("dtpShipDate"));
+                decimal _FREIGHT = decimal.Parse(f.Get("txtFreight"));
+                string _NOTE_EMPLOYEE = f.Get("txtNote");
+                USER _ADMIN = (USER)(Session["SS_USER_ADMIN"]);
+                
+                var ORDER = db.ORDERS.Find(_ORDER_ID);
+
+                //Cập nhật điểm người dùng khi mua hàng
+                if(ORDER.USER_ID != 0)
+                {
+                    USER_PROFILES _USER = db.USER_PROFILES.Single(n => n.USER_ID == ORDER.USER_ID);
+                    _USER.POINTS += (int)(ORDER.SUBTOTAL/1000000);
+                }
+               
+                //Cập nhật số hàng bán ra
+                List<ORDER_DETAILS> _lstORDER_DETAILS = db.ORDER_DETAILS.Where(n => n.ORDER_ID == ORDER.ORDER_ID).ToList();
+                foreach(var _order_details in _lstORDER_DETAILS)
+                {
+                    PRODUCT _PRODUCT = db.PRODUCTS.Find(_order_details.PRODUCT_ID);
+                    _PRODUCT.QUANTITY_SOLD += _order_details.QUANTITY;
+                    db.SaveChanges();
+                }
+
+                ORDER.ORDER_STATUS_ID = 1;
+                ORDER.EMPLOYEE_ID = _ADMIN.USER_ID;
+                ORDER.SHIP_CODE = _SHIP_CODE;
+                ORDER.SHIPPED_DATE = _SHIP_DATE;
+                ORDER.FREIGHT = _FREIGHT;
+                ORDER.NOTE_EMPLOYEE = _NOTE_EMPLOYEE;
+
+
+
+                TempData["Success"] = "Đơn hàng #VNT-" + ORDER.ORDER_ID + " đã được giao !";
+                db.SaveChanges();
+
+                return RedirectToAction("ManagingOrders", "Admin", new { order_status_id = 1, Time = 1});
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

@@ -34,6 +34,7 @@ namespace TGMCO.Controllers.ADMINCONTROLLER
             try
             {
                 string _CategoryName = _frmCollect.Get("CategoryrName").ToString();
+                string _Type = _frmCollect.Get("Type").ToString();
                 if (ModelState.IsValid)
                 {
                     if (db.CATEGORIES.Where(n => n.CATEGORY_NAME == _CategoryName).Count() == 0)
@@ -41,6 +42,10 @@ namespace TGMCO.Controllers.ADMINCONTROLLER
                         //Binding
                         m_objCATEGORY.CATEGORY_NAME = _frmCollect.Get("CategoryrName").ToString();
                         m_objCATEGORY.DESCRIPTION = _frmCollect.Get("Description").ToString();
+                        if(_Type.Equals("PK"))
+                        {
+                            m_objCATEGORY.IS_ACCESSORY = true;
+                        }
                         if(_frmCollect.GetValue("IsActive") != null)
                         {
                             m_objCATEGORY.IS_ACTIVE = true;
@@ -79,7 +84,16 @@ namespace TGMCO.Controllers.ADMINCONTROLLER
                     TempData["VB_ErrorCreate"] = "Thêm không thành công, kiểm tra lại dữ liệu.";
                 }
 
-                return RedirectToAction("ManagingCategories", "Admin");
+                if (_Type.Equals("PK")) //Phụ kiện
+                {
+                    return RedirectToAction("ManagingAccesstories", "Admin");
+                }
+                else //Sản phẩm
+                {
+                    return RedirectToAction("ManagingCategories", "Admin");
+                }
+
+                
             }
             catch (Exception ex)
             {

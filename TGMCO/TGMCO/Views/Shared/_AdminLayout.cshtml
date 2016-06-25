@@ -102,7 +102,7 @@
                                             <a href="#">
                                                 <div class="pull-left">
                                                     @{
-                                                        if (!string.IsNullOrEmpty(@m_ADMIN_PROFILE.AVATAR))
+                                                        if ((@m_ADMIN_PROFILE != null))
                                                         {
                                                             <img src="@Url.Content(@m_ADMIN_PROFILE.AVATAR)" class="img-circle" alt="user image" />
                                                         }
@@ -390,11 +390,17 @@
                                 </a>
                             </li>
                             <li><a href="@Url.Action("ManagingCategoriesExtra", "Admin")"><i class="fa fa-tag"></i> DANH MỤC NHỎ <small class="label label-primary pull-right">@m_NUMBER_OBJECT.GetNumOfCategoriesExtra()</small></a></li>
+                            <li>
+                                <a href="@Url.Action("ManagingAccesstories", "Admin")">
+                                    <i class="fa fa-tags">
+                                    </i> DANH MỤC PK <small class="label label-primary pull-right">@m_NUMBER_OBJECT.GetNumOfAccessories()</small>
+                                </a>
+                            </li>
                             <li><a href="@Url.Action("ManagingCategoriesBySupplier", "Admin")"><i class="fa fa-cubes"></i> DANH MỤC THEO NCC </a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="@Url.Action("ManagingProducts", "Admin")">
+                        <a href="@Url.Action("ManagingProducts", "Admin", new { ListSupplier = 0, txtSearch = "" })">
                             <i class="fa fa-gamepad"></i> <span> QUẢN LÝ SẢN PHẨM <small class="label label-primary">@m_NUMBER_OBJECT.GetNumOfProducts()</small></span>
                         </a>
                     </li>
@@ -404,7 +410,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="@Url.Action("ManagingOrders", "Admin", new { order_status_id = 3})">
+                        <a href="@Url.Action("ManagingOrders", "Admin", new { order_status_id = 3, Time = 1})">
                             <i class="fa fa-cart-plus"></i> <span> QUẢN LÝ ĐƠN ĐẶT HÀNG <small class="label label-primary">@m_NUMBER_OBJECT.GetNumOfOrders()</small></span>
                         </a>
                     </li>

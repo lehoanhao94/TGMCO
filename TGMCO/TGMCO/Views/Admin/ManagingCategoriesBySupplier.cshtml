@@ -39,8 +39,9 @@
                 </div>
                 <ul class="list-group list-group-flush text-center">
                     <li class="list-group-item"> <strong>@supplier.SUPPLIER_NAME</strong> </li>
-                    <li class="list-group-item"> Danh mục hiện có: @m_NUMBER_OBJECT.GetNumOfCategoriesBySupplier(@supplier.SUPPLIER_ID)</li>
-                    <li class="list-group-item"> Sản phẩm hiện có: </li>
+                    <li class="list-group-item"> Danh mục sản phẩm: @m_NUMBER_OBJECT.GetNumOfCategoriesBySupplier(@supplier.SUPPLIER_ID)</li>
+                    <li class="list-group-item"> Danh mục phụ kiện: @m_NUMBER_OBJECT.GetNumOfAccessoriesBySupplier(@supplier.SUPPLIER_ID)</li>
+                    <li class="list-group-item"> Sản phẩm hiện có: @m_NUMBER_OBJECT.GetNumOfProductsBySupplier(@supplier.SUPPLIER_ID)</li>
                 </ul>
                 <div class="panel-footer">
                     <a class="btn btn-lg btn-block btn-primary" href="@Url.Action("Supplier", "ManagingCategoriesBySupplier", new {id =  @supplier.SUPPLIER_ID})">QUẢN LÝ</a>

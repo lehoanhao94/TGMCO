@@ -124,7 +124,7 @@ namespace TGMCO.Controllers
                 }
                 else
                 {
-                    List<SUPPLIER> _lstSUPPLIER = db.SUPPLIERS.OrderByDescending(n => n.SUPPLIER_ID).ToList();
+                    List<SUPPLIER> _lstSUPPLIER = db.SUPPLIERS.OrderBy(n => n.IDX).ToList();
                     return View(_lstSUPPLIER);
                 }
             }
@@ -147,7 +147,7 @@ namespace TGMCO.Controllers
                 }
                 else
                 {
-                    List<CATEGORy> _lstCATEGORY = db.CATEGORIES.OrderByDescending(n => n.CATEGORY_ID).ToList();
+                    List<CATEGORy> _lstCATEGORY = db.CATEGORIES.Where(n => n.IS_ACCESSORY == null).OrderByDescending(n => n.CATEGORY_ID).ToList();
                     return View(_lstCATEGORY);
                 }
             }
@@ -184,6 +184,29 @@ namespace TGMCO.Controllers
         /// 
         /// </summary>
         /// <returns></returns>
+        public ActionResult ManagingAccesstories()
+        {
+            try
+            {
+                if (Session["SS_USER_ADMIN"] == null)
+                {
+                    return RedirectToAction("Login", "Admin");
+                }
+                else
+                {
+                    List<CATEGORy> _lstCATEGORY = db.CATEGORIES.Where(n => n.IS_ACCESSORY == true).OrderByDescending(n => n.CATEGORY_ID).ToList();
+                    return View(_lstCATEGORY);
+                }
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Http404", "Error"); // 404
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public ActionResult ManagingCategoriesBySupplier()
         {
             try
@@ -207,7 +230,7 @@ namespace TGMCO.Controllers
         /// 
         /// </summary>
         /// <returns></returns>
-        public ActionResult ManagingProducts(int? page)
+        public ActionResult ManagingProducts(int? ListSupplier, string txtSearch)
         {
             try
             {
@@ -217,7 +240,9 @@ namespace TGMCO.Controllers
                 }
                 else
                 {
-                    List<PRODUCT> _lstPRODUCT = db.PRODUCTS.OrderByDescending(n => n.SUPPLIER_ID).OrderByDescending(n => n.IS_ACTIVE).OrderByDescending(n => n.IDX).ToList();
+                    List<PRODUCT> _lstPRODUCT = db.PRODUCTS.Where(n => (n.SUPPLIER_ID == ListSupplier || ListSupplier == 0 || ListSupplier == null) 
+                                && (n.PRODUCT_CODE.Contains(txtSearch) || n.PRODUCT_NAME.Contains(txtSearch) || string.IsNullOrEmpty(txtSearch))).OrderByDescending(n => n.SUPPLIER_ID).OrderByDescending(n => n.IS_ACTIVE).OrderByDescending(n => n.IDX).ToList();
+                    ViewBag.ListSupplier = new SelectList(db.SUPPLIERS.ToList(), "Supplier_ID", "Supplier_Name");
                     return View(_lstPRODUCT);
                 }
             }
@@ -225,7 +250,7 @@ namespace TGMCO.Controllers
             {
                 return RedirectToAction("Http404", "Error"); // 404
             }
-        }
+        }      
 
         public ActionResult ManagingUsers()
         {
@@ -254,7 +279,7 @@ namespace TGMCO.Controllers
         /// 
         /// </summary>
         /// <returns></returns>
-        public ActionResult ManagingOrders(int order_status_id)
+        public ActionResult ManagingOrders(int order_status_id, int Time)
         {
             try
             {
@@ -264,7 +289,21 @@ namespace TGMCO.Controllers
                 }
                 else
                 {
-                    List<ORDER> _lstORDER = db.ORDERS.Where(n => n.ORDER_STATUS_ID == order_status_id).OrderByDescending(n => n.ORDER_DATE).ToList();
+                    TimeSpan _Day = new TimeSpan(Time, 0, 0, 0);
+                    DateTime _Date = DateTime.Now - _Day;
+                    List<ORDER> _lstORDER = new List<ORDER>();
+                    TempData["Status_Id"] = order_status_id;
+                    TempData["Time"] = Time;
+                    if(Time == 0)
+                    {
+                         _lstORDER = db.ORDERS.Where(n => n.ORDER_STATUS_ID == order_status_id).OrderByDescending(n => n.ORDER_DATE).ToList();
+                    }
+                    else
+                    {
+                         _lstORDER = db.ORDERS.Where(n => n.ORDER_STATUS_ID == order_status_id
+                             && n.ORDER_DATE > _Date).OrderByDescending(n => n.ORDER_DATE).ToList();
+                    }
+                        
                     return View(_lstORDER);
                 }
             }

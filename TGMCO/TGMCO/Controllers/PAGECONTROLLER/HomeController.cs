@@ -21,7 +21,7 @@ namespace TGMCO.Controllers.PAGECONTROLLER
                 Session["SUPPLIER"] = "STANLEY";
                 SUPPLIER _Supplier = db.SUPPLIERS.First();
                 Session["SUPPLIER_MODEL"] = _Supplier;
-                ViewBag.Suppliers = db.SUPPLIERS.OrderByDescending(n => n.IDX).ToList();
+                ViewBag.Suppliers = db.SUPPLIERS.OrderBy(n => n.IDX).ToList();
                 return View();
             }
             catch (Exception ex)

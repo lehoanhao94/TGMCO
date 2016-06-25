@@ -36,6 +36,7 @@
     <Property Name="DESCRIPTION" Type="nvarchar" MaxLength="150" />
     <Property Name="IMAGE" Type="nvarchar(max)" />
     <Property Name="IS_ACTIVE" Type="bit" Nullable="false" />
+    <Property Name="IS_ACCESSORY" Type="bit" />
   </EntityType>
   <EntityType Name="CATEGORIES_BY_SUPPLIER">
     <Key>
@@ -46,6 +47,7 @@
     <Property Name="CATEGORY_ID" Type="int" Nullable="false" />
     <Property Name="SUPPLIER_NAME" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="CATEGORY_NAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IS_ACCESSTORY" Type="bit" />
   </EntityType>
   <EntityType Name="CATEGORIES_EXTRA">
     <Key>
@@ -140,6 +142,7 @@
     <Property Name="NOTE" Type="nvarchar" MaxLength="250" />
     <Property Name="PAYMENT_METHOD_ID" Type="int" />
     <Property Name="ORDER_CODE" Type="nvarchar" MaxLength="50" />
+    <Property Name="NOTE_EMPLOYEE" Type="nvarchar" MaxLength="250" />
   </EntityType>
   <EntityType Name="PRODUCT_FILES">
     <Key>

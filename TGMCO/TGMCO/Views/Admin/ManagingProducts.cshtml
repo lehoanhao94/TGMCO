@@ -23,10 +23,25 @@
 }
 <div class="jquery-script-clear"></div>
 <div class="table-responsive" id="categories">
-    <a href="@Url.Action("Create", "ManagingProducts")" class="btn btn-success btn-md"><i class="fa fa-pencil" aria-hidden="true"></i> Thêm mới </a>
-
+    <div class="col-xs-2 form-group">
+        <a href="@Url.Action("Create", "ManagingProducts")" class="btn btn-success btn-md"><i class="fa fa-pencil" aria-hidden="true"></i> Thêm mới </a>
+    </div>    
+    <div class="col-xs-6" >
+        <form role="form" method="get" action="/Admin/ManagingProducts">
+            <div class="col-xs-6">
+                <input class="form-control" name="txtSearch" placeholder="Tìm kiếm theo mã, tên sản phẩm..." style="width: 300px;" />
+            </div>
+            <div class="col-xs-4">
+                @Html.DropDownList("ListSupplier", (IEnumerable<SelectListItem>)ViewBag.ListSupplier, "Tất cả NCC", new { @class = "form-control" })
+            </div>
+            <div class="col-xs-2">
+                <button class="btn btn-info btn-md" type="submit">Lọc sản phẩm</button>
+            </div>
+        </form>        
+    </div>
+    
     <div style="float: right;">
-        <input class="search form-control" placeholder="Tìm kiếm theo mã, tên đăng nhập, tên người dùng..." style="width: 300px;" />
+        <input class="search form-control" placeholder="Lọc theo mã, tên sản phẩm..." style="width: 300px;" />
     </div>
     @{
         if (@TempData["SuccessCreate"] != null)
@@ -43,7 +58,7 @@
         <table id="table" class="table table-hover">
             <thead>
                 <tr>
-                    <th style="width:100px;" class="sort" data-sort="id">Mã SP</th>
+                    <th style="width:50px;" class="sort" data-sort="id">Mã SP</th>
                     <th class="sort" data-sort="name">Tên sản phẩm</th>
                     <th class="sort" data-sort="supplier">Nhà cung cấp</th>
                     <th class="sort" data-sort="category">Danh mục</th>
@@ -53,7 +68,7 @@
                     <th class="sort" data-sort="activebtn">Trạng thái</th>
                     <th>Còn hàng</th>
                     <th>SP mới</th>
-                    <th></th>
+                    <th style="width:95px;"></th>
                 </tr>
             </thead>
             <tbody class="list">

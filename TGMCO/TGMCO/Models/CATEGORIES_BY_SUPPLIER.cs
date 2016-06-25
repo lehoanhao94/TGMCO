@@ -19,5 +19,6 @@ namespace TGMCO.Models
         public int CATEGORY_ID { get; set; }
         public string SUPPLIER_NAME { get; set; }
         public string CATEGORY_NAME { get; set; }
+        public Nullable<bool> IS_ACCESSTORY { get; set; }
     }
 }

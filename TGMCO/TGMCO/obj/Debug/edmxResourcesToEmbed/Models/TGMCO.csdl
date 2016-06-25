@@ -36,6 +36,7 @@
     <Property Name="DESCRIPTION" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
     <Property Name="IMAGE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="IS_ACTIVE" Type="Boolean" Nullable="false" />
+    <Property Name="IS_ACCESSORY" Type="Boolean" />
   </EntityType>
   <EntityType Name="CATEGORIES_BY_SUPPLIER">
     <Key>
@@ -46,6 +47,7 @@
     <Property Name="CATEGORY_ID" Type="Int32" Nullable="false" />
     <Property Name="SUPPLIER_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="CATEGORY_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IS_ACCESSTORY" Type="Boolean" />
   </EntityType>
   <EntityType Name="CATEGORIES_EXTRA">
     <Key>
@@ -140,6 +142,7 @@
     <Property Name="NOTE" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="PAYMENT_METHOD_ID" Type="Int32" />
     <Property Name="ORDER_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NOTE_EMPLOYEE" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="PRODUCT">
     <Key>

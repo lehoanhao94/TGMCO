@@ -38,9 +38,12 @@ namespace TGMCO.Controllers.ADMINCONTROLLER
         {
             try
             {
-                List<CATEGORIES_BY_SUPPLIER> lstCategory_By_Supplier = db.CATEGORIES_BY_SUPPLIER.Where(n => n.SUPPLIER_ID == id).ToList();
+                List<CATEGORIES_BY_SUPPLIER> lstCategory_By_Supplier = db.CATEGORIES_BY_SUPPLIER.Where(n => n.SUPPLIER_ID == id && n.IS_ACCESSTORY == null).ToList();
+                ViewBag.lstAccesstory_By_Supplier = db.CATEGORIES_BY_SUPPLIER.Where(n => n.SUPPLIER_ID == id && n.IS_ACCESSTORY == true).ToList();
+
                 ViewBag.Supplier = db.SUPPLIERS.Find(id);
-                ViewBag.ListCategory = db.CATEGORIES.Where(n => n.IS_ACTIVE == true).ToList();
+                ViewBag.ListCategory = db.CATEGORIES.Where(n => n.IS_ACTIVE == true && n.IS_ACCESSORY == null).ToList();
+                ViewBag.ListAccessory = db.CATEGORIES.Where(n => n.IS_ACTIVE == true && n.IS_ACCESSORY == true).ToList();
                 return View(lstCategory_By_Supplier);
             }
             catch (Exception ex)
@@ -63,6 +66,28 @@ namespace TGMCO.Controllers.ADMINCONTROLLER
                 _CATEGORIER_BY_SUPPLIER.SUPPLIER_ID = id_sup;
                 _CATEGORIER_BY_SUPPLIER.SUPPLIER_NAME = m_SUPPLIER_MODEL.GetSupplierName(id_sup);
                 _CATEGORIER_BY_SUPPLIER.CATEGORY_ID = id_cate;
+                _CATEGORIER_BY_SUPPLIER.CATEGORY_NAME = m_CATEGORY_MODEL.GetCategoryName(id_cate);
+                db.CATEGORIES_BY_SUPPLIER.Add(_CATEGORIER_BY_SUPPLIER);
+                db.SaveChanges();
+                return RedirectToAction("ManagingCategoriesBySupplier", "Admin");
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [HttpPost]
+        public ActionResult AddAccessory(int id_sup, int id_cate)
+        {
+            try
+            {
+                CATEGORIES_BY_SUPPLIER _CATEGORIER_BY_SUPPLIER = new CATEGORIES_BY_SUPPLIER();
+                _CATEGORIER_BY_SUPPLIER.SUPPLIER_ID = id_sup;
+                _CATEGORIER_BY_SUPPLIER.SUPPLIER_NAME = m_SUPPLIER_MODEL.GetSupplierName(id_sup);
+                _CATEGORIER_BY_SUPPLIER.CATEGORY_ID = id_cate;
+                _CATEGORIER_BY_SUPPLIER.IS_ACCESSTORY = true;
                 _CATEGORIER_BY_SUPPLIER.CATEGORY_NAME = m_CATEGORY_MODEL.GetCategoryName(id_cate);
                 db.CATEGORIES_BY_SUPPLIER.Add(_CATEGORIER_BY_SUPPLIER);
                 db.SaveChanges();

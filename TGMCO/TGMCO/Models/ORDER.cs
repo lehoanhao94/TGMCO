@@ -31,5 +31,6 @@ namespace TGMCO.Models
         public string NOTE { get; set; }
         public Nullable<int> PAYMENT_METHOD_ID { get; set; }
         public string ORDER_CODE { get; set; }
+        public string NOTE_EMPLOYEE { get; set; }
     }
 }

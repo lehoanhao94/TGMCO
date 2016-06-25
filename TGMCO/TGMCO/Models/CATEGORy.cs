@@ -19,5 +19,6 @@ namespace TGMCO.Models
         public string DESCRIPTION { get; set; }
         public string IMAGE { get; set; }
         public bool IS_ACTIVE { get; set; }
+        public Nullable<bool> IS_ACCESSORY { get; set; }
     }
 }
