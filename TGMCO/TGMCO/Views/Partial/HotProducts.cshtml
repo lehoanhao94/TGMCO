@@ -1,4 +1,5 @@
 ﻿@using TGMCO.Models.Entity;
+@using TGMCO.Models.Util;
 @using TGMCO.Models;
 
 @model List<PRODUCT>
@@ -6,6 +7,8 @@
 @{
     SUPPLIER m_SUPPLIER = (SUPPLIER)ViewBag.Supplier;
     ProductModel m_PRODUCT = new ProductModel();
+    SupplierModel m_SUPPLIER_MODEL = new SupplierModel();
+    UrlFriendly m_URL = new UrlFriendly();  
 }
 @{
     if (Session["SUPPLIER"].ToString().Equals("MAKITA"))
@@ -62,7 +65,7 @@
                         Mới
                     </div>
                 </div>
-                <a href="@Url.Action("Detail", "Product", new { id = @Model[i].PRODUCT_ID })" class="photo">
+                <a href="@Url.Action("Detail", "Product", new { id = @Model[i].PRODUCT_ID, supplier = m_URL.GenerateURL(m_SUPPLIER_MODEL.GetSupplierName(@Model[i].SUPPLIER_ID)), product = m_URL.GenerateURL(@Model[i].PRODUCT_NAME) })" class="photo">
                     <img id="Image-Product" src="@Url.Content(@m_PRODUCT.GetImage1(Model[i].PRODUCT_ID))" class="img-responsive" alt="@Model[i].PRODUCT_NAME" title="@Model[i].PRODUCT_NAME" />
                 </a>
                 <div class="info">
@@ -103,7 +106,7 @@
                         Mới
                     </div>
                 </div>
-                <a href="@Url.Action("Detail", "Product", new { id = @Model[i].PRODUCT_ID })" class="photo">
+                <a href="@Url.Action("Detail", "Product", new { id = @Model[i].PRODUCT_ID, supplier = m_URL.GenerateURL(m_SUPPLIER_MODEL.GetSupplierName(@Model[i].SUPPLIER_ID)), product = m_URL.GenerateURL(@Model[i].PRODUCT_NAME) })" class="photo">
                     <img id="Image-Product" src="@Url.Content(@m_PRODUCT.GetImage1(Model[i].PRODUCT_ID))" class="img-responsive" alt="@Model[i].PRODUCT_NAME" title="@Model[i].PRODUCT_NAME" />
                 </a>
                 <div class="info">

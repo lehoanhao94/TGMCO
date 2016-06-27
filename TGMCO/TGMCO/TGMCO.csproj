@@ -314,6 +314,7 @@
     <Compile Include="Models\USER_PROFILES.cs">
       <DependentUpon>TGMCO.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Util\UrlFriendly.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -323,6 +324,7 @@
     <Content Include="Content\Admin_Layout\bootstrap\js\bootstrap.js" />
     <Content Include="Content\Admin_Layout\bootstrap\js\bootstrap.min.js" />
     <Content Include="Content\Admin_Layout\bootstrap\js\npm.js" />
+    <Content Include="Content\Admin_Layout\css\404.css" />
     <Content Include="Content\Admin_Layout\css\bootstrap-theme.css" />
     <Content Include="Content\Admin_Layout\css\bootstrap-theme.min.css" />
     <Content Include="Content\Admin_Layout\css\bootstrap.min.css" />
@@ -362,6 +364,7 @@
     <Content Include="Content\Admin_Layout\dist\js\demo.js" />
     <Content Include="Content\Admin_Layout\dist\js\pages\dashboard.js" />
     <Content Include="Content\Admin_Layout\dist\js\pages\dashboard2.js" />
+    <Content Include="Content\Admin_Layout\img\http404.jpg" />
     <Content Include="Content\Admin_Layout\img\logo.png" />
     <Content Include="Content\Admin_Layout\js\bootstrap.min.js" />
     <Content Include="Content\Admin_Layout\js\controller\ManagingUsersController .js" />
@@ -1056,6 +1059,7 @@
     <Content Include="Content\Page_Layout\css\main-menu.css" />
     <Content Include="Content\Page_Layout\css\makita.css" />
     <Content Include="Content\Page_Layout\css\new-product.css" />
+    <Content Include="Content\Page_Layout\css\normalize.css" />
     <Content Include="Content\Page_Layout\css\right-content.css" />
     <Content Include="Content\Page_Layout\css\shopping-cart.css" />
     <Content Include="Content\Page_Layout\css\startup.css" />
@@ -1072,6 +1076,7 @@
     <Content Include="Content\Page_Layout\img\bosch1.jpg" />
     <Content Include="Content\Page_Layout\img\bosch2.jpg" />
     <Content Include="Content\Page_Layout\img\bosch3.jpg" />
+    <Content Include="Content\Page_Layout\img\boschback.png" />
     <Content Include="Content\Page_Layout\img\cn1.png" />
     <Content Include="Content\Page_Layout\img\cn2.png" />
     <Content Include="Content\Page_Layout\img\cn3.png" />
@@ -1108,6 +1113,8 @@
     <Content Include="Content\Page_Layout\img\stanley.jpg" />
     <Content Include="Content\Page_Layout\img\stl.jpg" />
     <Content Include="Content\Page_Layout\img\stlh.jpg" />
+    <Content Include="Content\Page_Layout\img\topmenu.png" />
+    <Content Include="Content\Page_Layout\img\wall-drill.png" />
     <Content Include="Content\Page_Layout\js\bootstrap.min.js" />
     <Content Include="Content\Page_Layout\js\home-menu.js" />
     <Content Include="Content\Page_Layout\js\index.js" />
@@ -1337,6 +1344,8 @@
     <Content Include="Views\Home\ContactUs.cshtml" />
     <Content Include="Views\Admin\ManagingAccesstories.cshtml" />
     <Content Include="Views\Partial\OrderDelivery.cshtml" />
+    <Content Include="Views\Error\Http404.cshtml" />
+    <Content Include="Views\Shared\_BoschLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -4,6 +4,16 @@
     USER m_ADMIN = (USER)Session["SS_USER_ADMIN"];
     USER_PROFILES m_ADMIN_PROFILE = (USER_PROFILES)Session["SS_USER_PROFILE"];
     NumberObject m_NUMBER_OBJECT = new NumberObject();
+
+    if (@m_ADMIN_PROFILE == null)
+    {
+        m_ADMIN_PROFILE = new USER_PROFILES();
+    }
+
+    if (@m_ADMIN == null)
+    {
+        m_ADMIN = new USER();
+    }
 }
 
 <!DOCTYPE html>
@@ -102,7 +112,7 @@
                                             <a href="#">
                                                 <div class="pull-left">
                                                     @{
-                                                        if ((@m_ADMIN_PROFILE != null))
+                                                        if (!string.IsNullOrEmpty(@m_ADMIN_PROFILE.AVATAR))
                                                         {
                                                             <img src="@Url.Content(@m_ADMIN_PROFILE.AVATAR)" class="img-circle" alt="user image" />
                                                         }
@@ -276,12 +286,11 @@
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="height: 50px;">
                                 @{
-
+                                    
                                     if (!string.IsNullOrEmpty(@m_ADMIN_PROFILE.AVATAR))
                                     {
                                         <img src="@Url.Content(@m_ADMIN_PROFILE.AVATAR)" class="img-circle" height="30" width="30" alt="user image" />
                                     }
-
                                     else
                                     {
                                         <span>@m_ADMIN_PROFILE.FULL_NAME</span>

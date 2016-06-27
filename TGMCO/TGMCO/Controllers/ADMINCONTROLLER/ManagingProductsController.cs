@@ -395,6 +395,8 @@ namespace TGMCO.Controllers.ADMINCONTROLLER
 
                             #region UPLOAD IMAGE
                             //Upload File
+                            if (m_PRODUCT_IMAGES == null)
+                                m_PRODUCT_IMAGES = new PRODUCT_IMAGES();
                             if (Image != null)
                             {
                                 m_PRODUCT_IMAGES.PRODUCT_ID = m_PRODUCT.PRODUCT_ID;
@@ -429,6 +431,7 @@ namespace TGMCO.Controllers.ADMINCONTROLLER
 
                             #region UPLOAD FILES
                             //Upload File
+                            int flag = 0;
                             if (m_PRODUCT_FILES == null)
                                 m_PRODUCT_FILES = new PRODUCT_FILES();
                             if (fileUpload_1 != null)
@@ -438,7 +441,7 @@ namespace TGMCO.Controllers.ADMINCONTROLLER
                                 m_PRODUCT_FILES.FILE_1 = "~/FilesUpload/PRODUCTS/" + _fileNameRandom + "-" + fileUpload_1.FileName;
                                 string _path = Path.Combine(Server.MapPath("~/FilesUpload/PRODUCTS/" + _fileNameRandom + "-" + fileUpload_1.FileName));
                                 fileUpload_1.SaveAs(_path);
-
+                                flag++;
                             }
 
                             if (fileUpload_2 != null)
@@ -448,6 +451,8 @@ namespace TGMCO.Controllers.ADMINCONTROLLER
                                 m_PRODUCT_FILES.FILE_2 = "~/FilesUpload/PRODUCTS/" + _fileNameRandom + "-" + fileUpload_2.FileName;
                                 string _path = Path.Combine(Server.MapPath("~/FilesUpload/PRODUCTS/" + _fileNameRandom + "-" + fileUpload_2.FileName));
                                 fileUpload_2.SaveAs(_path);
+                                flag++;
+
                             }
 
                             if (fileUpload_3 != null)
@@ -457,9 +462,11 @@ namespace TGMCO.Controllers.ADMINCONTROLLER
                                 m_PRODUCT_FILES.FILE_3 = "~/FilesUpload/PRODUCTS/" + _fileNameRandom + "-" + fileUpload_3.FileName;
                                 string _path = Path.Combine(Server.MapPath("~/FilesUpload/PRODUCTS/" + _fileNameRandom + "-" + fileUpload_3.FileName));
                                 fileUpload_3.SaveAs(_path);
+                                flag++;
+
                             }
 
-                            if (_isAddFilesNew == 1)
+                            if (_isAddFilesNew == 1 && flag > 0)
                                 db.PRODUCT_FILES.Add(m_PRODUCT_FILES);
                             #endregion
 

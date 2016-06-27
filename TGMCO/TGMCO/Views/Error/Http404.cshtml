@@ -1,0 +1,253 @@
+﻿@{
+    Layout = "~/Views/Shared/_PageLayout.cshtml";
+}
+
+@section LeftMenu{
+    <a class="btn icon-btn" style="font-size: 40px;" onclick="goBack()"><span class="glyphicon glyphicon-circle-arrow-left"></span></a>
+}
+@section RightContent{}
+
+<div class="http404">
+
+        <div id="header">
+            <h1>Rất tiếc</h1>
+            <h2>Trang này không tồn tại</h2>
+        </div>
+
+        <div class="warning">
+            <p class="sign alert">Alert!</p>
+            <p style="margin-top: 20px;">Liên kết bạn đã nhấp vào có thể bị hỏng, hoặc trang này có thể đã được gỡ bỏ.</p>
+        </div>
+
+        <h4><i class="sign tip">Gợi ý: </i><strong>Có thể giúp bạn:</strong></h4>
+        <ul>
+            <li>Kiểm tra lại đường dẫn</li>
+            <li>Quay về trang chủ để tìm kiếm</li>
+            <li><a href="javascript:history.back()">Quay lại trang trước</a></li>
+        </ul>
+        <div id="footer">
+            <div class="contact"><i class="sign call">Khuyên: </i><p class="marquee">Nếu bạn nghĩ rằng đây là một lỗi máy chủ, xin vui lòng liên hệ với quản trị hệ thống.</p></div>
+        </div>
+
+</div>
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
+<style>
+    /* Custom 404 */
+    /* Tested in Safari 6+, Chrome 26+, Firefox 23+, IE10, Opera 12+ */
+    /* This page was created to demonstrate CSS3 features - thus it may not validate CSS specs */
+
+    /* SELECTED TEXT */
+    .icon-btn {
+        color: #F37232;
+    } ::selection {
+        background: #ff5e99;
+        color: #FFFFFF;
+        text-shadow: 0;
+    }
+
+    ::-moz-selection {
+        background: #ff5e99;
+        color: #FFFFFF;
+    }
+
+    p {
+        margin: 5px 0;
+    }
+
+    .http404 {
+        background: none repeat scroll 0 0 #982E33;
+        border-radius: 14px 14px 14px 14px;
+        border-top: 2px solid #B65156;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+        margin: 0 auto;
+        margin-top: 20px;
+        margin-bottom: 20px;    
+        _width: 500px;
+        padding: 50px 10px 10px;
+    }
+
+    .http404, a, a:visited, a:active {
+        color: #f1f1f1;
+        text-decoration: none;
+    }
+
+    ul {
+        font-size: 16px;
+        line-height: 1.4;
+        list-style: square outside none;
+        margin: 16px 24px 10px 100px;
+        padding: 0 0 0 10px;
+    }
+
+    h1 {
+        margin:;
+        font-size: 76px;
+        text-align: center;
+        margin: 0 0 0px 0;
+        text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+    }
+
+    h2 {
+        font-size: 50px;
+        text-align: center;
+        margin: 12px 0 0 0;
+        text-transform: uppercase;
+        line-height: 40px;
+        text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+    }
+
+    h3 {
+        margin: 40px 0 8px;
+        text-align: center;
+        font-size: 30px;
+        font-weight: 500;
+        line-height: 1.4;
+    }
+
+    h4 {
+        margin: 24px 0 8px 18px;
+        text-transform: uppercase;
+    }
+
+    .author {
+        font-size: 14px;
+        padding: 0 10px 0 0;
+        text-align: center;
+    }
+
+
+    .warning {
+        margin: 20px 0 20px 0;
+        padding: 10px 20px 16px;
+        border-top: 1px solid #999;
+        border-bottom: 1px solid #999;
+    }
+
+        .warning .sign.alert {
+            background-image: url("http://simonalex.com/demo/404/redbox/404_icon_white.png");
+            background-repeat: no-repeat;
+            background-size: 90px auto;
+            height: 64px;
+            margin-right: 20px;
+            float: left;
+            text-indent: -9999px;
+            width: 69px;
+            margin-bottom: 20px;
+        }
+
+        .warning p {
+            font-size: 16px;
+            line-height: 40px;
+        }
+
+    .sign.tip {
+        background-image: url("http://simonalex.com/demo/404/redbox/404_icon_white.png");
+        background-position: -70px -45px;
+        background-repeat: no-repeat;
+        background-size: 90px auto;
+        float: left;
+        height: 20px;
+        margin-right: 6px;
+        text-indent: -9999px;
+        width: 20px;
+    }
+
+    .sign.call {
+        background-image: url("http://simonalex.com/demo/404/redbox/404_icon_white.png");
+        background-position: -70px -22px;
+        background-repeat: no-repeat;
+        background-size: 90px auto;
+        float: left;
+        height: 20px;
+        margin: 4px 8px 0 0;
+        text-indent: -9999px;
+        width: 20px;
+    }
+
+    .contact {
+        padding: 4px 20px;
+        background: #490a0e;
+        border-radius: 6px;
+        font-size: 12px;
+    }
+
+    .copyright {
+        font-size: 12px;
+        text-align: center;
+    }
+
+
+
+    /* Glass cover */
+    .http404:before {
+        background: -moz-linear-gradient(-40deg, rgba(255,255,255,0.09) 0%, rgba(255,255,255,0.1) 40%, rgba(10,14,10,0.09) 40%, rgba(255,255,255,0.2) 90%); /* FF3.6+ */
+        background: -webkit-linear-gradient(-40deg, rgba(255,255,255,0.09) 0%,rgba(255,255,255,0.1) 40%,rgba(10,14,10,0.09) 40%,rgba(255,255,255,0.2) 90%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(-40deg, rgba(255,255,255,0.09) 0%, rgba(255,255,255,0.1) 40%, rgba(10,14,10,0.09) 40%, rgba(255,255,255,0.2) 90%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(-40deg, rgba(255,255,255,0.09) 0%, rgba(255,255,255,0.1) 40%, rgba(10,14,10,0.09) 40%, rgba(255,255,255,0.2) 90%); /* IE10+ */
+        background: linear-gradient(-220deg, rgba(255,255,255,0.09) 0%, rgba(255,255,255,0.1) 40%, rgba(10,14,10,0.09) 40%, rgba(255,255,255,0.2) 90%); /* W3C */
+        border-radius: 6px 6px 6px 6px;
+        border-top: 3px solid rgba(255, 255, 255, 0.2);
+        border-left: 1px solid rgba(255, 255, 255, 0.3);
+        border-right: 1px solid rgba(255, 255, 255, 0.2);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        content: " ";
+        height: 520px;
+        margin: -70px 0 0 -40px;
+        position: absolute;
+        width: 910px;
+    }
+
+    /* Cover holder */
+    #header:before, #header:after, .copyright:before, .copyright:after {
+        background: -moz-linear-gradient(-40deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.6) 50%, #0A0E0A 50%, #FFFFFF 100%); /* FF3.6+ */
+        background: -webkit-linear-gradient(-40deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.6) 50%, #0A0E0A 50%, #FFFFFF 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(-40deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.6) 50%, #0A0E0A 50%, #FFFFFF 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(-40deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.6) 50%, #0A0E0A 50%, #FFFFFF 100%); /* IE10+ */
+        background: linear-gradient(-220deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.6) 50%, #0A0E0A 50%, #FFFFFF 100%);
+        border: 0px solid #999999;
+        border-radius: 10px 10px 10px 10px;
+        box-shadow: 0 0 2px rgba(0, 0, 0, 0.5) inset, 0 0 3px #000000;
+        content: " ";
+        display: block;
+        height: 18px;
+        position: absolute;
+        width: 18px;
+    }
+
+    #header:before {
+        margin: -50px 0 0 -36px;
+    }
+
+    #header:after {
+        margin: -348px 0 0 485px;
+    }
+
+    .copyright:before {
+        margin: 40px 0 0 -36px;
+    }
+
+    .copyright:after {
+        margin: 28px 0 0 485px;
+    }
+
+
+
+    /* Animation */
+    .sign.alert {
+        -webkit-animation: blink 1s infinite;
+        -moz-animation: blink 1s infinite;
+        -ms-animation: blink 1s infinite;
+        animation: blink 1s infinite;
+    }
+</style>
+
+
+
+
+

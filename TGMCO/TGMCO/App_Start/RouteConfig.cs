@@ -21,7 +21,7 @@ namespace TGMCO
 
             routes.MapRoute(
                 name: "ProductDetail",
-                url: "chi-tiet/san-pham-{id}",
+                url: "{supplier}/{product}-{id}",
                 defaults: new { controller = "Product", action = "Detail", id = UrlParameter.Optional }
             );
             routes.MapRoute(

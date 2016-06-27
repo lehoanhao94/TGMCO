@@ -327,7 +327,7 @@
                                         <i class="file-image">
                                             <input id="_" name="Image" type="file" onchange="readImage(this)" title="" />
                                             <i class="reset" onclick="resetImage(this.previousElementSibling)"></i>
-                                            <label for="_" class="image"></label>
+                                            <label for="_" class="image" style="background-image: url(@Url.Content(@m_PRODUCT.GetImage1(Model.PRODUCT_ID)));"></label>
                                         </i>
                                         <i class="file-image">
                                             <input id="_1" name="Image_1" type="file" onchange="readImage(this)" title="" />
@@ -664,14 +664,14 @@
             }
 
             .file-image .image:before {
-                content: "+";
+                content: "";
                 font-size: 100px;
                 margin-top: -20px;
                 color: #3C8DBC;
             }
 
             .file-image .image:after {
-                content: "Thêm ảnh";
+                content: "";
                 margin-top: 30px;
                 color: #3C8DBC;
             }

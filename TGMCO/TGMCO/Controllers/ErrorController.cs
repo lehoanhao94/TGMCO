@@ -13,6 +13,7 @@ namespace TGMCO.Controllers
 
         public ActionResult Http404()
         {
+            Session["SUPPLIER"] = "DEFAULT";
             return View();
         }
 

@@ -266,7 +266,7 @@ E:\FPT IS\TGMCO\TGMCO\TGMCO\bin\zh-Hans\System.Spatial.resources.dll
 E:\FPT IS\TGMCO\TGMCO\TGMCO\bin\zh-Hant\System.Spatial.resources.dll
 E:\FPT IS\TGMCO\TGMCO\TGMCO\obj\Debug\TGMCO.dll
 E:\FPT IS\TGMCO\TGMCO\TGMCO\obj\Debug\TGMCO.pdb
-E:\FPT IS\TGMCO\TGMCO\TGMCO\obj\Debug\TGMCO.csprojResolveAssemblyReference.cache
 E:\FPT IS\TGMCO\TGMCO\TGMCO\bin\RazorEngine.dll
 E:\FPT IS\TGMCO\TGMCO\TGMCO\bin\RazorEngine.xml
 E:\FPT IS\TGMCO\TGMCO\TGMCO\bin\EmailTemplates\SuccessOrder.html
+E:\FPT IS\TGMCO\TGMCO\TGMCO\obj\Debug\TGMCO.csprojResolveAssemblyReference.cache

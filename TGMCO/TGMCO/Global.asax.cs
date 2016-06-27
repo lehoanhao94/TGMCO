@@ -24,5 +24,14 @@ namespace TGMCO
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
         }
+
+        protected void Application_Error()
+        {
+            Exception exception = Server.GetLastError();
+            Server.ClearError();
+
+            int a = Response.StatusCode;
+            Response.Redirect("/Error/Http404");
+        }
     }
 }

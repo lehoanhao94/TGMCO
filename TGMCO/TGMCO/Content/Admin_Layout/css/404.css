@@ -1,0 +1,63 @@
+﻿/* Custom 404 */
+/* Tested in Safari 6+, Chrome 26+, Firefox 23+, IE10, Opera 12+ */
+/* This page was created to demonstrate CSS3 features - thus it may not validate CSS specs */
+
+@import url(http://fonts.googleapis.com/css?family=Titillium+Web:400,600,700,200);    
+        
+
+                       
+                       
+                    
+                    @-webkit-keyframes blink {
+                       0% { opacity: 0.1; }
+                       50% { opacity: 1; }
+                       100% { opacity: 0.1; }  
+                    }
+                    
+                    @-moz-keyframes blink {
+                       0% { opacity: 0.1; }
+                       50% { opacity: 1; }
+                       100% { opacity: 0.1; }  
+                    }
+                    
+                    @-ms-keyframes blink {
+                       0% { opacity: 0.1; }
+                       50% { opacity: 1; }
+                       100% { opacity: 0.1; }  
+                    }
+                    
+                    @keyframes blink {
+                       0% { opacity: 0.1; }
+                       50% { opacity: 1; }
+                       100% { opacity: 0.1; }            
+                    }
+
+                
+                    @-webkit-keyframes scroll {
+                        0%  { -webkit-transform:translateX(100%);opacity:0; }  
+                        10% { -webkit-transform:translateX(0);opacity:1; }  
+                        40% { -webkit-transform:translateX(0%); }  
+                        50% { -webkit-transform:translateX(0%); } 
+                        90% { opacity:1;}  
+                        100% { opacity:0;}  
+                    }
+                        
+                    @-moz-keyframes scroll {
+                        0%  { -moz-transform:translateX(100%);opacity:0; }  
+                        10% { -moz-transform:translateX(0);opacity:1; }  
+                        40% { -moz-transform:translateX(0%); }  
+                        50% { -moz-transform:translateX(0%); } 
+                        90% { opacity:1;}  
+                        100% { opacity:0;}  
+                    }
+                        
+                    @keyframes scroll {
+                        0%  { transform:translateX(100%);opacity:0; }  
+                        10% { transform:translateX(0);opacity:1; }  
+                        40% { transform:translateX(0%); }  
+                        50% { transform:translateX(0%); } 
+                        90% { opacity:1;}  
+                        100% { opacity:0;}            
+                    }            
+
+

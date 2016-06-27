@@ -1,10 +1,14 @@
-﻿@using TGMCO.Models;
+﻿@using TGMCO.Models.Entity;
+@using TGMCO.Models.Util;
+@using TGMCO.Models;
 
 @model List<PRODUCT>
 
 
 @{
     TGMCO.Models.Entity.ProductModel m_PRODUCT = new TGMCO.Models.Entity.ProductModel();
+    SupplierModel m_SUPPLIER_MODEL = new SupplierModel();
+    UrlFriendly m_URL = new UrlFriendly();  
 }
 
 <div id="Right-Slides">
@@ -20,7 +24,7 @@
                         {
                             <li class="news-item">
                                 <div class="col-item">
-                                    <a href="@Url.Action("Detail", "Product", new { id = product.PRODUCT_ID })" class="photo">
+                                    <a href="@Url.Action("Detail", "Product", new { id = product.PRODUCT_ID, supplier = m_URL.GenerateURL(m_SUPPLIER_MODEL.GetSupplierName(@product.SUPPLIER_ID)), product = m_URL.GenerateURL(@product.PRODUCT_NAME) })" class="photo">
                                         <img id="Image-Product" src="@Url.Content(@m_PRODUCT.GetImage1(product.PRODUCT_ID))" class="img-responsive" alt="@product.PRODUCT_NAME" title="@product.PRODUCT_NAME" />
                                     </a>
                                     <div class="info">
