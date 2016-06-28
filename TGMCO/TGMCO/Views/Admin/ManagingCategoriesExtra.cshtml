@@ -55,7 +55,7 @@
                 @Html.AntiForgeryToken()
                 <tr>
                     <td></td>
-                    <td><input name="CategoryExtraName" class="form-control" placeholder="Tên danh mục nhỏ" id="ex1" type="text"></td>
+                    <td><input name="CategoryExtraName" class="form-control" placeholder="Tên danh mục nhỏ" required id="ex1" type="text"></td>
                     <td><input name="Description" class="form-control" placeholder="Mô tả" id="ex1" type="text"></td>
                     <td>@Html.DropDownList("ListCategory", (IEnumerable<SelectListItem>)ViewBag.ListCategory, new { @class = "form-control", @style = "width: 350px;" })</td>
                     <td>

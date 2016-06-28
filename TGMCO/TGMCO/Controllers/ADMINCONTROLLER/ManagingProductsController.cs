@@ -48,8 +48,8 @@ namespace TGMCO.Controllers.ADMINCONTROLLER
                     ViewBag.ListSupplier = new SelectList(db.SUPPLIERS.ToList(), "Supplier_ID", "Supplier_Name");
                     ViewBag.ListCategory = new SelectList(db.CATEGORIES.ToList(), "Category_ID", "Category_Name");
                     ViewBag.ListCategoryExtra = new SelectList(db.CATEGORIES_EXTRA.ToList(), "Category_Extra_ID", "Category_Extra_Name");
-
-                    return View();
+                    PRODUCT _PRODUCT = db.PRODUCTS.ToList().Last();
+                    return View(_PRODUCT);
                 }
             }
             catch 
@@ -83,12 +83,12 @@ namespace TGMCO.Controllers.ADMINCONTROLLER
                 if(db.PRODUCTS.Where(n => n.PRODUCT_CODE.Equals(m_PRODUCT.PRODUCT_CODE)).Count() == 0)
                 {                   
                     m_PRODUCT.PRODUCT_NAME = collection.Get("PRODUCT_NAME").ToString();
-                    if (!string.IsNullOrEmpty(collection.Get("ListSupplier").ToString()))
-                    {                      
-                        if (!string.IsNullOrEmpty(collection.Get("ListCategory").ToString()))
+                    if (!string.IsNullOrEmpty(collection.Get("SUPPLIER_ID").ToString()))
+                    {
+                        if (!string.IsNullOrEmpty(collection.Get("CATEGORY_ID").ToString()))
                         {
-                            m_PRODUCT.SUPPLIER_ID = Int32.Parse(collection.Get("ListSupplier").ToString());
-                            m_PRODUCT.CATEGORY_ID = Int32.Parse(collection.Get("ListCategory").ToString());
+                            m_PRODUCT.SUPPLIER_ID = Int32.Parse(collection.Get("SUPPLIER_ID").ToString());
+                            m_PRODUCT.CATEGORY_ID = Int32.Parse(collection.Get("CATEGORY_ID").ToString());
                             if (!string.IsNullOrEmpty(collection.Get("ListCategoryExtra").ToString()))
                                 m_PRODUCT.CATEGORY_EXTRA_ID = Int32.Parse(collection.Get("ListCategoryExtra").ToString());
                             m_PRODUCT.UNIT_PRICE = decimal.Parse(collection.Get("UNIT_PRICE").ToString());
@@ -196,7 +196,11 @@ namespace TGMCO.Controllers.ADMINCONTROLLER
                             db.SaveChanges();
 
                             TempData["SuccessCreate"] = "Thêm thành công sản phẩm mã: " + m_PRODUCT.PRODUCT_CODE + ".";
-                            return RedirectToAction("ManagingProducts", "Admin");
+                            ViewBag.ListSupplier = new SelectList(db.SUPPLIERS.ToList(), "Supplier_ID", "Supplier_Name");
+                            ViewBag.ListCategory = new SelectList(db.CATEGORIES.ToList(), "Category_ID", "Category_Name");
+                            ViewBag.ListCategoryExtra = new SelectList(db.CATEGORIES_EXTRA.ToList(), "Category_Extra_ID", "Category_Extra_Name");
+
+                            return View(m_PRODUCT);
                         }
                         else
                         {
@@ -212,7 +216,7 @@ namespace TGMCO.Controllers.ADMINCONTROLLER
                 {
                     TempData["ErrorCreate"] = "Mã sản phẩm đã tồn tại.";
                 }
-                return RedirectToAction("Create", "ManagingProducts", FormMethod.Get);
+                return View(m_PRODUCT);
             }
             catch (Exception ex)
             {

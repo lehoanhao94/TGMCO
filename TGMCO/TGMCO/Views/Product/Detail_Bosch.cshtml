@@ -1,0 +1,260 @@
+﻿@using TGMCO.Models;
+@using TGMCO.Models.Entity;
+
+@model PRODUCT
+
+@{
+    ProductModel m_PRODUCT_MODEL = new ProductModel();
+}
+
+@{
+    Layout = "~/Views/Shared/_BoschLayout.cshtml";
+    ViewBag.Title = "Tuấn Gia Minh | " + Model.PRODUCT_NAME;
+    ViewBag.Description = "VietNamTool | " + Model.PRODUCT_NAME + " - " + Model.FEATURED + " - " + string.Format("{0:0,0}", Model.UNIT_PRICE) + " VNĐ.";    
+}
+
+<div id="Content">
+    <ul class="breadcrumb" style="padding-top: 0;">
+        <li><a href="@Url.Action("Category_Bosch", "Category", new { cate_id = @ViewBag.CategoryID })">Sản phẩm</a></li>
+        <li><a href="@Url.Action("Category_Bosch", "Category", new { cate_id = @ViewBag.CategoryID })">@ViewBag.CategoryNAME</a></li>
+        <li class="active">@Model.PRODUCT_NAME</li>
+    </ul>
+</div>
+<div id="ImgProduct" class="col-lg-7">
+    <img src="@Url.Content(m_PRODUCT_MODEL.GetImage1(Model.PRODUCT_ID))" alt="@Model.PRODUCT_NAME" title="@Model.PRODUCT_NAME" />
+</div>
+<div id="InfoProduct" class="col-lg-5">
+    <h4>@Model.PRODUCT_NAME</h4>
+    <h4>Mã SP: @Model.PRODUCT_CODE</h4>
+    <h5>@Model.FEATURED</h5>
+    <table class="product-desc">
+        <tbody>
+            <tr>
+                <td>Mã sản phẩm: </td>
+                <td class="col-lg-6">@Model.PRODUCT_CODE</td>
+            </tr>
+            <tr>
+                <td>Nhà sản xuất: </td>
+                <td class="col-lg-6">BOSCH</td>
+            </tr>
+            <tr>
+                <td>Xuất xứ: </td>
+                <td class="col-lg-6">@Model.MADE_IN</td>
+            </tr>
+            <tr>
+                <td>Tình trạng: </td>
+                @{
+                    if (Model.IS_STILL)
+                    {
+                        <td class="col-lg-6"><small class="label label-success pull-left">Còn hàng</small></td>
+                    }
+                    else
+                    {
+                        <td class="col-lg-6"><small class="label label-danger pull-left">Hết hàng</small></td>
+
+                    }
+                }
+            </tr>
+            <tr>
+                <td>Bảo hành: </td>
+                <td class="col-lg-6">@Model.WARRANTY</td>
+            </tr>
+            <tr>
+                <td>Trọng lượng: </td>
+                <td class="col-lg-6">@Model.WEIGHT</td>
+            </tr>
+            <tr>
+                <td>Giá: </td>
+                <td class="col-lg-6"><small class="label product-price label-info pull-left">@string.Format("{0:0,0}", @Model.UNIT_PRICE) VNĐ</small></td>
+            </tr>
+            <tr>
+                <td>
+                    Số lượng:
+                </td>
+                <td class="col-lg-3 product-rating">
+                    <input type="number" id="numProduct" class="form-control text-center numProduct" pattern="[0-9]" required value="1" min="1" max="10">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <!-- AddToAny BEGIN -->
+                    <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+                        <a class="a2a_dd" href="@Request.RawUrl"></a>
+                        <a class="a2a_button_facebook"></a>
+                        <a class="a2a_button_google_plus"></a>
+                        <a class="a2a_button_google_gmail"></a>
+                    </div>
+                    <script>
+                        var a2a_config = a2a_config || {};
+                        a2a_config.locale = "vi";
+                    </script>
+                    <script async src="https://static.addtoany.com/menu/page.js"></script>
+                    <!-- AddToAny END -->
+                    <!--<div class="fb-share-button" data-href="@Request.RawUrl" data-layout="button_count" data-mobile-iframe="true"></div>-->
+                </td>
+                <td class="product-stock col-lg-6">
+                    <button type="button" onclick="AddProduct(this)" id="btnAddProduct" data-ajax="true" data-id="@Model.PRODUCT_ID" data-code="@Model.PRODUCT_CODE" class="btn btn-default btnShopNow" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> <strong>Thêm vào giỏ</strong>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div id="Content">
+    <div class="col-md-12">
+        <div class="panel with-nav-tabs panel-default">
+            <div class="panel-heading">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#tab1default" data-toggle="tab">CHI TIẾT KỸ THUẬT</a></li>
+                    <li><a href="#tab2default" data-toggle="tab">ĐẶC TRƯNG</a></li>
+                    <li><a href="#tab3default" data-toggle="tab">PHỤ KIỆN ĐI KÈM</a></li>
+                    <li><a href="#tab4default" data-toggle="tab">FILES ĐÍNH KÈM</a></li>
+                    <li><a href="#tab5default" data-toggle="tab">BÌNH LUẬN</a></li>
+                </ul>
+            </div>
+            <div class="panel-body">
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="tab1default">@Html.Raw(Model.DESCRIPTION.Replace(Environment.NewLine, "<br/>"))</div>
+                    <div class="tab-pane fade" id="tab2default">@Model.FEATURED</div>
+                    <div class="tab-pane fade" id="tab3default">@Model.ACCESSORIES</div>
+                    <div class="tab-pane fade" id="tab4default">
+                        <ul>
+                            @if (@m_PRODUCT_MODEL.GetFile1(@Model.PRODUCT_ID) != "#")
+                            {
+                                <li>
+                                    <a target="_blank" href="@Url.Content(@m_PRODUCT_MODEL.GetFile1(@Model.PRODUCT_ID))" title="FILES1">
+                                        <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                                        Parts Diagram
+                                    </a>
+                                </li>
+                            }
+                            @if (@m_PRODUCT_MODEL.GetFile2(@Model.PRODUCT_ID) != "#")
+                            {
+                                <li>
+                                    <a target="_blank" href="@Url.Content(@m_PRODUCT_MODEL.GetFile2(@Model.PRODUCT_ID))" title="FILES2">
+                                        <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                                        Parts List
+                                    </a>
+                                </li>
+                            }
+                            @if (@m_PRODUCT_MODEL.GetFile3(@Model.PRODUCT_ID) != "#")
+                            {
+                                <li>
+                                    <a target="_blank" href="@Url.Content(@m_PRODUCT_MODEL.GetFile3(@Model.PRODUCT_ID))" title="FILES3">
+                                        <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                                        Introduction Manual
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    <div class="tab-pane fade" id="tab5default">
+                        <div class="fb-comments" data-href="@Url.Content("https://developers.facebook.com/docs/plugins/comments#" + @Request.RawUrl)" data-width="950" data-numposts="5"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    #Content .col-md-12 {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .panel-default {
+        border-color: 0;
+    }
+    .panel.with-nav-tabs .panel-heading {
+        padding: 5px 5px 0 5px;
+        background-color: #073961;
+        font-weight: bold;
+    }
+
+    .panel.with-nav-tabs .nav-tabs {
+        border-bottom: none;
+    }
+
+    .panel.with-nav-tabs .nav-justified {
+        margin-bottom: -1px;
+    }
+
+    .with-nav-tabs.panel-default .nav-tabs > li > a,
+    .with-nav-tabs.panel-default .nav-tabs > li > a:hover,
+    .with-nav-tabs.panel-default .nav-tabs > li > a:focus {
+        color: white;
+    }
+
+        .with-nav-tabs.panel-default .nav-tabs > .open > a,
+        .with-nav-tabs.panel-default .nav-tabs > .open > a:hover,
+        .with-nav-tabs.panel-default .nav-tabs > .open > a:focus,
+        .with-nav-tabs.panel-default .nav-tabs > li > a:hover,
+        .with-nav-tabs.panel-default .nav-tabs > li > a:focus {
+            color: white;
+            background-color: #ddd;
+            border-color: transparent;
+        }
+
+    .with-nav-tabs.panel-default .nav-tabs > li.active > a,
+    .with-nav-tabs.panel-default .nav-tabs > li.active > a:hover,
+    .with-nav-tabs.panel-default .nav-tabs > li.active > a:focus {
+        color: #555;
+        background-color: #fff;
+        border-color: #ddd;
+        border-bottom-color: transparent;
+    }
+
+    .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu {
+        background-color: #f5f5f5;
+        border-color: #ddd;
+    }
+
+        .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > li > a {
+            color: #777;
+        }
+
+            .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > li > a:hover,
+            .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > li > a:focus {
+                background-color: #ddd;
+            }
+
+        .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > .active > a,
+        .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > .active > a:hover,
+        .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > .active > a:focus {
+            color: #fff;
+            background-color: #555;
+        }
+</style>
+<style>
+    #btnAddProduct, #numProduct, .a2a_default_style {
+        margin-top: 5px;
+        margin-bottom: 20px;
+    } .product-price {
+        font-size: 16px;
+    } #ImgProduct {
+        padding-top: 20px;
+        margin-bottom: 20px;
+    } 
+    #InfoProduct {
+        background: rgba(0, 59, 106, 0.85);
+        color: white;
+    }
+    #Content {
+        background-color: white;
+        height: auto;
+        width: 1002px;
+        display: table;
+        font-size: 12px;
+        margin-bottom: 20px;
+    }
+</style>
+<div id="fb-root"></div>
+<script>
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.6&appId=1454298961531347";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>

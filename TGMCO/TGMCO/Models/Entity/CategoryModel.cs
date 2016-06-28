@@ -47,7 +47,18 @@ namespace TGMCO.Models.Entity
             }
 
         }
-
+        public List<CATEGORIES_BY_SUPPLIER> GetListCategoryBySupplier(int id)
+        {
+            try
+            {
+                List<CATEGORIES_BY_SUPPLIER> _lstCATEGORY = db.CATEGORIES_BY_SUPPLIER.Where(n => n.SUPPLIER_ID == id).ToList();
+                return _lstCATEGORY;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public List<CATEGORIES_EXTRA> GetListCategoryExtra(int id)
         {
             try

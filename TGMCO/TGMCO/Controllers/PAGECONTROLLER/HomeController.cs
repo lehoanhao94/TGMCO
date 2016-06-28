@@ -196,6 +196,8 @@ namespace TGMCO.Controllers.PAGECONTROLLER
                 SUPPLIER _Supplier = db.SUPPLIERS.Where(n => n.SUPPLIER_NAME.Contains("BOSCH")).Single();
                 Session["SUPPLIER"] = "BOSCH";
                 Session["SUPPLIER_MODEL"] = _Supplier;
+                List<PRODUCT> _lstPRODUCT = db.PRODUCTS.Where(n => n.IS_ACTIVE && n.IS_NEW).OrderByDescending(n => n.IDX).Take(8).ToList();
+                ViewBag.lstNEW_PRODUCT = _lstPRODUCT;
                 return View(_Supplier);
             }
             catch (Exception ex)

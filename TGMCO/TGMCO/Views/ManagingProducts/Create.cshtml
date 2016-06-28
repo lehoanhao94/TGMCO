@@ -1,4 +1,7 @@
-﻿@{
+﻿@model TGMCO.Models.PRODUCT
+@using TGMCO.Models.Entity;
+@using TGMCO.Models;
+@{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
@@ -14,7 +17,16 @@
         <li class="active">ManagingProducts @ViewBag.Title</li>
     </ol>
 }
-
+@{
+    if (@TempData["SuccessCreate"] != null)
+    {
+        <div class="alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4>	<i class="icon fa fa-check"></i> THÀNH CÔNG!</h4>
+            @TempData["SuccessCreate"]
+        </div>
+    }
+}
 <div class="box box-success">
     @using (Html.BeginForm("Create", "ManagingProducts", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
@@ -71,11 +83,11 @@
                 </div>
                 <div class="col-xs-2 form-group">
                     <label>Nhà cung cấp <i style="color:red;">*</i></label>
-                    @Html.DropDownList("ListSupplier", (IEnumerable<SelectListItem>)ViewBag.ListSupplier, "Chọn nhà cung cấp", new { @class = "form-control" })
+                    @Html.DropDownListFor(x => x.SUPPLIER_ID, (IEnumerable<SelectListItem>)ViewBag.ListSupplier, new { @class = "form-control" })                   
                 </div>
                 <div class="col-xs-3 form-group">
                     <label>Danh mục <i style="color:red;">*</i></label>
-                    @Html.DropDownList("ListCategory", (IEnumerable<SelectListItem>)ViewBag.ListCategory, "Chọn danh mục", new { @class = "form-control" })
+                   @Html.DropDownListFor(x => x.CATEGORY_ID, (IEnumerable<SelectListItem>)ViewBag.ListCategory, new { @class = "form-control" })
                 </div>
                 <div class="col-xs-2 form-group">
                     <label>Danh mục con</label>
@@ -89,11 +101,11 @@
                 </div>
                 <div class="col-xs-1 form-group">
                     <label>ĐVT <i style="color:red;">*</i></label>
-                    <input name="UNIT" type="text" value="Chiếc" class="form-control" placeholder="Loại, chiếc, bộ, cặp...." required>
+                    <input name="UNIT" type="text" value="@Model.UNIT" class="form-control" placeholder="Loại, chiếc, bộ, cặp...." required>
                 </div>
                 <div class="col-xs-1 form-group">
                     <label>Bảo hành</label>
-                    <input name="WARRANTY" type="text" value="6 tháng" class="form-control" placeholder="Bảo hành">
+                    <input name="WARRANTY" type="text" value="@Model.WARRANTY" class="form-control" placeholder="Bảo hành">
                 </div>
                 <div class="col-xs-1 form-group">
                     <label>TLượng</label>
@@ -101,7 +113,7 @@
                 </div>
                 <div class="col-xs-2 form-group">
                     <label>Xuất xứ</label>
-                    <input name="MADE_IN" type="text" value="Trung Quốc" class="form-control" placeholder="Xuất xứ">
+                    <input name="MADE_IN" type="text" value="@Model.MADE_IN" class="form-control" placeholder="Xuất xứ">
                 </div>
                 <div class="col-xs-3 form-group">
                     <label>Phụ kiện đi kèm</label>

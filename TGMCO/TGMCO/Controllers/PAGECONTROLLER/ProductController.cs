@@ -29,6 +29,26 @@ namespace TGMCO.Controllers.PAGECONTROLLER
                 return RedirectToAction("Http404", "Error"); // 404
             }          
         }
+        public ActionResult Detail_Bosch(int id)
+        {
+            try
+            {
+
+                SupplierModel _SUPPLIER = new SupplierModel();
+                Session["SUPPLIER"] = _SUPPLIER.GetSupplierName(db.PRODUCTS.Find(id).SUPPLIER_ID);
+                Session["SUPPLIER_MODEL"] = db.SUPPLIERS.Find(db.PRODUCTS.Find(id).SUPPLIER_ID);
+
+                PRODUCT _PRODUCT = db.PRODUCTS.Find(id);
+                ViewBag.CategoryID = _PRODUCT.CATEGORY_ID;
+                ViewBag.CategoryNAME = db.CATEGORIES.Single(n => n.CATEGORY_ID == _PRODUCT.CATEGORY_ID).CATEGORY_NAME;
+                return View(_PRODUCT);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Http404", "Error"); // 404
+            }
+        }
+
         [HttpPost]
         public ActionResult Search(FormCollection f)
         {

@@ -1346,6 +1346,8 @@
     <Content Include="Views\Partial\OrderDelivery.cshtml" />
     <Content Include="Views\Error\Http404.cshtml" />
     <Content Include="Views\Shared\_BoschLayout.cshtml" />
+    <Content Include="Views\Category\Category_Bosch.cshtml" />
+    <Content Include="Views\Product\Detail_Bosch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
