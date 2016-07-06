@@ -113,7 +113,7 @@
                             <button data-ajax="true" onclick="OrderDelivery(this)" data-toggle="modal" data-target="#OrderDelivery" type="button" id="btnOrder" data-id="@order.ORDER_ID" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span></button>
                             <a data-ajax="true" href="/Order/UpdateStatusOrder/?id=@order.ORDER_ID&status_id=2" type="button" data-ajax-confirm="Bạn có muốn chuyển trạng thái đơn #VNT-@order.ORDER_ID thành 'Đã thanh toán - Chưa giao hàng' không?" data-ajax-complete="location.reload()" data-ajax-method="Post" class="btn btn-warning"><span class="glyphicon glyphicon-usd"></span></a>
                             <a data-ajax="true" href="/Order/UpdateStatusOrder/?id=@order.ORDER_ID&status_id=4" type="button" data-ajax-confirm="Bạn có muốn hủy đơn hàng #VNT-@order.ORDER_ID không?" data-ajax-complete="location.reload()" data-ajax-method="Post" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></a>
-                            <button data-ajax="true" onclick="OrderDetails(thiss)" data-toggle="modal" data-target="#myModal" type="button" id="btnOrder" data-id="@order.ORDER_ID" class="btn btn-info">Chi tiết</button>
+                            <button data-ajax="true" onclick="OrderDetails(this)" data-toggle="modal" data-target="#myModal" type="button" id="btnOrder" data-id="@order.ORDER_ID" class="btn btn-info">Chi tiết</button>
                         </td>
                     </tr>
                 }

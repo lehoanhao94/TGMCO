@@ -50,6 +50,7 @@ namespace TGMCO.Models
         public DbSet<ADS> ADS { get; set; }
         public DbSet<SLIDER> SLIDERS { get; set; }
         public DbSet<PAYMENT_METHOD> PAYMENT_METHOD { get; set; }
+        public DbSet<IMAGES_UPLOAD> IMAGES_UPLOAD { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

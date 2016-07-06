@@ -12,17 +12,11 @@ namespace TGMCO.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class NEWS
+    public partial class IMAGES_UPLOAD
     {
-        public int NEWS_ID { get; set; }
-        public string TITLE { get; set; }
-        public string CONTENT_1 { get; set; }
-        public string CONTENT_2 { get; set; }
-        public string CONTENT_3 { get; set; }
-        public string IMAGE_1 { get; set; }
-        public string IMAGE_2 { get; set; }
-        public string IMAGE_3 { get; set; }
-        public System.DateTime CREATED_DATE { get; set; }
-        public Nullable<int> SUPPLIER_ID { get; set; }
+        public int IMAGES_ID { get; set; }
+        public string NAME { get; set; }
+        public string URL { get; set; }
+        public Nullable<int> NEWS_ID { get; set; }
     }
 }

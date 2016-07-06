@@ -1,0 +1,133 @@
+﻿@model IList<TGMCO.Models.NEWS>
+@using TGMCO.Models.Entity;
+@{
+    ViewBag.Title = "ManagingNews";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section Page_Header {
+    <h1>
+        QUẢN LÝ TÀI TIN TỨC
+        <small>Thêm, xóa, cập nhập</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Admin")"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">@ViewBag.Title</li>
+    </ol>
+}
+
+<div class="jquery-script-clear"></div>
+<div class="table-responsive" id="categories">
+    <a href="@Url.Action("Create", "ManagingNews")" class="btn btn-success btn-md"><i class="fa fa-pencil" aria-hidden="true"></i> Thêm mới </a>
+
+    <div style="float: right;">
+        <input class="search form-control" placeholder="Tìm kiếm theo mã, tên sản phẩm..." style="width: 300px;" />
+    </div>
+    @{
+        if (@TempData["SuccessCreate"] != null)
+        {
+            <div class="alert alert-success alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4>	<i class="icon fa fa-check"></i> THÀNH CÔNG!</h4>
+                @TempData["SuccessCreate"]
+            </div>
+        }
+    }
+
+    <div id="first-container">
+        <table id="table" class="table table-hover">
+            <thead>
+                <tr>
+                    <th style="width:30px;" class="sort" data-sort="id">#</th>
+                    <th style="width: 30%;" class="sort" data-sort="username">Tiêu đề</th>
+                    <th style="width: 40%;" class="sort" data-sort="username">Mô tả ngắn</th>
+                    <th class="sort" data-sort="fullname">Ngày viết</th>    
+                    <th></th>              
+                </tr>
+            </thead>
+            <tbody class="list">
+                @foreach (var user in Model)
+                {
+                    <tr id="row_@user.NEWS_ID">
+                        <td class="point">@user.NEWS_ID</td>
+                        <td class="id">@user.TITLE</td>
+                        <td class="id">@user.CONTENT_2</td>
+                        <td class="username">@user.CREATED_DATE</td>  
+                        <td class="btn-group">
+                            <a href="@Url.Action("Update", "ManagingNews", new { id = @user.NEWS_ID })" id="btnUpdate" type="button" class="btn btn-primary"><i class="fa fa-pencil-square-o fa-2" aria-hidden="true"></i></a>
+                            <a data-ajax="true" href="/ManagingNews/Delete/@user.NEWS_ID" type="button" data-ajax-confirm="Bạn có muốn xóa bài viết số @user.NEWS_ID  không?" data-ajax-complete="$('#row_@user.NEWS_ID').remove()" data-ajax-method="Delete" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        </td>                  
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div style="margin-left: 500px;">
+            <div class="my-navigation">
+                <div class="simple-pagination-first"></div>
+                <div class="simple-pagination-previous"></div>
+                <div class="simple-pagination-page-numbers"></div>
+                <div class="simple-pagination-next"></div>
+                <div class="simple-pagination-last"></div>
+            </div>
+            <div class="simple-pagination-page-x-of-x"></div>
+            <div class="simple-pagination-showing-x-of-x"></div>
+            <div>
+                Display <select class="simple-pagination-items-per-page"></select> items per page.
+            </div>
+            <div>
+                Go directly to page <select class="simple-pagination-select-specific-page"></select>.
+            </div>
+        </div>
+    </div>
+</div>
+
+@section masterjs{
+    <style>
+        #table th:hover {
+            cursor: pointer;
+        }
+
+        .simple-pagination-page-numbers a {
+            display: block;
+            float: left;
+            width: 2rem;
+            text-align: center;
+        }
+
+        .my-navigation:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .my-navigation div {
+            float: left;
+        }
+
+            .my-navigation div + div {
+                margin-left: .5rem;
+            }
+    </style>
+
+}
+@section footerjs{
+    <script src="~/Content/Admin_Layout/js/jquery-simple-pagination-plugin.js"></script>
+    <script>
+        (function ($) {
+
+            $('#first-container').simplePagination({
+                items_per_page: 100
+            });
+
+        })(jQuery);
+    </script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.2.0/list.min.js"></script>
+    <script>
+        var options = {
+            valueNames: ['username', 'id', 'fullname', 'email', 'createdate', 'point', 'mobile', 'access', 'activebtn']
+        };
+
+        var userList = new List('categories', options);
+    </script>
+}

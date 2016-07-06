@@ -86,6 +86,7 @@
     <Property Name="IMAGE_2" Type="nvarchar" MaxLength="50" />
     <Property Name="IMAGE_3" Type="nvarchar" MaxLength="50" />
     <Property Name="CREATED_DATE" Type="datetime" Nullable="false" />
+    <Property Name="SUPPLIER_ID" Type="int" />
   </EntityType>
   <EntityType Name="NEWS_PROMOTION">
     <Key>
@@ -262,6 +263,15 @@
     <Property Name="LINK" Type="nvarchar(max)" Nullable="false" />
     <Property Name="IDX" Type="int" />
   </EntityType>
+  <EntityType Name="IMAGES_UPLOAD">
+    <Key>
+      <PropertyRef Name="IMAGES_ID" />
+    </Key>
+    <Property Name="IMAGES_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NAME" Type="nvarchar" MaxLength="250" />
+    <Property Name="URL" Type="nvarchar(max)" />
+    <Property Name="NEWS_ID" Type="int" />
+  </EntityType>
   <EntityType Name="PAYMENT_METHOD">
     <Key>
       <PropertyRef Name="PAYMENT_METHOD_ID" />
@@ -305,6 +315,7 @@
     <EntitySet Name="USER_PROFILES" EntityType="Self.USER_PROFILES" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ADS" EntityType="Self.ADS" Schema="vieb2155_admin" store:Type="Tables" />
+    <EntitySet Name="IMAGES_UPLOAD" EntityType="Self.IMAGES_UPLOAD" Schema="vieb2155_admin" store:Type="Tables" />
     <EntitySet Name="PAYMENT_METHOD" EntityType="Self.PAYMENT_METHOD" Schema="vieb2155_admin" store:Type="Tables" />
     <EntitySet Name="SLIDERS" EntityType="Self.SLIDERS" Schema="vieb2155_admin" store:Type="Tables" />
   </EntityContainer>

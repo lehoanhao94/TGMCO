@@ -91,6 +91,7 @@
           <Property Name="IMAGE_2" Type="nvarchar" MaxLength="50" />
           <Property Name="IMAGE_3" Type="nvarchar" MaxLength="50" />
           <Property Name="CREATED_DATE" Type="datetime" Nullable="false" />
+          <Property Name="SUPPLIER_ID" Type="int" />
         </EntityType>
         <EntityType Name="NEWS_PROMOTION">
           <Key>
@@ -267,6 +268,15 @@
           <Property Name="LINK" Type="nvarchar(max)" Nullable="false" />
           <Property Name="IDX" Type="int" />
         </EntityType>
+        <EntityType Name="IMAGES_UPLOAD">
+          <Key>
+            <PropertyRef Name="IMAGES_ID" />
+          </Key>
+          <Property Name="IMAGES_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NAME" Type="nvarchar" MaxLength="250" />
+          <Property Name="URL" Type="nvarchar(max)" />
+          <Property Name="NEWS_ID" Type="int" />
+        </EntityType>
         <EntityType Name="PAYMENT_METHOD">
           <Key>
             <PropertyRef Name="PAYMENT_METHOD_ID" />
@@ -310,6 +320,7 @@
           <EntitySet Name="USER_PROFILES" EntityType="Self.USER_PROFILES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ADS" EntityType="Self.ADS" Schema="vieb2155_admin" store:Type="Tables" />
+          <EntitySet Name="IMAGES_UPLOAD" EntityType="Self.IMAGES_UPLOAD" Schema="vieb2155_admin" store:Type="Tables" />
           <EntitySet Name="PAYMENT_METHOD" EntityType="Self.PAYMENT_METHOD" Schema="vieb2155_admin" store:Type="Tables" />
           <EntitySet Name="SLIDERS" EntityType="Self.SLIDERS" Schema="vieb2155_admin" store:Type="Tables" />
         </EntityContainer>
@@ -403,6 +414,7 @@
           <Property Name="IMAGE_2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IMAGE_3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CREATED_DATE" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SUPPLIER_ID" Type="Int32" />
         </EntityType>
         <EntityType Name="NEWS_PROMOTION">
           <Key>
@@ -593,6 +605,7 @@
           <EntitySet Name="ADS" EntityType="TGMCOModel.ADS" />
           <EntitySet Name="SLIDERS" EntityType="TGMCOModel.SLIDER" />
           <EntitySet Name="PAYMENT_METHOD" EntityType="TGMCOModel.PAYMENT_METHOD" />
+          <EntitySet Name="IMAGES_UPLOAD" EntityType="TGMCOModel.IMAGES_UPLOAD" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -665,6 +678,15 @@
           </Key>
           <Property Name="PAYMENT_METHOD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DESCRIPTION" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="IMAGES_UPLOAD">
+          <Key>
+            <PropertyRef Name="IMAGES_ID" />
+          </Key>
+          <Property Name="IMAGES_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NAME" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="URL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NEWS_ID" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -754,6 +776,7 @@
           <EntitySetMapping Name="NEWS">
             <EntityTypeMapping TypeName="TGMCOModel.NEWS">
               <MappingFragment StoreEntitySet="NEWS">
+                <ScalarProperty Name="SUPPLIER_ID" ColumnName="SUPPLIER_ID" />
                 <ScalarProperty Name="NEWS_ID" ColumnName="NEWS_ID" />
                 <ScalarProperty Name="TITLE" ColumnName="TITLE" />
                 <ScalarProperty Name="CONTENT_1" ColumnName="CONTENT_1" />
@@ -975,6 +998,16 @@
               <MappingFragment StoreEntitySet="PAYMENT_METHOD">
                 <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
                 <ScalarProperty Name="PAYMENT_METHOD_ID" ColumnName="PAYMENT_METHOD_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IMAGES_UPLOAD">
+            <EntityTypeMapping TypeName="TGMCOModel.IMAGES_UPLOAD">
+              <MappingFragment StoreEntitySet="IMAGES_UPLOAD">
+                <ScalarProperty Name="NEWS_ID" ColumnName="NEWS_ID" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="IMAGES_ID" ColumnName="IMAGES_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

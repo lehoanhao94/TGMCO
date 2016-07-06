@@ -1,0 +1,45 @@
+﻿@using TGMCO.Models;
+@using TGMCO.Models.Entity;
+
+@model NEWS
+
+@{
+    ViewBag.Title = "Tuấn Gia Minh | " + Model.TITLE;
+    Layout = "~/Views/Shared/_PageLayout.cshtml";
+    ViewBag.Description = "CÔNG TY TNHH TM TUẤN GIA MINH - Cung cấp thiết bị xây dựng, thiết bị công nghiệp, dụng cụ cầm tay, máy hàn, máy mài góc, máy cắt kim loại, dụng cụ đo chính xác, dụng cụ điện...";
+}
+
+@{
+    NewsModel m_NEWS_MODEL = new NewsModel();
+}
+
+@section LeftMenu{
+    @Html.Partial("~/Views/Partial/LeftMenu.cshtml")
+}
+<h1 style="text-align: center;color: white ; font-size: 18px; padding-top: 0; background-color: #30454A; margin-top: 0; margin-bottom: 5px; height: 35px; line-height: 2;">@Model.TITLE</h1>
+<div class="col-md-12" style="background: #FFF;">
+    
+    <h2><strong>@Model.TITLE</strong></h2> 
+    <p style=" color: #999; font-size: 12px;"><span class="label label-primary">VietNamTool.vn</span>  @Model.CREATED_DATE.ToString("hh:mm dd/MM/yyyy") <div class="fb-like pull-right" data-href="@Request.Url" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div> </p>
+    @(new HtmlString(Model.CONTENT_1))
+
+    <div class="fb-comments" data-href="@Request.Url" data-width="100%" data-numposts="5"></div>
+</div>
+
+@section RightContent{
+
+    @{
+        Html.RenderAction("VerticalSlider", "Partial", new { _title = "Sản phẩm mới", _type = "New", _supplier_id = 0 });
+    }
+
+}
+
+<div id="fb-root"></div>
+<script>
+(function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.6&appId=1454298961531347";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>

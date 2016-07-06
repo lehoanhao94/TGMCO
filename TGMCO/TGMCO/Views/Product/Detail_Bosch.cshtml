@@ -156,105 +156,177 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>  
 </div>
-<style>
-    #Content .col-md-12 {
-        padding-left: 0;
-        padding-right: 0;
-    }
-    .panel-default {
-        border-color: 0;
-    }
-    .panel.with-nav-tabs .panel-heading {
-        padding: 5px 5px 0 5px;
-        background-color: #073961;
-        font-weight: bold;
-    }
+<div id="Content">
+    <div id="Header-Images">
+        <span class="col-lg-offset-1"><i class="fa fa-picture-o" aria-hidden="true"></i> Thư viện phương tiện</span>
+    </div>
+    <div class="" style="padding-top: 20px;">
+        @if (m_PRODUCT_MODEL.GetImage1(Model.PRODUCT_ID) != "#")
+        {
+            <div class='col-sm-4'>
+                <a class="thumbnail fancybox" rel="ligthbox" href="@Url.Content(m_PRODUCT_MODEL.GetImage1(Model.PRODUCT_ID))">
+                    <img class="img-responsive" src="@Url.Content(m_PRODUCT_MODEL.GetImage1(Model.PRODUCT_ID))" alt="@Model.PRODUCT_NAME" title="@Model.PRODUCT_NAME" />
+                </a>
+            </div> <!-- col-6 / end -->
+        }
 
-    .panel.with-nav-tabs .nav-tabs {
-        border-bottom: none;
-    }
+@if (m_PRODUCT_MODEL.GetImage1(Model.PRODUCT_ID) != "#")
+{
+    <div class='col-sm-4'>
+        <a class="thumbnail fancybox" rel="ligthbox" href="@Url.Content(m_PRODUCT_MODEL.GetImage1(Model.PRODUCT_ID))">
+            <img class="img-responsive" src="@Url.Content(m_PRODUCT_MODEL.GetImage1(Model.PRODUCT_ID))" alt="@Model.PRODUCT_NAME" title="@Model.PRODUCT_NAME" />
+        </a>
+    </div> <!-- col-6 / end -->
+}
+@if (m_PRODUCT_MODEL.GetImage1(Model.PRODUCT_ID) != "#")
+{
+    <div class='col-sm-4'>
+        <a class="thumbnail fancybox" rel="ligthbox" href="@Url.Content(m_PRODUCT_MODEL.GetImage1(Model.PRODUCT_ID))">
+            <img class="img-responsive" src="@Url.Content(m_PRODUCT_MODEL.GetImage1(Model.PRODUCT_ID))" alt="@Model.PRODUCT_NAME" title="@Model.PRODUCT_NAME" />
+        </a>
+    </div> <!-- col-6 / end -->
+}       
+    </div> <!-- row / end -->
+</div>
 
-    .panel.with-nav-tabs .nav-justified {
-        margin-bottom: -1px;
-    }
 
-    .with-nav-tabs.panel-default .nav-tabs > li > a,
-    .with-nav-tabs.panel-default .nav-tabs > li > a:hover,
-    .with-nav-tabs.panel-default .nav-tabs > li > a:focus {
-        color: white;
-    }
 
-        .with-nav-tabs.panel-default .nav-tabs > .open > a,
-        .with-nav-tabs.panel-default .nav-tabs > .open > a:hover,
-        .with-nav-tabs.panel-default .nav-tabs > .open > a:focus,
+    <style>
+        #Header-Images span{
+            color: white;
+            font-size: 24px;
+            line-height: 2.2;
+        } 
+        #Header-Images {
+            height: 60px;
+            background: #205f8a;
+        } 
+        .gallery {
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        #Content .col-md-12 {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .panel-default {
+            border-color: 0;
+        }
+
+        .panel.with-nav-tabs .panel-heading {
+            padding: 5px 5px 0 5px;
+            background-color: #073961;
+            font-weight: bold;
+        }
+
+        .panel.with-nav-tabs .nav-tabs {
+            border-bottom: none;
+        }
+
+        .panel.with-nav-tabs .nav-justified {
+            margin-bottom: -1px;
+        }
+
+        .with-nav-tabs.panel-default .nav-tabs > li > a,
         .with-nav-tabs.panel-default .nav-tabs > li > a:hover,
         .with-nav-tabs.panel-default .nav-tabs > li > a:focus {
             color: white;
-            background-color: #ddd;
-            border-color: transparent;
         }
 
-    .with-nav-tabs.panel-default .nav-tabs > li.active > a,
-    .with-nav-tabs.panel-default .nav-tabs > li.active > a:hover,
-    .with-nav-tabs.panel-default .nav-tabs > li.active > a:focus {
-        color: #555;
-        background-color: #fff;
-        border-color: #ddd;
-        border-bottom-color: transparent;
-    }
-
-    .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu {
-        background-color: #f5f5f5;
-        border-color: #ddd;
-    }
-
-        .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > li > a {
-            color: #777;
-        }
-
-            .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > li > a:hover,
-            .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > li > a:focus {
+            .with-nav-tabs.panel-default .nav-tabs > .open > a,
+            .with-nav-tabs.panel-default .nav-tabs > .open > a:hover,
+            .with-nav-tabs.panel-default .nav-tabs > .open > a:focus,
+            .with-nav-tabs.panel-default .nav-tabs > li > a:hover,
+            .with-nav-tabs.panel-default .nav-tabs > li > a:focus {
+                color: white;
                 background-color: #ddd;
+                border-color: transparent;
             }
 
-        .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > .active > a,
-        .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > .active > a:hover,
-        .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > .active > a:focus {
-            color: #fff;
-            background-color: #555;
+        .with-nav-tabs.panel-default .nav-tabs > li.active > a,
+        .with-nav-tabs.panel-default .nav-tabs > li.active > a:hover,
+        .with-nav-tabs.panel-default .nav-tabs > li.active > a:focus {
+            color: #555;
+            background-color: #fff;
+            border-color: #ddd;
+            border-bottom-color: transparent;
         }
-</style>
-<style>
-    #btnAddProduct, #numProduct, .a2a_default_style {
-        margin-top: 5px;
-        margin-bottom: 20px;
-    } .product-price {
-        font-size: 16px;
-    } #ImgProduct {
-        padding-top: 20px;
-        margin-bottom: 20px;
-    } 
-    #InfoProduct {
-        background: rgba(0, 59, 106, 0.85);
-        color: white;
-    }
-    #Content {
-        background-color: white;
-        height: auto;
-        width: 1002px;
-        display: table;
-        font-size: 12px;
-        margin-bottom: 20px;
-    }
-</style>
-<div id="fb-root"></div>
-<script>
-    (function (d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.6&appId=1454298961531347";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
+
+        .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu {
+            background-color: #f5f5f5;
+            border-color: #ddd;
+        }
+
+            .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > li > a {
+                color: #777;
+            }
+
+                .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > li > a:hover,
+                .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > li > a:focus {
+                    background-color: #ddd;
+                }
+
+            .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > .active > a,
+            .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > .active > a:hover,
+            .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > .active > a:focus {
+                color: #fff;
+                background-color: #555;
+            }
+    </style>
+    <style>
+        #btnAddProduct, #numProduct, .a2a_default_style {
+            margin-top: 5px;
+            margin-bottom: 20px;
+        }
+
+        .product-price {
+            font-size: 16px;
+        }
+
+        #ImgProduct {
+            padding-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        #InfoProduct {
+            background: rgba(0, 59, 106, 0.85);
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        #Content {
+            background-color: white;
+            height: auto;
+            width: 1002px;
+            display: table;
+            font-size: 12px;
+            margin-bottom: 20px;
+        }
+    </style>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            //FANCYBOX
+            //https://github.com/fancyapps/fancyBox
+            $(".fancybox").fancybox({
+                openEffect: "none",
+                closeEffect: "none"
+            });
+        });
+
+
+    </script>
+    <div id="fb-root"></div>
+    <script>
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.6&appId=1454298961531347";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>

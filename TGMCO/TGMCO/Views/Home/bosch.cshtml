@@ -74,7 +74,7 @@
                                     </div>
                                 </div>
                             }
-                            <a href="@Url.Action("Detail", "Product", new { id = product.PRODUCT_ID, supplier = m_URL.GenerateURL(m_SUPPLIER_MODEL.GetSupplierName(@product.SUPPLIER_ID)), product = m_URL.GenerateURL(@product.PRODUCT_NAME) })" class="photo">
+                            <a href="@Url.Action("Detail_Bosch", "Product", new { id = product.PRODUCT_ID, supplier = m_URL.GenerateURL(m_SUPPLIER_MODEL.GetSupplierName(@product.SUPPLIER_ID)), product = m_URL.GenerateURL(@product.PRODUCT_NAME) })" class="photo">
                                 <img id="Image-Product" src="@Url.Content(@m_PRODUCT_MODEL.GetImage1(product.PRODUCT_ID))" class="img-responsive" alt="@product.PRODUCT_NAME" title="@product.PRODUCT_NAME" />
                             </a>
                             <div class="info">
@@ -164,6 +164,9 @@
 </div>
 
 <style>
+    .img-responsive{
+        width: 100%;
+    } 
     .product-cart {
         padding: 1px;
         padding-bottom: 5px;

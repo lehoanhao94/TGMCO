@@ -197,6 +197,7 @@
     <Compile Include="Controllers\ADMINCONTROLLER\ManagingCategoriesBySupplierController.cs" />
     <Compile Include="Controllers\ADMINCONTROLLER\ManagingCategoriesController.cs" />
     <Compile Include="Controllers\ADMINCONTROLLER\ManagingCategoriesExtraController.cs" />
+    <Compile Include="Controllers\ADMINCONTROLLER\ManagingNewsController.cs" />
     <Compile Include="Controllers\ADMINCONTROLLER\ManagingProductsController.cs" />
     <Compile Include="Controllers\ADMINCONTROLLER\ManagingSuppliersController.cs" />
     <Compile Include="Controllers\ADMINCONTROLLER\ManagingUsersController.cs" />
@@ -237,6 +238,7 @@
     <Compile Include="Models\Entity\CategoryExtraModel.cs" />
     <Compile Include="Models\Entity\OrderMailModel.cs" />
     <Compile Include="Models\Entity\OrderModel.cs" />
+    <Compile Include="Models\Entity\NewsModel.cs" />
     <Compile Include="Models\Entity\ShipperModel.cs" />
     <Compile Include="Models\Entity\PaymentMethodModel .cs" />
     <Compile Include="Models\Entity\OrderStatusModel.cs" />
@@ -245,6 +247,9 @@
     <Compile Include="Models\Entity\UserProfilesModel.cs" />
     <Compile Include="Models\Entity\SupplierModel.cs" />
     <Compile Include="Models\Entity\CategoryModel.cs" />
+    <Compile Include="Models\IMAGES_UPLOAD.cs">
+      <DependentUpon>TGMCO.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\NEWS.cs">
       <DependentUpon>TGMCO.tt</DependentUpon>
     </Compile>
@@ -1348,6 +1353,10 @@
     <Content Include="Views\Shared\_BoschLayout.cshtml" />
     <Content Include="Views\Category\Category_Bosch.cshtml" />
     <Content Include="Views\Product\Detail_Bosch.cshtml" />
+    <Content Include="Views\ManagingNews\News.cshtml" />
+    <Content Include="Views\Admin\ManagingNews.cshtml" />
+    <Content Include="Views\ManagingNews\Create.cshtml" />
+    <Content Include="Views\News\News_Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

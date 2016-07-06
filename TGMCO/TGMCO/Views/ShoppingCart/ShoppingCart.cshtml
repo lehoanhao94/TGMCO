@@ -153,13 +153,12 @@
                         </div>
                     </div>
                 </td>
-                <td><h5 class="text-center">@string.Format("{0:0,0}", @product.UNIT_PRICE)</h5></td>                       
+                <td><h5 class="text-center" id="unitPrice">@string.Format("{0:0,0}", @product.UNIT_PRICE)</h5></td>                       
                 <td data-th="Quantity">
-                    <input type="number" onchange="onChangeQuantity(this)" name="numberProduct" class="form-control text-center numberProduct" min="1" max="20" value="@product.QUANTITY">
+                    <input type="number" onchange="onChangeQuantity(this)" data-id="@product.PRODUCT_ID" data-price="@product.UNIT_PRICE" name="numberProduct" class="form-control text-center numberProduct" min="1" max="20" value="@product.QUANTITY">
                 </td>
-                <td><h5 class="text-center">@string.Format("{0:0,0}", @product.TOTAL_PRICE)</h5></td>
-                <td class="actions" data-th="">
-                    <button id="btnUpdate" onclick="UpdateProduct(this)" data-quantity="1" data-id="@product.PRODUCT_ID" class="btn btn-info btn-sm"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+                <td><h5 class="text-center" id="totalPrice_@product.PRODUCT_ID">@string.Format("{0:0,0}", @product.TOTAL_PRICE)</h5></td>
+                <td class="actions" data-th="">                  
                     <a data-ajax="true" href="/ShoppingCart/DeleteProductFromShoppingCart/@product.PRODUCT_ID" type="button" data-ajax-confirm="Bạn có muốn xóa sản phẩm @product.PRODUCT_CODE khỏi giỏ hàng không?" data-ajax-complete="location.reload()" data-ajax-method="Delete" class="btn btn-danger btn-sm"><i class="fa fa-times" aria-hidden="true"></i></a>
                 </td>           
         </tr>
@@ -175,7 +174,7 @@
                             <td colspan="1" class="hidden-xs"></td>
                             @if (Model.Count > 0)
                             {
-                                <td class="hidden-xs text-center" colspan="2"><h4><strong>Tổng tiền: @string.Format("{0:0,0}", @ViewBag.TotalPrice) VNĐ</strong></h4></td>
+                                <td class="hidden-xs text-center" colspan="2"><h4><strong>Tổng tiền:<span id="total">@string.Format("{0:0,0}", @ViewBag.TotalPrice)</span> VNĐ</strong></h4></td>
                                 <td><a href="@Url.Action("Order", "Order")" class="btn btn-success btn-block next-step">Mua hàng <i class="fa fa-angle-right"></i></a></td>
                             }
                             else
@@ -442,10 +441,30 @@
         var num = $(obj).val();
         if (num > 20) {
             alert('Bạn nhập số quá lớn, vui lòng nhập số lượng dưới 20.');
-            _num = 20;
+            num = 20;
+            $(obj).val(num);
         }
-        else {
-            _num = num;
-        }
+        _num = num;
+        var _total = num * $(obj).data("price");
+        var _id = $(obj).data("id");
+        Number.prototype.format = function (n, x) {
+            var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
+            return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
+        };
+
+        $("#totalPrice_" + _id).html(_total.format());
+
+        $.ajax({
+            url: '/ShoppingCart/UpdateProductFromShoppingCart?id=' + _id + '&quantity=' + _num,
+            dataType: "html",
+            type: "POST",
+            contentType: 'application/html; charset=utf-8',
+            success: function (data) {
+                $("#total").html(data);
+            },
+            error: function (xhr) {
+
+            }
+        });
     }
 </script>

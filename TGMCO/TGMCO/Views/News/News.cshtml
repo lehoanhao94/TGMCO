@@ -1,7 +1,16 @@
-﻿@{
+﻿@using TGMCO.Models;
+@using TGMCO.Models.Entity;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<NEWS>
+
+@{
     ViewBag.Title = "Tuấn Gia Minh | Tin tức sự kiện ";
     Layout = "~/Views/Shared/_PageLayout.cshtml";
     ViewBag.Description = "CÔNG TY TNHH TM TUẤN GIA MINH - Cung cấp thiết bị xây dựng, thiết bị công nghiệp, dụng cụ cầm tay, máy hàn, máy mài góc, máy cắt kim loại, dụng cụ đo chính xác, dụng cụ điện...";
+}
+
+@{
+    NewsModel m_NEWS_MODEL = new NewsModel();
 }
 
 @section LeftMenu{
@@ -9,21 +18,21 @@
 }
 <h1 style="text-align: center;color: white ; font-size: 20px; padding-top: 0; background-color: #30454A; margin-top: 0; margin-bottom: 5px; height: 35px; line-height: 1.6;">Tin tức sự kiện</h1>
 <div class="col-md-12">
-    <div class="row">
+    @foreach(var news in Model)
+    {
+     <div class="row">
         <div class="col-md-12 post">
             <div class="row">
                 <div class="col-md-12">
                     <h4>
-                        <strong><a href="#" class="post-title">Hướng dẫn sửa chữa máy cưa lọng Bosch</a></strong>
+                        <strong><a href="/News/News_Detail/?id=@news.NEWS_ID" class="post-title">@news.TITLE</a></strong>
                     </h4>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12 post-header-line">
-                    <span class="glyphicon glyphicon-user"></span>by <a href="#">Admin</a> | <span class="glyphicon glyphicon-calendar">
-                    </span>21-06-2016 | <span class="glyphicon glyphicon-comment"></span><a href="#">
-                        3 Comments
-                    </a> | <i class="icon-share"></i><a href="#">69 Shares</a> | <span class="glyphicon glyphicon-tags">
+                    <span class="glyphicon glyphicon-user"></span>by <a href="#">TGMCO</a> | <span class="glyphicon glyphicon-calendar"></span>@news.CREATED_DATE.ToString("dd-MM-yyyy") | 
+                    <span class="glyphicon glyphicon-comment"></span><div class="fb-like" data-href="@Url.Content("http://www.vietnamtool.vn/News/News_Detail/?id=" + @news.NEWS_ID)" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div> | <span class="glyphicon glyphicon-tags">
                     </span>Tags : <a href="#"><span class="label label-info">Bosch</span></a> <a href="#">
                         <span class="label label-info">Máy cưa</span>
                     </a> <a href="#">
@@ -36,197 +45,25 @@
             <div class="row post-content">
                 <div class="col-md-3">
                     <a href="#">
-                        <img src="http://www.acefixings.com/components/com_virtuemart/shop_image/product/964373556be02563577ef26a11eeea2a.jpg" alt="" class="img-responsive">
+                        <img src="@m_NEWS_MODEL.GetImage(news.NEWS_ID)" alt="@news.TITLE" title="@news.TITLE" class="img-responsive">
                     </a>
                 </div>
                 <div class="col-md-9">
                     <p>
-                        Việc sửa máy mài, máy đục, máy khoan,... hay bất kỳ loại máy móc, thiết bị cầm tay nào cũng đòi hỏi người thợ phải có được những kiến thức cơ bản nhất định, đặc biệt là về các bước thực hiện, thay chi tiết, vệ sinh, bảo dưỡng,... Dưới đây là quy trình tháo lắp máy cưa lọng GST 100 CE sẽ giúp người dùng dễ dàng hơn trong việc sửa chửa, thay mới cho máy.
+                       @news.CONTENT_2
                     </p>
                     <p>
-                        <a class="btn btn-read-more" href="#">Chi tiết</a>
+                        <a class="btn btn-read-more" href="/News/News_Detail/?id=@news.NEWS_ID">Chi tiết</a>
                     </p>
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="row">
-        <div class="col-md-12 post">
-            <div class="row">
-                <div class="col-md-12">
-                    <h4>
-                        <strong><a href="#" class="post-title">Hướng dẫn sửa chữa máy cưa lọng Bosch</a></strong>
-                    </h4>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12 post-header-line">
-                    <span class="glyphicon glyphicon-user"></span>by <a href="#">Admin</a> | <span class="glyphicon glyphicon-calendar">
-                    </span>21-06-2016 | <span class="glyphicon glyphicon-comment"></span><a href="#">
-                        3 Comments
-                    </a> | <i class="icon-share"></i><a href="#">69 Shares</a> | <span class="glyphicon glyphicon-tags">
-                    </span>Tags : <a href="#"><span class="label label-info">Bosch</span></a> <a href="#">
-                        <span class="label label-info">Máy cưa</span>
-                    </a> <a href="#">
-                        <span class="label label-info">
-                            Tools
-                        </span>
-                    </a> <a href="#"><span class="label label-info">TGM</span></a>
-                </div>
-            </div>
-            <div class="row post-content">
-                <div class="col-md-3">
-                    <a href="#">
-                        <img src="http://www.acefixings.com/components/com_virtuemart/shop_image/product/964373556be02563577ef26a11eeea2a.jpg" alt="" class="img-responsive">
-                    </a>
-                </div>
-                <div class="col-md-9">
-                    <p>
-                        Việc sửa máy mài, máy đục, máy khoan,... hay bất kỳ loại máy móc, thiết bị cầm tay nào cũng đòi hỏi người thợ phải có được những kiến thức cơ bản nhất định, đặc biệt là về các bước thực hiện, thay chi tiết, vệ sinh, bảo dưỡng,... Dưới đây là quy trình tháo lắp máy cưa lọng GST 100 CE sẽ giúp người dùng dễ dàng hơn trong việc sửa chửa, thay mới cho máy.
-                    </p>
-                    <p>
-                        <a class="btn btn-read-more" href="#">Chi tiết</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12 post">
-            <div class="row">
-                <div class="col-md-12">
-                    <h4>
-                        <strong><a href="#" class="post-title">Hướng dẫn sửa chữa máy cưa lọng Bosch</a></strong>
-                    </h4>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12 post-header-line">
-                    <span class="glyphicon glyphicon-user"></span>by <a href="#">Admin</a> | <span class="glyphicon glyphicon-calendar">
-                    </span>21-06-2016 | <span class="glyphicon glyphicon-comment"></span><a href="#">
-                        3 Comments
-                    </a> | <i class="icon-share"></i><a href="#">69 Shares</a> | <span class="glyphicon glyphicon-tags">
-                    </span>Tags : <a href="#"><span class="label label-info">Bosch</span></a> <a href="#">
-                        <span class="label label-info">Máy cưa</span>
-                    </a> <a href="#">
-                        <span class="label label-info">
-                            Tools
-                        </span>
-                    </a> <a href="#"><span class="label label-info">TGM</span></a>
-                </div>
-            </div>
-            <div class="row post-content">
-                <div class="col-md-3">
-                    <a href="#">
-                        <img src="http://www.acefixings.com/components/com_virtuemart/shop_image/product/964373556be02563577ef26a11eeea2a.jpg" alt="" class="img-responsive">
-                    </a>
-                </div>
-                <div class="col-md-9">
-                    <p>
-                        Việc sửa máy mài, máy đục, máy khoan,... hay bất kỳ loại máy móc, thiết bị cầm tay nào cũng đòi hỏi người thợ phải có được những kiến thức cơ bản nhất định, đặc biệt là về các bước thực hiện, thay chi tiết, vệ sinh, bảo dưỡng,... Dưới đây là quy trình tháo lắp máy cưa lọng GST 100 CE sẽ giúp người dùng dễ dàng hơn trong việc sửa chửa, thay mới cho máy.
-                    </p>
-                    <p>
-                        <a class="btn btn-read-more" href="#">Chi tiết</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12 post">
-            <div class="row">
-                <div class="col-md-12">
-                    <h4>
-                        <strong><a href="#" class="post-title">Hướng dẫn sửa chữa máy cưa lọng Bosch</a></strong>
-                    </h4>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12 post-header-line">
-                    <span class="glyphicon glyphicon-user"></span>by <a href="#">Admin</a> | <span class="glyphicon glyphicon-calendar">
-                    </span>21-06-2016 | <span class="glyphicon glyphicon-comment"></span><a href="#">
-                        3 Comments
-                    </a> | <i class="icon-share"></i><a href="#">69 Shares</a> | <span class="glyphicon glyphicon-tags">
-                    </span>Tags : <a href="#"><span class="label label-info">Bosch</span></a> <a href="#">
-                        <span class="label label-info">Máy cưa</span>
-                    </a> <a href="#">
-                        <span class="label label-info">
-                            Tools
-                        </span>
-                    </a> <a href="#"><span class="label label-info">TGM</span></a>
-                </div>
-            </div>
-            <div class="row post-content">
-                <div class="col-md-3">
-                    <a href="#">
-                        <img src="http://www.acefixings.com/components/com_virtuemart/shop_image/product/964373556be02563577ef26a11eeea2a.jpg" alt="" class="img-responsive">
-                    </a>
-                </div>
-                <div class="col-md-9">
-                    <p>
-                        Việc sửa máy mài, máy đục, máy khoan,... hay bất kỳ loại máy móc, thiết bị cầm tay nào cũng đòi hỏi người thợ phải có được những kiến thức cơ bản nhất định, đặc biệt là về các bước thực hiện, thay chi tiết, vệ sinh, bảo dưỡng,... Dưới đây là quy trình tháo lắp máy cưa lọng GST 100 CE sẽ giúp người dùng dễ dàng hơn trong việc sửa chửa, thay mới cho máy.
-                    </p>
-                    <p>
-                        <a class="btn btn-read-more" href="#">Chi tiết</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12 post">
-            <div class="row">
-                <div class="col-md-12">
-                    <h4>
-                        <strong><a href="#" class="post-title">Hướng dẫn sửa chữa máy cưa lọng Bosch</a></strong>
-                    </h4>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12 post-header-line">
-                    <span class="glyphicon glyphicon-user"></span>by <a href="#">Admin</a> | <span class="glyphicon glyphicon-calendar">
-                    </span>21-06-2016 | <span class="glyphicon glyphicon-comment"></span><a href="#">
-                        3 Comments
-                    </a> | <i class="icon-share"></i><a href="#">69 Shares</a> | <span class="glyphicon glyphicon-tags">
-                    </span>Tags : <a href="#"><span class="label label-info">Bosch</span></a> <a href="#">
-                        <span class="label label-info">Máy cưa</span>
-                    </a> <a href="#">
-                        <span class="label label-info">
-                            Tools
-                        </span>
-                    </a> <a href="#"><span class="label label-info">TGM</span></a>
-                </div>
-            </div>
-            <div class="row post-content">
-                <div class="col-md-3">
-                    <a href="#">
-                        <img src="http://www.acefixings.com/components/com_virtuemart/shop_image/product/964373556be02563577ef26a11eeea2a.jpg" alt="" class="img-responsive">
-                    </a>
-                </div>
-                <div class="col-md-9">
-                    <p>
-                        Việc sửa máy mài, máy đục, máy khoan,... hay bất kỳ loại máy móc, thiết bị cầm tay nào cũng đòi hỏi người thợ phải có được những kiến thức cơ bản nhất định, đặc biệt là về các bước thực hiện, thay chi tiết, vệ sinh, bảo dưỡng,... Dưới đây là quy trình tháo lắp máy cưa lọng GST 100 CE sẽ giúp người dùng dễ dàng hơn trong việc sửa chửa, thay mới cho máy.
-                    </p>
-                    <p>
-                        <a class="btn btn-read-more" href="#">Chi tiết</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
+    }
 </div>
 <div style="text-align: center;">
-    <ul class="pagination">
-        <li class="active"><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-    </ul>
+    @*Tạo link liên kết các trang*@
+    <div class="pagination">@Html.PagedListPager(Model, page => Url.Action("ManagingNews", "Admin", new { page = page }))</div>
 </div>
 
 
@@ -294,3 +131,13 @@
     }
 
 }
+
+<div id="fb-root"></div>
+<script>
+(function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.6&appId=1454298961531347";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>

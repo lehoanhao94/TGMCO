@@ -86,6 +86,7 @@
     <Property Name="IMAGE_2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="IMAGE_3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="CREATED_DATE" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="SUPPLIER_ID" Type="Int32" />
   </EntityType>
   <EntityType Name="NEWS_PROMOTION">
     <Key>
@@ -276,6 +277,7 @@
     <EntitySet Name="ADS" EntityType="TGMCOModel.ADS" />
     <EntitySet Name="SLIDERS" EntityType="TGMCOModel.SLIDER" />
     <EntitySet Name="PAYMENT_METHOD" EntityType="TGMCOModel.PAYMENT_METHOD" />
+    <EntitySet Name="IMAGES_UPLOAD" EntityType="TGMCOModel.IMAGES_UPLOAD" />
   </EntityContainer>
   <ComplexType Name="sp_helpdiagramdefinition_Result">
     <Property Type="Int32" Name="version" Nullable="true" />
@@ -348,5 +350,14 @@
     </Key>
     <Property Name="PAYMENT_METHOD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="DESCRIPTION" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="IMAGES_UPLOAD">
+    <Key>
+      <PropertyRef Name="IMAGES_ID" />
+    </Key>
+    <Property Name="IMAGES_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NAME" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="URL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NEWS_ID" Type="Int32" />
   </EntityType>
 </Schema>

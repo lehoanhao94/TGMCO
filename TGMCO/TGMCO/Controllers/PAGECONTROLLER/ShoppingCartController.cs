@@ -117,18 +117,19 @@ namespace TGMCO.Controllers.PAGECONTROLLER
             }
         }
         [HttpPost]
-        public ActionResult UpdateProductFromShoppingCart(int id, int quantity)
+        public string UpdateProductFromShoppingCart(int id, int quantity)
         {
             try
             {
                 List<ProductCart> _lstProductCart = GetShoppingCart();
                 _lstProductCart.Find(n => n.PRODUCT_ID == id).QUANTITY = quantity;
-                
-                return RedirectToAction("ShoppingCart", "ShoppingCart");
+                Session["TOTAL_PRICE"] = GetTotalPrice();
+                string _Total = string.Format("{0:0,0}", GetTotalPrice());
+                return _Total;
             }
             catch (Exception ex)
             {
-                return RedirectToAction("Http404", "Error"); // 404
+                return "0"; // 404
             }
         }
 

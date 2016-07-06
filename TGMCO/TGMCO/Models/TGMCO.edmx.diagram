@@ -27,6 +27,7 @@
         <EntityTypeShape EntityType="TGMCOModel.ADS" Width="1.5" PointX="9.375" PointY="11.75" />
         <EntityTypeShape EntityType="TGMCOModel.SLIDER" Width="1.5" PointX="11.375" PointY="11.75" />
         <EntityTypeShape EntityType="TGMCOModel.PAYMENT_METHOD" Width="1.5" PointX="13.375" PointY="0.75" />
+        <EntityTypeShape EntityType="TGMCOModel.IMAGES_UPLOAD" Width="1.5" PointX="13.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

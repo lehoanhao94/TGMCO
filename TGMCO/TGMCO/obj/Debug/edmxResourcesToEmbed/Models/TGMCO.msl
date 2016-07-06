@@ -83,6 +83,7 @@
     <EntitySetMapping Name="NEWS">
       <EntityTypeMapping TypeName="TGMCOModel.NEWS">
         <MappingFragment StoreEntitySet="NEWS">
+          <ScalarProperty Name="SUPPLIER_ID" ColumnName="SUPPLIER_ID" />
           <ScalarProperty Name="NEWS_ID" ColumnName="NEWS_ID" />
           <ScalarProperty Name="TITLE" ColumnName="TITLE" />
           <ScalarProperty Name="CONTENT_1" ColumnName="CONTENT_1" />
@@ -304,6 +305,16 @@
         <MappingFragment StoreEntitySet="PAYMENT_METHOD">
           <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
           <ScalarProperty Name="PAYMENT_METHOD_ID" ColumnName="PAYMENT_METHOD_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IMAGES_UPLOAD">
+      <EntityTypeMapping TypeName="TGMCOModel.IMAGES_UPLOAD">
+        <MappingFragment StoreEntitySet="IMAGES_UPLOAD">
+          <ScalarProperty Name="NEWS_ID" ColumnName="NEWS_ID" />
+          <ScalarProperty Name="URL" ColumnName="URL" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="IMAGES_ID" ColumnName="IMAGES_ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

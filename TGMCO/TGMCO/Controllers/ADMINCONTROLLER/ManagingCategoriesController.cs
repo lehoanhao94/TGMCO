@@ -34,7 +34,9 @@ namespace TGMCO.Controllers.ADMINCONTROLLER
             try
             {
                 string _CategoryName = _frmCollect.Get("CategoryrName").ToString();
-                string _Type = _frmCollect.Get("Type").ToString();
+                string _Type = "";
+                if(_frmCollect.Get("Type") != null)
+                    _Type = _frmCollect.Get("Type").ToString();
                 if (ModelState.IsValid)
                 {
                     if (db.CATEGORIES.Where(n => n.CATEGORY_NAME == _CategoryName).Count() == 0)
