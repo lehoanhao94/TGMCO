@@ -22,7 +22,7 @@ namespace TGMCO.Controllers.PAGECONTROLLER
                 //Số trang
                 int pageNumber = (page ?? 1);
                 Session["SUPPLIER"] = "DEFAULT";
-                List<NEWS> _lstNEWS = db.NEWS.OrderByDescending(n => n.NEWS_ID).ToList();
+                List<NEWS> _lstNEWS = db.NEWS.Where(n => n.IS_PROMOTION == false).OrderByDescending(n => n.NEWS_ID).ToList();
                 return View(_lstNEWS.ToPagedList(pageNumber, pageSize));
             }
             catch (Exception ex)
@@ -45,12 +45,17 @@ namespace TGMCO.Controllers.PAGECONTROLLER
             }
         }
 
-        public ActionResult NewsPromotion()
+        public ActionResult News_Promotion(int? page)
         {
             try
             {
+                //Số bài trên trang
+                int pageSize = 5;
+                //Số trang
+                int pageNumber = (page ?? 1);
                 Session["SUPPLIER"] = "DEFAULT";
-                return View();
+                List<NEWS> _lstNEWS = db.NEWS.Where(n => n.IS_PROMOTION == true).OrderByDescending(n => n.NEWS_ID).ToList();
+                return View(_lstNEWS.ToPagedList(pageNumber, pageSize));
             }
             catch (Exception ex)
             {

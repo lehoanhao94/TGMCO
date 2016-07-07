@@ -35,7 +35,6 @@ namespace TGMCO.Models
         public DbSet<CATEGORIES_EXTRA> CATEGORIES_EXTRA { get; set; }
         public DbSet<EMPLOYEE> EMPLOYEES { get; set; }
         public DbSet<NEWS> NEWS { get; set; }
-        public DbSet<NEWS_PROMOTION> NEWS_PROMOTION { get; set; }
         public DbSet<ORDER_DETAILS> ORDER_DETAILS { get; set; }
         public DbSet<ORDER_STATUS> ORDER_STATUS { get; set; }
         public DbSet<ORDER> ORDERS { get; set; }

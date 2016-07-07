@@ -4,6 +4,7 @@
 @{
     CategoryModel m_CATEGORY_MODEL = new CategoryModel();
     List<CATEGORIES_BY_SUPPLIER> m_lstCategory = m_CATEGORY_MODEL.GetListCategoryBySupplier(23);
+    List<CATEGORIES_BY_SUPPLIER> m_lstAccessory = m_CATEGORY_MODEL.GetListAccessoryBySupplier(23);    
 }
 
 <!DOCTYPE html>
@@ -99,14 +100,22 @@
                     <li class=""><a href="/Home/bosch" style="font-size: 22px;"><i class="fa fa-home" aria-hidden="true"></i></a></li>
                     <li class="show-on-hover">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sản phẩm <span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu" style="width: 400px;">    
+                        <ul class="dropdown-menu" role="menu" style="width: 300px;">    
                             @foreach(var category in m_lstCategory)
                             {
                             <li><a href="@Url.Action("Category_Bosch", "Category", new { cate_id = category.CATEGORY_ID })"><i class="fa fa-chevron-right" aria-hidden="true"></i> @category.CATEGORY_NAME</a></li>
                             }                       
                         </ul>
                     </li>
-                    <li><a href="#">Phụ kiện</a></li>
+                    <li class="show-on-hover">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Phụ kiện <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu" style="width: 300px;">
+                            @foreach (var category in m_lstAccessory)
+                            {
+                                <li><a href="@Url.Action("Accessory_Bosch", "Category", new { cate_id = category.CATEGORY_ID })"><i class="fa fa-chevron-right" aria-hidden="true"></i> @category.CATEGORY_NAME</a></li>
+                            }
+                        </ul>
+                    </li>
                     <li><a href="#">Tin tức & khuyến mãi</a></li>
                     <li><a href="#">Dịch vụ</a></li>
                 </ul>
@@ -244,7 +253,7 @@
 
                 $('.scroll-top-wrapper').on('click', scrollToTop);
             });
-
+            
             function scrollToTop() {
                 verticalOffset = typeof (verticalOffset) != 'undefined' ? verticalOffset : 0;
                 element = $('body');
@@ -258,9 +267,11 @@
     </script>
     <script>
         function AddProduct(obj) {
+            var num = 1;
             var id = $(obj).data("id");
             var code = $(obj).data("code");
-            var num = $('.numProduct').val();
+            num = $('.numProduct').val();
+            if (num == null) num = 1;
             if (num > 20) {
                 alert('Bạn nhập số quá lớn, vui lòng nhập số lượng dưới 20.')
             }

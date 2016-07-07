@@ -253,9 +253,6 @@
     <Compile Include="Models\NEWS.cs">
       <DependentUpon>TGMCO.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\NEWS_PROMOTION.cs">
-      <DependentUpon>TGMCO.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\PAYMENT_METHOD.cs">
       <DependentUpon>TGMCO.tt</DependentUpon>
     </Compile>
@@ -1338,7 +1335,6 @@
     <Content Include="Views\Home\Business.cshtml" />
     <Content Include="Views\Home\OrganizationalChart.cshtml" />
     <Content Include="Views\News\News.cshtml" />
-    <Content Include="Views\News\NewsPromotion.cshtml" />
     <Content Include="Views\Home\GuideLogin.cshtml" />
     <Content Include="Views\Home\GuideShoping.cshtml" />
     <Content Include="Views\Home\GuideResetPassword.cshtml" />
@@ -1357,6 +1353,10 @@
     <Content Include="Views\Admin\ManagingNews.cshtml" />
     <Content Include="Views\ManagingNews\Create.cshtml" />
     <Content Include="Views\News\News_Detail.cshtml" />
+    <Content Include="Views\Admin\ManagingNewsPromotion.cshtml" />
+    <Content Include="Views\ManagingNews\Create_Promotion.cshtml" />
+    <Content Include="Views\News\News_Promotion.cshtml" />
+    <Content Include="Views\Category\Accessory_Bosch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1364,6 +1364,7 @@
     <Folder Include="FilesUpload\PRODUCTS\" />
     <Folder Include="Images\ADMIN\CATEGORIES\" />
     <Folder Include="Images\AVATAR\" />
+    <Folder Include="Images\NEWS\" />
     <Folder Include="Views\ManagingSuppliers\" />
   </ItemGroup>
   <ItemGroup>

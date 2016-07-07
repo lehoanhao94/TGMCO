@@ -342,7 +342,27 @@ namespace TGMCO.Controllers
                 }
                 else
                 {
-                    List<NEWS> _lstNEWS = db.NEWS.OrderByDescending(n=>n.NEWS_ID).ToList();
+                    List<NEWS> _lstNEWS = db.NEWS.Where(n => n.IS_PROMOTION == false).OrderByDescending(n=>n.NEWS_ID).ToList();
+                    return View(_lstNEWS);
+                }
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Http404", "Error"); // 404
+            }
+        }
+
+        public ActionResult ManagingNewsPromotion()
+        {
+            try
+            {
+                if (Session["SS_USER_ADMIN"] == null)
+                {
+                    return RedirectToAction("Login", "Admin");
+                }
+                else
+                {
+                    List<NEWS> _lstNEWS = db.NEWS.Where(n => n.IS_PROMOTION == true).OrderByDescending(n => n.NEWS_ID).ToList();
                     return View(_lstNEWS);
                 }
             }

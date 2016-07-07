@@ -83,6 +83,7 @@
     <EntitySetMapping Name="NEWS">
       <EntityTypeMapping TypeName="TGMCOModel.NEWS">
         <MappingFragment StoreEntitySet="NEWS">
+          <ScalarProperty Name="IS_PROMOTION" ColumnName="IS_PROMOTION" />
           <ScalarProperty Name="SUPPLIER_ID" ColumnName="SUPPLIER_ID" />
           <ScalarProperty Name="NEWS_ID" ColumnName="NEWS_ID" />
           <ScalarProperty Name="TITLE" ColumnName="TITLE" />
@@ -93,20 +94,6 @@
           <ScalarProperty Name="IMAGE_2" ColumnName="IMAGE_2" />
           <ScalarProperty Name="IMAGE_3" ColumnName="IMAGE_3" />
           <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="NEWS_PROMOTION">
-      <EntityTypeMapping TypeName="TGMCOModel.NEWS_PROMOTION">
-        <MappingFragment StoreEntitySet="NEWS_PROMOTION">
-          <ScalarProperty Name="NEWS_PROMOTION_ID" ColumnName="NEWS_PROMOTION_ID" />
-          <ScalarProperty Name="TITLE" ColumnName="TITLE" />
-          <ScalarProperty Name="BEGIN_DATE" ColumnName="BEGIN_DATE" />
-          <ScalarProperty Name="END_DATE" ColumnName="END_DATE" />
-          <ScalarProperty Name="CONTENT" ColumnName="CONTENT" />
-          <ScalarProperty Name="IMAGE" ColumnName="IMAGE" />
-          <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
-          <ScalarProperty Name="CREATED_USER" ColumnName="CREATED_USER" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

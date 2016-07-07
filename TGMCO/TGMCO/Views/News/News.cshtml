@@ -17,7 +17,7 @@
     @Html.Partial("~/Views/Partial/LeftMenu.cshtml")
 }
 <h1 style="text-align: center;color: white ; font-size: 20px; padding-top: 0; background-color: #30454A; margin-top: 0; margin-bottom: 5px; height: 35px; line-height: 1.6;">Tin tức sự kiện</h1>
-<div class="col-md-12">
+<div class="col-md-12" style="background: #fff;">
     @foreach(var news in Model)
     {
      <div class="row">
@@ -31,7 +31,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12 post-header-line">
-                    <span class="glyphicon glyphicon-user"></span>by <a href="#">TGMCO</a> | <span class="glyphicon glyphicon-calendar"></span>@news.CREATED_DATE.ToString("dd-MM-yyyy") | 
+                    <span class="glyphicon glyphicon-user"></span>by <a href="#">TGMCO</a> | <span class="glyphicon glyphicon-calendar"></span>@news.CREATED_DATE | 
                     <span class="glyphicon glyphicon-comment"></span><div class="fb-like" data-href="@Url.Content("http://www.vietnamtool.vn/News/News_Detail/?id=" + @news.NEWS_ID)" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div> | <span class="glyphicon glyphicon-tags">
                     </span>Tags : <a href="#"><span class="label label-info">Bosch</span></a> <a href="#">
                         <span class="label label-info">Máy cưa</span>
@@ -53,7 +53,7 @@
                        @news.CONTENT_2
                     </p>
                     <p>
-                        <a class="btn btn-read-more" href="/News/News_Detail/?id=@news.NEWS_ID">Chi tiết</a>
+                        <a class="btn btn-read-more" href="/News/News_Detail/?id=@news.NEWS_ID">Chi tiết</a> 
                     </p>
                 </div>
             </div>
@@ -63,7 +63,7 @@
 </div>
 <div style="text-align: center;">
     @*Tạo link liên kết các trang*@
-    <div class="pagination">@Html.PagedListPager(Model, page => Url.Action("ManagingNews", "Admin", new { page = page }))</div>
+    <div class="pagination">@Html.PagedListPager(Model, page => Url.Action("News", "News", new { page = page }))</div>
 </div>
 
 

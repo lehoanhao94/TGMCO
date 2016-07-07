@@ -90,21 +90,9 @@
           <Property Name="IMAGE_1" Type="nvarchar" MaxLength="50" />
           <Property Name="IMAGE_2" Type="nvarchar" MaxLength="50" />
           <Property Name="IMAGE_3" Type="nvarchar" MaxLength="50" />
-          <Property Name="CREATED_DATE" Type="datetime" Nullable="false" />
+          <Property Name="CREATED_DATE" Type="datetime" />
           <Property Name="SUPPLIER_ID" Type="int" />
-        </EntityType>
-        <EntityType Name="NEWS_PROMOTION">
-          <Key>
-            <PropertyRef Name="NEWS_PROMOTION_ID" />
-          </Key>
-          <Property Name="NEWS_PROMOTION_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TITLE" Type="nvarchar" MaxLength="150" Nullable="false" />
-          <Property Name="BEGIN_DATE" Type="datetime" />
-          <Property Name="END_DATE" Type="datetime" />
-          <Property Name="CONTENT" Type="nvarchar(max)" />
-          <Property Name="IMAGE" Type="nvarchar" MaxLength="50" />
-          <Property Name="CREATED_DATE" Type="datetime" Nullable="false" />
-          <Property Name="CREATED_USER" Type="int" Nullable="false" />
+          <Property Name="IS_PROMOTION" Type="bit" />
         </EntityType>
         <EntityType Name="ORDER_DETAILS">
           <Key>
@@ -307,7 +295,6 @@
           <EntitySet Name="CATEGORIES_EXTRA" EntityType="Self.CATEGORIES_EXTRA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EMPLOYEES" EntityType="Self.EMPLOYEES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NEWS" EntityType="Self.NEWS" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="NEWS_PROMOTION" EntityType="Self.NEWS_PROMOTION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ORDER_DETAILS" EntityType="Self.ORDER_DETAILS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ORDER_STATUS" EntityType="Self.ORDER_STATUS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ORDERS" EntityType="Self.ORDERS" Schema="dbo" store:Type="Tables" />
@@ -413,21 +400,9 @@
           <Property Name="IMAGE_1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IMAGE_2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IMAGE_3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CREATED_DATE" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
           <Property Name="SUPPLIER_ID" Type="Int32" />
-        </EntityType>
-        <EntityType Name="NEWS_PROMOTION">
-          <Key>
-            <PropertyRef Name="NEWS_PROMOTION_ID" />
-          </Key>
-          <Property Name="NEWS_PROMOTION_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TITLE" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="BEGIN_DATE" Type="DateTime" Precision="3" />
-          <Property Name="END_DATE" Type="DateTime" Precision="3" />
-          <Property Name="CONTENT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="IMAGE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CREATED_DATE" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CREATED_USER" Type="Int32" Nullable="false" />
+          <Property Name="IS_PROMOTION" Type="Boolean" />
         </EntityType>
         <EntityType Name="ORDER_DETAILS">
           <Key>
@@ -560,7 +535,6 @@
           <EntitySet Name="CATEGORIES_EXTRA" EntityType="Self.CATEGORIES_EXTRA" />
           <EntitySet Name="EMPLOYEES" EntityType="Self.EMPLOYEE" />
           <EntitySet Name="NEWS" EntityType="Self.NEWS" />
-          <EntitySet Name="NEWS_PROMOTION" EntityType="Self.NEWS_PROMOTION" />
           <EntitySet Name="ORDER_DETAILS" EntityType="Self.ORDER_DETAILS" />
           <EntitySet Name="ORDER_STATUS" EntityType="Self.ORDER_STATUS" />
           <EntitySet Name="ORDERS" EntityType="Self.ORDER" />
@@ -776,6 +750,7 @@
           <EntitySetMapping Name="NEWS">
             <EntityTypeMapping TypeName="TGMCOModel.NEWS">
               <MappingFragment StoreEntitySet="NEWS">
+                <ScalarProperty Name="IS_PROMOTION" ColumnName="IS_PROMOTION" />
                 <ScalarProperty Name="SUPPLIER_ID" ColumnName="SUPPLIER_ID" />
                 <ScalarProperty Name="NEWS_ID" ColumnName="NEWS_ID" />
                 <ScalarProperty Name="TITLE" ColumnName="TITLE" />
@@ -786,20 +761,6 @@
                 <ScalarProperty Name="IMAGE_2" ColumnName="IMAGE_2" />
                 <ScalarProperty Name="IMAGE_3" ColumnName="IMAGE_3" />
                 <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="NEWS_PROMOTION">
-            <EntityTypeMapping TypeName="TGMCOModel.NEWS_PROMOTION">
-              <MappingFragment StoreEntitySet="NEWS_PROMOTION">
-                <ScalarProperty Name="NEWS_PROMOTION_ID" ColumnName="NEWS_PROMOTION_ID" />
-                <ScalarProperty Name="TITLE" ColumnName="TITLE" />
-                <ScalarProperty Name="BEGIN_DATE" ColumnName="BEGIN_DATE" />
-                <ScalarProperty Name="END_DATE" ColumnName="END_DATE" />
-                <ScalarProperty Name="CONTENT" ColumnName="CONTENT" />
-                <ScalarProperty Name="IMAGE" ColumnName="IMAGE" />
-                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
-                <ScalarProperty Name="CREATED_USER" ColumnName="CREATED_USER" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

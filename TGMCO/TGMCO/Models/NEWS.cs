@@ -22,7 +22,8 @@ namespace TGMCO.Models
         public string IMAGE_1 { get; set; }
         public string IMAGE_2 { get; set; }
         public string IMAGE_3 { get; set; }
-        public System.DateTime CREATED_DATE { get; set; }
+        public Nullable<System.DateTime> CREATED_DATE { get; set; }
         public Nullable<int> SUPPLIER_ID { get; set; }
+        public Nullable<bool> IS_PROMOTION { get; set; }
     }
 }

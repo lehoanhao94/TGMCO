@@ -28,6 +28,7 @@ namespace TGMCO.Controllers.ADMINCONTROLLER
                 _NEWS.CONTENT_2 = Description;
                 _NEWS.CREATED_DATE = DateTime.Now;
                 _NEWS.SUPPLIER_ID = Supplier_id;
+                _NEWS.IS_PROMOTION = false;
                 db.NEWS.Add(_NEWS);
                 db.SaveChanges();
 
@@ -60,6 +61,54 @@ namespace TGMCO.Controllers.ADMINCONTROLLER
             }            
         }
 
+        public ActionResult Create_Promotion()
+        {
+            try
+            {
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Http404", "Error"); // 404
+            }
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult Create_Promotion(FormCollection f)
+        {
+            try
+            {
+                string Content1 = f.Get("Content").ToString();
+                string Title = f.Get("Title").ToString();
+                string Description = f.Get("Description").ToString();
+                int Supplier_id = int.Parse(f.Get("ListSupplier").ToString());
+                NEWS _NEWS = new NEWS();
+                _NEWS.TITLE = Title;
+                _NEWS.CONTENT_1 = Content1;
+                _NEWS.CONTENT_2 = Description;
+                _NEWS.CREATED_DATE = DateTime.Now;
+                _NEWS.SUPPLIER_ID = Supplier_id;
+                _NEWS.IS_PROMOTION = true;
+                db.NEWS.Add(_NEWS);
+                db.SaveChanges();
+
+                List<IMAGES_UPLOAD> _lstIMAGE_UPLOAD = db.IMAGES_UPLOAD.Where(n => n.NEWS_ID == 0).ToList();
+                foreach (var image in _lstIMAGE_UPLOAD)
+                {
+                    image.NEWS_ID = _NEWS.NEWS_ID;
+                }
+                db.SaveChanges();
+                TempData["SuccessCreate"] = "Thêm thành công bài viết số " + _NEWS.NEWS_ID;
+                return RedirectToAction("ManagingNews", "Admin");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+
+        }
+
         public string UploadImage(string id)
         {
             try
@@ -73,17 +122,18 @@ namespace TGMCO.Controllers.ADMINCONTROLLER
                         // get a stream
                         var stream = fileContent.InputStream;
                         // and optionally write the file to disk
-                        var fileName = Path.GetFileName(file) + ".jpg";
-                        var path = Path.Combine(Server.MapPath("~/Images/PRODUCTS/" + _fileNameRandom + fileName));
+                        var fileName = _fileNameRandom + Path.GetFileName(file) + ".jpg";
+                        var path = Path.Combine(Server.MapPath("~/Images/NEWS/" + fileName));
+                        var URL = "http://www.vietnamtool.vn/Images/NEWS" + fileName;
                         fileContent.SaveAs(path);
                         IMAGES_UPLOAD _IMAGE_UPLOAD = new IMAGES_UPLOAD();
                         _IMAGE_UPLOAD.NEWS_ID = 0;
                         _IMAGE_UPLOAD.NAME = _fileNameRandom + fileName;
-                        _IMAGE_UPLOAD.URL = path;
+                        _IMAGE_UPLOAD.URL = URL;
                         db.IMAGES_UPLOAD.Add(_IMAGE_UPLOAD);
                         db.SaveChanges();
 
-                        return path;
+                        return URL;
                     }                  
                 }
                 return string.Empty; 
