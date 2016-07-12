@@ -193,19 +193,6 @@ namespace TGMCO.Controllers.PAGECONTROLLER
 
         }
 
-        public ActionResult CheckBill()
-        {
-            try
-            {
-                Session["SUPPLIER"] = "DEFAULT";
-                return View();
-            }
-            catch (Exception ex)
-            {
-                return RedirectToAction("Http404", "Error"); // 404
-            }
-        }
-
         [HttpGet]
         public ActionResult CheckBill(string Order_Code)
         {
@@ -219,7 +206,7 @@ namespace TGMCO.Controllers.PAGECONTROLLER
                     if(_ORDER != null)
                     {
                         ViewBag.ORDER_DETAILS = db.ORDER_DETAILS.Where(n => n.ORDER_ID == _ORDER.ORDER_ID).ToList();
-                        if (db.ORDER_DETAILS.Where(n => n.ORDER_ID == _ORDER.ORDER_ID).ToList().Count > 0)
+                        if (db.ORDER_DETAILS.Where(n => n.ORDER_ID == _ORDER.ORDER_ID).ToList().Count > 0 && _ORDER.ORDER_STATUS_ID != 4)
                         {
                             ViewBag.SearchResult = 1;
                             return View(_ORDER);
@@ -230,10 +217,11 @@ namespace TGMCO.Controllers.PAGECONTROLLER
                             return View(_ORDER);
                         }
                     }
+                    
                     ViewBag.SearchResult = 0;                 
                 }
                 
-                return View();
+                return View(new ORDER());
             }
             catch (Exception ex)
             {
@@ -242,17 +230,56 @@ namespace TGMCO.Controllers.PAGECONTROLLER
         }
 
         [HttpDelete]
-        public ActionResult DeleteProductFromOrder(int order_id, int product_id)
+        public int DeleteProductFromOrder(int order_id, int product_id)
         {
             try
             {
                 ORDER_DETAILS ORDER_DETAILS = db.ORDER_DETAILS.Where(n => n.ORDER_ID == order_id && n.PRODUCT_ID == product_id).SingleOrDefault();
-                ORDER ORDER = db.ORDERS.Find(order_id);
+                ORDER ORDER = db.ORDERS.Find(order_id);                
                 ORDER.SUBTOTAL = ORDER.SUBTOTAL - ORDER_DETAILS.EXTENDED_PRICE;
                 db.ORDER_DETAILS.Remove(ORDER_DETAILS);
                 db.SaveChanges();
+                int numProducts = db.ORDER_DETAILS.Where(n => n.ORDER_ID == order_id).ToList().Count;
+                if (numProducts == 0)
+                    ORDER.ORDER_STATUS_ID = 4;
+                db.SaveChanges();
+                return numProducts;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+        }
+        [HttpPost]
+        public decimal UpdateQuantity(int id, int id_product, int quantity)
+        {
+            try
+            {
+                ORDER_DETAILS _ORDER_DETAIL = db.ORDER_DETAILS.Where(n => n.ORDER_ID == id && n.PRODUCT_ID == id_product).SingleOrDefault();
+                ORDER _ORDER = db.ORDERS.Find(id);
+                _ORDER_DETAIL.QUANTITY = quantity;
+                decimal _Total_Before = _ORDER_DETAIL.EXTENDED_PRICE;
+                _ORDER_DETAIL.EXTENDED_PRICE = _ORDER_DETAIL.UNIT_PRICE * quantity;
+                _ORDER.SUBTOTAL += (_ORDER_DETAIL.EXTENDED_PRICE - _Total_Before);
+                db.SaveChanges();
 
-                return RedirectToAction("CheckBill", "ShoppingCart", new { Order_Code = ORDER.ORDER_CODE });
+                return _ORDER.SUBTOTAL;
+            }
+            catch (Exception ex)
+            {
+                return 0; // 404
+            }
+        }
+        [HttpDelete]
+        public ActionResult DeleteOrder(int id)
+        {
+            try
+            {
+                ORDER _ORDER = db.ORDERS.Find(id);
+                _ORDER.ORDER_STATUS_ID = 4;
+                _ORDER.NOTE += "-Người dùng hủy đơn hàng-";
+                db.SaveChanges();
+                return RedirectToAction("CheckBill", "ShoppingCart", new { Order_Code = _ORDER.ORDER_CODE });
             }
             catch (Exception ex)
             {
@@ -260,19 +287,24 @@ namespace TGMCO.Controllers.PAGECONTROLLER
             }
         }
         [HttpPost]
-        public ActionResult UpdateOrder(int id, int quantity)
+        public ActionResult CheckBill(int id, FormCollection f)
         {
             try
             {
-
-                return RedirectToAction("ShoppingCart", "ShoppingCart");
+                ORDER _ORDER = db.ORDERS.Find(id);
+                _ORDER.SHIP_NAME = f.Get("txtName").ToString();
+                _ORDER.SHIP_PHONE = f.Get("txtMobile").ToString();
+                _ORDER.SHIP_EMAIL = f.Get("txtEmail").ToString();
+                _ORDER.SHIP_ADDRESS = f.Get("txtAddress").ToString();
+                _ORDER.NOTE = f.Get("txtNote").ToString();
+                db.SaveChanges();
+                return RedirectToAction("CheckBill", "Order", new { Order_Code = _ORDER .ORDER_CODE});
             }
             catch (Exception ex)
             {
                 return RedirectToAction("Http404", "Error"); // 404
             }
         }
-
         [HttpPost]
         public void UpdateStatusOrder(int id, int status_id)
         {

@@ -62,5 +62,61 @@ namespace TGMCO.Controllers.PAGECONTROLLER
                 return RedirectToAction("Http404", "Error"); // 404
             }
         }
+
+        public ActionResult News_Bosch(int? page)
+        {
+            try
+            {
+                //Số bài trên trang
+                int pageSize = 5;
+                //Số trang
+                int pageNumber = (page ?? 1);
+                SUPPLIER _Supplier = db.SUPPLIERS.Where(n => n.SUPPLIER_NAME.Contains("BOSCH")).Single();
+                Session["SUPPLIER"] = "BOSCH";
+                Session["SUPPLIER_MODEL"] = _Supplier;
+                List<NEWS> _lstNEWS = db.NEWS.Where(n => n.IS_PROMOTION == false && n.SUPPLIER_ID == 23).OrderByDescending(n => n.NEWS_ID).ToList();
+                return View(_lstNEWS.ToPagedList(pageNumber, pageSize));
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Http404", "Error"); // 404
+            }
+        }
+
+        public ActionResult News_Bosch_Promotion(int? page)
+        {
+            try
+            {
+                //Số bài trên trang
+                int pageSize = 5;
+                //Số trang
+                int pageNumber = (page ?? 1);
+                SUPPLIER _Supplier = db.SUPPLIERS.Where(n => n.SUPPLIER_NAME.Contains("BOSCH")).Single();
+                Session["SUPPLIER"] = "BOSCH";
+                Session["SUPPLIER_MODEL"] = _Supplier;
+                List<NEWS> _lstNEWS = db.NEWS.Where(n => n.IS_PROMOTION == true && n.SUPPLIER_ID == 23).OrderByDescending(n => n.NEWS_ID).ToList();
+                return View(_lstNEWS.ToPagedList(pageNumber, pageSize));
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Http404", "Error"); // 404
+            }
+        }
+
+        public ActionResult News_Bosch_Detail(int id)
+        {
+            try
+            {
+                SUPPLIER _Supplier = db.SUPPLIERS.Where(n => n.SUPPLIER_NAME.Contains("BOSCH")).Single();
+                Session["SUPPLIER"] = "BOSCH";
+                Session["SUPPLIER_MODEL"] = _Supplier;
+                NEWS _NEWS = db.NEWS.Find(id);
+                return View(_NEWS);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Http404", "Error"); // 404
+            }
+        }
     }
 }

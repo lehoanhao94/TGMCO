@@ -99,7 +99,7 @@
                 }
                     }
                     <td class="btn-group">
-                        <button id="btnUpdate" type="button" class="btn btn-primary"><i class="fa fa-pencil-square-o fa-2" aria-hidden="true"></i></button>
+                        <a id="btnUpdate" data-toggle="modal" onclick="ShowName(@category.CATEGORY_ID)" href="#myModal" type="button" class="btn btn-primary"><i class="fa fa-pencil-square-o fa-2" aria-hidden="true"></i></a>
                         <a data-ajax="true" href="/ManagingCategories/Delete/@category.CATEGORY_ID" type="button" data-ajax-confirm="Bạn có muốn xóa danh mục này không?" data-ajax-complete="$('#row_@category.CATEGORY_ID').remove()" data-ajax-method="Delete" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
                     </td>
                 </tr>
@@ -107,5 +107,54 @@
         </tbody>
     </table>
 </div>
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Cập nhật danh mục phụ kiện</h4>
+            </div>
+            <form role="form" action="/ManagingCategories/Update" method="post">
+                <div class="modal-body">
+                    <input class="form-control" name="ID" id="txtID" style="display: none" value="" />
+                    <input class="form-control" name="NAME" required id="txtName" value="" />
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary pull-left">Cập nhật</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function ShowName(id) {
+        $.ajax({
+            url: '/ManagingCategories/Update?id=' + id,
+            dataType: "html",
+            type: "GET",
+            contentType: 'application/html; charset=utf-8',
+            success: function (data) {
+                $("#txtName").val(data);
+                $("#txtID").val(id);
+            },
+            error: function (xhr) {
+
+            }
+        });
+    }
+</script>
+
+
+
+
+
+
+
 
 

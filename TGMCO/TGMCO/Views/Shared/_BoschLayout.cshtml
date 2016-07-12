@@ -116,8 +116,26 @@
                             }
                         </ul>
                     </li>
-                    <li><a href="#">Tin tức & khuyến mãi</a></li>
-                    <li><a href="#">Dịch vụ</a></li>
+                    <li class="show-on-hover">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tin tức & khuyến mãi <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu" style="width: 300px;">
+                            <li><a href="@Url.Action("News_Bosch", "News")"><i class="fa fa-chevron-right" aria-hidden="true"></i> Tin tức</a></li>
+                            <li><a href="@Url.Action("News_Bosch_Promotion", "News")"><i class="fa fa-chevron-right" aria-hidden="true"></i> Khuyến mãi</a></li>
+                        </ul>
+                    </li>
+                    <li class="show-on-hover">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dịch vụ <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu" style="width: 300px;">
+                            <li><a href="@Url.Action("PrivacyPolicy", "Home")"><i class="fa fa-chevron-right" aria-hidden="true"></i> Chính sách bảo mật</a></li>
+                            <li><a href="@Url.Action("ShippingPolicy", "Home")"><i class="fa fa-chevron-right" aria-hidden="true"></i> Chính sách vận chuyển</a></li>
+                            <li><a href="@Url.Action("OrderProcessing", "Home")"><i class="fa fa-chevron-right" aria-hidden="true"></i> Quy trình giao hàng</a></li>
+                            <li><a href="@Url.Action("ReturnPolicy", "Home")"><i class="fa fa-chevron-right" aria-hidden="true"></i> Chính sách đổi trả</a></li>
+                            <li><a href="@Url.Action("GuideShoping", "Home")"><i class="fa fa-chevron-right" aria-hidden="true"></i> Hướng dẫn</a></li>
+                            <li><a href="@Url.Action("ContactUs", "Home")"><i class="fa fa-chevron-right" aria-hidden="true"></i> Liên hệ</a></li>
+                            <li><a href="@Url.Action("CheckBill", "Order")"><i class="fa fa-chevron-right" aria-hidden="true"></i> Kiểm tra đơn hàng</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="@Url.Action("Agency_Bosch", "Agencies")">Đại lý chi nhánh</a></li>
                 </ul>
         </nav>
     </div>

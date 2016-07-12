@@ -37,24 +37,15 @@
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
 }
 <form role="form" method="post" action="/ManagingNews/Create" >
-    <div class="form-group">
+    <div class="form-group" style="width: 70%; float: left;">
         <label class="control-label" for="email">Tiêu đề:</label>
         <div>
             <input type="text" name="Title" required class="form-control" id="title" placeholder="Nhập tiêu đề bài viết">
         </div>
     </div>
-    <div class="form-group">
-        <label class="control-label" for="email">Mô tả ngắn:</label>
+    <div class="form-group" style="width: 29%;float: right;">
+        <label class="control-label" for="email">Hiển thị cho trang:</label>
         <div>
-            <textarea name="Description" required class="form-control" id="description" placeholder="Mô tả sơ lược về bài viết"></textarea>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label" for="email">Nội dung:</label>
-        <textarea id="summernote" name="Content"></textarea>
-    </div>
-    <div class="form-group">
-        <div style="width: 300px;">
             <select class="form-control" id="ListSupplier" name="ListSupplier">
                 <option value="0">Tất cả các trang</option>
                 <option value="20">STANLEY POWER TOOLS</option>
@@ -65,28 +56,50 @@
                 <option value="25">DEWALT</option>
             </select>
         </div>
-        
     </div>
-    <button id="btnSave" class="btn btn-success" type="submit">Lưu bài viết</button>
+
+    <div class="form-group">
+        <label class="control-label" for="email">Mô tả ngắn:</label>
+        <div>
+            <textarea name="Description" required class="form-control" id="description" placeholder="Mô tả sơ lược về bài viết"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label" for="email">Nội dung:</label>
+        <textarea id="summernote" name="Content"></textarea>
+    </div>
+    <button id="btnSave" type="submit" class="btn btn-success btn-lg"><i class="fa fa-pencil-square-o"></i> Lưu bài viết</button>
 </form>
 
-    <div id="file-upload" class="input-group" style="margin-top: 10px;">
-        <span class="input-group-btn">
-            <button id="fake-file-button-browse" type="button" class="btn btn-primary">
-                Chọn hình ảnh
-            </button>
-        </span>
-        <input type="file" id="files-input-upload" name="ImageUpload" style="display:none">
-        <input type="text" id="fake-file-input-name" disabled="disabled" placeholder="Chưa chọn hình ảnh nào..." class="form-control">
-        <span class="input-group-btn">
-            <button type="button" class="btn btn-info" disabled="disabled" id="fake-file-button-upload">
-                Upload ảnh lên
-            </button>
-        </span>
-    </div>
-    <div class="list-image" id="list-image">
 
+<div class="panel panel-primary" style="margin-top: 20px;">
+    <div class="panel-heading">
+        <h3 class="col-lg-3" style="margin-top: 10px;">
+            Thư viện hình ảnh
+        </h3>
+        <div id="file-upload" class="input-group col-lg-9" style="margin-top: 10px;">
+            <span class="input-group-btn">
+                <button id="fake-file-button-browse" type="button" class="btn btn-warning">
+                    Chọn hình ảnh
+                </button>
+            </span>
+            <input type="file" id="files-input-upload" name="ImageUpload" style="display:none">
+            <input type="text" id="fake-file-input-name" disabled="disabled" placeholder="Chưa chọn hình ảnh nào..." class="form-control">
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-info" disabled="disabled" id="fake-file-button-upload">
+                    Upload ảnh lên
+                </button>
+            </span>
+        </div>
     </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="list-image" id="list-image">
+
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
     var data = new FormData();
@@ -112,6 +125,7 @@
             data: data,
             success: function (result) {
                 $('#list-image').append('<div class="col-lg-4"><input readonly="readonly" class="form-control" value="' + result + '" /><img style="width: 100%;" src="' + result + '" /></div>')
+                data = new FormData();
             },
             error: function (xhr, status, p3, p4) {
                 var err = "Error " + " " + status + " " + p3 + " " + p4;

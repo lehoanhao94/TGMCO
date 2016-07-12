@@ -200,26 +200,18 @@
                         </div>
                     </div>
                 </form>
+
+
             </div>
             <div class="tab-pane fade" id="tab3default">
                 <div class="panel-body">
-                    <div style="height: 44px;">
-                        <div class="pull-right">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-success btn-filter" data-target="stt-1">Đã giao hàng</button>
-                                <button type="button" class="btn btn-warning btn-filter" data-target="stt-2">Chưa giao hàng</button>
-                                <button type="button" class="btn btn-danger btn-filter" data-target="stt-3">Chưa thanh toán</button>
-                                <button type="button" class="btn btn-default btn-filter" data-target="all">Tất cả</button>
-                            </div>
-                        </div>
-                    </div>
                     <div class="table-container">
                         <table class="table table-filter">
                             <tbody>
                                 @foreach (var order in m_lstORDER)
                                 {
 
-                                    <tr data-status="stt-@order.ORDER_STATUS_ID" data-for=".cyruxx-@order.ORDER_ID" class="dropdown-user">
+                                    <tr id="order_@order.ORDER_ID" data-id="@order.ORDER_ID" onclick="OrderDetails(this)" data-toggle="modal" data-target="#myModal" class="dropdown-user">
                                         <td>
                                             <div class="media">
                                                 <div class="media-body">
@@ -232,88 +224,26 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    <div class="row-fluid user-infos cyruxx-@order.ORDER_ID">
-                                        <div class="span10 offset1">
-
-                                            <ul class="list-group">
-                                                <li class="list-group-item stt-@order.ORDER_STATUS_ID">
-                                                    <span class="prefix"><strong>Mã hóa đơn:</strong></span>
-                                                    <span class=""><strong>#VNT-@order.ORDER_ID</strong></span>
-                                                    <span class="prefix pull-right">@string.Format("{0:0,0}", @order.SUBTOTAL) VNĐ - (@m_Order_Status.GetName(@order.ORDER_STATUS_ID)) - @order.ORDER_DATE.ToString("dd.MM.yyyy")</span>
-                                                </li>
-                                                <li class="list-group-item" style="height: 55px;">
-                                                    <span class="prefix col-sm-3" style="line-height: 2.3">Họ tên người đặt hàng:</span>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" class="form-control" required maxlength="30" id="name" placeholder="Nhập họ và tên bạn." value="@order.SHIP_NAME">
-                                                    </div>
-                                                </li>
-                                                <li class="list-group-item" style="height: 55px;">
-                                                    <span class="prefix col-sm-3" style="line-height: 2.3">Địa chỉ người đặt hàng:</span>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" class="form-control" required maxlength="30" id="name" placeholder="Nhập họ và tên bạn." value="@order.SHIP_ADDRESS">
-                                                    </div>
-                                                </li>
-                                                <li class="list-group-item" style="height: 55px;">
-                                                    <span class="prefix col-sm-3" style="line-height: 2.3">Số điện thoại:</span>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" class="form-control" required maxlength="30" id="name" placeholder="Nhập họ và tên bạn." value="@order.SHIP_PHONE">
-                                                    </div>
-                                                </li>
-                                                <li class="list-group-item" style="height: 55px;">
-                                                    <span class="prefix col-sm-3" style="line-height: 2.3">Email:</span>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" class="form-control" required maxlength="30" id="name" placeholder="Nhập họ và tên bạn." value="@order.SHIP_EMAIL">
-                                                    </div>
-                                                </li>
-                                                <li class="list-group-item" style="height: 55px;">
-                                                    <span class="prefix col-sm-3" style="line-height: 2.3">Ghi chú:</span>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" class="form-control" required maxlength="30" id="name" placeholder="Nhập họ và tên bạn." value="@order.NOTE">
-                                                    </div>
-                                                </li>
-                                                <li class="list-group-item" style="height: 40px;">
-                                                    <span class="prefix col-sm-6"><strong>Tên SP</strong></span>
-                                                    <span class="prefix col-sm-2"><strong>Đơn giá</strong></span>
-                                                    <span class="prefix col-sm-1"><strong>SL</strong></span>
-                                                    <span class="prefix col-sm-2"><strong>Thành tiền</strong></span>
-                                                    <span class="prefix col-sm-1"><strong>Xóa</strong></span>
-                                                </li>
-                                                @foreach (var order_detail in @m_Order.GetListOrderDetail(order.ORDER_ID))
-                                                {
-                                                    <li class="list-group-item" style="height: 55px;">
-                                                        <span class="prefix col-sm-6">@m_Product.GetName(@order_detail.PRODUCT_ID)<p>@m_Product.GetCode(@order_detail.PRODUCT_ID)</p></span>
-                                                        <span class="prefix col-sm-2" style="line-height: 2.5; text-align: right">@string.Format("{0:0,0}", @order_detail.UNIT_PRICE)</span>
-                                                        <span class="prefix col-sm-1"><input class="form-control" type="text" style="width: 40px;" value="@order_detail.QUANTITY"></span>
-                                                        <span class="prefix col-sm-2" style="line-height: 2.5; text-align: right">@string.Format("{0:0,0}", @order_detail.EXTENDED_PRICE)</span>
-                                                        <span class="prefix col-sm-1"><button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button></span>
-                                                    </li>
-                                                }
-                                                <li class="list-group-item" style="height: 40px;">
-                                                    <span class="prefix col-sm-3 col-lg-offset-6">Tổng tiền hàng:</span>
-                                                    <span class="prefix col-sm-2" style="text-align: right">@string.Format("{0:0,0}", @order.SUBTOTAL)</span>
-                                                </li>
-                                                <li class="list-group-item" style="height: 40px;">
-                                                    <span class="prefix col-sm-3 col-lg-offset-6">Phí giao hàng:</span>
-                                                    <span class="prefix col-sm-2" style="text-align: right">@string.Format("{0:0,0}", @order.FREIGHT)</span>
-                                                </li>
-                                                <li class="list-group-item" style="height: 40px;">
-                                                    <span class="prefix col-sm-3 col-lg-offset-6"><strong>Tổng cộng:</strong></span>
-                                                    <span class="prefix col-sm-2" style="text-align: right"><strong>@string.Format("{0:0,0}", @order.SUBTOTAL + @order.FREIGHT)</strong></span>
-                                                </li>
-                                                <li class="list-group-item" style="height: 55px;">
-                                                    <div class="btn-group btn-group-justified">
-                                                        <a href="#" class="btn btn-danger">Hủy bỏ đơn hàng</a>
-                                                        <a href="#" class="btn btn-success">Cập nhật đơn hàng</a>
-                                                    </div>
-                                                </li>
-                                            </ul>
-
-                                        </div>
-                                    </div>
                                 }
 
                             </tbody>
                         </table>
+                    </div>
+                </div>
+                <div class="modal fade" id="myModal" role="dialog">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header" style="color: white">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title"><i class="fa fa-spinner fa-spin"></i> Đang tải dữ liệu hóa đơn</h4>
+                            </div>
+                            <div class="modal-body">
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -344,20 +274,20 @@
                                     <span class="glyphicon glyphicon-remove">
                                     </span>
                                 </span>
-                                </a>
+                            </a>
                         </div>
                     </div>
                     <div class="tab-pane fade in" id="profile">
                         <div class="list-group">
                             <div class="list-group-item">
 
-                                    <div class="form-group">
-                                        <input id="tokenfield" type="text" class="form-control" placeholder="Tiêu đề" />
-                                    </div>
-                                    <textarea class="form-control" placeholder="Nội dung"></textarea>
-                                
-                                    <button class="btn btn-success btn-lg" style="margin-top: 15px;"><span class="glyphicon glyphicon-send"></span> Gửi</button>
-                               
+                                <div class="form-group">
+                                    <input id="tokenfield" type="text" class="form-control" placeholder="Tiêu đề" />
+                                </div>
+                                <textarea class="form-control" placeholder="Nội dung"></textarea>
+
+                                <button class="btn btn-success btn-lg" style="margin-top: 15px;"><span class="glyphicon glyphicon-send"></span> Gửi</button>
+
                             </div>
                         </div>
                     </div>
@@ -375,38 +305,114 @@
     <img class="ads-right" src="~/Content/Page_Layout/img/lienhequangcao.jpg" width="238">
     <img class="ads-right" src="~/Content/Page_Layout/img/lienhequangcao.jpg" width="238">
 }
+
 <script>
-    $(document).ready(function () {
-        var panels = $('.user-infos');
-        var panelsButton = $('.dropdown-user');
-        panels.hide();
+    function OrderDetails(obj) {
+        var id = $(obj).data("id");
+        $.ajax({
+            url: '/Partial/OrderDetail_Profile?order_id=' + id,
+            dataType: "html",
+            type: "POST",
+            contentType: 'application/html; charset=utf-8',
+            success: function (data) {
+                $("#myModal").html(data)
+            },
+            error: function (xhr) {
 
-        //Click dropdown
-        panelsButton.click(function () {
-            //get data-for attribute
-            var dataFor = $(this).attr('data-for');
-            var idFor = $(dataFor);
-
-            //current button
-            var currentButton = $(this);
-            idFor.slideToggle(400, function () {
-                //Completed slidetoggle
-            })
+            }
         });
-
-
-        $('[data-toggle="tooltip"]').tooltip();
-    });
-    $('.btn-filter').on('click', function () {
-        var $target = $(this).data('target');
-        if ($target != 'all') {
-            $('.table tr').css('display', 'none');
-            $('.table tr[data-status="' + $target + '"]').fadeIn('slow');
-        } else {
-            $('.table tr').css('display', 'none').fadeIn('slow');
-        }
-    });
+    }
 </script>
+<script>
+
+    var _num = 0;
+    function onChangeQuantity(obj) {
+        var num = $(obj).val();
+        if (num > 20) {
+            alert('Bạn nhập số quá lớn, vui lòng nhập số lượng dưới 20.');
+            num = 20;
+            $(obj).val(num);
+        }
+
+        if (num < 1) {
+            alert('Không được nhập số nhỏ hơn 1.');
+            num = 1;
+            $(obj).val(num);
+        }
+        _num = num;
+        var _total = num * $(obj).data("price");
+        var _id = $(obj).data("id");
+        var _id_order = $(obj).data("order");
+        var _freight = $(obj).data("freight");
+        Number.prototype.format = function (n, x) {
+            var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
+            return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
+        };
+
+        $("#totalPrice_" + _id).html(_total.format());
+
+        $.ajax({
+            url: '/Order/UpdateQuantity?id=' + _id_order + '&id_product=' + _id + '&quantity=' + _num,
+            dataType: "html",
+            type: "POST",
+            contentType: 'application/html; charset=utf-8',
+            success: function (data) {
+                var total = parseFloat(data);
+                $("#total").html(total.format());
+                var subtotal = parseFloat(total) + parseFloat(_freight);
+                $("#subtotal").html(subtotal.format());
+            },
+            error: function (xhr) {
+
+            }
+        });
+    }
+</script>
+
+<script>
+    function CancelOrder(obj) {
+        var id = $(obj).data("id");
+        if (confirm('Bạn có muốn hủy hóa đơn này không?')) {
+            $.ajax({
+                url: '/Order/DeleteOrder?id=' + id,
+                dataType: "html",
+                type: "DELETE",
+                contentType: 'application/html; charset=utf-8',
+                success: function (data) {
+                    $("#order_" + id).remove();
+                    $("#myModal").modal("hide");
+                }
+            });
+        }
+    }
+</script>
+<script>
+    function DeleteProductFromOrder(obj) {
+        var id_order = $(obj).data("order");
+        var id_product = $(obj).data("id");
+        if (confirm('Bạn có muốn xóa sản phẩm này khỏi hóa đơn?')) {
+            $.ajax({
+                url: '/Order/DeleteProductFromOrder?order_id=' + id_order + '&product_id=' + id_product,
+                dataType: "html",
+                type: "DELETE",
+                contentType: 'application/html; charset=utf-8',
+                success: function (data) {
+                    if (data > 0) {
+                        $("#row_" + id_product).remove();
+                    }
+                    else {
+                        $("#row_" + id_product).remove();
+                        $("#myModal").modal("hide");
+                        $("#order_" + id_order).remove();
+                    }
+
+                }
+            });
+        }
+    }
+</script>
+
+
 <style>
     .list-group .stt-3 {
         background-color: #d9534f;

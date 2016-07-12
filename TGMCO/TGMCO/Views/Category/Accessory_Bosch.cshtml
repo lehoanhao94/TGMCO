@@ -22,7 +22,7 @@
             <h5><strong><i class="fa fa-chevron-down" aria-hidden="true"></i> Phụ kiện</strong></h5>
             @foreach (var category in m_lstCategory)
             {
-                <a href="@Url.Action("Category_Bosch", "Category", new { cate_id = category.CATEGORY_ID })">
+                <a href="@Url.Action("Accessory_Bosch", "Category", new { cate_id = category.CATEGORY_ID })">
                     <li>
                         <i class="fa fa-chevron-right" aria-hidden="true"></i> @category.CATEGORY_NAME
                     </li>

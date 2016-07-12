@@ -11,81 +11,81 @@
 <div style="border: 2px solid #30454A;">
     <iframe width="100%" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3919.847122959404!2d106.65219744232787!3d10.746263239104776!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752e606e17daa3%3A0x52c635d7b62f9d91!2zQ-G7rWEgSMOgbmcgxJBp4buHbiBOaMOgIFBow6JuIFBo4buRaSBTdGFubGV5IFR14bqlbiBHaWEgTWluaA!5e0!3m2!1sen!2s!4v1423724833531"></iframe>
 </div>
-
-<div class="col-lg-12" style="margin-top: 10px;">
-    <div class="col-md-8">
-        <div class="well well-sm">
-            <form>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="name">
-                                Name
-                            </label>
-                            <input type="text" class="form-control" id="name" placeholder="Enter name" required="required" />
-                        </div>
-                        <div class="form-group">
-                            <label for="email">
-                                Email Address
-                            </label>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-envelope"></span>
-                                </span>
-                                <input type="email" class="form-control" id="email" placeholder="Enter email" required="required" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="subject">
-                                Subject
-                            </label>
-                            <select id="subject" name="subject" class="form-control" required="required">
-                                <option value="na" selected="">Choose One:</option>
-                                <option value="service">General Customer Service</option>
-                                <option value="suggestions">Suggestions</option>
-                                <option value="product">Product Support</option>
-                            </select>
+@if(TempData["Success"] != null)
+{
+<div class="alert alert-success">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>Gửi thành công !</strong> Bạn đã gửi thông tin liên hệ thành công.
+</div>
+}
+<div class="col-md-12">
+    <form>
+        <legend><span class="glyphicon glyphicon-globe"></span> Thông tin liên hệ</legend>
+        <address class="col-lg-6">
+            <strong>Văn phòng</strong><br>
+            Tầng trệt 18A Vạn Tượng, P.13, Q.5, TP.HCM <br>
+            (08) 38 591 896 <br>
+            <strong>Email</strong><br>
+            <a href="mailto:#">info@tgmco.com.vn </a>
+        </address>
+        <address class="col-lg-6">
+            <strong>Showroom</strong><br>
+            171 Gia Phú, P.1, Q.6, TP.HCM  <br>
+            091 9977 926 - 090 2333 949  <br>
+        </address>
+        <address>
+            
+        </address>
+    </form>
+</div>
+<div class="" style="margin-top: 10px;">
+    <div class="well well-sm">
+        <form role="form" action="" method="post">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="name">
+                            Họ tên
+                        </label>
+                        <input type="text" class="form-control" name="txtName" id="name" placeholder="Nhập họ tên" required="required" />
+                    </div>
+                    <div class="form-group">
+                        <label for="email">
+                            Địa chỉ Email
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-envelope"></span>
+                            </span>
+                            <input type="email" class="form-control" name="txtEmail" id="email" placeholder="Nhập Email nhận thư trả lời" required="required" />
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="name">
-                                Message
-                            </label>
-                            <textarea name="message" id="message" class="form-control" rows="9" cols="25" required="required"
-                                      placeholder="Message"></textarea>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <button type="submit" class="btn btn-primary pull-right" id="btnContactUs">
-                            Send Message
-                        </button>
+                    <div class="form-group">
+                        <label for="subject">
+                            Tiêu đề Email 
+                        </label>
+                        <input type="text" class="form-control" id="email" name="txtTitle" placeholder="Tiêu đề Email" required="required" />
                     </div>
                 </div>
-            </form>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <form>
-            <legend><span class="glyphicon glyphicon-globe"></span> Địa chỉ liên hệ</legend>
-            <address>
-                <strong>Văn phòng</strong><br>
-                Tầng trệt 18A Vạn Tượng, P.13, Q.5, TP.HCM <br>
-                (08) 38 591 896 <br>
-            </address>
-            <address>
-                <strong>Showroom</strong><br>
-                171 Gia Phú, P.1, Q.6, TP.HCM  <br>
-                091 9977 926 - 090 2333 949  <br>
-            </address>
-            <address>
-                <strong>Email</strong><br>
-                <a href="mailto:#">info@tgmco.com.vn </a>
-            </address>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="name">
+                            Nội dung
+                        </label>
+                        <textarea name="txtMessage" id="message" class="form-control" rows="9" cols="25" required="required"
+                                  placeholder="Nội dung"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-primary pull-right" id="btnContactUs">
+                        Gửi
+                    </button>
+                </div>
+            </div>
         </form>
     </div>
+    
 </div>
-
 @section RightContent{
 
     @{

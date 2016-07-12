@@ -21,7 +21,7 @@
     </ul>
 </div>
 <div id="ImgProduct" class="col-lg-7">
-    <img src="@Url.Content(m_PRODUCT_MODEL.GetImage1(Model.PRODUCT_ID))" alt="@Model.PRODUCT_NAME" title="@Model.PRODUCT_NAME" />
+    <img src="@Url.Content(m_PRODUCT_MODEL.GetImage1(Model.PRODUCT_ID))" alt="@Model.PRODUCT_NAME" style="height: 330px;" title="@Model.PRODUCT_NAME" />
 </div>
 <div id="InfoProduct" class="col-lg-5">
     <h4>@Model.PRODUCT_NAME</h4>
@@ -288,8 +288,8 @@
         }
 
         #ImgProduct {
-            padding-top: 20px;
-            margin-bottom: 20px;
+            background-color: white;
+            text-align: center;
         }
 
         #InfoProduct {

@@ -202,6 +202,7 @@
     <Compile Include="Controllers\ADMINCONTROLLER\ManagingSuppliersController.cs" />
     <Compile Include="Controllers\ADMINCONTROLLER\ManagingUsersController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\PAGECONTROLLER\AgenciesController.cs" />
     <Compile Include="Controllers\PAGECONTROLLER\CategoryController.cs" />
     <Compile Include="Controllers\PAGECONTROLLER\HomeController.cs" />
     <Compile Include="Controllers\PAGECONTROLLER\NewsController.cs" />
@@ -1349,7 +1350,6 @@
     <Content Include="Views\Shared\_BoschLayout.cshtml" />
     <Content Include="Views\Category\Category_Bosch.cshtml" />
     <Content Include="Views\Product\Detail_Bosch.cshtml" />
-    <Content Include="Views\ManagingNews\News.cshtml" />
     <Content Include="Views\Admin\ManagingNews.cshtml" />
     <Content Include="Views\ManagingNews\Create.cshtml" />
     <Content Include="Views\News\News_Detail.cshtml" />
@@ -1357,6 +1357,12 @@
     <Content Include="Views\ManagingNews\Create_Promotion.cshtml" />
     <Content Include="Views\News\News_Promotion.cshtml" />
     <Content Include="Views\Category\Accessory_Bosch.cshtml" />
+    <Content Include="Views\ManagingNews\Update.cshtml" />
+    <Content Include="Views\News\News_Bosch.cshtml" />
+    <Content Include="Views\News\News_Bosch_Detail.cshtml" />
+    <Content Include="Views\News\News_Bosch_Promotion.cshtml" />
+    <Content Include="Views\Agencies\Agency_Bosch.cshtml" />
+    <Content Include="Views\Partial\OrderDetail_Profile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

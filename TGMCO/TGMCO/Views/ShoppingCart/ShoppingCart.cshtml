@@ -444,6 +444,12 @@
             num = 20;
             $(obj).val(num);
         }
+
+        if (num < 1) {
+            alert('Không được nhập số nhỏ hơn 1.');
+            num = 1;
+            $(obj).val(num);
+        }
         _num = num;
         var _total = num * $(obj).data("price");
         var _id = $(obj).data("id");

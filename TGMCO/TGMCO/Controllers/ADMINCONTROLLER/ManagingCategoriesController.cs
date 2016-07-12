@@ -142,6 +142,48 @@ namespace TGMCO.Controllers.ADMINCONTROLLER
 
         }
 
+        public string Update(int id)
+        {
+            try
+            {
+                return db.CATEGORIES.Find(id).CATEGORY_NAME;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        [HttpPost]
+        public ActionResult Update(FormCollection f)
+        {
+            try
+            {
+                int id = int.Parse(f.Get("ID").ToString());
+                string name = f.Get("NAME").ToString();
+                CATEGORy _CATEGORY = db.CATEGORIES.Find(id);
+                List<CATEGORIES_BY_SUPPLIER> _lstCATEGORY = db.CATEGORIES_BY_SUPPLIER.Where(n => n.CATEGORY_ID == id).ToList();
+                foreach(var category in _lstCATEGORY)
+                {
+                    category.CATEGORY_NAME = name;
+                    db.SaveChanges();
+                }
+                _CATEGORY.CATEGORY_NAME = name;
+                db.SaveChanges();
+                if(_CATEGORY.IS_ACCESSORY == true)
+                {
+                    return RedirectToAction("ManagingAccesstories", "Admin");
+                }
+                else
+                {
+                    return RedirectToAction("ManagingCategories", "Admin");
+                }
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Http404", "Error"); // 404
+            }
+        }
+
         protected override void Dispose(bool disposing)
         {
             db.Dispose();
