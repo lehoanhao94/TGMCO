@@ -1,0 +1,255 @@
+﻿@using TGMCO.Models;
+@model NEWS
+
+@{
+    ViewBag.Title = "Update News";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+    List<IMAGES_UPLOAD> m_lstImages = (List<IMAGES_UPLOAD>)ViewBag.ListImages;
+}
+@section Page_Header {
+    <h1>
+        QUẢN LÝ TIN TỨC
+        <small>Cập nhật tin tức số @Model.NEWS_ID</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Admin")"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">@ViewBag.Title</li>
+    </ol>
+}
+
+@{
+    if (@TempData["VB_ErrorCreate"] != null)
+    {
+        <div class="alert alert-danger alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4><i class="icon fa fa-ban"></i> LỖI !</h4>
+            @TempData["VB_ErrorCreate"]
+        </div>
+    }
+    if (@TempData["VB_SuccessCreate"] != null)
+    {
+        <div class="alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4>	<i class="icon fa fa-check"></i> THÀNH CÔNG!</h4>
+            @TempData["VB_SuccessCreate"]
+        </div>
+    }
+}
+
+@section masterjs{
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+}
+<form role="form" method="post" action="/ManagingNews/Update/?id=@Model.NEWS_ID">
+
+        <div class="form-group" style="width: 70%; float: left;">
+            <label class="control-label" for="email">Tiêu đề:</label>
+            <div>
+                <input type="text" name="Title" required class="form-control" value="@Model.TITLE" id="title" placeholder="Nhập tiêu đề bài viết">
+            </div>
+        </div>
+        <div class="form-group" style="width: 29%;float: right;">
+            <label class="control-label" for="email">Hiển thị cho trang:</label>
+            <div>
+                <select class="form-control" id="ListSupplier" name="ListSupplier">
+                    @switch (@Model.SUPPLIER_ID)
+                    {
+                        case 0:
+                            <option value="0" selected>Tất cả các trang</option>
+                            <option value="20">STANLEY POWER TOOLS</option>
+                            <option value="21">MAKITA</option>
+                            <option value="22">STANLEY HAND TOOLS</option>
+                            <option value="23">BOSCH</option>
+                            <option value="24">BLACK AND DECKER</option>
+                            <option value="25">DEWALT</option>
+                            break;
+                        case 20:
+                        <option value="0">Tất cả các trang</option>
+                        <option value="20" selected>STANLEY POWER TOOLS</option>
+                        <option value="21">MAKITA</option>
+                        <option value="22">STANLEY HAND TOOLS</option>
+                        <option value="23">BOSCH</option>
+                        <option value="24">BLACK AND DECKER</option>
+                        <option value="25">DEWALT</option>
+                            break;
+                        case 21:
+                        <option value="0">Tất cả các trang</option>
+                        <option value="20">STANLEY POWER TOOLS</option>
+                        <option value="21" selected>MAKITA</option>
+                        <option value="22">STANLEY HAND TOOLS</option>
+                        <option value="23">BOSCH</option>
+                        <option value="24">BLACK AND DECKER</option>
+                        <option value="25">DEWALT</option>
+                            break;
+                        case 22:
+                        <option value="0">Tất cả các trang</option>
+                        <option value="20">STANLEY POWER TOOLS</option>
+                        <option value="21">MAKITA</option>
+                        <option value="22" selected>STANLEY HAND TOOLS</option>
+                        <option value="23">BOSCH</option>
+                        <option value="24">BLACK AND DECKER</option>
+                        <option value="25">DEWALT</option>
+                            break;
+                        case 23:
+                        <option value="0">Tất cả các trang</option>
+                        <option value="20">STANLEY POWER TOOLS</option>
+                        <option value="21">MAKITA</option>
+                        <option value="22">STANLEY HAND TOOLS</option>
+                        <option value="23" selected>BOSCH</option>
+                        <option value="24">BLACK AND DECKER</option>
+                        <option value="25">DEWALT</option>
+                            break;
+                        case 24:
+                        <option value="0">Tất cả các trang</option>
+                        <option value="20">STANLEY POWER TOOLS</option>
+                        <option value="21">MAKITA</option>
+                        <option value="22">STANLEY HAND TOOLS</option>
+                        <option value="23">BOSCH</option>
+                        <option value="24" selected>BLACK AND DECKER</option>
+                        <option value="25">DEWALT</option>
+                            break;
+                        case 25:
+                        <option value="0">Tất cả các trang</option>
+                        <option value="20">STANLEY POWER TOOLS</option>
+                        <option value="21">MAKITA</option>
+                        <option value="22">STANLEY HAND TOOLS</option>
+                        <option value="23">BOSCH</option>
+                        <option value="24">BLACK AND DECKER</option>
+                        <option value="25" selected>DEWALT</option>
+                            break;
+                    }
+                </select>
+            </div>
+        </div>
+
+   
+    <div class="form-group">
+        <label class="control-label" for="email">Mô tả ngắn:</label>
+        <div>
+            <textarea name="Description" required class="form-control" id="description" placeholder="Mô tả sơ lược về bài viết">@Model.CONTENT_2</textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label" for="email">Nội dung:</label>
+        <textarea id="summernote" name="Content">@Model.CONTENT_1</textarea>
+    </div>
+    <button id="btnSave" type="submit" class="btn btn-success btn-lg"><i class="fa fa-pencil-square-o"></i> Cập nhật bài viết</button>
+</form>
+
+<div class="panel panel-primary" style="margin-top: 20px;">
+    <div class="panel-heading">
+        <h3 class="col-lg-3" style="margin-top: 10px;">
+            Thư viện hình ảnh
+        </h3>
+        <div id="file-upload" class="input-group col-lg-9" style="margin-top: 10px;">
+            <span class="input-group-btn">
+                <button id="fake-file-button-browse" type="button" class="btn btn-warning">
+                    Chọn hình ảnh
+                </button>
+            </span>
+            <input type="file" id="files-input-upload" name="ImageUpload" style="display:none">
+            <input type="text" id="fake-file-input-name" disabled="disabled" placeholder="Chưa chọn hình ảnh nào..." class="form-control">
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-info" disabled="disabled" id="fake-file-button-upload">
+                    Upload ảnh lên
+                </button>
+            </span>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="list-image" id="list-image">
+                @foreach (var images in m_lstImages)
+                {
+                    <div class="col-lg-4"><input readonly="readonly" class="form-control" value="@images.URL" /><img style="width: 100%;" src="@images.URL" /></div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var data = new FormData();
+    $('#files-input-upload').on('change', function (e) {
+        var files = e.target.files;
+        //var myID = 3; //uncomment this to make sure the ajax URL works
+        if (files.length > 0) {
+            if (window.FormData !== undefined) {
+                for (var x = 0; x < files.length; x++) {
+                    data.append("file" + x, files[x]);
+                }
+            } else {
+                alert("This browser doesn't support HTML5 file uploads!");
+            }
+        }
+    });
+    $('#fake-file-button-upload').on('click', function (e) {
+        $.ajax({
+            type: "POST",
+            url: '/ManagingNews/UploadImage?id=0',
+            contentType: false,
+            processData: false,
+            data: data,
+            success: function (result) {
+                $('#list-image').prepend('<div class="col-lg-4"><input readonly="readonly" class="form-control" value="' + result + '" /><img style="width: 100%;" src="' + result + '" /></div>')
+                data = new FormData();
+            },
+            error: function (xhr, status, p3, p4) {
+                var err = "Error " + " " + status + " " + p3 + " " + p4;
+                if (xhr.responseText && xhr.responseText[0] == "{")
+                    err = JSON.parse(xhr.responseText).Message;
+                console.log(err);
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    // Fake file upload
+    document.getElementById('fake-file-button-browse').addEventListener('click', function () {
+        document.getElementById('files-input-upload').click();
+    });
+
+    document.getElementById('files-input-upload').addEventListener('change', function () {
+        document.getElementById('fake-file-input-name').value = this.value;
+
+        document.getElementById('fake-file-button-upload').removeAttribute('disabled');
+    });
+</script>
+
+<style>
+    .form-group {
+    }
+
+    .list-image, .form-group {
+        display: table;
+        width: 100%;
+        margin-top: 5px;
+    }
+
+    .note-group-select-from-files {
+        display: none;
+    }
+</style>
+
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#summernote').summernote();
+    });
+
+    $('#summernote').summernote({
+        height: 300,                 // set editor height
+        minHeight: null,             // set minimum height of editor
+        maxHeight: null,             // set maximum height of editor
+        focus: true                  // set focus to editable area after initializing summernote
+    });
+
+
+</script>
+
+
+
+
+

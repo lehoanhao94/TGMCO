@@ -1,0 +1,49 @@
+﻿@using TGMCO.Models;
+@using TGMCO.Models.Entity;
+
+@model NEWS
+
+@{
+    ViewBag.Title = "Tuấn Gia Minh | Tin tức Bosch - " + Model.TITLE;
+    Layout = "~/Views/Shared/_BoschLayout.cshtml";
+    ViewBag.Description = Model.CONTENT_2;
+}
+
+@{
+    NewsModel m_NEWS_MODEL = new NewsModel();
+}
+<div id="Content">
+    <ul class="breadcrumb" style="padding-top: 0;">
+        <li><a href="@Url.Action("bosch", "Home")">Trang chủ</a></li>
+        @if(Model.IS_PROMOTION == true)
+        {
+            <li><a href="@Url.Action("News_Bosch_Promotion", "News")">Tin tức khuyến mãi</a></li>
+        }
+        else
+        {
+            <li><a href="@Url.Action("News_Bosch", "News")">Tin tức</a></li>
+        }
+        
+        <li class="active">@Model.TITLE</li>
+    </ul>
+</div>
+<div class="col-md-12" style="background: #fff; margin-bottom: 20px;">
+    <div class="col-md-12" style="background: #FFF;">
+
+        <h2><strong>@Model.TITLE</strong></h2>
+        <div style=" color: #999; font-size: 12px;margin-bottom: 10px;"><span class="label label-primary">VietNamTool.vn</span>  @Model.CREATED_DATE <div class="fb-like pull-right" data-href="@Request.Url" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div> </div>
+        @(new HtmlString(Model.CONTENT_1))
+
+        <div class="fb-comments" data-href="@Request.Url" data-width="100%" data-numposts="5"></div>
+    </div>
+</div>
+
+<div id="fb-root"></div>
+<script>
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.6&appId=1454298961531347";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>

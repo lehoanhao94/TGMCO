@@ -1,0 +1,136 @@
+﻿@using TGMCO.Models;
+@using TGMCO.Models.Entity;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<NEWS>
+
+@{
+    ViewBag.Title = "Tuấn Gia Minh | Tin tức khuyến mãi Bosch ";
+    Layout = "~/Views/Shared/_BoschLayout.cshtml";
+    ViewBag.Description = "CÔNG TY TNHH TM TUẤN GIA MINH - Cung cấp thiết bị xây dựng, thiết bị công nghiệp, dụng cụ cầm tay, máy hàn, máy mài góc, máy cắt kim loại, dụng cụ đo chính xác, dụng cụ điện...";
+}
+
+@{
+    NewsModel m_NEWS_MODEL = new NewsModel();
+}
+<div id="Content">
+    <ul class="breadcrumb" style="padding-top: 0;">
+        <li><a href="@Url.Action("bosch", "Home")">Trang chủ</a></li>
+        <li class="active">Tin tức khuyến mãi</li>
+    </ul>
+</div>
+<div class="col-md-12" style="background: #fff;">
+    @if(Model.Count == 0)
+    {
+        <p class="col-lg-12" style="padding-top: 10px;">Không có tin khuyến mãi nào.</p>
+    }
+    @foreach (var news in Model)
+    {
+        <div class="row">
+            <div class="col-md-12 post">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>
+                            <strong><a href="/News/News_Bosch_Detail/?id=@news.NEWS_ID" class="post-title">@news.TITLE</a></strong>
+                        </h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 post-header-line">
+                        <span class="glyphicon glyphicon-user"></span>by <a href="#">TGMCO</a> | <span class="glyphicon glyphicon-calendar"></span>@news.CREATED_DATE |
+                        <span class="glyphicon glyphicon-comment"></span><div class="fb-like" data-href="@Url.Content("http://www.vietnamtool.vn/News/News_Detail/?id=" + @news.NEWS_ID)" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div> | <span class="glyphicon glyphicon-tags">
+                        </span>Tags : <a href="#"><span class="label label-info">Bosch</span></a> <a href="#">
+                            <span class="label label-info">Máy cưa</span>
+                        </a> <a href="#">
+                            <span class="label label-info">
+                                Tools
+                            </span>
+                        </a> <a href="#"><span class="label label-info">TGM</span></a>
+                    </div>
+                </div>
+                <div class="row post-content">
+                    <div class="col-md-3">
+                        <a href="#">
+                            <img src="@m_NEWS_MODEL.GetImage(news.NEWS_ID)" alt="@news.TITLE" title="@news.TITLE" class="img-responsive">
+                        </a>
+                    </div>
+                    <div class="col-md-9">
+                        <p>
+                            @news.CONTENT_2
+                        </p>
+                        <p>
+                            <a class="btn btn-read-more" href="/News/News_Bosch_Detail/?id=@news.NEWS_ID">Chi tiết</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<div style="text-align: center;">
+    @*Tạo link liên kết các trang*@
+    <div class="pagination">@Html.PagedListPager(Model, page => Url.Action("News", "News", new { page = page }))</div>
+</div>
+<style>
+    a:hover {
+        text-decoration: none;
+    }
+
+    .btn {
+        transition: all .2s linear;
+        -webkit-transition: all .2s linear;
+        -moz-transition: all .2s linear;
+        -o-transition: all .2s linear;
+    }
+
+    .btn-read-more {
+        padding: 5px;
+        text-align: center;
+        border-radius: 0px;
+        display: inline-block;
+        border: 2px solid #164C7A;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 12px;
+        color: #164C7A;
+        float: right;
+    }
+
+        .btn-read-more:hover {
+            color: #FFF;
+            background: #164C7A;
+        }
+
+    .post {
+        border-bottom: 1px solid #DDD;
+    }
+
+    .post-title {
+        color: #164C7A;
+    }
+
+    .post .glyphicon {
+        margin-right: 5px;
+    }
+
+    .post-header-line {
+        border-top: 1px solid #DDD;
+        border-bottom: 1px solid #DDD;
+        padding: 5px 0px 5px 15px;
+        font-size: 12px;
+    }
+
+    .post-content {
+        padding-bottom: 15px;
+        padding-top: 15px;
+    }
+</style>
+<div id="fb-root"></div>
+<script>
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.6&appId=1454298961531347";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>

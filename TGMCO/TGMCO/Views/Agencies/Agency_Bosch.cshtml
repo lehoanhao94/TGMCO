@@ -1,0 +1,218 @@
+﻿@using TGMCO.Models;
+@using TGMCO.Models.Entity;
+
+@{
+    ViewBag.Title = "Tuấn Gia Minh | Chi nhánh cửa hàng";
+    Layout = "~/Views/Shared/_BoschLayout.cshtml";
+    ViewBag.Description = "Chi nhánh cửa hàng";
+}
+
+@{
+    NewsModel m_NEWS_MODEL = new NewsModel();
+}
+<div id="Content">
+    <ul class="breadcrumb" style="padding-top: 0;">
+        <li><a href="@Url.Action("bosch", "Home")">Trang chủ</a></li>
+
+        <li class="active">Đại lý chi nhánh</li>
+    </ul>
+</div>
+<div class="col-md-12" style="background: #fff; margin-bottom: 20px;padding-left: 0px;">
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 bhoechie-tab-menu">
+            <div class="list-group">
+                <a href="#" class="list-group-item active text-center">
+                    <h4>Hồ Chí Minh</h4>
+                </a>
+                <a href="#" class="list-group-item text-center">
+                    <h4>Đà Nẵng</h4>
+                </a>
+                <a href="#" class="list-group-item text-center">
+                    <h4>Đắk Lắc</h4>
+                </a>
+            </div>
+            <div class="marginalBox spacer ">
+                <img src="http://images.vn.bosch-pt.com/vn/media/centralpool/classical/professional_1/images/dealers/bosch_shop.jpg" width="100%" alt="">
+                <div class="mbcBox">
+                    <h6>Đường dây nóng Hỗ trợ khách hàng</h6>
+                    <p>Bạn có bất cứ thắc mắc gì về các sản phẩm hay dịch vụ của chúng tôi không? Chỉ cần gọi cho chúng tôi.</p>
+                    <p class="hotline phone">+84 (08) 38 591 896</p><p class="hotline mail"><a title="Hoặc liên hệ qua e-mail" href="mailto: info@tgmco.com.vn" target="_self">Hoặc liên hệ qua e-mail</a></p><p>Thứ Hai-Thứ Sáu 8.00 – 17.00</p>
+                    <div class="clrL"></div>
+                </div>
+                <div class="clrL"></div>
+            </div>
+        </div>
+        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 bhoechie-tab">
+            <!-- flight section -->
+            <div class="bhoechie-tab-content active">
+                <div>
+                    <h3 style="margin-top: 0; color: #1F5382">Quận 6</h3>
+                    <h5><i class="fa fa-home" aria-hidden="true"></i> Địa chỉ: 10,12 Đường 59, Phường 10, Quận 6, TP Hồ Chí Minh</h5>
+                    <h5><i class="fa fa-phone" aria-hidden="true"></i> Điện thoại: (08) 38 591 896 - 091 9977 926</h5>
+                    <h5><i class="fa fa-fax" aria-hidden="true"></i> FAX: (08) 38 591 896 </h5>
+                    <h5><i class="fa fa-envelope" aria-hidden="true"></i> Email: info@tgmco.com.vn</h5>
+                    <div class="divider"></div>        
+                    <h3 style="margin-top: 0; color: #1F5382">Quận 5</h3>
+                    <h5><i class="fa fa-home" aria-hidden="true"></i> Địa chỉ: Tầng Trệt, 18A Đường Vạn Tượng, Phường 13, Quận 5, Thành Phố Hồ Chí Minh</h5>
+                    <h5><i class="fa fa-phone" aria-hidden="true"></i> Điện thoại: (08) 38 591 896 - 091 9977 926 - 090 2333 949 </h5>
+                    <h5><i class="fa fa-fax" aria-hidden="true"></i> FAX: (08) 38 591 896 </h5>
+                    <h5><i class="fa fa-envelope" aria-hidden="true"></i> Email: info@tgmco.com.vn</h5>     
+                    <div class="divider"></div>     
+                </div>
+            </div>
+            <!-- train section -->
+            <div class="bhoechie-tab-content">
+                <div>
+                    <h3 style="margin-top: 0; color: #1F5382">Quận Hải Châu</h3>
+                    <h5><i class="fa fa-home" aria-hidden="true"></i> Địa chỉ: 664 Núi Thành, Phường Hoà Cường Nam, Quận Hải Châu, Đà Nẵng</h5>
+                    <h5><i class="fa fa-phone" aria-hidden="true"></i> Điện thoại: (08) 38 591 896 - 091 9977 926</h5>
+                    <h5><i class="fa fa-fax" aria-hidden="true"></i> FAX: (08) 38 591 896 </h5>
+                    <h5><i class="fa fa-envelope" aria-hidden="true"></i> Email: info@tgmco.com.vn</h5>
+                    <div class="divider"></div>
+                </div>
+            </div>
+
+            <!-- hotel search -->
+            <div class="bhoechie-tab-content">
+                <div>
+                    <h3 style="margin-top: 0; color: #1F5382">TP Buôn Ma Thuột</h3>
+                    <h5><i class="fa fa-home" aria-hidden="true"></i> Địa chỉ: Số 104 đường Ngô Quyền, Phường Tân Lợi, TP.Buôn Ma Thuột, Đắk Lắc</h5>
+                    <h5><i class="fa fa-phone" aria-hidden="true"></i> Điện thoại: (08) 38 591 896 - 091 9977 926</h5>
+                    <h5><i class="fa fa-fax" aria-hidden="true"></i> FAX: (08) 38 591 896 </h5>
+                    <h5><i class="fa fa-envelope" aria-hidden="true"></i> Email: info@tgmco.com.vn</h5>
+                    <div class="divider"></div>
+                </div>
+            </div>
+            <div class="bhoechie-tab-content">
+                
+            </div>
+            <div class="bhoechie-tab-content">
+                
+            </div>
+        </div>
+
+</div>
+
+<style>
+    .mbcBox {
+        background-color: #e1e1e2;
+    }
+
+    .mbcBox {
+        padding: 10px;
+        font-size: 10px;
+    }
+    .divider {
+        border-bottom: 1px solid #aaa;
+        margin-bottom: 10px;
+        margin-top: 20px;
+    }
+
+    h4 a {
+        font-size: 20px;
+    }
+
+    ul {
+        text-align: left;
+    }
+
+    h4 {
+        text-align: left;
+    }
+
+    .savings {
+        color: green;
+    }
+
+    /*  bhoechie tab */
+    div.bhoechie-tab-container {
+        z-index: 10;
+        background-color: #ffffff;
+        padding: 0 !important;
+        border-radius: 1px;
+        -moz-border-radius: 1px;
+        border: 1px solid #ddd;
+        margin-top: 20px;
+        margin-left: 50px;
+        margin-bottom: 40px;
+        -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+        box-shadow: 0 6px 12px rgba(0,0,0,.175);
+        -moz-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+        background-clip: padding-box;
+        opacity: 0.97;
+        filter: alpha(opacity=97);
+    }
+
+    div.bhoechie-tab-menu {
+        padding-right: 0;
+        padding-left: 0;
+        padding-bottom: 0;
+    }
+
+        div.bhoechie-tab-menu div.list-group {
+            margin-bottom: 0;
+        }
+
+            div.bhoechie-tab-menu div.list-group > a {
+                margin-bottom: 0;
+            }
+
+                div.bhoechie-tab-menu div.list-group > a .glyphicon,
+                div.bhoechie-tab-menu div.list-group > a .fa {
+                    color: #1F5382;
+                }
+
+                div.bhoechie-tab-menu div.list-group > a:first-child {
+                    border-top-right-radius: 0;
+                    -moz-border-top-right-radius: 0;
+                }
+
+                div.bhoechie-tab-menu div.list-group > a:last-child {
+                    border-bottom-right-radius: 0;
+                    -moz-border-bottom-right-radius: 0;
+                }
+
+                div.bhoechie-tab-menu div.list-group > a.active,
+                div.bhoechie-tab-menu div.list-group > a.active .glyphicon,
+                div.bhoechie-tab-menu div.list-group > a.active .fa {
+                    background-color: #1F5382;
+                    background-image: #1F5382;
+                    color: #ffffff;
+                    position: static;
+                }
+
+                    div.bhoechie-tab-menu div.list-group > a.active:after {
+                        content: '';
+                        position: static;
+                        left: 100%;
+                        top: 50%;
+                        margin-top: -13px;
+                        border-left: 0;
+                        border-bottom: 13px solid transparent;
+                        border-top: 13px solid transparent;
+                        border-left: 10px solid #1F5382;
+                    }
+
+    div.bhoechie-tab-content {
+        background-color: #ffffff;
+        /* border: 1px solid #eeeeee; */
+        padding-left: 20px;
+        padding-top: 10px;
+    }
+
+    div.bhoechie-tab div.bhoechie-tab-content:not(.active) {
+        display: none;
+    }
+</style>
+
+<script>
+    $(document).ready(function () {
+        $("div.bhoechie-tab-menu>div.list-group>a").click(function (e) {
+            e.preventDefault();
+            $(this).siblings('a.active').removeClass("active");
+            $(this).addClass("active");
+            var index = $(this).index();
+            $("div.bhoechie-tab>div.bhoechie-tab-content").removeClass("active");
+            $("div.bhoechie-tab>div.bhoechie-tab-content").eq(index).addClass("active");
+        });
+    });
+</script>
