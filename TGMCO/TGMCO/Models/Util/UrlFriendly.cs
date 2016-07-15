@@ -48,7 +48,7 @@ namespace TGMCO.Models.Util
         {
             if (string.IsNullOrEmpty(Title))
                 return "";
-            Title = ToAscii(Title);
+            Title = ToAscii(Title.ToLower());
             string strTitle = Title.ToString();
 
             //#region Generate SEO Friendly URL based on Title

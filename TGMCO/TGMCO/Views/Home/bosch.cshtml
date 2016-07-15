@@ -15,12 +15,178 @@
     UrlFriendly m_URL = new UrlFriendly();
     SupplierModel m_SUPPLIER_MODEL = new SupplierModel();
     NewsModel m_NEWS_MODEL = new NewsModel();
-    
+    CategoryModel m_CATEGORY_MODEL = new CategoryModel();
     List<PRODUCT> m_lstPRODUCT = (List<PRODUCT>)ViewBag.lstNEW_PRODUCT;
     List<PRODUCT> m_lstACCESSORY = (List<PRODUCT>)ViewBag.lstNEW_ACCESSORY;
     List<NEWS> m_lstNEWS = (List<NEWS>)ViewBag.lstNEWS;    
     
 }
+@section head{
+<style>
+    .img-responsive {
+        width: 100%;
+    }
+
+    .product-cart {
+        padding: 1px;
+        padding-bottom: 5px;
+    }
+</style>
+<style>
+    .fEndCredits {
+        padding: 0 10px;
+        margin-bottom: 7px;
+        color: white;
+        font-size: 10px;
+        margin-top: 10px;
+    }
+
+    .line {
+        background-color: #c3c3c4;
+        color: #c3c3c4;
+        width: 100%;
+        margin: 0;
+        margin-top: auto;
+        padding: 0;
+        height: 1px;
+        border: none;
+        overflow: hidden;
+        display: block;
+    }
+
+    .Menu-Item .btn-red {
+        margin-top: 10px;
+        background: linear-gradient(to bottom, #dd8d8e 0%, #bf4b4c 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+        border: medium none;
+        color: #ffffff;
+        font-weight: 500;
+    }
+
+    .Menu-Item .h4 {
+        font-size: 18px;
+        float: none;
+        margin: 0;
+        padding: 0;
+        width: auto;
+        margin-top: 1px;
+        width: 100%;
+    }
+
+        .Menu-Item .h4 span {
+            padding: 7px 10px 7px;
+            color: #FFF;
+            background: rgba(0, 59, 106, 0.85);
+            max-width: 285px;
+            font-size: 0.8em;
+            display: inline-block;
+            font-weight: normal;
+        }
+
+    .Menu-Item {
+        width: 495px;
+        margin-bottom: 10px;
+        height: 210px;
+        padding: 20px;
+    }
+
+        .Menu-Item h3 {
+            padding-top: 0;
+            margin-top: 0;
+            display: inline-block;
+            margin-bottom: 0;
+        }
+
+            .Menu-Item h3 span {
+                padding: 6px 10px;
+                color: #FFF;
+                background: rgba(0, 59, 106, 0.85);
+                display: inline-block;
+            }
+
+    #Item1 {
+        background-image: url("http://images.vn.bosch-pt.com/vn/media/be_country/be_country_desktop/be_country_professional/be_country_professional_images/be_country_startpage_desktop/be_country_professional_footer_teaser/tv_sub_product_catalogue_vn.png");
+    }
+
+    #Item2 {
+        background-image: url("http://images.vn.bosch-pt.com/vn/media/be_country/be_country_desktop/be_country_professional/be_country_professional_images/be_country_startpage_desktop/be_country_professional_footer_teaser/tv_sub_cordless_tools.png");
+    }
+
+    #Item3 {
+        background-image: url("http://images.vn.bosch-pt.com/vn/media/common_media_files/desktop_be/professional_be_desktop/images_be/startpage_home_be/footer_subteaser_be/tv_footer_contact~1.png");
+    }
+
+    #Item4 {
+        background-image: url("http://images.vn.bosch-pt.com/vn/media/common_media_files/desktop_be/professional_be_desktop/images_be/startpage_home_be/footer_subteaser_be/tv_footer_dealers.png");
+    }
+
+    #Tab-Bosch, #Tab-Bosch .panel-heading {
+        background: transparent;
+        border: 0;
+    }
+
+        #Tab-Bosch .panel-heading {
+            background: transparent;
+        }
+
+        #Tab-Bosch .panel-body {
+            background: #EEEEEF;
+            text-align: center;
+        }
+
+        #Tab-Bosch li {
+            margin-right: 1px;
+            width: 333px;
+            text-align: center;
+        }
+
+            #Tab-Bosch li a {
+                font-size: 17px;
+                color: white;
+                padding: 20px 0;
+                margin-top: 15px;
+                background: #013B69;
+            }
+
+        #Tab-Bosch .active {
+            background: #EEEEEF;
+        }
+
+            #Tab-Bosch .active a {
+                color: black;
+                background: #EEEEEF;
+            }
+
+    #Content {
+        position: relative;
+        z-index: 97;
+        width: 1002px;
+        margin: 0 auto;
+    }
+
+    #Bosch-Slide {
+        position: absolute;
+        width: 100%;
+        top: 30px;
+        left: 0;
+        z-index: 1;
+        margin: 0 auto;
+    }
+
+    .panel.with-nav-tabs .panel-heading {
+        padding: 0;
+    }
+
+    .panel.with-nav-tabs .nav-tabs {
+        border-bottom: none;
+    }
+
+    .panel.with-nav-tabs .nav-justified {
+        margin-bottom: -1px;
+    }
+</style>
+}
+
+
 <div style="width: 100%; height: 500px;">
 
 </div>
@@ -79,7 +245,7 @@
                                     </div>
                                 </div>
                             }
-                            <a href="@Url.Action("Detail_Bosch", "Product", new { id = product.PRODUCT_ID, supplier = m_URL.GenerateURL(m_SUPPLIER_MODEL.GetSupplierName(@product.SUPPLIER_ID)), product = m_URL.GenerateURL(@product.PRODUCT_NAME) })" class="photo">
+                            <a href="@Url.Action("Detail_Bosch", "Product", new { id = product.PRODUCT_ID, category = m_URL.GenerateURL(m_CATEGORY_MODEL.GetCategoryName(product.CATEGORY_ID)), product = m_URL.GenerateURL(@product.PRODUCT_NAME) })" class="photo">
                                 <img id="Image-Product" src="@Url.Content(@m_PRODUCT_MODEL.GetImage1(product.PRODUCT_ID))" class="img-responsive" alt="@product.PRODUCT_NAME" title="@product.PRODUCT_NAME" />
                             </a>
                             <div class="info">
@@ -117,7 +283,7 @@
                                         </div>
                                     </div>
                                 }
-                                <a href="@Url.Action("Detail_Bosch", "Product", new { id = product.PRODUCT_ID, supplier = m_URL.GenerateURL(m_SUPPLIER_MODEL.GetSupplierName(@product.SUPPLIER_ID)), product = m_URL.GenerateURL(@product.PRODUCT_NAME) })" class="photo">
+                                <a href="@Url.Action("Detail_Bosch", "Product", new { id = product.PRODUCT_ID, category = m_URL.GenerateURL(m_CATEGORY_MODEL.GetCategoryName(product.CATEGORY_ID)), product = m_URL.GenerateURL(@product.PRODUCT_NAME) })" class="photo">
                                     <img id="Image-Product" src="@Url.Content(@m_PRODUCT_MODEL.GetImage1(product.PRODUCT_ID))" class="img-responsive" alt="@product.PRODUCT_NAME" title="@product.PRODUCT_NAME" />
                                 </a>
                                 <div class="info">
@@ -233,150 +399,6 @@
     <div class="line"></div>
 </div>
 
-<style>
-    .img-responsive{
-        width: 100%;
-    } 
-    .product-cart {
-        padding: 1px;
-        padding-bottom: 5px;
-    }
-</style>
-<style>
-    .fEndCredits {
-        padding: 0 10px;
-        margin-bottom: 7px;
-        color: white;
-        font-size: 10px;
-        margin-top: 10px;
-    }
-    .line {
-        background-color: #c3c3c4;
-        color: #c3c3c4;
-        width: 100%;
-        margin: 0;
-        margin-top: auto;
-        padding: 0;
-        height: 1px;
-        border: none;
-        overflow: hidden;
-        display: block;
-    }
-    .Menu-Item .btn-red {
-        margin-top: 10px;
-        background: linear-gradient(to bottom, #dd8d8e 0%, #bf4b4c 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
-        border: medium none;
-        color: #ffffff;
-        font-weight: 500;
-    } 
-    .Menu-Item .h4 {
-        font-size: 18px;
-        float: none;
-        margin: 0;
-        padding: 0;
-        width: auto;
-        margin-top: 1px;
-        width: 100%;
-        
-    }
-        .Menu-Item .h4 span {
-            padding: 7px 10px 7px;
-            color: #FFF;
-            background: rgba(0, 59, 106, 0.85);
-            max-width: 285px;
-            font-size: 0.8em;
-            display: inline-block;
-            font-weight: normal;
-        } 
-    .Menu-Item {
-        width: 495px;
-        margin-bottom: 10px;
-        height: 210px;
-        padding: 20px;
-    }
-        .Menu-Item h3 {
-            padding-top: 0;
-            margin-top: 0;
-            display: inline-block;
-            margin-bottom: 0;
-        }
-            .Menu-Item h3 span {
-                padding: 6px 10px;
-                color: #FFF;
-                background: rgba(0, 59, 106, 0.85);
-                display: inline-block;
-            }
-        #Item1 {
-            background-image: url("http://images.vn.bosch-pt.com/vn/media/be_country/be_country_desktop/be_country_professional/be_country_professional_images/be_country_startpage_desktop/be_country_professional_footer_teaser/tv_sub_product_catalogue_vn.png");
-        }
-    #Item2 {
-        background-image: url("http://images.vn.bosch-pt.com/vn/media/be_country/be_country_desktop/be_country_professional/be_country_professional_images/be_country_startpage_desktop/be_country_professional_footer_teaser/tv_sub_cordless_tools.png");
-    }
-    #Item3 {
-        background-image: url("http://images.vn.bosch-pt.com/vn/media/common_media_files/desktop_be/professional_be_desktop/images_be/startpage_home_be/footer_subteaser_be/tv_footer_contact~1.png");
-    }
-    #Item4 {
-        background-image: url("http://images.vn.bosch-pt.com/vn/media/common_media_files/desktop_be/professional_be_desktop/images_be/startpage_home_be/footer_subteaser_be/tv_footer_dealers.png");
-    }
-    #Tab-Bosch, #Tab-Bosch .panel-heading {
-        background: transparent;
-        border: 0;
-    }
-        #Tab-Bosch .panel-heading {
-            background: transparent;
-        }
-        #Tab-Bosch .panel-body {
-            background: #EEEEEF;
-            text-align: center;
-        }
-        #Tab-Bosch li {
-            
-            margin-right: 1px;
-            width: 333px;
-            text-align: center;
-            
-            
-        }
-            #Tab-Bosch li a {
-                font-size: 17px;
-                color: white;
-                padding: 20px 0;
-                margin-top: 15px;
-                background: #013B69;
-            }
-        #Tab-Bosch .active {
-            background: #EEEEEF;
-        }
-            #Tab-Bosch .active a {
-                color: black;
-                background: #EEEEEF;
-            }
-    #Content {
-        position: relative;
-        z-index: 97;
-        width: 1002px;
-        margin: 0 auto;
-    }
-    #Bosch-Slide {
-        position: absolute;
-        width: 100%;
-        top: 30px;
-        left: 0;
-        z-index: 1;
-        margin: 0 auto;
-    }
-    .panel.with-nav-tabs .panel-heading {
-        padding: 0;
-    }
-
-    .panel.with-nav-tabs .nav-tabs {
-        border-bottom: none;
-    }
-
-    .panel.with-nav-tabs .nav-justified {
-        margin-bottom: -1px;
-    }
-</style>
 
 
 

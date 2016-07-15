@@ -25,13 +25,13 @@ namespace TGMCO
             AuthConfig.RegisterAuth();
         }
 
-        protected void Application_Error()
-        {
-            Exception exception = Server.GetLastError();
-            Server.ClearError();
+        //protected void Application_Error()
+        //{
+        //    Exception exception = Server.GetLastError();
+        //    Server.ClearError();
 
-            int a = Response.StatusCode;
-            Response.Redirect("/Error/Http404");
-        }
+        //    int a = Response.StatusCode;
+        //    Response.Redirect("/Error/Http404");
+        //}
     }
 }

@@ -15,68 +15,7 @@
     Layout = "~/Views/Shared/_BoschLayout.cshtml";
     ViewBag.Description = "Nhà cung cấp dụng cụ xây dựng, dụng cụ điện Bosch"; 
 }
-
-<div id="Content">
-    <div class="col-lg-3">
-        <ul>
-            <h5><strong><i class="fa fa-chevron-down" aria-hidden="true"></i> Phụ kiện</strong></h5>
-            @foreach (var category in m_lstCategory)
-            {
-                <a href="@Url.Action("Accessory_Bosch", "Category", new { cate_id = category.CATEGORY_ID })">
-                    <li>
-                        <i class="fa fa-chevron-right" aria-hidden="true"></i> @category.CATEGORY_NAME
-                    </li>
-                </a>
-            }
-        </ul>
-    </div>
-    <div id="Main-Bosch" class="col-lg-9">
-        <h1 style="font-size: 22px; font-weight: bold;">@ViewBag.CategoryName</h1>
-        @foreach (var product in Model)
-        {
-            <div class="col-sm-4 product-cart">
-                <div class="col-item">
-                    @if (product.IS_NEW)
-                    {
-                        <div class="shape">
-                            <div class="shape-text">
-                                Mới
-                            </div>
-                        </div>
-                    }
-                    <a href="@Url.Action("Detail_Bosch", "Product", new { id = product.PRODUCT_ID, supplier = m_URL.GenerateURL(m_SUPPLIER_MODEL.GetSupplierName(@product.SUPPLIER_ID)), product = m_URL.GenerateURL(@product.PRODUCT_NAME) })" class="photo">
-                        <img id="Image-Product" src="@Url.Content(@m_PRODUCT_MODEL.GetImage1(product.PRODUCT_ID))" class="img-responsive" alt="@product.PRODUCT_NAME" title="@product.PRODUCT_NAME" />
-                    </a>
-                    <div class="info">
-                        <div class="Name-Product">
-                            <h5>@product.PRODUCT_NAME</h5>
-                        </div>
-                        <div class="Price-Product">
-                            <h5 class="price-text-color">
-                                <strong>Giá: </strong>
-                                @string.Format("{0:0,0}", @product.UNIT_PRICE) VND
-                            </h5>
-                        </div>
-                        <div class="separator">
-                            <button type="button" onclick="AddProduct(this)" id="btnAddProduct" data-ajax="true" data-id="@product.PRODUCT_ID" data-code="@product.PRODUCT_CODE" class="btn btn-default btnShopNow" aria-label="Left Align">
-                                <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> <strong>Thêm vào giỏ</strong>
-                            </button>
-                        </div>
-                        <div class="clearfix">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        }
-    </div>
-</div>
-
-<script>
-    function ShowProduct(id) {
-        var id = id;
-        history.pushState({}, "", "Category_Bosch?cate_id=" + id);
-    }
-</script>
+@section head{
 <style>
     .product-cart {
         padding: 1px;
@@ -84,6 +23,11 @@
     }
 </style>
 <style>
+    .fa-spin
+    {      
+        margin-left: 300px;
+        margin-top: 30px;
+    } 
     #Content {
         background-color: white;
         height: auto;
@@ -93,7 +37,9 @@
         padding-bottom: 40px;
         margin-bottom: 20px;
     }
-
+    #Main-Bosch {
+        min-height: 500px;
+    }
         #Content a {
             color: black;
         }
@@ -115,5 +61,83 @@
 
         #Content li:hover {
             background-color: #F1F1F1;
+            cursor: pointer;
         }
 </style>
+}
+<div id="Content">
+    <div class="col-lg-3">
+        <ul>
+            <h5><strong><i class="fa fa-chevron-down" aria-hidden="true"></i> Phụ kiện</strong></h5>
+            @foreach (var category in m_lstCategory)
+            {
+                
+                    <li onclick="ShowProduct(this)" data-supplier="@Model[0].SUPPLIER_ID" data-category="@category.CATEGORY_ID">
+                        <i class="fa fa-chevron-right" aria-hidden="true"></i> @category.CATEGORY_NAME
+                    </li>                               
+            }
+        </ul>
+    </div>
+    <div id="Main-Bosch" class="col-lg-9">
+            <h1 style="font-size: 22px; font-weight: bold;">@ViewBag.CategoryName</h1>
+@foreach (var product in Model)
+{
+    <div class="col-sm-4 product-cart">
+        <div class="col-item">
+            @if (product.IS_NEW)
+            {
+                <div class="shape">
+                    <div class="shape-text">
+                        Mới
+                    </div>
+                </div>
+            }
+            <a href="@Url.Action("Detail_Bosch", "Product", new { id = product.PRODUCT_ID, supplier = m_URL.GenerateURL(m_SUPPLIER_MODEL.GetSupplierName(@product.SUPPLIER_ID)), product = m_URL.GenerateURL(@product.PRODUCT_NAME) })" class="photo">
+                <img id="Image-Product" src="@Url.Content(@m_PRODUCT_MODEL.GetImage1(product.PRODUCT_ID))" class="img-responsive" alt="@product.PRODUCT_NAME" title="@product.PRODUCT_NAME" />
+            </a>
+            <div class="info">
+                <div class="Name-Product">
+                    <h5>@product.PRODUCT_NAME</h5>
+                </div>
+                <div class="Price-Product">
+                    <h5 class="price-text-color">
+                        <strong>Giá: </strong>
+                        @string.Format("{0:0,0}", @product.UNIT_PRICE) VND
+                    </h5>
+                </div>
+                <div class="separator">
+                    <button type="button" onclick="AddProduct(this)" id="btnAddProduct" data-ajax="true" data-id="@product.PRODUCT_ID" data-code="@product.PRODUCT_CODE" class="btn btn-default btnShopNow" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> <strong>Thêm vào giỏ</strong>
+                    </button>
+                </div>
+                <div class="clearfix">
+                </div>
+            </div>
+        </div>
+    </div>
+}
+        
+    </div>
+</div>
+
+<script>
+    function ShowProduct(obj) {
+        var supplier_id = $(obj).data("supplier");
+        var category_id = $(obj).data("category");
+        $("#Main-Bosch").html("<i class=\"fa fa-spinner fa-spin fa-2x\"></i>")
+        $.ajax({
+            url: '/Partial/ListItem?supplier_id=' + supplier_id + '&category_id=' + category_id,
+            dataType: "html",
+            type: "GET",
+            contentType: 'application/html; charset=utf-8',
+            success: function (data) {
+                $("#Main-Bosch").html(data).fadeIn(3000);
+
+                window.history.pushState('string', '', "Accessory_Bosch?cate_id=" + category_id);
+            }
+        });
+       
+    }
+
+
+</script>

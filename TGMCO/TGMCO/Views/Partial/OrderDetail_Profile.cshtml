@@ -16,80 +16,80 @@
         @if(Model.ORDER_STATUS_ID < 4)
         {
             <div class="modal-body">
-            <form role="form" method="post" action="@Url.Action("CheckBill", "Order", new { id = Model.ORDER_ID })">
-                <ul class="list-group">
-                    <li class="list-group-item stt-@Model.ORDER_STATUS_ID">
-                        <span class="prefix"><strong>Mã hóa đơn:</strong></span>
-                        <span class=""><strong>#VNT-@Model.ORDER_ID</strong></span>
-                        <span class="prefix pull-right">@string.Format("{0:0,0}", @Model.SUBTOTAL + @Model.FREIGHT) VNĐ - (@m_Order_Status.GetName(@Model.ORDER_STATUS_ID)) - @Model.ORDER_DATE.ToString("dd.MM.yyyy")</span>
-                    </li>
-                    <li class="list-group-item" style="height: 55px;">
-                        <span class="prefix col-sm-3" style="line-height: 2.3">Họ tên người đặt hàng:</span>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" required maxlength="30" name="txtName" id="name" placeholder="Nhập họ và tên bạn." value="@Model.SHIP_NAME">
-                        </div>
-                    </li>
-                    <li class="list-group-item" style="height: 55px;">
-                        <span class="prefix col-sm-3" style="line-height: 2.3">Địa chỉ người đặt hàng:</span>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" required maxlength="30" name="txtAddress" placeholder="Nhập họ và tên bạn." value="@Model.SHIP_ADDRESS">
-                        </div>
-                    </li>
-                    <li class="list-group-item" style="height: 55px;">
-                        <span class="prefix col-sm-3" style="line-height: 2.3">Số điện thoại:</span>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" required maxlength="30" name="txtMobile" placeholder="Nhập họ và tên bạn." value="@Model.SHIP_PHONE">
-                        </div>
-                    </li>
-                    <li class="list-group-item" style="height: 55px;">
-                        <span class="prefix col-sm-3" style="line-height: 2.3">Email:</span>
-                        <div class="col-sm-9">
-                            <input type="email" class="form-control" required maxlength="30" name="txtEmail" placeholder="Nhập họ và tên bạn." value="@Model.SHIP_EMAIL">
-                        </div>
-                    </li>
-                    <li class="list-group-item" style="height: 55px;">
-                        <span class="prefix col-sm-3" style="line-height: 2.3">Ghi chú:</span>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" required maxlength="30" name="txtNote" placeholder="Nhập họ và tên bạn." value="@Model.NOTE">
-                        </div>
-                    </li>
-                    <li class="list-group-item" style="height: 40px;">
-                        <span class="prefix col-sm-6"><strong>Tên SP</strong></span>
-                        <span class="prefix col-sm-2"><strong>Đơn giá</strong></span>
-                        <span class="prefix col-sm-1"><strong>SL</strong></span>
-                        <span class="prefix col-sm-2"><strong>Thành tiền</strong></span>
-                        <span class="prefix col-sm-1"><strong>Xóa</strong></span>
-                    </li>
-                    @foreach (var order_detail in m_lstORDER_DETAIL)
-                    {
-                        <li class="list-group-item" style="height: 55px;" id="row_@order_detail.PRODUCT_ID">
-                            <span class="prefix col-sm-6">@m_Product.GetName(@order_detail.PRODUCT_ID)<p>@m_Product.GetCode(@order_detail.PRODUCT_ID)</p></span>
-                            <span class="prefix col-sm-2" style="line-height: 2.5; text-align: right">@string.Format("{0:0,0}", @order_detail.UNIT_PRICE)</span>
-                            <span class="prefix col-sm-1"><input class="form-control numberProduct" onchange="onChangeQuantity(this)" data-order="@order_detail.ORDER_ID" data-freight="@Model.FREIGHT" data-id="@order_detail.PRODUCT_ID" data-price="@order_detail.UNIT_PRICE" min="1" max="20" name="numberProduct" type="number" style="width: 70px;" value="@order_detail.QUANTITY"></span>
-                            <span class="prefix col-sm-2" style="line-height: 2.5; text-align: right" id="totalPrice_@order_detail.PRODUCT_ID">@string.Format("{0:0,0}", @order_detail.EXTENDED_PRICE)</span>
-                            <span class="prefix col-sm-1"><a onclick="DeleteProductFromOrder(this)" data-order="@order_detail.ORDER_ID" data-id="@order_detail.PRODUCT_ID" class="btn btn-danger btn-sm"><i class="fa fa-times" aria-hidden="true"></i></a></span>
+                <form role="form" method="post" id="frmUpdateOrder">
+                    <ul class="list-group">
+                        <li class="list-group-item stt-@Model.ORDER_STATUS_ID">
+                            <span class="prefix"><strong>Mã hóa đơn:</strong></span>
+                            <span class=""><strong>#VNT-@Model.ORDER_ID</strong></span>
+                            <span class="prefix pull-right">@string.Format("{0:0,0}", @Model.SUBTOTAL + @Model.FREIGHT) VNĐ - (@m_Order_Status.GetName(@Model.ORDER_STATUS_ID)) - @Model.ORDER_DATE.ToString("dd.MM.yyyy")</span>
                         </li>
-                    }
-                    <li class="list-group-item" style="height: 40px;">
-                        <span class="prefix col-sm-3 col-lg-offset-6">Tổng tiền hàng:</span>
-                        <span class="prefix col-sm-2" style="text-align: right" id="total">@string.Format("{0:0,0}", @Model.SUBTOTAL)</span>
-                    </li>
-                    <li class="list-group-item" style="height: 40px;">
-                        <span class="prefix col-sm-3 col-lg-offset-6">Phí giao hàng:</span>
-                        <span class="prefix col-sm-2" style="text-align: right">@string.Format("{0:0,0}", @Model.FREIGHT)</span>
-                    </li>
-                    <li class="list-group-item" style="height: 40px;">
-                        <span class="prefix col-sm-3 col-lg-offset-6"><strong>Tổng cộng:</strong></span>
-                        <span class="prefix col-sm-2" style="text-align: right"><strong id="subtotal">@string.Format("{0:0,0}", @Model.SUBTOTAL + @Model.FREIGHT)</strong></span>
-                    </li>
-                    <li class="list-group-item" style="height: 55px;">
-                        <div class="btn-group btn-group-justified">
-                            <a data-ajax="true" style="width: 50%" data-id="@Model.ORDER_ID" onclick="CancelOrder(this)" class="btn btn-danger">Hủy bỏ đơn hàng</a>
-                            <button type="submit" style="width: 392px" class="btn btn-success">Cập nhật đơn hàng</button>
-                        </div>
-                    </li>
-                </ul>
-            </form>
+                        <li class="list-group-item" style="height: 55px;">
+                            <span class="prefix col-sm-3" style="line-height: 2.3">Họ tên người đặt hàng:</span>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" required maxlength="30" name="txtName" id="name" placeholder="Nhập họ và tên bạn." value="@Model.SHIP_NAME">
+                            </div>
+                        </li>
+                        <li class="list-group-item" style="height: 55px;">
+                            <span class="prefix col-sm-3" style="line-height: 2.3">Địa chỉ người đặt hàng:</span>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" required maxlength="30" name="txtAddress" placeholder="Nhập địa chỉ." value="@Model.SHIP_ADDRESS">
+                            </div>
+                        </li>
+                        <li class="list-group-item" style="height: 55px;">
+                            <span class="prefix col-sm-3" style="line-height: 2.3">Số điện thoại:</span>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" required maxlength="30" name="txtMobile" placeholder="Nhập số điện thoại." value="@Model.SHIP_PHONE">
+                            </div>
+                        </li>
+                        <li class="list-group-item" style="height: 55px;">
+                            <span class="prefix col-sm-3" style="line-height: 2.3">Email:</span>
+                            <div class="col-sm-9">
+                                <input type="email" class="form-control" required maxlength="30" name="txtEmail" placeholder="Nhập email." value="@Model.SHIP_EMAIL">
+                            </div>
+                        </li>
+                        <li class="list-group-item" style="height: 55px;">
+                            <span class="prefix col-sm-3" style="line-height: 2.3">Ghi chú:</span>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" required maxlength="30" name="txtNote" placeholder="Nhập ghi chú." value="@Model.NOTE">
+                            </div>
+                        </li>
+                        <li class="list-group-item" style="height: 40px;">
+                            <span class="prefix col-sm-6"><strong>Tên SP</strong></span>
+                            <span class="prefix col-sm-2"><strong>Đơn giá</strong></span>
+                            <span class="prefix col-sm-1"><strong>SL</strong></span>
+                            <span class="prefix col-sm-2"><strong>Thành tiền</strong></span>
+                            <span class="prefix col-sm-1"><strong>Xóa</strong></span>
+                        </li>
+                        @foreach (var order_detail in m_lstORDER_DETAIL)
+                        {
+                            <li class="list-group-item" style="height: 55px;" id="row_@order_detail.PRODUCT_ID">
+                                <span class="prefix col-sm-6">@m_Product.GetName(@order_detail.PRODUCT_ID)<p>@m_Product.GetCode(@order_detail.PRODUCT_ID)</p></span>
+                                <span class="prefix col-sm-2" style="line-height: 2.5; text-align: right">@string.Format("{0:0,0}", @order_detail.UNIT_PRICE)</span>
+                                <span class="prefix col-sm-1"><input class="form-control numberProduct" onchange="onChangeQuantity(this)" data-order="@order_detail.ORDER_ID" data-freight="@Model.FREIGHT" data-id="@order_detail.PRODUCT_ID" data-price="@order_detail.UNIT_PRICE" min="1" max="20" name="numberProduct" type="number" style="width: 70px;" value="@order_detail.QUANTITY"></span>
+                                <span class="prefix col-sm-2" style="line-height: 2.5; text-align: right" id="totalPrice_@order_detail.PRODUCT_ID">@string.Format("{0:0,0}", @order_detail.EXTENDED_PRICE)</span>
+                                <span class="prefix col-sm-1"><a onclick="DeleteProductFromOrder(this)" data-order="@Model.ORDER_ID" data-id="@order_detail.PRODUCT_ID" class="btn btn-danger btn-sm"><i class="fa fa-times" aria-hidden="true"></i></a></span>
+                            </li>
+                        }
+                        <li class="list-group-item" style="height: 40px;">
+                            <span class="prefix col-sm-3 col-lg-offset-6">Tổng tiền hàng:</span>
+                            <span class="prefix col-sm-2" style="text-align: right" id="total">@string.Format("{0:0,0}", @Model.SUBTOTAL)</span>
+                        </li>
+                        <li class="list-group-item" style="height: 40px;">
+                            <span class="prefix col-sm-3 col-lg-offset-6">Phí giao hàng:</span>
+                            <span class="prefix col-sm-2" style="text-align: right">@string.Format("{0:0,0}", @Model.FREIGHT)</span>
+                        </li>
+                        <li class="list-group-item" style="height: 40px;">
+                            <span class="prefix col-sm-3 col-lg-offset-6"><strong>Tổng cộng:</strong></span>
+                            <span class="prefix col-sm-2" style="text-align: right"><strong id="subtotal">@string.Format("{0:0,0}", @Model.SUBTOTAL + @Model.FREIGHT)</strong></span>
+                        </li>
+                        <li class="list-group-item" style="height: 55px;">
+                            <div class="btn-group btn-group-justified">
+                                <a data-ajax="true" data-id="@Model.ORDER_ID" onclick="CancelOrder(this)" class="btn btn-danger">Hủy bỏ đơn hàng</a>
+                                <a data-id="@Model.ORDER_ID" onclick="UpdateOrder(this)" class="btn btn-success">Cập nhật đơn hàng</a>
+                            </div>
+                        </li>
+                    </ul>
+                </form>
         </div>
         }
         else

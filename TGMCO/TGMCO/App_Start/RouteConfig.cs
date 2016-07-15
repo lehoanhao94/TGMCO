@@ -19,11 +19,11 @@ namespace TGMCO
                 defaults: new { controller = "ShoppingCart", action = "ShoppingCart", id = UrlParameter.Optional }
             );
 
-            routes.MapRoute(
-                name: "ProductDetail",
-                url: "{supplier}/{product}-{id}",
-                defaults: new { controller = "Product", action = "Detail", id = UrlParameter.Optional }
-            );
+            //routes.MapRoute(
+            //    name: "ProductDetail",
+            //    url: "makita/{category}/{product}-{id}",
+            //    defaults: new { controller = "Product", action = "Detail"}
+            //);
             routes.MapRoute(
                 name: "Search",
                 url: "ket-qua-tim-kiem",
@@ -59,12 +59,32 @@ namespace TGMCO
                 url: "makita",
                 defaults: new { controller = "Home", action = "makita" }
             );
+            //BOSCH
+            routes.MapRoute(
+                name: "Bosch",
+                url: "bosch",
+                defaults: new { controller = "Home", action = "bosch" }
+            );
+            //category Bosch
+            routes.MapRoute(
+               name: "CategoryBosch",
+               url: "bosch/{catename}-{id}",
+               defaults: new { controller = "Category", action = "Category_Bosch"}
+           );
+            //detail Bosch
+            routes.MapRoute(
+               name: "DetailsBosch",
+               url: "bosch/{category}/{product}-{id}",
+               defaults: new { controller = "Product", action = "Detail_Bosch" }
+           );
+
 
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
 
         }
     }

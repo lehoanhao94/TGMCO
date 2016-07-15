@@ -1,10 +1,12 @@
 ﻿@using TGMCO.Models.Entity;
+@using TGMCO.Models.Util;
 @using TGMCO.Models;
 
 @{
     CategoryModel m_CATEGORY_MODEL = new CategoryModel();
     List<CATEGORIES_BY_SUPPLIER> m_lstCategory = m_CATEGORY_MODEL.GetListCategoryBySupplier(23);
-    List<CATEGORIES_BY_SUPPLIER> m_lstAccessory = m_CATEGORY_MODEL.GetListAccessoryBySupplier(23);    
+    List<CATEGORIES_BY_SUPPLIER> m_lstAccessory = m_CATEGORY_MODEL.GetListAccessoryBySupplier(23);  
+    UrlFriendly m_URL = new UrlFriendly();  
 }
 
 <!DOCTYPE html>
@@ -77,6 +79,120 @@
 
     <!-- END INCLUDE -->
     <title>@ViewBag.Title</title>
+    
+    <style>
+        .btnShopNow {
+            width: 100%;
+            background-color: #013B69 !important;
+        }
+
+            .btnShopNow:hover {
+                width: 100%;
+                background-color: #F37232 !important;
+            }
+
+        .dropdown-menu a {
+            color: black !important;
+            border: 0 !important;
+            font-weight: normal !important;
+        }
+
+        #Main-Content {
+            margin: 0 auto;
+            width: 1002px;
+        }
+    </style>
+
+    <style>
+        body {
+            background: url("/Content/Page_Layout/img/boschback.png");
+        }
+
+        .show-on-hover:hover > ul.dropdown-menu {
+            display: block;
+        }
+
+        #Top-Bar-Bosch {
+            background: url("/Content/Page_Layout/img/topmenu.png") repeat-x 0 0;
+            font-size: 12px;
+            height: 32px;
+            min-height: 30px;
+        }
+
+            #Top-Bar-Bosch a:hover {
+                color: #003B6A;
+                background: #E9E9E9;
+            }
+
+            #Top-Bar-Bosch .active a {
+                color: #003B6A;
+            }
+
+            #Top-Bar-Bosch a {
+                font-size: 12px;
+                height: 30px;
+                font-weight: bold;
+                padding-top: 4px;
+                color: white;
+                border-right: 1px solid #003B6A;
+            }
+
+        #Logo-Bosch {
+            margin-top: 7px;
+        }
+
+        #Top-Menu-Bosch {
+            background: none repeat scroll 0 0 white;
+            height: 121px;
+            margin: 30px auto;
+            padding: 0 10px 10px 10px;
+            width: 1002px;
+            margin-bottom: 0;
+            z-index: 2;
+            position: relative;
+        }
+
+        .scroll-top-wrapper {
+            position: fixed;
+            opacity: 0;
+            visibility: hidden;
+            overflow: hidden;
+            text-align: center;
+            z-index: 99999999;
+            background-color: #777777;
+            color: #eeeeee;
+            width: 50px;
+            height: 48px;
+            line-height: 48px;
+            right: 10px;
+            bottom: 30px;
+            padding-top: 2px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+            border-bottom-left-radius: 10px;
+            -webkit-transition: all 0.5s ease-in-out;
+            -moz-transition: all 0.5s ease-in-out;
+            -ms-transition: all 0.5s ease-in-out;
+            -o-transition: all 0.5s ease-in-out;
+            transition: all 0.5s ease-in-out;
+        }
+
+            .scroll-top-wrapper:hover {
+                background-color: #888888;
+            }
+
+            .scroll-top-wrapper.show {
+                visibility: visible;
+                cursor: pointer;
+                opacity: 1.0;
+            }
+
+            .scroll-top-wrapper i.fa {
+                line-height: inherit;
+            }
+    </style>
+    @RenderSection("head", required: false)
 </head>
 <body style="font-family: Verdana, sans-serif;">
 
@@ -97,13 +213,13 @@
         <nav class="navbar navbar-default" id="Top-Bar-Bosch">
 
                 <ul class="nav navbar-nav">
-                    <li class=""><a href="/Home/bosch" style="font-size: 22px;"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+                    <li class=""><a href="/bosch" style="font-size: 22px;"><i class="fa fa-home" aria-hidden="true"></i></a></li>
                     <li class="show-on-hover">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sản phẩm <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu" style="width: 300px;">    
                             @foreach(var category in m_lstCategory)
                             {
-                            <li><a href="@Url.Action("Category_Bosch", "Category", new { cate_id = category.CATEGORY_ID })"><i class="fa fa-chevron-right" aria-hidden="true"></i> @category.CATEGORY_NAME</a></li>
+                            <li><a href="@Url.Action("Category_Bosch", "Category", new { id = category.CATEGORY_ID, catename = m_URL.GenerateURL(category.CATEGORY_NAME) })"><i class="fa fa-chevron-right" aria-hidden="true"></i> @category.CATEGORY_NAME</a></li>
                             }                       
                         </ul>
                     </li>
@@ -154,107 +270,6 @@
             <i class="fa fa-2x fa-arrow-circle-up"></i>
         </span>
     </div>
-    <style>
-        .btnShopNow {
-            width: 100%;
-            background-color: #013B69 !important;
-        }
-            .btnShopNow:hover {
-                width: 100%;
-                background-color: #F37232 !important;
-            }
-        .dropdown-menu a {
-            color: black !important;
-            border: 0 !important;
-            font-weight: normal !important;
-        } 
-        #Main-Content {
-            margin: 0 auto;
-            width: 1002px;
-        }
-    </style>
-
-    <style>
-        body {
-            background: url("/Content/Page_Layout/img/boschback.png");
-        }
-        .show-on-hover:hover > ul.dropdown-menu {
-            display: block;
-        }
-        #Top-Bar-Bosch {
-            background: url("/Content/Page_Layout/img/topmenu.png") repeat-x 0 0;
-            font-size: 12px;
-            height: 32px;
-            min-height: 30px;
-        }
-            #Top-Bar-Bosch a:hover {
-                color: #003B6A;
-                background: #E9E9E9;
-            } 
-            #Top-Bar-Bosch .active a {
-                color: #003B6A;
-            }
-            #Top-Bar-Bosch a {
-                font-size: 12px;
-                height: 30px;
-                font-weight: bold;
-                padding-top: 4px;
-                color: white;
-                border-right: 1px solid #003B6A;
-            }
-        #Logo-Bosch {
-            margin-top: 7px;
-        }
-        #Top-Menu-Bosch {
-            background: none repeat scroll 0 0 white;
-            height: 121px;
-            margin: 30px auto;
-            padding: 0 10px 10px 10px;
-            width: 1002px;
-            margin-bottom: 0;
-            z-index: 2;
-            position: relative;
-        }
-        .scroll-top-wrapper {
-            position: fixed;
-            opacity: 0;
-            visibility: hidden;
-            overflow: hidden;
-            text-align: center;
-            z-index: 99999999;
-            background-color: #777777;
-            color: #eeeeee;
-            width: 50px;
-            height: 48px;
-            line-height: 48px;
-            right: 10px;
-            bottom: 30px;
-            padding-top: 2px;
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-            border-bottom-right-radius: 10px;
-            border-bottom-left-radius: 10px;
-            -webkit-transition: all 0.5s ease-in-out;
-            -moz-transition: all 0.5s ease-in-out;
-            -ms-transition: all 0.5s ease-in-out;
-            -o-transition: all 0.5s ease-in-out;
-            transition: all 0.5s ease-in-out;
-        }
-
-            .scroll-top-wrapper:hover {
-                background-color: #888888;
-            }
-
-            .scroll-top-wrapper.show {
-                visibility: visible;
-                cursor: pointer;
-                opacity: 1.0;
-            }
-
-            .scroll-top-wrapper i.fa {
-                line-height: inherit;
-            }
-    </style>
     <script>
         $(document).ready(function () {
 

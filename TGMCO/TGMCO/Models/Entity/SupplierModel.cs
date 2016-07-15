@@ -20,7 +20,10 @@ namespace TGMCO.Models.Entity
         {
             try
             {
-                return db.SUPPLIERS.Find(id).SUPPLIER_NAME;
+                if (db.SUPPLIERS.Find(id) != null)
+                    return db.SUPPLIERS.Find(id).SUPPLIER_NAME;
+                else
+                    return "";
             }
             catch (Exception ex)
             {

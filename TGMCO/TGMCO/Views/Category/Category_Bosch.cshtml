@@ -15,6 +15,58 @@
     Layout = "~/Views/Shared/_BoschLayout.cshtml";
     ViewBag.Description = "Nhà cung cấp dụng cụ xây dựng, dụng cụ điện Bosch" ;  
 }
+@section head{
+<style>
+    .product-cart {
+        padding: 1px;
+        padding-bottom: 5px;
+    }
+</style>
+<style>
+    #Main-Bosch {
+        min-height: 500px;
+    }
+    .fa-spin {
+        margin-left: 300px;
+        margin-top: 30px;
+    } 
+    #Content {
+        background-color: white;
+        height: auto;
+        width: 1002px;
+        display: table;
+        font-size: 12px;
+        padding-bottom: 40px;
+        margin-bottom: 20px;
+    }
+
+        #Content a {
+            color: black;
+        }
+
+        #Content i {
+            font-size: 12px;
+        }
+
+    a:hover {
+        text-decoration: none;
+    }
+
+    #Content li {
+        font-weight: 500;
+        line-height: 20px;
+        text-decoration: none;
+        padding: 0 0 0 17px;
+    }
+
+        #Content li:hover {
+            background-color: #F1F1F1;
+            cursor: pointer;
+        }
+</style>
+
+}
+
 
 <div id="Content">
     <div class="col-lg-3">
@@ -22,11 +74,9 @@
             <h5><strong><i class="fa fa-chevron-down" aria-hidden="true"></i> Sản phẩm</strong></h5>
             @foreach (var category in m_lstCategory)
 {
-    <a href="@Url.Action("Category_Bosch", "Category", new { cate_id = category.CATEGORY_ID })">
-        <li>
-            <i class="fa fa-chevron-right" aria-hidden="true"></i> @category.CATEGORY_NAME
-        </li>
-    </a>
+                    <li onclick="ShowProduct(this)" data-supplier="@Model[0].SUPPLIER_ID" data-categoryname="@m_URL.GenerateURL(m_CATEGORY_MODEL.GetCategoryName(category.CATEGORY_ID))" data-category="@category.CATEGORY_ID">
+                        <i class="fa fa-chevron-right" aria-hidden="true"></i> @category.CATEGORY_NAME
+                    </li> 
 }
         </ul>
     </div>
@@ -72,43 +122,30 @@
 </div>
 
 <script>
-    function ShowProduct(id) {
-        var id = id;
-        history.pushState({}, "", "Category_Bosch?cate_id="+id);
-    }
-</script>
-<style>
-    .product-cart {
-        padding: 1px;
-        padding-bottom: 5px;
-    }
-</style>
-<style>
-    #Content {
-        background-color: white;
-        height: auto;
-        width: 1002px;
-        display: table;
-        font-size: 12px;
-        padding-bottom: 40px;
-        margin-bottom: 20px;
-    }
-    #Content a{
-        color: black;
-    }
-        #Content i {
-            font-size: 12px;
-        }
-    a:hover{
-        text-decoration: none;
-    }
-        #Content li {
-            font-weight:  500;
-            line-height: 20px;
-            text-decoration: none;
-            padding: 0 0 0 17px;
-        }
-            #Content li:hover {
-                background-color: #F1F1F1;
+    function ShowProduct(obj) {
+        var supplier_id = $(obj).data("supplier");
+        var category_id = $(obj).data("category");
+        var category_name = $(obj).data("categoryname");
+
+        $("#Main-Bosch").html("<i class=\"fa fa-spinner fa-spin fa-2x\"></i>")
+        $.ajax({
+            url: '/Partial/ListItem?supplier_id=' + supplier_id + '&category_id=' + category_id,
+            dataType: "html",
+            type: "GET",
+            contentType: 'application/html; charset=utf-8',
+            success: function (data) {
+                $("#Main-Bosch").html(data);                
             }
-</style>
+        });
+        var page_url = window.location.href;
+        if (page_url.indexOf('bosch') >= 0) {
+            page_url = page_url.slice(0, page_url.indexOf('bosch/'));
+            window.history.pushState('string', '', page_url + "bosch/" + category_name + "-" + category_id);
+        }
+    }
+
+
+</script>
+
+
+

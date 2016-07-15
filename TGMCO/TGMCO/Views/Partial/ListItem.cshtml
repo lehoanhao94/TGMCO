@@ -1,0 +1,49 @@
+﻿@using TGMCO.Models.Entity
+@using TGMCO.Models.Util
+@using TGMCO.Models
+
+@model List<PRODUCT>
+
+@{
+    ProductModel m_PRODUCT_MODEL = new ProductModel();
+    UrlFriendly m_URL = new UrlFriendly();
+    SupplierModel m_SUPPLIER_MODEL = new SupplierModel();
+    CategoryModel m_CATEGORY_MODEL = new CategoryModel();
+}
+<h1 style="font-size: 22px; font-weight: bold;">@ViewBag.CategoryName</h1>
+@foreach (var product in Model)
+{
+    <div class="col-sm-4 product-cart">
+        <div class="col-item">
+            @if (product.IS_NEW)
+            {
+                <div class="shape">
+                    <div class="shape-text">
+                        Mới
+                    </div>
+                </div>
+            }
+            <a href="@Url.Action("Detail_Bosch", "Product", new { id = product.PRODUCT_ID, category = m_URL.GenerateURL(m_CATEGORY_MODEL.GetCategoryName(product.CATEGORY_ID)), supplier = m_URL.GenerateURL(m_SUPPLIER_MODEL.GetSupplierName(@product.SUPPLIER_ID)), product = m_URL.GenerateURL(@product.PRODUCT_NAME) })" class="photo">
+                <img id="Image-Product" src="@Url.Content(@m_PRODUCT_MODEL.GetImage1(product.PRODUCT_ID))" class="img-responsive" alt="@product.PRODUCT_NAME" title="@product.PRODUCT_NAME" />
+            </a>
+            <div class="info">
+                <div class="Name-Product">
+                    <h5>@product.PRODUCT_NAME</h5>
+                </div>
+                <div class="Price-Product">
+                    <h5 class="price-text-color">
+                        <strong>Giá: </strong>
+                        @string.Format("{0:0,0}", @product.UNIT_PRICE) VND
+                    </h5>
+                </div>
+                <div class="separator">
+                    <button type="button" onclick="AddProduct(this)" id="btnAddProduct" data-ajax="true" data-id="@product.PRODUCT_ID" data-code="@product.PRODUCT_CODE" class="btn btn-default btnShopNow" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> <strong>Thêm vào giỏ</strong>
+                    </button>
+                </div>
+                <div class="clearfix">
+                </div>
+            </div>
+        </div>
+    </div>
+}

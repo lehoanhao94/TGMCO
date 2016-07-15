@@ -130,5 +130,18 @@ namespace TGMCO.Controllers.PAGECONTROLLER
 
         }
 
+        public PartialViewResult ListItem(int supplier_id, int category_id)
+        {
+            try
+            {
+                List<PRODUCT> _lstPRODUCT = db.PRODUCTS.Where(n => n.SUPPLIER_ID == supplier_id && n.CATEGORY_ID == category_id).ToList();
+                ViewBag.CategoryName = db.CATEGORIES.Single(n => n.CATEGORY_ID == category_id).CATEGORY_NAME; 
+                return PartialView(_lstPRODUCT);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

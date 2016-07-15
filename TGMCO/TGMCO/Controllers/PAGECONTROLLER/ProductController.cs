@@ -18,10 +18,14 @@ namespace TGMCO.Controllers.PAGECONTROLLER
             {
 
                     SupplierModel _SUPPLIER = new SupplierModel();
-                    Session["SUPPLIER"] = _SUPPLIER.GetSupplierName(db.PRODUCTS.Find(id).SUPPLIER_ID);
-                    Session["SUPPLIER_MODEL"] = db.SUPPLIERS.Find(db.PRODUCTS.Find(id).SUPPLIER_ID);
-
-                PRODUCT _PRODUCT = db.PRODUCTS.Find(id);
+                    PRODUCT _PRODUCT = new PRODUCT();
+                    if (db.PRODUCTS.Find(id) != null)
+                    {
+                        Session["SUPPLIER"] = _SUPPLIER.GetSupplierName(db.PRODUCTS.Find(id).SUPPLIER_ID);
+                        Session["SUPPLIER_MODEL"] = db.SUPPLIERS.Find(db.PRODUCTS.Find(id).SUPPLIER_ID);
+                        _PRODUCT = db.PRODUCTS.Find(id);
+                    }
+                                 
                 return View(_PRODUCT);
             }
             catch (Exception ex)

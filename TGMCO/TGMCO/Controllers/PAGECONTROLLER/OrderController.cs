@@ -306,6 +306,23 @@ namespace TGMCO.Controllers.PAGECONTROLLER
             }
         }
         [HttpPost]
+        public void UpdateOrder(int id, FormCollection f)
+        {
+            try
+            {
+                ORDER _ORDER = db.ORDERS.Find(id);
+                _ORDER.SHIP_NAME = f.Get("txtName").ToString();
+                _ORDER.SHIP_PHONE = f.Get("txtMobile").ToString();
+                _ORDER.SHIP_EMAIL = f.Get("txtEmail").ToString();
+                _ORDER.SHIP_ADDRESS = f.Get("txtAddress").ToString();
+                _ORDER.NOTE = f.Get("txtNote").ToString();
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+        [HttpPost]
         public void UpdateStatusOrder(int id, int status_id)
         {
             try

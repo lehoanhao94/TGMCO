@@ -1363,6 +1363,7 @@
     <Content Include="Views\News\News_Bosch_Promotion.cshtml" />
     <Content Include="Views\Agencies\Agency_Bosch.cshtml" />
     <Content Include="Views\Partial\OrderDetail_Profile.cshtml" />
+    <Content Include="Views\Partial\ListItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

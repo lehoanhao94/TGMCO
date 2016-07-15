@@ -101,7 +101,7 @@ namespace TGMCO.Controllers.PAGECONTROLLER
             {
                 if(Session["SS_USER"] == null)
                 {
-                    RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Home");
                 }
 
                 SupplierModel _SUPPLIER = new SupplierModel();

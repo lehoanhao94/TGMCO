@@ -368,7 +368,23 @@
         });
     }
 </script>
-
+<script>
+    function UpdateOrder(obj) {
+        var f = $("#frmUpdateOrder").serialize();
+        var id = $(obj).data("id");
+        $.ajax({
+            type: "POST",
+            url: '/Order/UpdateOrder?id=' + id,
+            data: f,
+            dataType: "json",            
+            success: function (data) {
+                $("#myModal").modal("hide");
+                alert("Cập nhật đơn hàng thành công.");
+            }
+        });
+        alert("Cập nhật đơn hàng thành công.");
+    }
+</script>
 <script>
     function CancelOrder(obj) {
         var id = $(obj).data("id");
